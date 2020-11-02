@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+}
+
+.empty-layout {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 500px;
+}
+
+/* label focus color */
+#blue-layout .input-field input:focus + label {
+  color: #1e88e5;
+}
+/* label underline focus color */
+#blue-layout .input-field input:focus {
+  border-bottom: 1px solid #1e88e5;
+  box-shadow: 0 1px 0 0 #1e88e5;
+}
