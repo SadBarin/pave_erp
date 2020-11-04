@@ -1,9 +1,11 @@
 html, body {
-  height: 100%;
+  height: 100vh;
+
+  overflow: hidden;
 }
 
 .empty-layout {
-  height: 100%;
+  height: 100vh;
 
   display: flex;
   justify-content: center;
@@ -11,7 +13,7 @@ html, body {
 }
 
 .app-main-layout {
-  height: 100%;
+  height: 100vh;
 
   position: relative;
 }
@@ -22,7 +24,7 @@ html, body {
 
 #blue-layout .navbar {
   width:100%;
-  height:64px;
+  height: 10vh;
   padding:0 2rem;
 
   display:flex;
@@ -38,14 +40,16 @@ html, body {
 
 #blue-layout .app-sidenav {
   width:250px;
-  height:auto;
+  height: calc(100% + 10vh);
   padding-top:5px;
 
   position:absolute;
-  top:64px;
+  top:10vh;
   bottom:0;
 
   transition:transform .3s;
+
+  z-index:50
 }
 
 .app-sidenav.open {
@@ -57,12 +61,18 @@ html, body {
 }
 
 .app-content {
-  padding-top:64px;
+  padding-top:10vh;
   padding-left:250px;
 
   position:relative;
 
   transition:padding-left .3s;
+}
+
+.app-content section {
+  height: 70vh;
+
+  overflow-y: auto;
 }
 
 .page-title {
@@ -79,6 +89,14 @@ html, body {
   font-size:2rem
 }
 
+.page-subtitle h4, .page-title {
+  margin-bottom: 2rem;
+}
+
+#blue-layout .input-field {
+  padding: 1px;
+}
+
 /* label focus color */
 #blue-layout .input-field input:focus + label {
   color: #1e88e5;
@@ -87,4 +105,9 @@ html, body {
 #blue-layout .input-field input:focus {
   border-bottom: 1px solid #1e88e5;
   box-shadow: 0 1px 0 0 #1e88e5;
+}
+
+#blue-layout .dropdown-content li > a,
+#blue-layout .dropdown-content li > span {
+  color: #1e88e5;
 }

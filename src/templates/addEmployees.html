@@ -7,12 +7,20 @@
   <link rel="stylesheet" href="../assets/index.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let elems = document.querySelectorAll('select');
+      let options = document.querySelectorAll('option');
+      let instances = M.FormSelect.init(elems, options); })
+  </script>
 </head>
 <body>
 <div class="app-main-layout" id="blue-layout">
   <nav class="navbar blue darken-1 ">
     <div class="navbar-left">
-      <span class="white-text">Сегодня 3 ноября 2020 года</span>
+      <span class="white-text">Сегодня 4 ноября 2020 года</span>
     </div>
 
     <ul class="right hide-on-small-and-down">
@@ -40,11 +48,118 @@
   <main class="app-content">
     <div class="app-page">
       <div class="page-title">
-        <h3>Пригласить сотрудника в ERP</h3>
+        <h3>Настройка сотрудника</h3>
       </div>
+
+      <section>
+        <div class="row">
+          <div class="col s12 m6">
+            <div>
+              <div class="page-subtitle">
+                <h4>Пригласить сотрудника</h4>
+              </div>
+
+              <form>
+                <div class="input-field">
+                  <input type="text" id="login">
+                  <label for="login">Логин</label>
+                </div>
+
+                <div class="input-field">
+                  <input type="password" id="password">
+                  <label for="password">Пароль</label>
+                </div>
+
+                <div class="input-field">
+                  <select class="select-blue">
+                    <option value="1">Самара</option>
+                    <option value="2">Казань</option>
+                    <option value="3">Москва</option>
+                    <option value="4">Ульяновск</option>
+                    <option value="5">Набережные Челны</option>
+                    <option value="6">Красноярск</option>
+                    <option value="7">Оренбург</option>
+                  </select>
+                  <label>Город</label>
+                </div>
+
+                <div class="input-field">
+                  <select class="select-blue">
+                    <option value="1">Сотрудник</option>
+                    <option value="2">Админ</option>
+                  </select>
+                  <label>Доступ</label>
+                </div>
+
+                <button type="submit"
+                        class="btn waves-effect waves-light auth-submit blue darken-1"
+                >
+                  Пригласить
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="col s12 m6">
+            <div>
+              <div class="page-subtitle">
+                <h4>Редактировать сотрудника</h4>
+              </div>
+
+              <form>
+                <div class="input-field">
+                  <input type="text" id="oldLogin">
+                  <label for="oldLogin">Логин</label>
+                </div>
+
+                <div class="input-field">
+                  <input type="text" id="newLogin">
+                  <label for="newLogin">Новый Логин</label>
+                </div>
+
+                <div class="input-field">
+                  <input type="password" id="oldPassword">
+                  <label for="oldPassword">Пароль</label>
+                </div>
+
+                <div class="input-field">
+                  <input type="password" id="newPassword">
+                  <label for="newPassword">Новый Пароль</label>
+                </div>
+
+                <div class="input-field">
+                  <select class="select-blue">
+                    <option value="1">Самара</option>
+                    <option value="2">Казань</option>
+                    <option value="3">Москва</option>
+                    <option value="4">Ульяновск</option>
+                    <option value="5">Набережные Челны</option>
+                    <option value="6">Красноярск</option>
+                    <option value="7">Оренбург</option>
+                  </select>
+                  <label>Новый Город</label>
+                </div>
+
+                <div class="input-field">
+                  <select class="select-blue">
+                    <option value="1">Сотрудник</option>
+                    <option value="2">Админ</option>
+                  </select>
+                  <label>Доступ</label>
+                </div>
+
+                <button type="submit"
+                        class="btn waves-effect waves-light auth-submit blue darken-1"
+                >
+                  Изменить
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
