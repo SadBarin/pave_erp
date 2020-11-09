@@ -42,8 +42,4 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
-
-  .btn {
-    margin-left: 10px;
-  }
 </style>
