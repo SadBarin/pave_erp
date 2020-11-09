@@ -20,16 +20,34 @@ const router = new VueRouter({
       component: () => import('../views/Sites')
     },
     {
-      path: '/addEmployees',
-      name: 'addEmployees',
+      path: '/sites/editor',
+      name: 'sitesEditor',
       meta: { layout: 'main' },
-      component: () => import('../views/AddEmployees')
+      component: () => import('../components/sites/EditorSites')
     },
     {
-      path: '/addWorkers',
-      name: 'addWorkers',
+      path: '/employees',
+      name: 'employees',
       meta: { layout: 'main' },
-      component: () => import('../views/AddWorkers')
+      component: () => import('../views/Employees')
+    },
+    {
+      path: '/employees/editor',
+      name: 'employeesEditor',
+      meta: { layout: 'main' },
+      component: () => import('../components/employees/EditorEmployees')
+    },
+    {
+      path: '/workers',
+      name: 'workers',
+      meta: { layout: 'main' },
+      component: () => import('../views/Workers')
+    },
+    {
+      path: '/workers/editor',
+      name: 'workersEditor',
+      meta: { layout: 'main' },
+      component: () => import('../components/workers/EditorWorkers')
     }
   ]
 })

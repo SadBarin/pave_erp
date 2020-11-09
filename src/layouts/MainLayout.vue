@@ -17,10 +17,10 @@
         <router-link class="waves-effect waves-blue pointer" to="/sites">Города</router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/addEmployees">Сотрудники</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/employees">Сотрудники</router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/addWorkers">Рабочие</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/workers">Рабочие</router-link>
       </li>
 <!--      <li>-->
 <!--        <router-link class="waves-effect waves-blue pointer" to="/sites">Найти рабочего</router-link>-->

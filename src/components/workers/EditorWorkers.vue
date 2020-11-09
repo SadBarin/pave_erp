@@ -1,17 +1,13 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Добавить нового рабочего</h3>
+      <h3>Редактор рабочего</h3>
     </div>
 
     <section>
       <div class="row">
         <div class="col s12 m6">
           <div>
-            <div class="page-subtitle">
-              <h4>Добавить рабочего</h4>
-            </div>
-
             <form>
               <div class="input-field input-field-blue">
                 <input type="text" id="name">
@@ -192,11 +188,19 @@
                 <label>Уволен</label>
               </div>
 
-              <button type="submit"
-                      class="btn waves-effect waves-light auth-submit blue darken-1"
-              >
-                Добавить
-              </button>
+              <div class="button-container">
+                <button type="submit"
+                        class="btn waves-effect waves-light auth-submit blue darken-1"
+                >
+                  Редактировать
+                </button>
+
+                <router-link type="submit"
+                             class="btn waves-effect waves-light auth-submit blue darken-1" to="/workers"
+                >
+                  Вернуться назад
+                </router-link>
+              </div>
             </form>
           </div>
         </div>
@@ -220,5 +224,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .btn {
+    margin-right: 10px;
+  }
 </style>
