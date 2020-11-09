@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import 'materialize-css/dist/js/materialize.min'
+// import 'materialize-css/dist/js/materialize.min'
 import EmptyLayout from '@/layouts/EmptyLayout'
 import MainLayout from '@/layouts/MainLayout'
 export default {

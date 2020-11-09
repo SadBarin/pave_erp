@@ -2,7 +2,7 @@
   <div class="app-main-layout" id="blue-layout">
     <nav class="navbar blue darken-1 ">
       <div class="navbar-left">
-        <span class="white-text">Сегодня 4 ноября 2020 года</span>
+        <span class="white-text"></span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -14,17 +14,17 @@
 
     <ul class="sidenav app-sidenav open">
       <li>
-        <a href="sites.html" class="waves-effect waves-blue pointer">Города</a>
+        <router-link class="waves-effect waves-blue pointer" to="/sites">Города</router-link>
       </li>
       <li>
-        <a href="addEmployees.html" class="waves-effect waves-blue pointer">Пригласить сотрудника</a>
+        <router-link class="waves-effect waves-blue pointer" to="/addEmployees">Сотрудники</router-link>
       </li>
       <li>
-        <a href="addWorkers.html" class="waves-effect waves-blue pointer">Добавить рабочего</a>
+        <router-link class="waves-effect waves-blue pointer" to="/addWorkers">Рабочие</router-link>
       </li>
-      <li>
-        <a href="searchWorkers.html" class="waves-effect waves-blue pointer">Найти рабочего</a>
-      </li>
+<!--      <li>-->
+<!--        <router-link class="waves-effect waves-blue pointer" to="/sites">Найти рабочего</router-link>-->
+<!--      </li>-->
     </ul>
 
     <main class="app-content">

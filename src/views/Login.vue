@@ -15,11 +15,7 @@
     </div>
 
     <div class="card-action">
-      <button type="submit"
-              class="btn waves-effect waves-light auth-submit blue darken-1"
-      >
-        Войти
-      </button>
+      <router-link to="/sites" type="submit" class="btn waves-effect waves-light auth-submit blue darken-1"> Войти</router-link>
     </div>
   </form>
 </template>
