@@ -31,15 +31,17 @@ export default {
   }
 
   .info-container {
-    width: 28%;
+    width: 50%;
+  }
+
+  .btn-flat {
+    margin-left: 10px;
   }
 
   .button-container {
-    width: 22%;
+    width: 50%;
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: end;
   }
 </style>
