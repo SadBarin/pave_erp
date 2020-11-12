@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style scoped>
+  .row .col {
+    padding: 0;
+  }
+
   .card-line {
     display: flex;
     flex-direction: row;

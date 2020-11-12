@@ -7,7 +7,7 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a class="dropdown-trigger white-text" href="#" data-target="dropdown">ВАША ПОЧТА</a>
+          <router-link class="btn-flat waves-effect waves-light auth-submit red darken-1 white-text" to="/">Выйти</router-link>
         </li>
       </ul>
     </nav>
@@ -42,5 +42,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .btn-flat {
+    margin: 0;
+  }
 </style>
