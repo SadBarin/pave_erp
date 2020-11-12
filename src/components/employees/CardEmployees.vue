@@ -4,12 +4,14 @@
       <div class="card-panel blue accent-1">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6>Сотрудник: Алексей Иванович Дзен</h6>
-            <h6>Город: Магадан</h6>
+            <h6>Сотрудник: {{employee.name}}</h6>
+            <h6>Город: {{employee.city}}</h6>
           </div>
           <div class="button-container">
             <router-link class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" to="/employees/editor">Редактировать</router-link>
-            <button class="btn-flat waves-effect waves-light auth-submit red darken-1 white-text">Удалить</button>
+            <button class="btn-flat waves-effect waves-light auth-submit red darken-1 white-text"
+                    v-on:click="$emit('remove-employee', employee.id)"
+            >Удалить</button>
           </div>
         </div>
       </div>
@@ -19,7 +21,14 @@
 
 <script>
 export default {
-  name: 'CardSites'
+  name: 'CardSites',
+  props: {
+    employee: {
+      type: Object,
+      required: true
+    },
+    index: Number
+  }
 }
 </script>
 
@@ -40,8 +49,6 @@ export default {
   }
 
   .button-container {
-    width: 50%;
-
     display: flex;
     justify-content: end;
   }

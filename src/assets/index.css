@@ -70,9 +70,11 @@ html, body {
 }
 
 .app-content section {
-  height: 70vh;
+  height: 64vh;
 
   overflow-y: auto;
+
+  padding-bottom: 15px;
 }
 
 .page-title {

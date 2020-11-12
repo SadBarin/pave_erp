@@ -40,8 +40,6 @@ export default {
   }
 
   .button-container {
-    width: 50%;
-
     display: flex;
     justify-content: end;
   }
