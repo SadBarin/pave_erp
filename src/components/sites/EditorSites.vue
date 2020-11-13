@@ -6,29 +6,31 @@
 
     <section>
       <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12">
           <div>
             <div class="page-subtitle">
               <h4>Добавить город</h4>
             </div>
 
             <form>
-              <div class="input-field">
-                <input type="text" id="city">
-                <label for="city">Город</label>
-              </div>
+              <div class="form-content">
+                <div class="input-field">
+                  <input type="text" id="city">
+                  <label for="city">Город</label>
+                </div>
 
-              <div class="input-field">
-                <select class="select">
-                  <option value="1">Красный</option>
-                  <option value="2">Зелёный</option>
-                  <option value="3">Синий</option>
-                  <option value="4">Розовый</option>
-                  <option value="5">Фиолетовый</option>
-                  <option value="6">Жёлтый</option>
-                  <option value="7">Оранжевый</option>
-                </select>
-                <label>Цвет Карточки</label>
+<!--                <div class="input-field">-->
+<!--                  <select class="select">-->
+<!--                    <option value="1">Красный</option>-->
+<!--                    <option value="2">Зелёный</option>-->
+<!--                    <option value="3">Синий</option>-->
+<!--                    <option value="4">Розовый</option>-->
+<!--                    <option value="5">Фиолетовый</option>-->
+<!--                    <option value="6">Жёлтый</option>-->
+<!--                    <option value="7">Оранжевый</option>-->
+<!--                  </select>-->
+<!--                  <label>Цвет Карточки</label>-->
+<!--                </div>-->
               </div>
 
               <div class="button-container">
@@ -67,7 +69,25 @@ export default {
 </script>
 
 <style scoped>
+  .row .col {
+    padding: 0;
+  }
+
   .btn {
     margin-right: 10px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .form-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .input-field {
+    width: 48%;
   }
 </style>
