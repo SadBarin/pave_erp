@@ -8,16 +8,47 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form>
+            <form @submit.prevent="validateEmployees">
              <div class="form-content">
                <div class="input-field input-field-blue">
-                 <input type="text" id="email">
+                 <input
+                   id="email"
+                   type="text"
+                   v-model.trim="email"
+                   :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+                 >
                  <label for="email">Почта</label>
+                 <small
+                   class="helper-text invalid"
+                   v-if="$v.email.$dirty && !$v.email.required"
+                 >Введите ваш email</small>
+                 <small
+                   class="helper-text invalid"
+                   v-else-if="$v.email.$dirty && !$v.email.email"
+                 >Введите правильно email
+                 </small>
                </div>
 
-               <div class="input-field">
-                 <input type="password" id="password">
+               <div class="input-field" id="input-field-blue">
+                 <input
+                   id="password"
+                   type="password"
+                   v-model.trim="password"
+                   :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
+                 >
                  <label for="password">Пароль</label>
+                 <small
+                   class="helper-text invalid"
+                   v-if="$v.password.$dirty && !$v.password.required"
+                 >
+                   Введите ваш пароль
+                 </small>
+                 <small
+                   class="helper-text invalid"
+                   v-else-if="$v.password.$dirty && !$v.password.minLength"
+                 >
+                   Пароль должен содержать не менее {{$v.password.$params.minLength.min}} символов.
+                 </small>
                </div>
 
                <div class="input-field">
@@ -40,19 +71,6 @@
                  </select>
                  <label>Доступ</label>
                </div>
-
-<!--               <div class="input-field">-->
-<!--                 <select class="select">-->
-<!--                   <option value="1">Красный</option>-->
-<!--                   <option value="2">Зелёный</option>-->
-<!--                   <option value="3">Синий</option>-->
-<!--                   <option value="4">Розовый</option>-->
-<!--                   <option value="5">Фиолетовый</option>-->
-<!--                   <option value="6">Жёлтый</option>-->
-<!--                   <option value="7">Оранжевый</option>-->
-<!--                 </select>-->
-<!--                 <label>Цвет Карточки</label>-->
-<!--               </div>-->
              </div>
 
               <div class="button-container">
@@ -62,8 +80,7 @@
                   Редактировать
                 </button>
 
-                <router-link type="submit"
-                             class="btn waves-effect waves-light auth-submit blue darken-1" to="/employees"
+                <router-link class="btn waves-effect waves-light auth-submit blue darken-1" to="/employees"
                 >
                   Вернуться назад
                 </router-link>
@@ -78,6 +95,7 @@
 
 <script>
 import M from 'materialize-css'
+import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'addEmployees.vue',
@@ -86,6 +104,21 @@ export default {
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
+  },
+  data: () => ({
+    email: '',
+    password: ''
+  }),
+  validations: {
+    email: { email, required },
+    password: { required, minLength: minLength(8) }
+  },
+  methods: {
+    validateEmployees () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+      }
+    }
   }
 }
 </script>

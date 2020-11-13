@@ -8,29 +8,29 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <div class="page-subtitle">
-              <h4>Добавить город</h4>
-            </div>
-
-            <form>
+            <form @submit.prevent="validateSites">
               <div class="form-content">
                 <div class="input-field">
-                  <input type="text" id="city">
+                  <input
+                    type="text"
+                    id="city"
+                    v-model.trim="cityName"
+                    :class="{invalid: ($v.cityName.$dirty && !$v.cityName.required) || ($v.cityName.$dirty && !$v.cityName.minLength)}"
+                  >
                   <label for="city">Город</label>
+                  <small
+                    class="helper-text invalid"
+                    v-if="$v.cityName.$dirty && !$v.cityName.required"
+                  >
+                    Введите город
+                  </small>
+                  <small
+                    class="helper-text invalid"
+                    v-else-if="$v.cityName.$dirty && !$v.cityName.minLength"
+                  >
+                    Город должен содержать не менее {{$v.cityName.$params.minLength.min}} символов.
+                  </small>
                 </div>
-
-<!--                <div class="input-field">-->
-<!--                  <select class="select">-->
-<!--                    <option value="1">Красный</option>-->
-<!--                    <option value="2">Зелёный</option>-->
-<!--                    <option value="3">Синий</option>-->
-<!--                    <option value="4">Розовый</option>-->
-<!--                    <option value="5">Фиолетовый</option>-->
-<!--                    <option value="6">Жёлтый</option>-->
-<!--                    <option value="7">Оранжевый</option>-->
-<!--                  </select>-->
-<!--                  <label>Цвет Карточки</label>-->
-<!--                </div>-->
               </div>
 
               <div class="button-container">
@@ -56,9 +56,25 @@
 
 <script>
 import M from 'materialize-css'
+import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'Sites',
+  data () {
+    return {
+      cityName: ''
+    }
+  },
+  validations: {
+    cityName: { required, minLength: minLength(2) }
+  },
+  methods: {
+    validateSites () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+      }
+    }
+  },
   mounted () {
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {

@@ -23,7 +23,7 @@
 import AddCardSites from '@/components/sites/AddCardSites'
 import ListSites from '@/components/sites/ListSites'
 export default {
-  name: 'EditorSites',
+  name: 'Sites',
   components: { ListSites, AddCardSites },
   methods: {
     removeCity (id) {
