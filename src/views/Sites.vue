@@ -28,10 +28,17 @@ export default {
   methods: {
     removeCity (id) {
       this.sites = this.sites.filter(city => city.id !== id)
+      this.saveSites()
     },
 
     addCity (city) {
       this.sites.push(city)
+      this.saveSites()
+    },
+
+    saveSites () {
+      const parsed = JSON.stringify(this.sites)
+      localStorage.setItem('sites', parsed)
     }
   },
   data () {
@@ -42,6 +49,15 @@ export default {
         { id: 3, cityName: 'Камчатка' },
         { id: 4, cityName: 'Владивосток' }
       ]
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
     }
   }
 }

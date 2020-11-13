@@ -28,10 +28,17 @@ export default {
   methods: {
     removeEmployee (id) {
       this.employees = this.employees.filter(employee => employee.id !== id)
+      this.saveEmployees()
     },
 
     addEmployee (name) {
       this.employees.push(name)
+      this.saveEmployees()
+    },
+
+    saveEmployees () {
+      const parsed = JSON.stringify(this.employees)
+      localStorage.setItem('employees', parsed)
     }
   },
   data () {
@@ -42,6 +49,15 @@ export default {
         { id: 3, name: 'Михаил', city: 'Москва' },
         { id: 4, name: 'Бенедикт', city: 'Москва' }
       ]
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('employees')) {
+      try {
+        this.employees = JSON.parse(localStorage.getItem('employees'))
+      } catch (e) {
+        localStorage.removeItem('employees')
+      }
     }
   }
 }
