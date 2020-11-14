@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Настройка города</h3>
+      <h3>Настройка города "{{ editedSites }}"</h3>
     </div>
 
     <section>
@@ -14,21 +14,21 @@
                   <input
                     type="text"
                     id="city"
-                    v-model.trim="cityName"
-                    :class="{invalid: ($v.cityName.$dirty && !$v.cityName.required) || ($v.cityName.$dirty && !$v.cityName.minLength)}"
+                    v-model.trim="editedSitesName"
+                    :class="{invalid: ($v.editedSitesName.$dirty && !$v.editedSitesName.required) || ($v.editedSitesName.$dirty && !$v.editedSitesName.minLength)}"
                   >
-                  <label for="city">Город</label>
+                  <label for="city" class="active">Город</label>
                   <small
                     class="helper-text invalid"
-                    v-if="$v.cityName.$dirty && !$v.cityName.required"
+                    v-if="$v.editedSitesName.$dirty && !$v.editedSitesName.required"
                   >
                     Введите город
                   </small>
                   <small
                     class="helper-text invalid"
-                    v-else-if="$v.cityName.$dirty && !$v.cityName.minLength"
+                    v-else-if="$v.editedSitesName.$dirty && !$v.editedSitesName.minLength"
                   >
-                    Город должен содержать не менее {{$v.cityName.$params.minLength.min}} символов.
+                    Город должен содержать не менее {{$v.editedSitesName.$params.minLength.min}} символов.
                   </small>
                 </div>
               </div>
@@ -36,15 +36,17 @@
               <div class="button-container">
                 <button type="submit"
                         class="btn waves-effect waves-light auth-submit blue darken-1"
+                        v-on:click="editorName"
                 >
                   <i class="material-icons">create</i> Редактировать
                 </button>
 
-                <router-link type="submit"
-                             class="btn waves-effect waves-light auth-submit blue darken-1" to="/sites"
+                <button type="submit"
+                             class="btn waves-effect waves-light auth-submit blue darken-1"
+                             v-on:click="editorExit"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
-                </router-link>
+                </button>
               </div>
             </form>
           </div>
@@ -62,17 +64,52 @@ export default {
   name: 'Sites',
   data () {
     return {
-      cityName: ''
+      editedSitesName: '',
+
+      sites: [
+        { id: 1, cityName: 'Минск', edited: true }
+      ]
+    }
+  },
+  computed: {
+    editedSites: function () {
+      const cityName = this.sites.filter(city => city.edited !== false)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.editedSitesName = cityName[0].cityName
+      return cityName[0].cityName
     }
   },
   validations: {
-    cityName: { required, minLength: minLength(2) }
+    editedSitesName: { required, minLength: minLength(2) }
   },
   methods: {
     validateSites () {
       if (this.$v.$invalid) {
         this.$v.$touch()
       }
+    },
+
+    editorExit () {
+      const city = this.sites.filter(city => city.edited !== false)
+      const index = this.sites.findIndex((element) => element.id === city[0].id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.sites[index].edited = false
+      this.saveSites()
+      this.$router.push('/sites')
+    },
+
+    editorName () {
+      const city = this.sites.filter(city => city.edited !== false)
+      const index = this.sites.findIndex((element) => element.id === city[0].id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.sites[index].cityName = this.editedSitesName
+
+      this.editorExit()
+    },
+
+    saveSites () {
+      const parsed = JSON.stringify(this.sites)
+      localStorage.setItem('sites', parsed)
     }
   },
   mounted () {
@@ -80,6 +117,14 @@ export default {
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
+
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
+    }
   }
 }
 </script>

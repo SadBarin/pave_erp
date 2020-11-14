@@ -13,7 +13,6 @@
         v-if="sites.length"
         v-bind:sites="sites"
         @remove-city="removeCity"
-        @give-id="giveId"
       />
       <p v-else>Городов не осталось!</p>
     </div>
@@ -40,16 +39,12 @@ export default {
     saveSites () {
       const parsed = JSON.stringify(this.sites)
       localStorage.setItem('sites', parsed)
-    },
-
-    giveId () {
-      return this.city.id
     }
   },
   data () {
     return {
       sites: [
-        { id: 1, cityName: 'Минск', edited: true }
+        { id: 1, cityName: 'Минск', edited: false }
       ]
     }
   },

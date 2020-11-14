@@ -7,17 +7,19 @@
             <h6>Город: {{city.cityName}}</h6>
           </div>
           <div class="button-container">
-            <router-link class="btn-flat waves-effect waves-light auth-submit white-text"
-                         to="/sites/editor"
+            <button class="btn-flat waves-effect waves-light auth-submit white-text"
+                         v-on:click="editedCityStatus"
                          v-if="!city.edited"
             >
               <i class="material-icons">create</i> Редактировать
-            </router-link>
-            <div class="btn-flat blue-text text-lighten-3"
-                 v-if="city.edited"
+            </button>
+            <router-link class="btn-flat waves-effect waves-light auth-submit blue-text text-lighten-3"
+                         to="/sites/editor"
+                         v-if="city.edited"
             >
-              <i class="material-icons">border_color</i> Редактируется
-            </div>
+              <i class="material-icons">border_color</i> Редактировать принудительно
+            </router-link>
+
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-if="!city.edited"
                     v-on:click="$emit('remove-city', city.id)"
@@ -40,6 +42,35 @@ export default {
       required: true
     },
     index: Number
+  },
+  data () {
+    return {
+      sites: [
+        { id: 1, cityName: 'Минск', edited: false }]
+    }
+  },
+  methods: {
+    editedCityStatus () {
+      const index = this.sites.findIndex((element) => element.id === this.city.id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.sites[index].edited = true
+      this.saveSites()
+      this.$router.push('/sites/editor')
+    },
+
+    saveSites () {
+      const parsed = JSON.stringify(this.sites)
+      localStorage.setItem('sites', parsed)
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
+    }
   }
 }
 </script>

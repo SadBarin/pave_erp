@@ -77,10 +77,12 @@
                </div>
 
                <div class="input-field">
-                 <select class="select">
-                   <option value="1">Минск</option>
+                 <select class="browser-default">
+                   <option v-for="city of sites" :key="city.cityName">
+                     {{ city.cityName }}
+                   </option>
                  </select>
-                 <label>Город</label>
+                 <label class="active">Город</label>
                </div>
 
                <div class="input-field input-field-blue">
@@ -124,6 +126,14 @@ import { email, required, minLength } from 'vuelidate/lib/validators'
 export default {
   name: 'addEmployees.vue',
   mounted () {
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
+    }
+
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
@@ -131,7 +141,9 @@ export default {
   },
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    sites: [
+    ]
   }),
   validations: {
     email: { email, required },
@@ -168,5 +180,15 @@ export default {
 
   .input-field {
     width: 48%;
+  }
+
+  select {
+    border: none !important;
+    border-bottom: 1px solid #9E9E9E !important;
+    padding: 0 !important;
+  }
+
+  select:focus {
+    outline: none !important;
   }
 </style>
