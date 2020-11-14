@@ -50,7 +50,8 @@ export default {
       if (this.cityName.trim()) {
         const newCity = {
           id: Date.now(),
-          cityName: this.cityName
+          cityName: this.cityName,
+          edited: false
         }
 
         this.$emit('add-city', newCity)

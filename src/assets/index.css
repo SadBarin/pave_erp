@@ -56,6 +56,7 @@ html, body {
 #blue-layout .navbar {
   width:100%;
   height: 10vh;
+  min-height: 50px;
   padding:0 2rem;
 
   display:flex;
@@ -70,9 +71,9 @@ html, body {
 }
 
 #blue-layout .app-sidenav {
-  width:250px;
+  width: 15vw;
   height: calc(100% + 10vh);
-  padding-top:5px;
+  padding-top:50px;
 
   position:absolute;
   top:10vh;
@@ -83,17 +84,22 @@ html, body {
   z-index:50
 }
 
+#blue-layout .sidenav li>a {
+  padding: 0 2vw;
+}
+
 .app-sidenav.open {
   transform:translateX(0);
 }
 
 .app-page {
+  width: 85vw;
   padding:2rem
 }
 
 .app-content {
-  padding-top:10vh;
-  padding-left:250px;
+  padding-top: 10vh;
+  padding-left: 15vw;
 
   position:relative;
 
@@ -159,4 +165,19 @@ html, body {
 .material-icons {
   margin-right: 5px;
   font-size: 1.3rem !important;
+}
+
+@media (max-width: 1300px) {
+  #blue-layout .app-sidenav {
+    width: 5vw;
+  }
+
+  .app-page {
+    width: 95vw;
+  }
+
+  .app-content {
+    padding-left: 5vw;
+  }
+
 }
