@@ -21,7 +21,9 @@
       </small>
     </div>
 
-    <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">Добавить город</button>
+    <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">
+      <i class="material-icons">add</i> Добавить город
+    </button>
   </form>
 </template>
 
@@ -60,11 +62,6 @@ export default {
 </script>
 
 <style scoped>
-  .button-container {
-    display: flex;
-    align-items: center;
-  }
-
   .button-container .btn-flat {
     margin-left: 30px;
   }

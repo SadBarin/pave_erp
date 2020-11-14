@@ -1,41 +1,42 @@
 <template>
   <form @submit.prevent="submitEmployee" class="button-container" >
     <div class="input-field input-field-blue">
-      <input type="text"
-             id="name"
-             v-model.trim="name"
-             :class="{invalid: ($v.name.$dirty && !$v.name.required) || ($v.name.$dirty && !$v.name.minLength)}">
-      <label for="name">Имя</label>
+      <input
+        id="email"
+        type="text"
+        v-model.trim="email"
+        :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
+      >
+      <label for="email">Почта</label>
       <small
         class="helper-text invalid"
-        v-if="$v.name.$dirty && !$v.name.required"
-      >
-        Введите имя
-      </small>
+        v-if="$v.email.$dirty && !$v.email.required"
+      >Введите email сотрудника</small>
       <small
         class="helper-text invalid"
-        v-else-if="$v.name.$dirty && !$v.name.minLength"
-      >
-        Имя должно содержать не менее {{$v.name.$params.minLength.min}} символов.
+        v-else-if="$v.email.$dirty && !$v.email.email"
+      >Введите правильно email
       </small>
     </div>
 
-    <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">Добавить сотрудника</button>
+    <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">
+      <i class="material-icons">add</i> Добавить сотрудника
+    </button>
   </form>
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { email, required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'AddCardEmployees',
   data () {
     return {
-      name: ''
+      email: ''
     }
   },
   validations: {
-    name: { required, minLength: minLength(2) }
+    email: { email, required }
   },
   methods: {
     submitEmployee () {
@@ -44,15 +45,16 @@ export default {
         return
       }
 
-      if (this.name.trim()) {
+      if (this.email.trim()) {
         const newEmployee = {
           id: Date.now(),
-          name: this.name,
-          city: 'Москва'
+          email: this.email,
+          name: 'Сотрудник',
+          city: 'Минск'
         }
 
         this.$emit('add-employee', newEmployee)
-        this.name = ''
+        this.email = ''
       }
     }
   }
@@ -60,11 +62,6 @@ export default {
 </script>
 
 <style scoped>
-.button-container {
-  display: flex;
-  align-items: center;
-}
-
 .button-container .input-field {
   margin-right: 30px;
 }

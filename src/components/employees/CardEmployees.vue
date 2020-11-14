@@ -1,17 +1,22 @@
 <template>
   <div class="row">
     <div class="col s12">
-      <div class="card-panel blue accent-1">
+      <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
+            <h6>Почта: {{employee.email}}</h6>
             <h6>Сотрудник: {{employee.name}}</h6>
             <h6>Город: {{employee.city}}</h6>
           </div>
           <div class="button-container">
-            <router-link class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" to="/employees/editor">Редактировать</router-link>
-            <button class="btn-flat waves-effect waves-light auth-submit red darken-1 white-text"
+            <router-link class="btn-flat waves-effect waves-light auth-submit white-text" to="/employees/editor">
+              <i class="material-icons">create</i> Редактировать
+            </router-link>
+            <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-on:click="$emit('remove-employee', employee.id)"
-            >Удалить</button>
+            >
+              <i class="material-icons">delete</i> Удалить
+            </button>
           </div>
         </div>
       </div>

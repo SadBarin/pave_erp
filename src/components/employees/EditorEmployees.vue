@@ -51,17 +51,41 @@
                  </small>
                </div>
 
+               <div class="input-field input-field-blue">
+                 <input type="text" id="name">
+                 <label for="name">Имя</label>
+               </div>
+
+               <div class="input-field input-field-blue">
+                 <input type="text" id="surname">
+                 <label for="surname">Фамилия</label>
+               </div>
+
+               <div class="input-field input-field-blue">
+                 <input type="text" id="patronymic">
+                 <label for="patronymic">Отчество</label>
+               </div>
+
+               <div class="input-field input-field-blue">
+                 <input type="tel" id="homePhone">
+                 <label for="homePhone">Телефон Домашний</label>
+               </div>
+
+               <div class="input-field input-field-blue">
+                 <input type="tel" id="mobilePhone">
+                 <label for="mobilePhone">Телефон Мобильный</label>
+               </div>
+
                <div class="input-field">
                  <select class="select">
-                   <option value="1">Самара</option>
-                   <option value="2">Казань</option>
-                   <option value="3">Москва</option>
-                   <option value="4">Ульяновск</option>
-                   <option value="5">Набережные Челны</option>
-                   <option value="6">Красноярск</option>
-                   <option value="7">Оренбург</option>
+                   <option value="1">Минск</option>
                  </select>
                  <label>Город</label>
+               </div>
+
+               <div class="input-field input-field-blue">
+                 <input type="text" id="duty">
+                 <label for="duty">Должность</label>
                </div>
 
                <div class="input-field">
@@ -77,12 +101,12 @@
                 <button type="submit"
                         class="btn waves-effect waves-light auth-submit blue darken-1"
                 >
-                  Редактировать
+                  <i class="material-icons">create</i> Редактировать
                 </button>
 
                 <router-link class="btn waves-effect waves-light auth-submit blue darken-1" to="/employees"
                 >
-                  Вернуться назад
+                  <i class="material-icons">arrow_back</i> Вернуться назад
                 </router-link>
               </div>
             </form>

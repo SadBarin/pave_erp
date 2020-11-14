@@ -8,14 +8,14 @@
       />
     </div>
 
-    <section>
+    <div>
       <ListEmployees
         v-if="employees.length"
         v-bind:employees="employees"
         @remove-employee="removeEmployee"
       />
       <p v-else>Сотрудников не осталось!</p>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -31,8 +31,8 @@ export default {
       this.saveEmployees()
     },
 
-    addEmployee (name) {
-      this.employees.push(name)
+    addEmployee (email) {
+      this.employees.push(email)
       this.saveEmployees()
     },
 
@@ -44,10 +44,7 @@ export default {
   data () {
     return {
       employees: [
-        { id: 1, name: 'Артём', city: 'Москва' },
-        { id: 2, name: 'Богдан', city: 'Москва' },
-        { id: 3, name: 'Михаил', city: 'Москва' },
-        { id: 4, name: 'Бенедикт', city: 'Москва' }
+        { id: 1, email: 'admin@admin.by', name: 'Админ', city: 'Минск' }
       ]
     }
   },

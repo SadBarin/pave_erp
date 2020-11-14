@@ -2,7 +2,9 @@
   <div>
     <div class="page-title">
       <h3>Список рабочих</h3>
-      <router-link class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" to="/sites/editor">Добавить рабочего</router-link>
+      <router-link class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" to="/sites/editor">
+        <i class="material-icons">add</i> Добавить рабочего
+      </router-link>
     </div>
 
     <section>

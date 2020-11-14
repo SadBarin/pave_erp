@@ -46,7 +46,9 @@
     </div>
 
     <div class="card-action">
-      <button type="submit" class="btn waves-effect waves-light auth-submit blue darken-1"> Войти</button>
+      <button type="submit" class="btn waves-effect waves-light auth-submit blue darken-1">
+        <i class="material-icons">arrow_forward</i> Войти
+      </button>
     </div>
   </form>
 </template>

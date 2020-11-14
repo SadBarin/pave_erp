@@ -8,14 +8,14 @@
       />
     </div>
 
-    <section>
+    <div>
       <ListSites
         v-if="sites.length"
         v-bind:sites="sites"
         @remove-city="removeCity"
       />
       <p v-else>Городов не осталось!</p>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -44,10 +44,7 @@ export default {
   data () {
     return {
       sites: [
-        { id: 1, cityName: 'Магадан' },
-        { id: 2, cityName: 'Москва' },
-        { id: 3, cityName: 'Камчатка' },
-        { id: 4, cityName: 'Владивосток' }
+        { id: 1, cityName: 'Минск' }
       ]
     }
   },

@@ -7,20 +7,22 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <router-link class="btn-flat waves-effect waves-light auth-submit red darken-1 white-text" to="/">Выйти</router-link>
+          <router-link class="btn-flat waves-effect waves-light auth-submit white-text" to="/">
+            <i class="material-icons">arrow_back</i> Выйти
+          </router-link>
         </li>
       </ul>
     </nav>
 
     <ul class="sidenav app-sidenav open">
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/sites">Города</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/sites"><i class="material-icons">location_city</i> Города</router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/employees">Сотрудники</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/employees"><i class="material-icons">group</i> Сотрудники</router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/workers">Рабочие</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/workers"><i class="material-icons">transfer_within_a_station</i> Рабочие</router-link>
       </li>
 <!--      <li>-->
 <!--        <router-link class="waves-effect waves-blue pointer" to="/sites">Найти рабочего</router-link>-->

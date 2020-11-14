@@ -194,13 +194,13 @@
                 <button type="submit"
                         class="btn waves-effect waves-light auth-submit blue darken-1"
                 >
-                  Редактировать
+                  <i class="material-icons">create</i> Редактировать
                 </button>
 
                 <router-link type="submit"
                              class="btn waves-effect waves-light auth-submit blue darken-1" to="/workers"
                 >
-                  Вернуться назад
+                  <i class="material-icons">arrow_back</i> Вернуться назад
                 </router-link>
               </div>
             </form>
