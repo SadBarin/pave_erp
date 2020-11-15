@@ -14,7 +14,10 @@
         v-bind:sites="sites"
         @remove-city="removeCity"
       />
-      <p v-else>Городов не осталось!</p>
+      <div v-else class="empty-list">
+        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Городов не осталось!</h5>
+        <p>Добавьте город, чтобы начать работать над ним.</p>
+      </div>
     </div>
   </div>
 </template>

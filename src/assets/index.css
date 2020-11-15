@@ -11,7 +11,7 @@
   font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 1.3rem;
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -19,14 +19,12 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
   font-feature-settings: 'liga';
+
+  margin-right: 5px;
 }
 
 html, body {
@@ -132,6 +130,16 @@ html, body {
   margin-bottom: 2rem;
 }
 
+.empty-list-title {
+  display: flex;
+  align-items: center;
+}
+
+.empty-list-title .material-icons {
+  font-size: 1.7rem;
+  margin-right: 10px;
+}
+
 #blue-layout .input-field {
   padding: 1px;
 }
@@ -160,11 +168,6 @@ html, body {
   display: flex !important;
   justify-content: center;
   align-items: center;
-}
-
-.material-icons {
-  margin-right: 5px;
-  font-size: 1.3rem !important;
 }
 
 @media (max-width: 1300px) {

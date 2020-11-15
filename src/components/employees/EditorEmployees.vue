@@ -78,7 +78,7 @@
 
                <div class="input-field">
                  <select class="browser-default">
-                   <option v-for="city of sites" :key="city.cityName">
+                   <option v-for="(city) of sites" :key="city.cityName">
                      {{ city.cityName }}
                    </option>
                  </select>
@@ -142,8 +142,7 @@ export default {
   data: () => ({
     email: '',
     password: '',
-    sites: [
-    ]
+    sites: [{ id: 1, cityName: 'Минск', edited: false }]
   }),
   validations: {
     email: { email, required },
@@ -186,6 +185,11 @@ export default {
     border: none !important;
     border-bottom: 1px solid #9E9E9E !important;
     padding: 0 !important;
+    appearance: none !important;
+  }
+
+  option {
+    margin-left: 10px !important;
   }
 
   select:focus {

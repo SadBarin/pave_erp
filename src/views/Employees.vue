@@ -14,7 +14,10 @@
         v-bind:employees="employees"
         @remove-employee="removeEmployee"
       />
-      <p v-else>Сотрудников не осталось!</p>
+      <div v-else class="empty-list">
+        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Сотрудников не осталось!</h5>
+        <p>Добавьте сотрудника, чтобы начать работать над ним.</p>
+      </div>
     </div>
   </div>
 </template>
