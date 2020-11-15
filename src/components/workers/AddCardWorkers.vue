@@ -17,7 +17,7 @@
         class="helper-text invalid"
         v-else-if="$v.name.$dirty && !$v.name.minLength"
       >
-        Имя рабочего не должно содержать не менее {{$v.name.$params.minLength.min}} символов.
+        Имя рабочего должно содержать не менее {{$v.name.$params.minLength.min}} символов.
       </small>
     </div>
 
