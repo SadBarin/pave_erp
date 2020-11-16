@@ -4,7 +4,7 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6>Город: {{city.cityName}}</h6>
+            <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
           </div>
           <div class="button-container">
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
@@ -89,6 +89,15 @@ export default {
 
   .info-container {
     width: 50%;
+  }
+
+  h6 {
+    display: flex;
+    align-items: center;
+  }
+
+  h6 .material-icons {
+    margin-right: 10px;
   }
 
   .btn-flat {

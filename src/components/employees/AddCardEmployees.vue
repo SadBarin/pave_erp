@@ -49,8 +49,15 @@ export default {
         const newEmployee = {
           id: Date.now(),
           email: this.email,
-          name: 'Сотрудник',
-          city: 'Минск'
+          password: '',
+          name: Date.now(),
+          surname: '',
+          patronymic: '',
+          homePhone: '',
+          mobilePhone: '',
+          city: 'Минск',
+          duty: '',
+          access: false
         }
 
         this.$emit('add-employee', newEmployee)

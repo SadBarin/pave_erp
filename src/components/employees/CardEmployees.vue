@@ -4,9 +4,9 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6>Почта: {{employee.email}}</h6>
-            <h6>Сотрудник: {{employee.name}}</h6>
-            <h6>Город: {{employee.city}}</h6>
+            <h6><i class="material-icons">email</i> Почта: {{employee.email}}</h6>
+            <h6><i class="material-icons">person</i> Сотрудник: {{employee.name}} {{employee.surname}} {{employee.patronymic}}</h6>
+            <h6><i class="material-icons">location_city</i> Город: {{employee.city}}</h6>
           </div>
           <div class="button-container">
             <router-link class="btn-flat waves-effect waves-light auth-submit white-text" to="/employees/editor">
@@ -51,6 +51,15 @@ export default {
 
   .info-container {
     width: 50%;
+  }
+
+  h6 {
+    display: flex;
+    align-items: center;
+  }
+
+  h6 .material-icons {
+    margin-right: 10px;
   }
 
   .btn-flat {
