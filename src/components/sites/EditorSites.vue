@@ -65,10 +65,10 @@ export default {
   data () {
     return {
       editedSitesName: '',
+      countEmployees: '',
 
-      sites: [
-        { id: 1, cityName: 'Минск', edited: true }
-      ]
+      sites: [{ id: 1, cityName: 'Минск', edited: true }],
+      employees: [{ id: 1, email: 'admin@admin.by', name: 'Админ', city: 'Гомель' }]
     }
   },
   computed: {
@@ -104,6 +104,14 @@ export default {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.sites[index].cityName = this.editedSitesName
 
+      this.employees.forEach((employee) => {
+        if (employee.city === this.sites[index].cityName) {
+          this.countEmployees++
+        }
+      })
+
+      this.sites[index].employees = this.countEmployees
+
       this.editorExit()
     },
 
@@ -123,6 +131,14 @@ export default {
         this.sites = JSON.parse(localStorage.getItem('sites'))
       } catch (e) {
         localStorage.removeItem('sites')
+      }
+    }
+
+    if (localStorage.getItem('employees')) {
+      try {
+        this.employees = JSON.parse(localStorage.getItem('employees'))
+      } catch (e) {
+        localStorage.removeItem('employees')
       }
     }
   }

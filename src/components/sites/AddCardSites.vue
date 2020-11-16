@@ -51,6 +51,7 @@ export default {
         const newCity = {
           id: Date.now(),
           cityName: this.cityName,
+          employees: 0,
           edited: false
         }
 

@@ -5,6 +5,7 @@
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
+            <h6><i class="material-icons">group</i> Количество сотрудников: {{city.employees}}</h6>
             <p v-if="city.edited" class="card-report">
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
@@ -49,7 +50,7 @@ export default {
   data () {
     return {
       sites: [
-        { id: 1, cityName: 'Минск', edited: false }]
+        { id: 1, cityName: 'Минск', employees: 0, edited: false }]
     }
   },
   methods: {
