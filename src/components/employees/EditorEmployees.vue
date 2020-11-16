@@ -52,8 +52,11 @@
                </div>
 
                <div class="input-field input-field-blue">
-                 <input type="text" id="name">
-                 <label for="name">Имя</label>
+                 <input type="text"
+                        id="name"
+                        v-model.trim="editedEmployeeName"
+                 >
+                 <label for="name" class="active">Имя</label>
                </div>
 
                <div class="input-field input-field-blue">
@@ -99,18 +102,21 @@
                </div>
              </div>
 
-              <div class="button-container">
-                <button type="submit"
-                        class="btn waves-effect waves-light auth-submit blue darken-1"
-                >
-                  <i class="material-icons">create</i> Редактировать
-                </button>
+             <div class="button-container">
+               <button type="submit"
+                       class="btn waves-effect waves-light auth-submit blue darken-1"
+                       v-on:click="editorName"
+               >
+                 <i class="material-icons">create</i> Редактировать
+               </button>
 
-                <router-link class="btn waves-effect waves-light auth-submit blue darken-1" to="/employees"
-                >
-                  <i class="material-icons">arrow_back</i> Вернуться назад
-                </router-link>
-              </div>
+               <button type="submit"
+                       class="btn waves-effect waves-light auth-submit blue darken-1"
+                       v-on:click="editorExit"
+               >
+                 <i class="material-icons">arrow_back</i> Вернуться назад
+               </button>
+             </div>
             </form>
           </div>
         </div>
@@ -126,11 +132,11 @@ import { email, required, minLength } from 'vuelidate/lib/validators'
 export default {
   name: 'addEmployees.vue',
   mounted () {
-    if (localStorage.getItem('sites')) {
+    if (localStorage.getItem('employees')) {
       try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
+        this.employees = JSON.parse(localStorage.getItem('employees'))
       } catch (e) {
-        localStorage.removeItem('sites')
+        localStorage.removeItem('employees')
       }
     }
 
@@ -140,9 +146,9 @@ export default {
     })
   },
   data: () => ({
+    editedEmployeeName: '',
     email: '',
-    password: '',
-    sites: [{ id: 1, cityName: 'Минск', edited: false }]
+    password: ''
   }),
   validations: {
     email: { email, required },
@@ -153,6 +159,29 @@ export default {
       if (this.$v.$invalid) {
         this.$v.$touch()
       }
+    },
+
+    editorExit () {
+      const employee = this.employees.filter(employee => employee.edited !== false)
+      const index = this.employees.findIndex((element) => element.id === employee[0].id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.employees[index].edited = false
+      this.saveEmployees()
+      this.$router.push('/employees')
+    },
+
+    editorName () {
+      const employee = this.employees.filter(employee => employee.edited !== false)
+      const index = this.employees.findIndex((element) => element.id === employee[0].id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.employees[index].name = this.editedEmployeeName
+
+      this.editorExit()
+    },
+
+    saveEmployees () {
+      const parsed = JSON.stringify(this.employees)
+      localStorage.setItem('employees', parsed)
     }
   }
 }

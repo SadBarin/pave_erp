@@ -5,6 +5,9 @@
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
+            <p v-if="city.edited" class="card-report">
+              <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
+            </p>
           </div>
           <div class="button-container">
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
@@ -91,13 +94,18 @@ export default {
     width: 50%;
   }
 
-  h6 {
+  h6, .card-report {
     display: flex;
     align-items: center;
   }
 
-  h6 .material-icons {
+  h6 .material-icons,
+  .card-report .material-icons {
     margin-right: 10px;
+  }
+
+  .card-report {
+    margin: 20px 0 0;
   }
 
   .btn-flat {
