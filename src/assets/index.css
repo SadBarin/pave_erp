@@ -140,6 +140,21 @@ html, body {
   margin-right: 10px;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-update {
+  margin-left: 20px;
+  margin-bottom: -10px;
+}
+
+.btn-update .material-icons {
+  margin: 0px;
+  font-size: 1.7rem;
+}
+
 #blue-layout .input-field {
   padding: 1px;
 }

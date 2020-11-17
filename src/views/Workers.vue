@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Список рабочих</h3>
+      <div class="title-container">
+        <h3>Список рабочих</h3>
+
+        <button class="btn-flat btn-update"
+                v-on:click="update"
+        ><i class="material-icons">autorenew</i>
+        </button>
+      </div>
 
       <AddCardWorkers
         @add-worker="addWorker"
@@ -28,6 +35,13 @@ import ListWorkers from '@/components/workers/ListWorkers'
 export default {
   name: 'Workers',
   components: { ListWorkers, AddCardWorkers },
+  data () {
+    return {
+      workers: [],
+
+      updateTimeout: 300000
+    }
+  },
   methods: {
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
@@ -42,13 +56,16 @@ export default {
     saveWorkers () {
       const parsed = JSON.stringify(this.workers)
       localStorage.setItem('workers', parsed)
-    }
-  },
-  data () {
-    return {
-      workers: [
-        { id: 1, name: 'Зубило', edited: false }
-      ]
+    },
+
+    update () {
+      if (localStorage.getItem('workers')) {
+        try {
+          this.workers = JSON.parse(localStorage.getItem('workers'))
+        } catch (e) {
+          localStorage.removeItem('workers')
+        }
+      }
     }
   },
   mounted () {
@@ -59,6 +76,8 @@ export default {
         localStorage.removeItem('workers')
       }
     }
+
+    setInterval(this.update, this.updateTimeout)
   }
 }
 </script>

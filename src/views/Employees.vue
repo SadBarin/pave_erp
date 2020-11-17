@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Список сотрудников</h3>
+      <div class="title-container">
+        <h3>Список сотрудников</h3>
+
+        <button class="btn-flat btn-update"
+                v-on:click="update"
+        ><i class="material-icons">autorenew</i>
+        </button>
+      </div>
 
       <AddCardEmployees
         @add-employee="addEmployee"
@@ -28,6 +35,13 @@ import AddCardEmployees from '@/components/employees/AddCardEmployees'
 export default {
   name: 'Employees',
   components: { ListEmployees, AddCardEmployees },
+  data () {
+    return {
+      employees: [],
+
+      updateTimeout: 300000
+    }
+  },
   methods: {
     removeEmployee (id) {
       this.employees = this.employees.filter(employee => employee.id !== id)
@@ -42,13 +56,16 @@ export default {
     saveEmployees () {
       const parsed = JSON.stringify(this.employees)
       localStorage.setItem('employees', parsed)
-    }
-  },
-  data () {
-    return {
-      employees: [
-        { id: 1, email: 'admin@admin.by', name: 'Админ', city: 'Минск' }
-      ]
+    },
+
+    update () {
+      if (localStorage.getItem('employees')) {
+        try {
+          this.employees = JSON.parse(localStorage.getItem('employees'))
+        } catch (e) {
+          localStorage.removeItem('employees')
+        }
+      }
     }
   },
   mounted () {
@@ -59,6 +76,8 @@ export default {
         localStorage.removeItem('employees')
       }
     }
+
+    setInterval(this.update, this.updateTimeout)
   }
 }
 </script>

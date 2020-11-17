@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Список городов</h3>
+      <div class="title-container">
+        <h3>Список городов</h3>
+
+        <button class="btn-flat btn-update"
+                v-on:click="update"
+        ><i class="material-icons">autorenew</i>
+        </button>
+      </div>
 
       <AddCardSites
         @add-city="addCity"
@@ -28,6 +35,13 @@ import ListSites from '@/components/sites/ListSites'
 export default {
   name: 'Sites',
   components: { ListSites, AddCardSites },
+  data () {
+    return {
+      sites: [],
+
+      updateTimeout: 300000
+    }
+  },
   methods: {
     removeCity (id) {
       this.sites = this.sites.filter(city => city.id !== id)
@@ -42,13 +56,16 @@ export default {
     saveSites () {
       const parsed = JSON.stringify(this.sites)
       localStorage.setItem('sites', parsed)
-    }
-  },
-  data () {
-    return {
-      sites: [
-        { id: 1, cityName: 'Минск', edited: false }
-      ]
+    },
+
+    update () {
+      if (localStorage.getItem('sites')) {
+        try {
+          this.sites = JSON.parse(localStorage.getItem('sites'))
+        } catch (e) {
+          localStorage.removeItem('sites')
+        }
+      }
     }
   },
   mounted () {
@@ -59,6 +76,8 @@ export default {
         localStorage.removeItem('sites')
       }
     }
+
+    setInterval(this.update, this.updateTimeout)
   }
 }
 </script>
