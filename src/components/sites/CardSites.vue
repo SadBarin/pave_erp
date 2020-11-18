@@ -33,7 +33,9 @@
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
             <h6><i class="material-icons">group</i> Количество сотрудников: {{city.employees}}</h6>
-            <p v-if="city.edited" class="card-report">
+            <p class="card-report"
+               v-if="city.edited"
+            >
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
@@ -69,17 +71,17 @@ export default {
   name: 'CardSites',
   props: {
     city: {
-      type: Object,
-      required: true
+      type: Object
     },
     index: Number
   },
   data () {
     return {
-      sites: [
-        { id: 1, cityName: 'Минск', employees: 0, edited: false }],
+      sites: [{}],
+      employees: [{}],
 
-      overlayShow: false
+      overlayShow: false,
+      countEmployees: 0
     }
   },
   methods: {
@@ -99,6 +101,20 @@ export default {
       this.$router.push('/sites/editor')
     },
 
+    amountEmployees () {
+      const index = this.sites.findIndex((element) => element.id === this.city.id)
+
+      this.employees.forEach((employee) => {
+        if (employee.city === this.sites[index].cityName) {
+          this.countEmployees++
+        }
+      })
+
+      this.sites[index].employees = this.countEmployees
+
+      this.saveSites()
+    },
+
     saveSites () {
       const parsed = JSON.stringify(this.sites)
       localStorage.setItem('sites', parsed)
@@ -112,6 +128,16 @@ export default {
         localStorage.removeItem('sites')
       }
     }
+
+    if (localStorage.getItem('employees')) {
+      try {
+        this.employees = JSON.parse(localStorage.getItem('employees'))
+      } catch (e) {
+        localStorage.removeItem('employees')
+      }
+    }
+
+    this.amountEmployees()
   }
 }
 </script>

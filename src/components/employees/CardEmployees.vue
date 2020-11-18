@@ -70,15 +70,13 @@ export default {
   name: 'CardEmployees',
   props: {
     employee: {
-      type: Object,
-      required: true
+      type: Object
     },
     index: Number
   },
   data () {
     return {
-      employees: [
-        { id: 1, employeeName: 'Минск', edited: false }],
+      employees: [],
 
       overlayShow: false
     }

@@ -65,15 +65,13 @@ export default {
   name: 'CardWorkers',
   props: {
     worker: {
-      type: Object,
-      required: true
+      type: Object
     },
     index: Number
   },
   data () {
     return {
-      workers: [
-        { id: 1, name: 'Зубило', edited: false }],
+      workers: [],
 
       overlayShow: false
     }
@@ -88,9 +86,6 @@ export default {
     },
 
     editedWorkerStatus () {
-      // const index = this.workers.findIndex((element) => element.id === this.worker.id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      // this.workers[index].edited = true
       this.saveWorkers()
       this.$router.push('/workers/editor')
     },

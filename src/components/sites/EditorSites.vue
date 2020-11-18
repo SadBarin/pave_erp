@@ -67,8 +67,8 @@ export default {
       editedSitesName: '',
       countEmployees: '',
 
-      sites: [{ id: 1, cityName: 'Минск', edited: true }],
-      employees: [{ id: 1, email: 'admin@admin.by', name: 'Админ', city: 'Гомель' }]
+      sites: [{}],
+      employees: [{}]
     }
   },
   computed: {
