@@ -1,5 +1,32 @@
 <template>
   <div class="row">
+    <template v-if="overlayShow">
+      <div class="popup-overlay">
+        <form class="card auth-card popup">
+          <div class="card-content">
+            <span class="card-title">Удалить элемент? <br></span>
+            <span class="popup-subtitle">Рабочий: {{worker.name}}</span>
+          </div>
+
+          <div class="card-action btn-popup">
+            <button type="submit"
+                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+                    v-on:click="$emit('remove-worker', worker.id)"
+            >
+              <i class="material-icons">check</i> Да
+            </button>
+
+            <button type="submit"
+                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+                    v-on:click="overlayHidden"
+            >
+              <i class="material-icons">clear</i> Нет
+            </button>
+          </div>
+        </form>
+      </div>
+    </template>
+
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
@@ -22,7 +49,7 @@
 
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-if="!worker.edited"
-                    v-on:click="$emit('remove-worker', worker.id)"
+                    v-on:click="overlayVisibility"
             >
               <i class="material-icons">delete</i> Удалить
             </button>
@@ -46,10 +73,20 @@ export default {
   data () {
     return {
       workers: [
-        { id: 1, name: 'Зубило', edited: false }]
+        { id: 1, name: 'Зубило', edited: false }],
+
+      overlayShow: false
     }
   },
   methods: {
+    overlayVisibility () {
+      this.overlayShow = true
+    },
+
+    overlayHidden () {
+      this.overlayShow = false
+    },
+
     editedWorkerStatus () {
       // const index = this.workers.findIndex((element) => element.id === this.worker.id)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties

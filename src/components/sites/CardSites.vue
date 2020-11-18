@@ -1,5 +1,32 @@
 <template>
   <div class="row">
+    <template v-if="overlayShow">
+      <div class="popup-overlay">
+        <form class="card auth-card popup">
+          <div class="card-content">
+            <span class="card-title">Удалить элемент? <br></span>
+            <span class="popup-subtitle">Город: {{city.cityName}}</span>
+          </div>
+
+          <div class="card-action btn-popup">
+            <button type="submit"
+                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+                    v-on:click="$emit('remove-city', city.id)"
+            >
+              <i class="material-icons">check</i> Да
+            </button>
+
+            <button type="submit"
+                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+                    v-on:click="overlayHidden"
+            >
+              <i class="material-icons">clear</i> Нет
+            </button>
+          </div>
+        </form>
+      </div>
+    </template>
+
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
@@ -26,7 +53,7 @@
 
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-if="!city.edited"
-                    v-on:click="$emit('remove-city', city.id)"
+                    v-on:click="overlayVisibility"
             >
               <i class="material-icons">delete</i> Удалить
             </button>
@@ -50,10 +77,20 @@ export default {
   data () {
     return {
       sites: [
-        { id: 1, cityName: 'Минск', employees: 0, edited: false }]
+        { id: 1, cityName: 'Минск', employees: 0, edited: false }],
+
+      overlayShow: false
     }
   },
   methods: {
+    overlayVisibility () {
+      this.overlayShow = true
+    },
+
+    overlayHidden () {
+      this.overlayShow = false
+    },
+
     editedCityStatus () {
       const index = this.sites.findIndex((element) => element.id === this.city.id)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
