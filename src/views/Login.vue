@@ -10,7 +10,7 @@
                v-model.trim="email"
                :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
         >
-        <label for="email">Почта</label>
+        <label for="email" class="active">Почта</label>
         <small
           class="helper-text invalid"
           v-if="$v.email.$dirty && !$v.email.required"
@@ -29,7 +29,7 @@
           v-model.trim="password"
           :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
         >
-        <label for="password">Пароль</label>
+        <label for="password" class="active">Пароль</label>
         <small
           class="helper-text invalid"
           v-if="$v.password.$dirty && !$v.password.required"
@@ -58,10 +58,12 @@ import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'Login',
-  data: () => ({
-    email: '',
-    password: ''
-  }),
+  data () {
+    return {
+      email: 'admin@admin.com',
+      password: 'admin2020'
+    }
+  },
   validations: {
     email: { email, required },
     password: { required, minLength: minLength(8) }
@@ -78,7 +80,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,10 +1,12 @@
 <template>
   <form @submit.prevent="submitSites" class="button-container" >
     <div class="input-field input-field-blue">
-      <input type="text"
-             id="city"
-             v-model.trim="cityName"
-             :class="{invalid: ($v.cityName.$dirty && !$v.cityName.required) || ($v.cityName.$dirty && !$v.cityName.minLength)}"
+      <input
+        class="input-add"
+        type="text"
+        id="city"
+        v-model.trim="cityName"
+        :class="{invalid: ($v.cityName.$dirty && !$v.cityName.required) || ($v.cityName.$dirty && !$v.cityName.minLength)}"
       >
       <label for="city">Город</label>
       <small

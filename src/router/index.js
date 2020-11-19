@@ -48,6 +48,12 @@ const router = new VueRouter({
       name: 'workersEditor',
       meta: { layout: 'main' },
       component: () => import('../components/workers/EditorWorkers')
+    },
+    {
+      path: '/workers/search',
+      name: 'workersSearch',
+      meta: { layout: 'main' },
+      component: () => import('../components/workers/SearchWorkers')
     }
   ]
 })

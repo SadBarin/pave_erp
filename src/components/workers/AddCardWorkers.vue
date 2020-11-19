@@ -1,23 +1,25 @@
 <template>
   <form @submit.prevent="submitWorkers" class="button-container" >
     <div class="input-field input-field-blue">
-      <input type="text"
-             id="worker"
-             v-model.trim="name"
-             :class="{invalid: ($v.name.$dirty && !$v.name.required) || ($v.name.$dirty && !$v.name.minLength)}"
+      <input
+        class="input-add"
+        type="text"
+        id="worker"
+        v-model.trim="name"
+        :class="{invalid: ($v.name.$dirty && !$v.name.required) || ($v.name.$dirty && !$v.name.numeric) || ($v.name.$dirty && !$v.name.minLength)}"
       >
-      <label for="worker">Рабочий</label>
+      <label for="worker">Номер рабочего</label>
       <small
         class="helper-text invalid"
-        v-if="$v.name.$dirty && !$v.name.required"
+        v-if="$v.name.$dirty && !$v.name.numeric || $v.name.$dirty && !$v.name.required"
       >
-        Введите рабочего
+        Введите номер рабочего
       </small>
       <small
         class="helper-text invalid"
         v-else-if="$v.name.$dirty && !$v.name.minLength"
       >
-        Имя рабочего должно содержать не менее {{$v.name.$params.minLength.min}} символов.
+        Номер должен содержать не менее {{$v.name.$params.minLength.min}} символов.
       </small>
     </div>
 
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, numeric, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'AddCardSWorkers',
@@ -38,7 +40,7 @@ export default {
     }
   },
   validations: {
-    name: { required, minLength: minLength(2) }
+    name: { required, numeric, minLength: minLength(7) }
   },
   methods: {
     submitWorkers () {

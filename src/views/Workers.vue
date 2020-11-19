@@ -4,10 +4,15 @@
       <div class="title-container">
         <h3>Список рабочих</h3>
 
-        <button class="btn-flat btn-update"
-                v-on:click="update"
-        ><i class="material-icons">autorenew</i>
-        </button>
+        <div class="title-btn-container">
+          <button class="btn-flat btn-title"
+                  v-on:click="updateCollection('workers')"
+          ><i class="material-icons">autorenew</i>
+          </button>
+
+          <router-link class="btn-flat btn-title" to="/workers/search"><i class="material-icons">search</i>
+          </router-link>
+        </div>
       </div>
 
       <AddCardWorkers
@@ -39,53 +44,38 @@ export default {
     return {
       workers: [],
 
-      updateTimeout: 300000
+      updateTimeout: 60000
     }
   },
   methods: {
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
-      this.saveWorkers()
+      this.saveCollection(this.workers, 'workers')
     },
 
     addWorker (worker) {
       this.workers.push(worker)
-      this.saveWorkers()
+      this.saveCollection(this.workers, 'workers')
     },
 
-    saveWorkers () {
-      const parsed = JSON.stringify(this.workers)
-      localStorage.setItem('workers', parsed)
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
     },
 
-    update () {
-      if (localStorage.getItem('workers')) {
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
         try {
-          this.workers = JSON.parse(localStorage.getItem('workers'))
+          this.workers = JSON.parse(localStorage.getItem(collectionName))
         } catch (e) {
-          localStorage.removeItem('workers')
+          localStorage.removeItem(collectionName)
         }
       }
     }
   },
   mounted () {
-    if (localStorage.getItem('workers')) {
-      try {
-        this.workers = JSON.parse(localStorage.getItem('workers'))
-      } catch (e) {
-        localStorage.removeItem('workers')
-      }
-    }
-
-    setInterval(this.update, this.updateTimeout)
+    this.updateCollection('workers')
+    setInterval(() => this.updateCollection('workers'), this.updateTimeout)
   }
 }
 </script>
-
-<style scoped>
-  .page-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-</style>

@@ -4,10 +4,12 @@
       <div class="title-container">
         <h3>Список сотрудников</h3>
 
-        <button class="btn-flat btn-update"
-                v-on:click="update"
-        ><i class="material-icons">autorenew</i>
-        </button>
+        <div class="title-btn-container">
+          <button class="btn-flat btn-title"
+                  v-on:click="updateCollection('employees')"
+          ><i class="material-icons">autorenew</i>
+          </button>
+        </div>
       </div>
 
       <AddCardEmployees
@@ -39,56 +41,38 @@ export default {
     return {
       employees: [],
 
-      updateTimeout: 300000
+      updateTimeout: 60000
     }
   },
   methods: {
     removeEmployee (id) {
       this.employees = this.employees.filter(employee => employee.id !== id)
-      this.saveEmployees()
+      this.saveCollection(this.employees, 'employees')
     },
 
     addEmployee (email) {
       this.employees.push(email)
-      this.saveEmployees()
+      this.saveCollection(this.employees, 'employees')
     },
 
-    saveEmployees () {
-      const parsed = JSON.stringify(this.employees)
-      localStorage.setItem('employees', parsed)
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
     },
 
-    update () {
-      if (localStorage.getItem('employees')) {
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
         try {
-          this.employees = JSON.parse(localStorage.getItem('employees'))
+          this.employees = JSON.parse(localStorage.getItem(collectionName))
         } catch (e) {
-          localStorage.removeItem('employees')
+          localStorage.removeItem(collectionName)
         }
       }
     }
   },
   mounted () {
-    if (localStorage.getItem('employees')) {
-      try {
-        this.employees = JSON.parse(localStorage.getItem('employees'))
-      } catch (e) {
-        localStorage.removeItem('employees')
-      }
-    }
-
-    setInterval(this.update, this.updateTimeout)
+    this.updateCollection('employees')
+    setInterval(() => this.updateCollection('employees'), this.updateTimeout)
   }
 }
 </script>
-
-<style scoped>
-  .row {
-    margin-bottom: 0;
-  }
-
-  .page-title {
-    display: flex;
-    justify-content: space-between;
-  }
-</style>

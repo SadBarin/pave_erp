@@ -2,6 +2,7 @@
   <form @submit.prevent="submitEmployee" class="button-container" >
     <div class="input-field input-field-blue">
       <input
+        class="input-add"
         id="email"
         type="text"
         v-model.trim="email"

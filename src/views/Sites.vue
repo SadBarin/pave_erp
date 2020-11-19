@@ -4,10 +4,12 @@
       <div class="title-container">
         <h3>Список городов</h3>
 
-        <button class="btn-flat btn-update"
-                v-on:click="update"
-        ><i class="material-icons">autorenew</i>
-        </button>
+        <div class="title-btn-container">
+          <button class="btn-flat btn-title"
+                  v-on:click="updateCollection('sites')"
+          ><i class="material-icons">autorenew</i>
+          </button>
+        </div>
       </div>
 
       <AddCardSites
@@ -37,55 +39,40 @@ export default {
   components: { ListSites, AddCardSites },
   data () {
     return {
-      sites: [],
+      sites: [{}],
 
-      updateTimeout: 300000
+      updateTimeout: 60000
     }
   },
   methods: {
     removeCity (id) {
       this.sites = this.sites.filter(city => city.id !== id)
-      this.saveSites()
+      this.saveCollection(this.sites, 'sites')
     },
 
     addCity (city) {
       this.sites.push(city)
-      this.saveSites()
+      this.saveCollection(this.sites, 'sites')
     },
 
-    saveSites () {
-      const parsed = JSON.stringify(this.sites)
-      localStorage.setItem('sites', parsed)
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
     },
 
-    update () {
-      if (localStorage.getItem('sites')) {
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
         try {
-          this.sites = JSON.parse(localStorage.getItem('sites'))
+          this.sites = JSON.parse(localStorage.getItem(collectionName))
         } catch (e) {
-          localStorage.removeItem('sites')
+          localStorage.removeItem(collectionName)
         }
       }
     }
   },
   mounted () {
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
-
-    setInterval(this.update, this.updateTimeout)
+    this.updateCollection('sites')
+    setInterval(() => this.updateCollection('sites'), this.updateTimeout)
   }
 }
 </script>
-
-<style scoped>
-  .page-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-</style>

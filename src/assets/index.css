@@ -117,8 +117,9 @@ html, body {
 
   padding-bottom:1rem;
 
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-title h3 {
@@ -145,18 +146,36 @@ html, body {
   align-items: center;
 }
 
-.btn-update {
-  margin-left: 20px;
+.title-btn-container {
+  margin-left: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-title {
+  width: 1.7rem;
+
+  margin-right: 15px;
   margin-bottom: -10px;
 }
 
-.btn-update .material-icons {
-  margin: 0px;
+.btn-title .material-icons {
+  margin: 0;
   font-size: 1.7rem;
 }
 
+#blue-layout .card-title {
+  margin-bottom: 30px;
+}
+
 #blue-layout .input-field {
-  padding: 1px;
+  padding: 2px;
+}
+
+#blue-layout .input-add {
+  width: 270px;
 }
 
 /* label focus color */

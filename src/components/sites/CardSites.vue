@@ -102,15 +102,17 @@ export default {
     },
 
     amountEmployees () {
-      const index = this.sites.findIndex((element) => element.id === this.city.id)
+      try {
+        const index = this.sites.findIndex((element) => element.id === this.city.id)
 
-      this.employees.forEach((employee) => {
-        if (employee.city === this.sites[index].cityName) {
-          this.countEmployees++
-        }
-      })
+        this.employees.forEach((employee) => {
+          if (employee.city === this.sites[index].cityName) {
+            this.countEmployees++
+          }
+        })
 
-      this.sites[index].employees = this.countEmployees
+        this.sites[index].employees = this.countEmployees
+      } catch (e) {}
 
       this.saveSites()
     },
