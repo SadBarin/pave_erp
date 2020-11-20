@@ -31,7 +31,8 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6><i class="material-icons">face</i> Рабочий: {{worker.name}}</h6>
+            <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}} {{worker.patronymic}}</h6>
+            <h6><i class="material-icons">phone</i> Номер: {{worker.number}}</h6>
           </div>
           <div class="button-container">
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
@@ -86,6 +87,9 @@ export default {
     },
 
     editedWorkerStatus () {
+      const index = this.workers.findIndex((element) => element.id === this.worker.id)
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.workers[index].edited = true
       this.saveWorkers()
       this.$router.push('/workers/editor')
     },

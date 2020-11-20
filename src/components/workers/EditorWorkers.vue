@@ -11,52 +11,92 @@
             <form>
               <div class="form-content">
                 <div class="input-field input-field-blue">
-                  <input type="text" id="name">
-                  <label for="name">Имя</label>
+                  <input
+                    id="name"
+                    type="text"
+                    v-model.trim="editedName"
+                  >
+                  <label class="active" for="name">Имя</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="surname">
-                  <label for="surname">Фамилия</label>
+                  <input
+                    id="surname"
+                    type="text"
+                    v-model.trim="editedSurname"
+                  >
+                  <label class="active" for="surname">Фамилия</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="patronymic">
-                  <label for="patronymic">Отчество</label>
+                  <input
+                    id="patronymic"
+                    type="text"
+                    v-model.trim="editedPatronymic"
+                  >
+                  <label class="active" for="patronymic">Отчество</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="accountNumber">
-                  <label for="accountNumber">Учётный номер</label>
+                  <input
+                    id="accountNumber"
+                    type="text"
+                    v-model.trim="editedAccountNumber"
+                  >
+                  <label class="active" for="accountNumber">Учётный номер</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="number">
-                  <label for="number">Номер</label>
+                  <input
+                    id="number"
+                    type="text"
+                    v-model.trim="editedNumber"
+                  >
+                  <label class="active" for="number">Номер</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="nameCard">
-                  <label for="nameCard">Имя Держателя Карты</label>
+                  <input
+                    id="nameCard"
+                    type="text"
+                    v-model.trim="editedNameCard"
+                  >
+                  <label class="active" for="nameCard">Имя Держателя Карты</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="surnameCard">
-                  <label for="surnameCard">Фамилия Держателя Карты</label>
+                  <input
+                    id="surnameCard"
+                    type="text"
+                    v-model.trim="editedSurnameCard"
+                  >
+                  <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="patronymicCard">
-                  <label for="patronymicCard">Отчество Держателя Карты</label>
+                  <input
+                    id="patronymicCard"
+                    type="text"
+                    v-model.trim="editedPatronymicCard"
+                  >
+                  <label class="active" for="patronymicCard">Отчество Держателя Карты</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="accountNumberCard">
-                  <label for="accountNumberCard">Номер Счёта</label>
+                  <input
+                    id="accountNumberCard"
+                    type="text"
+                    v-model.trim="editedAccountNumberCard"
+                  >
+                  <label class="active" for="accountNumberCard">Номер Счёта</label>
                 </div>
 
                 <div class="input-field">
-                  <select class="select">
+                  <select
+                    class="select"
+                    id="bank"
+                    v-model.trim="editedBank"
+                  >
                     <option value="1">СберБанк</option>
                     <option value="2">Банк ВТБ</option>
                     <option value="3">Газпромбанк</option>
@@ -69,139 +109,230 @@
                     <option value="10">Росбанк</option>
                     <option value="11">Тинькофф Банк</option>
                   </select>
-                  <label>Банк</label>
+                  <label class="active">Банк</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" class="datepicker" id="birthday">
-                  <label for="birthday">Дата Рождения</label>
+                  <input
+                    class="datepicker"
+                    id="birthday"
+                    type="text"
+                    v-model.trim="editedBirthday"
+                  >
+                  <label class="active" for="birthday">Дата Рождения</label>
                 </div>
 
                 <div class="input-field">
-                  <select class="select">
+                  <select
+                    class="select"
+                    id="sex"
+                    v-model.trim="editedSex"
+                  >
                     <option value="1">Мужской</option>
                     <option value="2">Женский</option>
                   </select>
-                  <label>Биологический Пол</label>
+                  <label class="active">Биологический Пол</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="nationality">
-                  <label for="nationality">Национальность</label>
+                  <input
+                    id="nationality"
+                    type="text"
+                    v-model.trim="editedNationality"
+                  >
+                  <label class="active" for="nationality">Национальность</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="number" id="PassportID">
-                  <label for="PassportID">Номер Паспорта</label>
+                  <input
+                    id="passportID"
+                    type="text"
+                    v-model.trim="editedPassportID"
+                  >
+                  <label class="active" for="PassportID">Номер Паспорта</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" class="datepicker" id="passportDate">
-                  <label for="passportDate">Дата Выдачи Паспорта</label>
+                  <input
+                    id="passportDate"
+                    class="datepicker"
+                    type="text"
+                    v-model.trim="editedPassportDate"
+                  >
+                  <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="passportIssued">
-                  <label for="passportIssued">Кем выдан</label>
+                  <input
+                    id="passportIssued"
+                    type="text"
+                    v-model.trim="editedPassportIssued"
+                  >
+                  <label class="active" for="passportIssued">Кем выдан</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="registration">
-                  <label for="registration">Прописка</label>
+                  <input
+                    id="registration"
+                    type="text"
+                    v-model.trim="editedRegistration"
+                  >
+                  <label class="active" for="registration">Прописка</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="Address">
-                  <label for="Address">Адрес</label>
+                  <input
+                    id="address"
+                    type="text"
+                    v-model.trim="editedAddress"
+                  >
+                  <label class="active" for="address">Адрес</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="tel" id="homePhone">
-                  <label for="homePhone">Телефон Домашний</label>
+                  <input
+                    id="homePhone"
+                    type="text"
+                    v-model.trim="editedHomePhone"
+                  >
+                  <label class="active" for="homePhone">Телефон Домашний</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="tel" id="mobilePhone">
-                  <label for="mobilePhone">Телефон Мобильный</label>
+                  <input
+                    id="mobilePhone"
+                    type="text"
+                    v-model.trim="editedMobilePhone"
+                  >
+                  <label class="active" for="mobilePhone">Телефон Мобильный</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="medicalBook">
-                  <label for="medicalBook">Медицинская Книга</label>
+                  <input
+                    id="medicalBook"
+                    type="text"
+                    v-model.trim="editedMedicalBook"
+                  >
+                  <label class="active" for="medicalBook">Медицинская Книга</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="education">
-                  <label for="education">Образование</label>
+                  <input
+                    id="education"
+                    type="text"
+                    v-model.trim="editedEducation"
+                  >
+                  <label class="active" for="education">Образование</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="university">
-                  <label for="university">ВУЗ</label>
+                  <input
+                    id="university"
+                    type="text"
+                    v-model.trim="editedUniversity"
+                  >
+                  <label class="active" for="university">ВУЗ</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="previousWork">
-                  <label for="previousWork">Прежняя Работа</label>
+                  <input
+                    id="previousWork"
+                    type="text"
+                    v-model.trim="editedPreviousWork"
+                  >
+                  <label class="active" for="previousWork">Прежняя Работа</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="reasonComing">
-                  <label for="reasonComing">Почему пришел к нам</label>
+                  <input
+                    id="reasonComing"
+                    type="text"
+                    v-model.trim="editedReasonComing"
+                  >
+                  <label class="active" for="reasonComing">Почему пришел к нам</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="professions">
-                  <label for="professions">Профессии</label>
+                  <input
+                    id="professions"
+                    type="text"
+                    v-model.trim="editedProfessions"
+                  >
+                  <label class="active" for="professions">Профессии</label>
                 </div>
 
                 <div class="input-field">
-                  <select class="select">
+                  <select
+                    id="nightShift"
+                    class="select"
+                    v-model.trim="editedNightShift"
+                  >
                     <option value="1">Да</option>
                     <option value="2">Нет</option>
                   </select>
-                  <label>Ночная</label>
+                  <label class="active">Ночная</label>
                 </div>
 
                 <div class="input-field">
-                  <select class="select">
+                  <select
+                    id="checkMVD"
+                    class="select"
+                    v-model.trim="editedCheckMVD"
+                  >
                     <option value="1">Да</option>
                     <option value="2">Нет</option>
                   </select>
-                  <label>Проверка МВД</label>
+                  <label class="active">Проверка МВД</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" class="datepicker" id="dateInterview">
-                  <label for="dateInterview">Дата Собеседования</label>
+                  <input
+                    id="dateInterview"
+                    class="datepicker"
+                    type="text"
+                    v-model.trim="editedDateInterview"
+                  >
+                  <label class="active" for="dateInterview">Дата Собеседования</label>
                 </div>
 
                 <div class="input-field input-field-blue">
-                  <input type="text" id="uniform">
-                  <label for="uniform">Униформа</label>
+                  <input
+                    id="uniform"
+                    type="text"
+                    v-model.trim="editedUniform"
+                  >
+                  <label class="active" for="uniform">Униформа</label>
                 </div>
 
                 <div class="input-field">
-                  <select class="select">
+                  <select
+                    id="fired"
+                    class="select"
+                    v-model.trim="editedFired"
+                  >
                     <option value="1">Да</option>
                     <option value="2">Нет</option>
                   </select>
-                  <label>Уволен</label>
+                  <label class="active">Уволен</label>
                 </div>
               </div>
 
               <div class="button-container">
-                <button type="submit"
-                        class="btn waves-effect waves-light auth-submit blue darken-1"
+                <button
+                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  type="submit"
+                  v-on:click="editorCollection(workers)"
                 >
                   <i class="material-icons">create</i> Редактировать
                 </button>
 
-                <router-link type="submit"
-                             class="btn waves-effect waves-light auth-submit blue darken-1" to="/workers"
+                <button
+                  type="submit"
+                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  v-on:click="editorExit(workers)"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
-                </router-link>
+                </button>
               </div>
             </form>
           </div>
@@ -216,11 +347,151 @@ import M from 'materialize-css'
 
 export default {
   name: 'AddWorkers',
+  data () {
+    return {
+      workers: [{}],
+
+      editedName: '',
+      editedSurname: '',
+      editedPatronymic: '',
+      editedAccountNumber: '',
+      editedNumber: '',
+      editedNameCard: '',
+      editedSurnameCard: '',
+      editedPatronymicCard: '',
+      editedAccountNumberCard: '',
+      editedBank: '',
+      editedBirthday: '',
+      editedSex: '',
+      editedNationality: '',
+      editedPassportID: '',
+      editedPassportDate: '',
+      editedPassportIssued: '',
+      editedRegistration: '',
+      editedAddress: '',
+      editedHomePhone: '',
+      editedMobilePhone: '',
+      editedMedicalBook: '',
+      editedEducation: '',
+      editedUniversity: '',
+      editedPreviousWork: '',
+      editedReasonComing: '',
+      editedProfessions: '',
+      editedNightShift: '',
+      editedCheckMVD: '',
+      editedDateInterview: '',
+      editedUniform: '',
+      editedFired: '',
+      editedEdited: false
+    }
+  },
+  methods: {
+    validate () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+      }
+    },
+    searchIndex (collection) {
+      const object = collection.filter(element => element.edited !== false)
+      return collection.findIndex((element) => element.id === object[0].id)
+    },
+
+    editorExit (collection) {
+      collection[this.searchIndex(collection)].edited = false
+      this.saveCollection(this.workers, 'workers')
+      this.$router.push('/workers')
+    },
+
+    outputCollection (collection, additionalCollection) {
+      this.editedName = collection[this.searchIndex(collection)].name
+      this.editedSurname = collection[this.searchIndex(collection)].surname
+      this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
+      this.editedAccountNumber = collection[this.searchIndex(collection)].accountNumber
+      this.editedNumber = collection[this.searchIndex(collection)].number
+      this.editedNameCard = collection[this.searchIndex(collection)].nameCard
+      this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
+      this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
+      this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
+      this.editedBank = collection[this.searchIndex(collection)].bank
+      this.editedBirthday = collection[this.searchIndex(collection)].birthday
+      this.editedSex = collection[this.searchIndex(collection)].sex
+      this.editedNationality = collection[this.searchIndex(collection)].nationality
+      this.editedPassportID = collection[this.searchIndex(collection)].passportID
+      this.editedPassportDate = collection[this.searchIndex(collection)].passportDate
+      this.editedPassportIssued = collection[this.searchIndex(collection)].passportIssued
+      this.editedRegistration = collection[this.searchIndex(collection)].registration
+      this.editedAddress = collection[this.searchIndex(collection)].address
+      this.editedHomePhone = collection[this.searchIndex(collection)].homePhone
+      this.editedMobilePhone = collection[this.searchIndex(collection)].mobilePhone
+      this.editedMedicalBook = collection[this.searchIndex(collection)].medicalBook
+      this.editedEducation = collection[this.searchIndex(collection)].education
+      this.editedUniversity = collection[this.searchIndex(collection)].university
+      this.editedPreviousWork = collection[this.searchIndex(collection)].previousWork
+      this.editedReasonComing = collection[this.searchIndex(collection)].reasonComing
+      this.editedProfessions = collection[this.searchIndex(collection)].professions
+      this.editedNightShift = collection[this.searchIndex(collection)].nightShift
+      this.editedCheckMVD = collection[this.searchIndex(collection)].checkMVD
+      this.editedDateInterview = collection[this.searchIndex(collection)].dateInterview
+      this.editedUniform = collection[this.searchIndex(collection)].uniform
+      this.editedFired = collection[this.searchIndex(collection)].fired
+    },
+
+    editorCollection (collection, additionalCollection) {
+      collection[this.searchIndex(collection)].name = this.editedName
+      collection[this.searchIndex(collection)].surname = this.editedSurname
+      collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
+      collection[this.searchIndex(collection)].accountNumber = this.editedAccountNumber
+      collection[this.searchIndex(collection)].number = this.editedNumber
+      collection[this.searchIndex(collection)].nameCard = this.editedNameCard
+      collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
+      collection[this.searchIndex(collection)].patronymicCard = this.editedPatronymicCard
+      collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
+      collection[this.searchIndex(collection)].bank = this.editedBank
+      collection[this.searchIndex(collection)].birthday = this.editedBirthday
+      collection[this.searchIndex(collection)].sex = this.editedSex
+      collection[this.searchIndex(collection)].nationality = this.editedNationality
+      collection[this.searchIndex(collection)].passportID = this.editedPassportID
+      collection[this.searchIndex(collection)].passportDate = this.editedPassportDate
+      collection[this.searchIndex(collection)].passportIssued = this.editedPassportIssued
+      collection[this.searchIndex(collection)].registration = this.editedRegistration
+      collection[this.searchIndex(collection)].address = this.editedAddress
+      collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
+      collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
+      collection[this.searchIndex(collection)].medicalBook = this.editedMedicalBook
+      collection[this.searchIndex(collection)].education = this.editedEducation
+      collection[this.searchIndex(collection)].university = this.editedUniversity
+      collection[this.searchIndex(collection)].previousWork = this.editedPreviousWork
+      collection[this.searchIndex(collection)].reasonComing = this.editedReasonComing
+      collection[this.searchIndex(collection)].professions = this.editedProfessions
+      collection[this.searchIndex(collection)].nightShift = this.editedNightShift
+      collection[this.searchIndex(collection)].checkMVD = this.editedCheckMVD
+      collection[this.searchIndex(collection)].dateInterview = this.editedDateInterview
+      collection[this.searchIndex(collection)].uniform = this.editedUniform
+      collection[this.searchIndex(collection)].fired = this.editedFired
+
+      this.editorExit(collection)
+    },
+
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
+    }
+  },
   mounted () {
+    if (localStorage.getItem('workers')) {
+      try {
+        this.workers = JSON.parse(localStorage.getItem('workers'))
+      } catch (e) {
+        localStorage.removeItem('workers')
+      }
+    }
+
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
+
+    this.outputCollection(this.workers)
   }
 }
 </script>

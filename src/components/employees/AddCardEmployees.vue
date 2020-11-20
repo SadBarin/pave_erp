@@ -58,7 +58,8 @@ export default {
           mobilePhone: '',
           city: 'Минск',
           duty: '',
-          access: false
+          access: false,
+          edited: false
         }
 
         this.$emit('add-employee', newEmployee)

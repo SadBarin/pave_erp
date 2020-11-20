@@ -124,7 +124,7 @@
              <div class="button-container">
                <button type="submit"
                        class="btn waves-effect waves-light auth-submit blue darken-1"
-                       v-on:click="editorValues(employees, sites)"
+                       v-on:click="editorCollection(employees, sites)"
                >
                  <i class="material-icons">create</i> Редактировать
                </button>
@@ -150,6 +150,79 @@ import { email, minLength, required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'addEmployees.vue',
+  data () {
+    return {
+      employees: [{}],
+      sites: [{}],
+
+      editedEmail: '',
+      editedPassword: '',
+      editedName: '',
+      editedSurname: '',
+      editedPatronymic: '',
+      editedHomePhone: '',
+      editedMobilePhone: '',
+      editedCity: '',
+      editedDuty: '',
+      editedAccess: ''
+    }
+  },
+  validations: {
+    editedEmail: { email, required },
+    editedPassword: { required, minLength: minLength(8) }
+  },
+  methods: {
+    validateEmployees () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+      }
+    },
+
+    searchIndex (collection) {
+      const object = collection.filter(element => element.edited !== false)
+      return collection.findIndex((element) => element.id === object[0].id)
+    },
+
+    editorExit (collection) {
+      collection[this.searchIndex(collection)].edited = false
+      this.saveCollection(this.employees, 'employees')
+      this.saveCollection(this.sites, 'sites')
+      this.$router.push('/employees')
+    },
+
+    outputCollection (collection, additionalCollection) {
+      this.editedEmail = collection[this.searchIndex(collection)].email
+      this.editedPassword = collection[this.searchIndex(collection)].password
+      this.editedName = collection[this.searchIndex(collection)].name
+      this.editedSurname = collection[this.searchIndex(collection)].surname
+      this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
+      this.editedHomePhone = collection[this.searchIndex(collection)].homePhone
+      this.editedMobilePhone = collection[this.searchIndex(collection)].mobilePhone
+      this.editedCity = collection[this.searchIndex(collection)].city
+      this.editedDuty = collection[this.searchIndex(collection)].duty
+      this.editedAccess = collection[this.searchIndex(collection)].access
+    },
+
+    editorCollection (collection, additionalCollection) {
+      collection[this.searchIndex(collection)].email = this.editedEmail
+      collection[this.searchIndex(collection)].password = this.editedPassword
+      collection[this.searchIndex(collection)].name = this.editedName
+      collection[this.searchIndex(collection)].surname = this.editedSurname
+      collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
+      collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
+      collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
+      collection[this.searchIndex(collection)].city = this.editedCity
+      collection[this.searchIndex(collection)].duty = this.editedDuty
+      collection[this.searchIndex(collection)].access = this.editedAccess
+
+      this.editorExit(collection)
+    },
+
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
+    }
+  },
   mounted () {
     if (localStorage.getItem('employees')) {
       try {
@@ -171,66 +244,8 @@ export default {
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
-  },
-  data: () => ({
-    employees: [],
-    sites: [],
 
-    editedEmail: '',
-    editedPassword: '',
-    editedName: '',
-    editedSurname: '',
-    editedPatronymic: '',
-    editedHomePhone: '',
-    editedMobilePhone: '',
-    editedCity: '',
-    editedDuty: '',
-    editedAccess: ''
-  }),
-  validations: {
-    editedEmail: { email, required },
-    editedPassword: { required, minLength: minLength(8) }
-  },
-  methods: {
-    validateEmployees () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-      }
-    },
-
-    searchIndex (collection) {
-      const object = collection.filter(element => element.edited !== false)
-      return collection.findIndex((element) => element.id === object[0].id)
-    },
-
-    editorExit (collection) {
-      collection[this.searchIndex(collection)].edited = false
-      this.saveValues()
-      this.$router.push('/employees')
-    },
-
-    editorValues (collection, additionalCollection) {
-      collection[this.searchIndex(collection)].email = this.editedEmail
-      collection[this.searchIndex(collection)].password = this.editedPassword
-      collection[this.searchIndex(collection)].name = this.editedName
-      collection[this.searchIndex(collection)].surname = this.editedSurname
-      collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
-      collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
-      collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
-      collection[this.searchIndex(collection)].city = this.editedCity
-      collection[this.searchIndex(collection)].duty = this.editedDuty
-      collection[this.searchIndex(collection)].access = this.editedAccess
-
-      this.editorExit(collection)
-    },
-
-    saveValues () {
-      const parsedEmployees = JSON.stringify(this.employees)
-      const parsedSites = JSON.stringify(this.sites)
-
-      localStorage.setItem('employees', parsedEmployees)
-      localStorage.setItem('sites', parsedSites)
-    }
+    this.outputCollection(this.employees)
   }
 }
 </script>

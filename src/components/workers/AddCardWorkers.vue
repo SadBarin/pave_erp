@@ -5,21 +5,21 @@
         class="input-add"
         type="text"
         id="worker"
-        v-model.trim="name"
-        :class="{invalid: ($v.name.$dirty && !$v.name.required) || ($v.name.$dirty && !$v.name.numeric) || ($v.name.$dirty && !$v.name.minLength)}"
+        v-model.trim="number"
+        :class="{invalid: ($v.number.$dirty && !$v.number.required) || ($v.number.$dirty && !$v.number.numeric) || ($v.number.$dirty && !$v.number.minLength)}"
       >
       <label for="worker">Номер рабочего</label>
       <small
         class="helper-text invalid"
-        v-if="$v.name.$dirty && !$v.name.numeric || $v.name.$dirty && !$v.name.required"
+        v-if="$v.number.$dirty && !$v.number.numeric || $v.number.$dirty && !$v.number.required"
       >
         Введите номер рабочего
       </small>
       <small
         class="helper-text invalid"
-        v-else-if="$v.name.$dirty && !$v.name.minLength"
+        v-else-if="$v.number.$dirty && !$v.number.minLength"
       >
-        Номер должен содержать не менее {{$v.name.$params.minLength.min}} символов.
+        Номер должен содержать не менее {{$v.number.$params.minLength.min}} символов.
       </small>
     </div>
 
@@ -36,11 +36,11 @@ export default {
   name: 'AddCardSWorkers',
   data () {
     return {
-      name: ''
+      number: ''
     }
   },
   validations: {
-    name: { required, numeric, minLength: minLength(7) }
+    number: { required, numeric, minLength: minLength(7) }
   },
   methods: {
     submitWorkers () {
@@ -49,15 +49,45 @@ export default {
         return
       }
 
-      if (this.name.trim()) {
+      if (this.number.trim()) {
         const newWorker = {
           id: Date.now(),
-          name: this.name,
+          name: Date.now(),
+          surname: '',
+          patronymic: '',
+          accountNumber: '',
+          number: this.number,
+          nameCard: '',
+          surnameCard: '',
+          patronymicCard: '',
+          accountNumberCard: '',
+          bank: '',
+          birthday: '',
+          sex: '',
+          nationality: '',
+          passportID: '',
+          passportDate: '',
+          passportIssued: '',
+          registration: '',
+          address: '',
+          homePhone: '',
+          mobilePhone: '',
+          medicalBook: '',
+          education: '',
+          university: '',
+          previousWork: '',
+          reasonComing: '',
+          professions: '',
+          nightShift: '',
+          checkMVD: '',
+          dateInterview: '',
+          uniform: '',
+          fired: '',
           edited: false
         }
 
         this.$emit('add-worker', newWorker)
-        this.name = ''
+        this.number = ''
       }
     }
   }
