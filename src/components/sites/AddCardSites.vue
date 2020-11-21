@@ -50,6 +50,8 @@ export default {
       }
 
       if (this.cityName.trim()) {
+        this.cityName = this.cityName[0].toUpperCase() + this.cityName.substring(1)
+
         const newCity = {
           id: Date.now(),
           cityName: this.cityName,

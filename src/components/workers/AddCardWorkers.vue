@@ -52,8 +52,8 @@ export default {
       if (this.number.trim()) {
         const newWorker = {
           id: Date.now(),
-          name: Date.now(),
-          surname: '',
+          name: 'Новый',
+          surname: 'Рабочий',
           patronymic: '',
           accountNumber: '',
           number: this.number,

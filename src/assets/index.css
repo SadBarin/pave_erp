@@ -222,7 +222,7 @@ html, body {
 }
 
 .popup {
-  width: 240px;
+  width: 240px !important;
 
   text-align: center;
 }

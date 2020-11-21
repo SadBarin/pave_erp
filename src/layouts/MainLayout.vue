@@ -4,7 +4,7 @@
       <div class="popup-overlay">
         <form class="card auth-card popup">
           <div class="card-content">
-            <span class="card-title">Выйти? <br></span>
+            <span class="card-title">Выйти?<br></span>
           </div>
 
           <div class="card-action btn-popup">

@@ -1,7 +1,35 @@
 <template>
   <div>
+    <template v-if="overlayShow">
+      <div class="popup-overlay">
+        <form class="card auth-card popup">
+          <div class="card-content">
+            <span class="card-title">Выйти?<br></span>
+          </div>
+
+          <div class="card-action btn-popup">
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="editorExit(workers)"
+            >
+              <i class="material-icons">check</i> Да
+            </button>
+
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="overlayHidden"
+            >
+              <i class="material-icons">clear</i> Нет
+            </button>
+          </div>
+        </form>
+      </div>
+    </template>
+
     <div class="page-title">
-      <h3>Редактор рабочего</h3>
+      <h3>Редактор рабочего "{{editedName}} {{editedSurname}}"</h3>
     </div>
 
     <section>
@@ -320,16 +348,14 @@
               <div class="button-container">
                 <button
                   class="btn waves-effect waves-light auth-submit blue darken-1"
-                  type="submit"
                   v-on:click="editorCollection(workers)"
                 >
                   <i class="material-icons">create</i> Редактировать
                 </button>
 
                 <button
-                  type="submit"
                   class="btn waves-effect waves-light auth-submit blue darken-1"
-                  v-on:click="editorExit(workers)"
+                  v-on:click.prevent="overlayVisibility"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
                 </button>
@@ -349,6 +375,8 @@ export default {
   name: 'AddWorkers',
   data () {
     return {
+      overlayShow: false,
+
       workers: [{}],
 
       editedName: '',
@@ -386,6 +414,14 @@ export default {
     }
   },
   methods: {
+    overlayVisibility () {
+      this.overlayShow = true
+    },
+
+    overlayHidden () {
+      this.overlayShow = false
+    },
+
     validate () {
       if (this.$v.$invalid) {
         this.$v.$touch()

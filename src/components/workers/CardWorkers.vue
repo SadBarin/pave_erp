@@ -31,7 +31,7 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}} {{worker.patronymic}}</h6>
+            <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}}</h6>
             <h6><i class="material-icons">phone</i> Номер: {{worker.number}}</h6>
           </div>
           <div class="button-container">

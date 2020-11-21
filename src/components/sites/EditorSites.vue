@@ -1,14 +1,42 @@
 <template>
   <div>
+    <template v-if="overlayShow">
+      <div class="popup-overlay">
+        <form class="card auth-card popup">
+          <div class="card-content">
+            <span class="card-title">Выйти?<br></span>
+          </div>
+
+          <div class="card-action btn-popup">
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="editorExit(sites)"
+            >
+              <i class="material-icons">check</i> Да
+            </button>
+
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="overlayHidden"
+            >
+              <i class="material-icons">clear</i> Нет
+            </button>
+          </div>
+        </form>
+      </div>
+    </template>
+
     <div class="page-title">
-      <h3>Настройка города "{{ editedSites }}"</h3>
+      <h3>Редактор города "{{ editedSitesName }}"</h3>
     </div>
 
     <section>
       <div class="row">
         <div class="col s12">
           <div>
-            <form @submit.prevent="validateSites">
+            <form @submit.prevent="validate">
               <div class="form-content">
                 <div class="input-field">
                   <input
@@ -34,16 +62,16 @@
               </div>
 
               <div class="button-container">
-                <button type="submit"
-                        class="btn waves-effect waves-light auth-submit blue darken-1"
-                        v-on:click="editorName"
+                <button
+                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  v-on:click="editorCollection(sites)"
                 >
                   <i class="material-icons">create</i> Редактировать
                 </button>
 
-                <button type="submit"
-                             class="btn waves-effect waves-light auth-submit blue darken-1"
-                             v-on:click="editorExit"
+                <button
+                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  v-on:click="overlayVisibility"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
                 </button>
@@ -64,68 +92,68 @@ export default {
   name: 'Sites',
   data () {
     return {
+      overlayShow: false,
+
       editedSitesName: '',
-      countEmployees: '',
+      countEmployees: '0',
 
       sites: [{}],
       employees: [{}]
-    }
-  },
-  computed: {
-    editedSites: function () {
-      const cityName = this.sites.filter(city => city.edited !== false)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.editedSitesName = cityName[0].cityName
-      return cityName[0].cityName
     }
   },
   validations: {
     editedSitesName: { required, minLength: minLength(2) }
   },
   methods: {
-    validateSites () {
+    overlayVisibility () {
+      this.overlayShow = true
+    },
+
+    overlayHidden () {
+      this.overlayShow = false
+    },
+
+    validate () {
       if (this.$v.$invalid) {
         this.$v.$touch()
       }
     },
 
-    editorExit () {
-      const city = this.sites.filter(city => city.edited !== false)
-      const index = this.sites.findIndex((element) => element.id === city[0].id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.sites[index].edited = false
-      this.saveSites()
+    searchIndex (collection) {
+      const object = collection.filter(element => element.edited !== false)
+      return collection.findIndex((element) => element.id === object[0].id)
+    },
+
+    editorExit (collection) {
+      collection[this.searchIndex(collection)].edited = false
+      this.saveCollection(this.sites, 'sites')
       this.$router.push('/sites')
     },
 
-    editorName () {
-      const city = this.sites.filter(city => city.edited !== false)
-      const index = this.sites.findIndex((element) => element.id === city[0].id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.sites[index].cityName = this.editedSitesName
+    outputCollection (collection, additionalCollection) {
+      this.editedSitesName = collection[this.searchIndex(collection)].cityName
+    },
+
+    editorCollection (collection, additionalCollection) {
+      collection[this.searchIndex(collection)].cityName = this.editedSitesName
 
       this.employees.forEach((employee) => {
-        if (employee.city === this.sites[index].cityName) {
+        if (employee.city === this.sites[this.searchIndex(collection)].cityName) {
           this.countEmployees++
         }
       })
 
-      this.sites[index].employees = this.countEmployees
+      this.sites[this.searchIndex(collection)].employees = this.countEmployees
 
-      this.editorExit()
+      this.editorExit(collection)
     },
 
-    saveSites () {
-      const parsed = JSON.stringify(this.sites)
-      localStorage.setItem('sites', parsed)
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
     }
   },
   mounted () {
-    const select = document.querySelectorAll('.select')
-    select.forEach((element) => {
-      M.FormSelect.init(element)
-    })
-
     if (localStorage.getItem('sites')) {
       try {
         this.sites = JSON.parse(localStorage.getItem('sites'))
@@ -141,6 +169,13 @@ export default {
         localStorage.removeItem('employees')
       }
     }
+
+    const select = document.querySelectorAll('.select')
+    select.forEach((element) => {
+      M.FormSelect.init(element)
+    })
+
+    this.outputCollection(this.sites)
   }
 }
 </script>

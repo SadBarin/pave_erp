@@ -1,14 +1,42 @@
 <template>
   <div>
+    <template v-if="overlayShow">
+      <div class="popup-overlay">
+        <form class="card auth-card popup">
+          <div class="card-content">
+            <span class="card-title">Выйти?<br></span>
+          </div>
+
+          <div class="card-action btn-popup">
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="editorExit(employees)"
+            >
+              <i class="material-icons">check</i> Да
+            </button>
+
+            <button
+              type="submit"
+              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+              v-on:click="overlayHidden"
+            >
+              <i class="material-icons">clear</i> Нет
+            </button>
+          </div>
+        </form>
+      </div>
+    </template>
+
     <div class="page-title">
-      <h3>Редактор сотрудника</h3>
+      <h3>Редактор сотрудника "{{editedName}} {{editedSurname}}"</h3>
     </div>
 
     <section>
       <div class="row">
         <div class="col s12">
           <div>
-            <form @submit.prevent="validateEmployees">
+            <form @submit.prevent="validate">
              <div class="form-content">
                <div class="input-field input-field-blue">
                  <input
@@ -122,16 +150,16 @@
              </div>
 
              <div class="button-container">
-               <button type="submit"
-                       class="btn waves-effect waves-light auth-submit blue darken-1"
-                       v-on:click="editorCollection(employees, sites)"
+               <button
+                 class="btn waves-effect waves-light auth-submit blue darken-1"
+                 v-on:click="editorCollection(employees, sites)"
                >
                  <i class="material-icons">create</i> Редактировать
                </button>
 
-               <button type="submit"
-                       class="btn waves-effect waves-light auth-submit blue darken-1"
-                       v-on:click="editorExit(employees)"
+               <button
+                 class="btn waves-effect waves-light auth-submit blue darken-1"
+                 v-on:click="overlayVisibility"
                >
                  <i class="material-icons">arrow_back</i> Вернуться назад
                </button>
@@ -152,6 +180,8 @@ export default {
   name: 'addEmployees.vue',
   data () {
     return {
+      overlayShow: false,
+
       employees: [{}],
       sites: [{}],
 
@@ -172,7 +202,15 @@ export default {
     editedPassword: { required, minLength: minLength(8) }
   },
   methods: {
-    validateEmployees () {
+    overlayVisibility () {
+      this.overlayShow = true
+    },
+
+    overlayHidden () {
+      this.overlayShow = false
+    },
+
+    validate () {
       if (this.$v.$invalid) {
         this.$v.$touch()
       }

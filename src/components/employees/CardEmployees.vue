@@ -32,7 +32,7 @@
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">email</i> Почта: {{employee.email}}</h6>
-            <h6><i class="material-icons">person</i> Сотрудник: {{employee.name}} {{employee.surname}} {{employee.patronymic}}</h6>
+            <h6><i class="material-icons">person</i> Сотрудник: {{employee.name}} {{employee.surname}}</h6>
             <h6><i class="material-icons">location_city</i> Город: {{employee.city}}</h6>
             <p v-if="employee.edited" class="card-report">
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
