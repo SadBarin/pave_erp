@@ -19,7 +19,13 @@
         class="helper-text invalid"
         v-else-if="$v.cityName.$dirty && !$v.cityName.minLength"
       >
-        Город должен содержать не менее {{$v.cityName.$params.minLength.min}} символов.
+        Город должен содержать не менее {{$v.cityName.$params.minLength.min}} символов
+      </small>
+      <small
+        class="helper-text invalid"
+        v-else-if="coincidence"
+      >
+        Город уже есть
       </small>
     </div>
 
@@ -36,7 +42,10 @@ export default {
   name: 'AddCardSites',
   data () {
     return {
-      cityName: ''
+      cityName: '',
+      coincidence: false,
+
+      sites: [{}]
     }
   },
   validations: {
@@ -44,12 +53,29 @@ export default {
   },
   methods: {
     submitSites () {
+      if (localStorage.getItem('sites')) {
+        try {
+          this.sites = JSON.parse(localStorage.getItem('sites'))
+        } catch (e) {
+          localStorage.removeItem('sites')
+        }
+      }
+
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
 
-      if (this.cityName.trim()) {
+      for (const city of this.sites) {
+        if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
+          this.coincidence = true
+          break
+        } else {
+          this.coincidence = false
+        }
+      }
+
+      if (this.cityName.trim() && !this.coincidence) {
         this.cityName = this.cityName[0].toUpperCase() + this.cityName.substring(1)
 
         const newCity = {

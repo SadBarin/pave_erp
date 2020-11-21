@@ -43,6 +43,7 @@
                     type="text"
                     id="city"
                     v-model.trim="editedSitesName"
+                    v-on:change="validate"
                     :class="{invalid: ($v.editedSitesName.$dirty && !$v.editedSitesName.required) || ($v.editedSitesName.$dirty && !$v.editedSitesName.minLength)}"
                   >
                   <label for="city" class="active">Город</label>
@@ -58,12 +59,19 @@
                   >
                     Город должен содержать не менее {{$v.editedSitesName.$params.minLength.min}} символов.
                   </small>
+                  <small
+                    class="helper-text invalid"
+                    v-else-if="coincidence"
+                  >
+                    Город уже есть
+                  </small>
                 </div>
               </div>
 
               <div class="button-container">
                 <button
                   class="btn waves-effect waves-light auth-submit blue darken-1"
+                  type="submit"
                   v-on:click="editorCollection(sites)"
                 >
                   <i class="material-icons">create</i> Редактировать
@@ -93,9 +101,11 @@ export default {
   data () {
     return {
       overlayShow: false,
+      coincidence: false,
 
       editedSitesName: '',
       countEmployees: '0',
+      validateCheck: true,
 
       sites: [{}],
       employees: [{}]
@@ -105,18 +115,28 @@ export default {
     editedSitesName: { required, minLength: minLength(2) }
   },
   methods: {
+    validate () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+      }
+      // for (const city of this.sites) {
+      //   if (city.cityName.toString().toLowerCase() === this.editedSitesName.toString().toLowerCase() || this.$v.$invalid) {
+      //     this.coincidence = true
+      //     this.validateCheck = false
+      //     break
+      //   } else {
+      //     this.coincidence = false
+      //     this.validateCheck = true
+      //   }
+      // }
+    },
+
     overlayVisibility () {
       this.overlayShow = true
     },
 
     overlayHidden () {
       this.overlayShow = false
-    },
-
-    validate () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-      }
     },
 
     searchIndex (collection) {
@@ -135,17 +155,19 @@ export default {
     },
 
     editorCollection (collection, additionalCollection) {
-      collection[this.searchIndex(collection)].cityName = this.editedSitesName
+      if (this.validateCheck) {
+        collection[this.searchIndex(collection)].cityName = this.editedSitesName
 
-      this.employees.forEach((employee) => {
-        if (employee.city === this.sites[this.searchIndex(collection)].cityName) {
-          this.countEmployees++
-        }
-      })
+        this.employees.forEach((employee) => {
+          if (employee.city === this.sites[this.searchIndex(collection)].cityName) {
+            this.countEmployees++
+          }
+        })
 
-      this.sites[this.searchIndex(collection)].employees = this.countEmployees
+        this.sites[this.searchIndex(collection)].employees = this.countEmployees
 
-      this.editorExit(collection)
+        this.editorExit(collection)
+      }
     },
 
     saveCollection (collection, collectionName) {
