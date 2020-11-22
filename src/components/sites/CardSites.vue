@@ -94,8 +94,15 @@ export default {
     },
 
     editedCityStatus () {
+      if (localStorage.getItem('sites')) {
+        try {
+          this.sites = JSON.parse(localStorage.getItem('sites'))
+        } catch (e) {
+          localStorage.removeItem('sites')
+        }
+      }
+
       const index = this.sites.findIndex((element) => element.id === this.city.id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.sites[index].edited = true
       this.saveSites()
       this.$router.push('/sites/editor')

@@ -87,6 +87,14 @@ export default {
     },
 
     editedWorkerStatus () {
+      if (localStorage.getItem('workers')) {
+        try {
+          this.workers = JSON.parse(localStorage.getItem('workers'))
+        } catch (e) {
+          localStorage.removeItem('workers')
+        }
+      }
+
       const index = this.workers.findIndex((element) => element.id === this.worker.id)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.workers[index].edited = true
