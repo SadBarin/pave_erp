@@ -77,8 +77,8 @@ export default {
   },
   data () {
     return {
-      sites: [{}],
-      employees: [{}],
+      sites: [],
+      employees: [],
 
       overlayShow: false,
       countEmployees: 0
