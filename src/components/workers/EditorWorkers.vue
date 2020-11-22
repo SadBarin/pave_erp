@@ -121,7 +121,7 @@
 
                 <div class="input-field">
                   <select
-                    class="select"
+                    class="browser-default"
                     id="bank"
                     v-model.trim="editedBank"
                   >
@@ -152,7 +152,7 @@
 
                 <div class="input-field">
                   <select
-                    class="select"
+                    class="browser-default"
                     id="sex"
                     v-model.trim="editedSex"
                   >
@@ -292,7 +292,7 @@
                 <div class="input-field">
                   <select
                     id="nightShift"
-                    class="select"
+                    class="browser-default"
                     v-model.trim="editedNightShift"
                   >
                     <option value="1">Да</option>
@@ -304,7 +304,7 @@
                 <div class="input-field">
                   <select
                     id="checkMVD"
-                    class="select"
+                    class="browser-default"
                     v-model.trim="editedCheckMVD"
                   >
                     <option value="1">Да</option>
@@ -335,7 +335,7 @@
                 <div class="input-field">
                   <select
                     id="fired"
-                    class="select"
+                    class="browser-default"
                     v-model.trim="editedFired"
                   >
                     <option value="1">Да</option>
@@ -554,5 +554,20 @@ export default {
 
   .input-field {
     width: 48%;
+  }
+
+  select {
+    border: none !important;
+    border-bottom: 1px solid #9E9E9E !important;
+    padding: 0 !important;
+    appearance: none !important;
+  }
+
+  option {
+    margin-left: 10px !important;
+  }
+
+  select:focus {
+    outline: none !important;
   }
 </style>

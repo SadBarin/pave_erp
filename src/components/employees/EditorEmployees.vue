@@ -139,7 +139,7 @@
                </div>
 
                <div class="input-field">
-                 <select class="select"
+                 <select class="browser-default"
                          v-model.trim="editedAccess"
                  >
                    <option value="1">Сотрудник</option>
