@@ -43,6 +43,13 @@
           Пароль должен содержать не менее {{$v.password.$params.minLength.min}} символов.
         </small>
       </div>
+
+      <div>
+        <label>
+          <input type="checkbox" class="filled-in" v-model="localStorageClear"/>
+          <span>Удалить LocalStorage?</span>
+        </label>
+      </div>
     </div>
 
     <div class="card-action">
@@ -61,7 +68,8 @@ export default {
   data () {
     return {
       email: 'admin@admin.com',
-      password: 'admin2020'
+      password: 'admin2020',
+      localStorageClear: true
     }
   },
   validations: {
@@ -75,7 +83,15 @@ export default {
         return
       }
 
+      this.localStorageRemove()
+
       this.$router.push('/sites')
+    },
+
+    localStorageRemove () {
+      if (this.localStorageClear) {
+        localStorage.clear()
+      }
     }
   }
 }

@@ -204,6 +204,11 @@ html, body {
   align-items: center;
 }
 
+#blue-layout [type="checkbox"].filled-in:checked+span:not(.lever):after {
+  background-color: #1e88e5;
+  border: #1e88e5;
+}
+
 .popup-overlay {
   background: rgba(33, 31, 31, 0.5);
 
