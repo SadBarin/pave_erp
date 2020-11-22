@@ -427,6 +427,7 @@ export default {
         this.$v.$touch()
       }
     },
+
     searchIndex (collection) {
       const object = collection.filter(element => element.edited !== false)
       return collection.findIndex((element) => element.id === object[0].id)
