@@ -232,6 +232,10 @@ html, body {
   text-align: center;
 }
 
+#blue-layout .popup .card-title {
+  margin-bottom: 0;
+}
+
 .popup-subtitle {
   font-size: 1.1rem;
 }

@@ -1,31 +1,11 @@
 <template>
   <div class="row">
-    <template v-if="overlayShow">
-      <div class="popup-overlay">
-        <form class="card auth-card popup">
-          <div class="card-content">
-            <span class="card-title">Удалить элемент? <br></span>
-            <span class="popup-subtitle">Сотрудник: {{employee.name}}</span>
-          </div>
-
-          <div class="card-action btn-popup">
-            <button type="submit"
-                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-                    v-on:click="$emit('remove-employee', employee.id)"
-            >
-              <i class="material-icons">check</i> Да
-            </button>
-
-            <button type="submit"
-                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-                    v-on:click="overlayHidden"
-            >
-              <i class="material-icons">clear</i> Нет
-            </button>
-          </div>
-        </form>
-      </div>
-    </template>
+    <Popup
+      v-if="popupShow"
+      v-on:yes="$emit('remove-employee', employee.id)"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Удалить сотрудника?'"
+    />
 
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
@@ -54,7 +34,7 @@
 
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-if="!employee.edited"
-                    v-on:click="overlayVisibility"
+                    v-on:click="popupVisibility"
             >
               <i class="material-icons">delete</i> Удалить
             </button>
@@ -66,8 +46,12 @@
 </template>
 
 <script>
+import Popup from '@/components/Popup'
 export default {
   name: 'CardEmployees',
+  components: {
+    Popup
+  },
   props: {
     employee: {
       type: Object
@@ -78,16 +62,16 @@ export default {
     return {
       employees: [],
 
-      overlayShow: false
+      popupShow: false
     }
   },
   methods: {
-    overlayVisibility () {
-      this.overlayShow = true
+    popupVisibility () {
+      this.popupShow = true
     },
 
-    overlayHidden () {
-      this.overlayShow = false
+    popupHidden () {
+      this.popupShow = false
     },
 
     editedEmployeeStatus () {

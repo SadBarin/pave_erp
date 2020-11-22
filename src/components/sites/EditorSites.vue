@@ -1,32 +1,11 @@
 <template>
   <div>
-    <template v-if="overlayShow">
-      <div class="popup-overlay">
-        <form class="card auth-card popup">
-          <div class="card-content">
-            <span class="card-title">Выйти?<br></span>
-          </div>
-
-          <div class="card-action btn-popup">
-            <button
-              type="submit"
-              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-              v-on:click="editorExit(sites)"
-            >
-              <i class="material-icons">check</i> Да
-            </button>
-
-            <button
-              type="submit"
-              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-              v-on:click="overlayHidden"
-            >
-              <i class="material-icons">clear</i> Нет
-            </button>
-          </div>
-        </form>
-      </div>
-    </template>
+    <Popup
+      v-if="popupShow"
+      v-on:yes="editorExit(sites)"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Выйти?'"
+    />
 
     <div class="page-title">
       <h3>Редактор города "{{ editedSitesName }}"</h3>
@@ -79,7 +58,7 @@
 
                 <button
                   class="btn waves-effect waves-light auth-submit blue darken-1"
-                  v-on:click="overlayVisibility"
+                  v-on:click="popupVisibility"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
                 </button>
@@ -93,14 +72,18 @@
 </template>
 
 <script>
+import Popup from '@/components/Popup'
 import M from 'materialize-css'
 import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
   name: 'Sites',
+  components: {
+    Popup
+  },
   data () {
     return {
-      overlayShow: false,
+      popupShow: false,
       coincidence: false,
 
       editedSitesName: '',
@@ -131,12 +114,12 @@ export default {
       // }
     },
 
-    overlayVisibility () {
-      this.overlayShow = true
+    popupVisibility () {
+      this.popupShow = true
     },
 
-    overlayHidden () {
-      this.overlayShow = false
+    popupHidden () {
+      this.popupShow = false
     },
 
     searchIndex (collection) {

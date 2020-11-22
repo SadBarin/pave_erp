@@ -20,7 +20,7 @@
     <div>
       <ListSites
         v-if="sites.length"
-        v-bind:sites="sites"
+        :sites="sites"
         @remove-city="removeCity"
       />
       <div v-else class="empty-list">
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     removeCity (id) {
-      this.sites = this.sites.filter(city => city.id !== id)
+      this.sites = this.sites.filter(city => city.id.toString !== id.toString)
       this.saveCollection(this.sites, 'sites')
     },
 

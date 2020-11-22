@@ -1,31 +1,11 @@
 <template>
   <div class="row">
-    <template v-if="overlayShow">
-      <div class="popup-overlay">
-        <form class="card auth-card popup">
-          <div class="card-content">
-            <span class="card-title">Удалить элемент? <br></span>
-            <span class="popup-subtitle">Рабочий: {{worker.name}}</span>
-          </div>
-
-          <div class="card-action btn-popup">
-            <button type="submit"
-                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-                    v-on:click="$emit('remove-worker', worker.id)"
-            >
-              <i class="material-icons">check</i> Да
-            </button>
-
-            <button type="submit"
-                    class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-                    v-on:click="overlayHidden"
-            >
-              <i class="material-icons">clear</i> Нет
-            </button>
-          </div>
-        </form>
-      </div>
-    </template>
+    <Popup
+      v-if="popupShow"
+      v-on:yes="$emit('remove-worker', worker.id)"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Удалить рабочего?'"
+    />
 
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
@@ -50,7 +30,7 @@
 
             <button class="btn-flat waves-effect waves-light auth-submit white-text"
                     v-if="!worker.edited"
-                    v-on:click="overlayVisibility"
+                    v-on:click="popupVisibility"
             >
               <i class="material-icons">delete</i> Удалить
             </button>
@@ -62,8 +42,12 @@
 </template>
 
 <script>
+import Popup from '@/components/Popup'
 export default {
   name: 'CardWorkers',
+  components: {
+    Popup
+  },
   props: {
     worker: {
       type: Object
@@ -74,16 +58,16 @@ export default {
     return {
       workers: [],
 
-      overlayShow: false
+      popupShow: false
     }
   },
   methods: {
-    overlayVisibility () {
-      this.overlayShow = true
+    popupVisibility () {
+      this.popupShow = true
     },
 
-    overlayHidden () {
-      this.overlayShow = false
+    popupHidden () {
+      this.popupShow = false
     },
 
     editedWorkerStatus () {
@@ -96,7 +80,6 @@ export default {
       }
 
       const index = this.workers.findIndex((element) => element.id === this.worker.id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.workers[index].edited = true
       this.saveWorkers()
       this.$router.push('/workers/editor')

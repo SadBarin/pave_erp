@@ -1,32 +1,11 @@
 <template>
   <div class="app-main-layout" id="blue-layout">
-    <template v-if="overlayShow">
-      <div class="popup-overlay">
-        <form class="card auth-card popup">
-          <div class="card-content">
-            <span class="card-title">Выйти?<br></span>
-          </div>
-
-          <div class="card-action btn-popup">
-            <button
-              type="submit"
-              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-              v-on:click="exit"
-            >
-              <i class="material-icons">check</i> Да
-            </button>
-
-            <button
-              type="submit"
-              class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-              v-on:click="overlayHidden"
-            >
-              <i class="material-icons">clear</i> Нет
-            </button>
-          </div>
-        </form>
-      </div>
-    </template>
+    <Popup
+      v-if="popupShow"
+      v-on:yes="exit"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Выйти?'"
+    />
 
     <nav class="navbar blue darken-1 ">
       <div class="navbar-left">
@@ -35,7 +14,9 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <button class="btn-flat waves-effect waves-light auth-submit white-text" v-on:click="overlayVisibility">
+          <button
+            class="btn-flat waves-effect waves-light auth-submit white-text"
+            v-on:click="popupVisibility">
             <i class="material-icons">arrow_back</i> Выйти
           </button>
         </li>
@@ -63,20 +44,24 @@
 </template>
 
 <script>
+import Popup from '@/components/Popup'
 export default {
   name: 'MainLayout.vue',
+  components: {
+    Popup
+  },
   data () {
     return {
-      overlayShow: false
+      popupShow: false
     }
   },
   methods: {
-    overlayVisibility () {
-      this.overlayShow = true
+    popupVisibility () {
+      this.popupShow = true
     },
 
-    overlayHidden () {
-      this.overlayShow = false
+    popupHidden () {
+      this.popupShow = false
     },
 
     exit () {
