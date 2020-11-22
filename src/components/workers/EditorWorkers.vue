@@ -512,16 +512,20 @@ export default {
     saveCollection (collection, collectionName) {
       const parsed = JSON.stringify(collection)
       localStorage.setItem(collectionName, parsed)
+    },
+
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
+        try {
+          this.workers = JSON.parse(localStorage.getItem(collectionName))
+        } catch (e) {
+          localStorage.removeItem(collectionName)
+        }
+      }
     }
   },
   mounted () {
-    if (localStorage.getItem('workers')) {
-      try {
-        this.workers = JSON.parse(localStorage.getItem('workers'))
-      } catch (e) {
-        localStorage.removeItem('workers')
-      }
-    }
+    this.updateCollection('workers')
 
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {

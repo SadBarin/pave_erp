@@ -173,16 +173,20 @@ export default {
     saveCollection (collection, collectionName) {
       const parsed = JSON.stringify(collection)
       localStorage.setItem(collectionName, parsed)
+    },
+
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
+        try {
+          this.sites = JSON.parse(localStorage.getItem(collectionName))
+        } catch (e) {
+          localStorage.removeItem(collectionName)
+        }
+      }
     }
   },
   mounted () {
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
+    this.updateCollection('sites')
 
     if (localStorage.getItem('employees')) {
       try {
