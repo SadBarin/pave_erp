@@ -1,4 +1,4 @@
-<template>
+<template class="editor">
   <div>
     <Popup
       v-if="popupShow"
@@ -7,7 +7,7 @@
       v-bind:popup-title="'Выйти?'"
     />
 
-    <div class="page-title">
+    <div class="page-title editor-title">
       <h3>Редактор сотрудника "{{editedName}} {{editedSurname}}"</h3>
     </div>
 
@@ -15,129 +15,153 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form @submit.prevent="validate">
-             <div class="form-content">
-               <div class="input-field input-field-blue">
-                 <input
-                   id="email"
-                   type="text"
-                   v-model.trim="editedEmail"
-                   :class="{invalid: ($v.editedEmail.$dirty && !$v.editedEmail.required) || ($v.editedEmail.$dirty && !$v.editedEmail.editedEmail)}"
-                 >
-                 <label for="email" class="active">Почта</label>
-                 <small
-                   class="helper-text invalid"
-                   v-if="$v.editedEmail.$dirty && !$v.editedEmail.required"
-                 >Введите ваш email</small>
-                 <small
-                   class="helper-text invalid"
-                   v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.editedEmail"
-                 >Введите правильно email
-                 </small>
+            <form class="editor-form" @submit.prevent="validate">
+             <div class="form-content editor-form-content">
+               <div class="card editor-card blue darken-1 white-text">
+                 <div class="card-content editor-card-content">
+                   <span class="card-title">Авторизация</span>
+
+                   <div class="input-field editor-input">
+                     <input
+                       id="email"
+                       type="text"
+                       v-model.trim="editedEmail"
+                       :class="{invalid: ($v.editedEmail.$dirty && !$v.editedEmail.required) || ($v.editedEmail.$dirty && !$v.editedEmail.editedEmail)}"
+                     >
+                     <label for="email" class="active">Почта</label>
+                     <small
+                       class="helper-text invalid"
+                       v-if="$v.editedEmail.$dirty && !$v.editedEmail.required"
+                     >Введите ваш email</small>
+                     <small
+                       class="helper-text invalid"
+                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.editedEmail"
+                     >Введите правильно email
+                     </small>
+                   </div>
+
+                   <div class="input-field editor-input">
+                     <input
+                       id="password"
+                       type="password"
+                       v-model.trim="editedPassword"
+                       :class="{invalid: ($v.editedPassword.$dirty && !$v.editedPassword.required) || ($v.editedPassword.$dirty && !$v.editedPassword.minLength)}"
+                     >
+                     <label for="password" class="active">Пароль</label>
+                     <small
+                       class="helper-text invalid"
+                       v-if="$v.editedPassword.$dirty && !$v.editedPassword.required"
+                     >
+                       Введите ваш пароль
+                     </small>
+                     <small
+                       class="helper-text invalid"
+                       v-else-if="$v.editedPassword.$dirty && !$v.editedPassword.minLength"
+                     >
+                       Пароль должен содержать не менее {{$v.editedPassword.$params.minLength.min}} символов.
+                     </small>
+                   </div>
+
+                   <div class="input-field editor-input">
+                     <select class="browser-default editor-select"
+                             v-model="editedAccess"
+                     >
+                       <option class="editor-option" value="false">Сотрудник</option>
+                       <option class="editor-option" value="true"> Админ</option>
+                     </select>
+                     <label class="active">Доступ</label>
+                   </div>
+                 </div>
                </div>
 
-               <div class="input-field" id="input-field-blue">
-                 <input
-                   id="password"
-                   type="password"
-                   v-model.trim="editedPassword"
-                   :class="{invalid: ($v.editedPassword.$dirty && !$v.editedPassword.required) || ($v.editedPassword.$dirty && !$v.editedPassword.minLength)}"
-                 >
-                 <label for="password" class="active">Пароль</label>
-                 <small
-                   class="helper-text invalid"
-                   v-if="$v.editedPassword.$dirty && !$v.editedPassword.required"
-                 >
-                   Введите ваш пароль
-                 </small>
-                 <small
-                   class="helper-text invalid"
-                   v-else-if="$v.editedPassword.$dirty && !$v.editedPassword.minLength"
-                 >
-                   Пароль должен содержать не менее {{$v.editedPassword.$params.minLength.min}} символов.
-                 </small>
+               <div class="card editor-card blue darken-1 white-text">
+                 <div class="card-content editor-card-content">
+                   <span class="card-title">ФИО</span>
+                   <div class="input-field editor-input">
+                     <input type="text"
+                            id="name"
+                            v-model.trim="editedName"
+                     >
+                     <label for="name" class="active">Имя</label>
+                   </div>
+
+                   <div class="input-field editor-input">
+                     <input type="text"
+                            id="surname"
+                            v-model.trim="editedSurname"
+                     >
+                     <label for="surname" class="active">Фамилия</label>
+                   </div>
+
+                   <div class="input-field editor-input">
+                     <input type="text"
+                            id="patronymic"
+                            v-model.trim="editedPatronymic"
+                     >
+                     <label for="patronymic" class="active">Отчество</label>
+                   </div>
+                 </div>
                </div>
 
-               <div class="input-field input-field-blue">
-                 <input type="text"
-                        id="name"
-                        v-model.trim="editedName"
-                 >
-                 <label for="name" class="active">Имя</label>
+               <div class="card editor-card blue darken-1 white-text">
+                 <div class="card-content editor-card-content black-text">
+                   <span class="card-title">Контактные данные</span>
+
+                   <div class="input-field editor-input">
+                     <input type="tel"
+                            id="homePhone"
+                            v-model.trim="editedHomePhone"
+                     >
+                     <label for="homePhone" class="active">Телефон Домашний</label>
+                   </div>
+
+                   <div class="input-field editor-input">
+                     <input type="tel"
+                            id="mobilePhone"
+                            v-model.trim="editedMobilePhone"
+                     >
+                     <label for="mobilePhone" class="active">Телефон Мобильный</label>
+                   </div>
+                 </div>
                </div>
 
-               <div class="input-field input-field-blue">
-                 <input type="text"
-                        id="surname"
-                        v-model.trim="editedSurname"
-                 >
-                 <label for="surname" class="active">Фамилия</label>
-               </div>
+               <div class="card editor-card blue darken-1 white-text">
+                 <div class="card-content editor-card-content black-text">
+                   <span class="card-title">Дополнительно</span>
 
-               <div class="input-field input-field-blue">
-                 <input type="text"
-                        id="patronymic"
-                        v-model.trim="editedPatronymic"
-                 >
-                 <label for="patronymic" class="active">Отчество</label>
-               </div>
+                   <div class="input-field editor-input">
+                     <select class="browser-default editor-select"
+                             v-model.trim="editedCity"
+                     >
+                       <option class="editor-option" disabled>Отсутствует</option>
+                       <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                         {{ city.cityName }}
+                       </option>
+                     </select>
+                     <label class="active">Город</label>
+                   </div>
 
-               <div class="input-field input-field-blue">
-                 <input type="tel"
-                        id="homePhone"
-                        v-model.trim="editedHomePhone"
-                 >
-                 <label for="homePhone" class="active">Телефон Домашний</label>
-               </div>
-
-               <div class="input-field input-field-blue">
-                 <input type="tel"
-                        id="mobilePhone"
-                        v-model.trim="editedMobilePhone"
-                 >
-                 <label for="mobilePhone" class="active">Телефон Мобильный</label>
-               </div>
-
-               <div class="input-field">
-                 <select class="browser-default"
-                         v-model.trim="editedCity"
-                 >
-                   <option v-for="(city) of sites" :key="city.cityName">
-                     {{ city.cityName }}
-                   </option>
-                 </select>
-                 <label class="active">Город</label>
-               </div>
-
-               <div class="input-field input-field-blue">
-                 <input type="text"
-                        id="duty"
-                        v-model.trim="editedDuty"
-                 >
-                 <label for="duty" class="active">Должность</label>
-               </div>
-
-               <div class="input-field">
-                 <select class="browser-default"
-                         v-model.trim="editedAccess"
-                 >
-                   <option value="1">Сотрудник</option>
-                   <option value="2">Админ</option>
-                 </select>
-                 <label class="active">Доступ</label>
+                   <div class="input-field editor-input">
+                     <input type="text"
+                            id="duty"
+                            v-model.trim="editedDuty"
+                     >
+                     <label for="duty" class="active">Должность</label>
+                   </div>
+                 </div>
                </div>
              </div>
 
-             <div class="button-container">
+             <div class="editor-btns">
                <button
-                 class="btn waves-effect waves-light auth-submit blue darken-1"
+                 class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
                  v-on:click="editorCollection(employees, sites)"
                >
                  <i class="material-icons">create</i> Редактировать
                </button>
 
                <button
-                 class="btn waves-effect waves-light auth-submit blue darken-1"
+                 class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
                  v-on:click="popupVisibility"
                >
                  <i class="material-icons">arrow_back</i> Вернуться назад
@@ -177,7 +201,7 @@ export default {
       editedMobilePhone: '',
       editedCity: '',
       editedDuty: '',
-      editedAccess: ''
+      editedAccess: false
     }
   },
   validations: {
@@ -276,40 +300,103 @@ export default {
 </script>
 
 <style scoped>
-  .row .col {
-    padding: 0;
-  }
-
-  .btn {
-    margin-right: 10px;
-  }
-
-  form {
-    width: 100%;
-  }
-
-  .form-content {
+  .editor-title{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editor-form,
+  .editor-form-content,
+  .editor-card-content {
+    color: white !important;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
-  .input-field {
-    width: 48%;
+  .editor-card {
+    width: 100%;
   }
 
-  select {
+  .editor-input {
+    width: 50%;
+  }
+
+  .editor-input input {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .editor-input label {
+    color: white;
+  }
+
+  input:not([type]),
+  input[type=text]:not(.browser-default),
+  input[type=password]:not(.browser-default),
+  input[type=email]:not(.browser-default),
+  input[type=url]:not(.browser-default),
+  input[type=time]:not(.browser-default),
+  input[type=date]:not(.browser-default),
+  input[type=datetime]:not(.browser-default),
+  input[type=datetime-local]:not(.browser-default),
+  input[type=tel]:not(.browser-default),
+  input[type=number]:not(.browser-default),
+  input[type=search]:not(.browser-default),
+  textarea.materialize-textarea {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* label focus color */
+  #blue-layout .input-field input:focus + label {
+    color: white;
+  }
+  /* label underline focus color */
+  #blue-layout .input-field input:focus {
+    border-bottom: 1px solid white;
+    box-shadow: 0 1px 0 0 white;
+  }
+
+  .editor-select {
     border: none !important;
-    border-bottom: 1px solid #9E9E9E !important;
+    border-bottom: 1px solid white !important;
     padding: 0 !important;
-    appearance: none !important;
+
+    text-align-last: center;
+    text-align: center;
+
+    margin-top: 10px;
+
+    cursor: pointer;
   }
 
-  option {
-    margin-left: 10px !important;
+  .editor-option {
+    margin-left: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  select:focus {
+  .editor-select:focus {
     outline: none !important;
+  }
+
+  .editor-btns {
+    width: 50%;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .editor-btn {
+    width: 48%;
   }
 </style>
