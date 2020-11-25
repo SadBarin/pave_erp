@@ -7,7 +7,7 @@
       v-bind:popup-title="'Выйти?'"
     />
 
-    <div class="page-title">
+    <div class="page-title editor-title">
       <h3>Редактор рабочего "{{editedName}} {{editedSurname}}"</h3>
     </div>
 
@@ -15,325 +15,359 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form>
-              <div class="form-content">
-                <div class="input-field input-field-blue">
-                  <input
-                    id="name"
-                    type="text"
-                    v-model.trim="editedName"
-                  >
-                  <label class="active" for="name">Имя</label>
+            <form class="editor-form">
+              <div class="form-content editor-form-content">
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">ФИО</span>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="name"
+                        type="text"
+                        v-model.trim="editedName"
+                      >
+                      <label class="active" for="name">Имя</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="surname"
+                        type="text"
+                        v-model.trim="editedSurname"
+                      >
+                      <label class="active" for="surname">Фамилия</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="patronymic"
+                        type="text"
+                        v-model.trim="editedPatronymic"
+                      >
+                      <label class="active" for="patronymic">Отчество</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="surname"
-                    type="text"
-                    v-model.trim="editedSurname"
-                  >
-                  <label class="active" for="surname">Фамилия</label>
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">Личные данные</span>
+
+                    <div class="input-field editor-input">
+                      <input
+                        class="datepicker"
+                        id="birthday"
+                        type="text"
+                        v-model.trim="editedBirthday"
+                      >
+                      <label class="active" for="birthday">Дата Рождения</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="sex"
+                        v-model.trim="editedSex"
+                      >
+                        <option class="editor-option" value="1">Мужской</option>
+                        <option class="editor-option" value="2">Женский</option>
+                      </select>
+                      <label class="active">Биологический Пол</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="nationality"
+                        type="text"
+                        v-model.trim="editedNationality"
+                      >
+                      <label class="active" for="nationality">Национальность</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="medicalBook"
+                        type="text"
+                        v-model.trim="editedMedicalBook"
+                      >
+                      <label class="active" for="medicalBook">Медицинская Книга</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="education"
+                        type="text"
+                        v-model.trim="editedEducation"
+                      >
+                      <label class="active" for="education">Образование</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="university"
+                        type="text"
+                        v-model.trim="editedUniversity"
+                      >
+                      <label class="active" for="university">ВУЗ</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="patronymic"
-                    type="text"
-                    v-model.trim="editedPatronymic"
-                  >
-                  <label class="active" for="patronymic">Отчество</label>
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">Паспортные данные</span>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="passportID"
+                        type="text"
+                        v-model.trim="editedPassportID"
+                      >
+                      <label class="active" for="PassportID">Номер Паспорта</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="passportDate"
+                        class="datepicker"
+                        type="text"
+                        v-model.trim="editedPassportDate"
+                      >
+                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="passportIssued"
+                        type="text"
+                        v-model.trim="editedPassportIssued"
+                      >
+                      <label class="active" for="passportIssued">Кем выдан</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="registration"
+                        type="text"
+                        v-model.trim="editedRegistration"
+                      >
+                      <label class="active" for="registration">Прописка</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="address"
+                        type="text"
+                        v-model.trim="editedAddress"
+                      >
+                      <label class="active" for="address">Адрес</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="accountNumber"
-                    type="text"
-                    v-model.trim="editedAccountNumber"
-                  >
-                  <label class="active" for="accountNumber">Учётный номер</label>
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">Банковские данные</span>
+                    <div class="input-field editor-input">
+                      <input
+                        id="nameCard"
+                        type="text"
+                        v-model.trim="editedNameCard"
+                      >
+                      <label class="active" for="nameCard">Имя Держателя Карты</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="surnameCard"
+                        type="text"
+                        v-model.trim="editedSurnameCard"
+                      >
+                      <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="patronymicCard"
+                        type="text"
+                        v-model.trim="editedPatronymicCard"
+                      >
+                      <label class="active" for="patronymicCard">Отчество Держателя Карты</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="accountNumberCard"
+                        type="text"
+                        v-model.trim="editedAccountNumberCard"
+                      >
+                      <label class="active" for="accountNumberCard">Номер Счёта</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="bank"
+                        v-model.trim="editedBank"
+                      >
+                        <option class="editor-option" value="1">СберБанк</option>
+                        <option class="editor-option" value="2">Банк ВТБ</option>
+                        <option class="editor-option" value="3">Газпромбанк</option>
+                        <option class="editor-option" value="4">Национальный Клиринговый Центр</option>
+                        <option class="editor-option" value="5">Альфа-Банк</option>
+                        <option class="editor-option" value="6">Россельхозбанк</option>
+                        <option class="editor-option" value="7">Московский Кредитный Банк</option>
+                        <option class="editor-option" value="8">Банк «Открытие»</option>
+                        <option class="editor-option" value="9">Совкомбанк</option>
+                        <option class="editor-option" value="10">Росбанк</option>
+                        <option class="editor-option" value="11">Тинькофф Банк</option>
+                      </select>
+                      <label class="active">Банк</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="number"
-                    type="text"
-                    v-model.trim="editedNumber"
-                  >
-                  <label class="active" for="number">Номер</label>
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">Контактные данные</span>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="homePhone"
+                        type="text"
+                        v-model.trim="editedHomePhone"
+                      >
+                      <label class="active" for="homePhone">Телефон Домашний</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="mobilePhone"
+                        type="text"
+                        v-model.trim="editedMobilePhone"
+                      >
+                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="nameCard"
-                    type="text"
-                    v-model.trim="editedNameCard"
-                  >
-                  <label class="active" for="nameCard">Имя Держателя Карты</label>
-                </div>
+                <div class="card editor-card blue darken-1 white-text">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title">Рабочие данные</span>
+                    <div class="input-field editor-input">
+                      <input
+                        id="accountNumber"
+                        type="text"
+                        v-model.trim="editedAccountNumber"
+                      >
+                      <label class="active" for="accountNumber">Учётный номер</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="surnameCard"
-                    type="text"
-                    v-model.trim="editedSurnameCard"
-                  >
-                  <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="number"
+                        type="text"
+                        v-model.trim="editedNumber"
+                      >
+                      <label class="active" for="number">Номер</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="patronymicCard"
-                    type="text"
-                    v-model.trim="editedPatronymicCard"
-                  >
-                  <label class="active" for="patronymicCard">Отчество Держателя Карты</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="previousWork"
+                        type="text"
+                        v-model.trim="editedPreviousWork"
+                      >
+                      <label class="active" for="previousWork">Прежняя Работа</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="accountNumberCard"
-                    type="text"
-                    v-model.trim="editedAccountNumberCard"
-                  >
-                  <label class="active" for="accountNumberCard">Номер Счёта</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="reasonComing"
+                        type="text"
+                        v-model.trim="editedReasonComing"
+                      >
+                      <label class="active" for="reasonComing">Почему пришел к нам</label>
+                    </div>
 
-                <div class="input-field">
-                  <select
-                    class="browser-default"
-                    id="bank"
-                    v-model.trim="editedBank"
-                  >
-                    <option value="1">СберБанк</option>
-                    <option value="2">Банк ВТБ</option>
-                    <option value="3">Газпромбанк</option>
-                    <option value="4">Национальный Клиринговый Центр</option>
-                    <option value="5">Альфа-Банк</option>
-                    <option value="6">Россельхозбанк</option>
-                    <option value="7">Московский Кредитный Банк</option>
-                    <option value="8">Банк «Открытие»</option>
-                    <option value="9">Совкомбанк</option>
-                    <option value="10">Росбанк</option>
-                    <option value="11">Тинькофф Банк</option>
-                  </select>
-                  <label class="active">Банк</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="professions"
+                        type="text"
+                        v-model.trim="editedProfessions"
+                      >
+                      <label class="active" for="professions">Профессии</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    class="datepicker"
-                    id="birthday"
-                    type="text"
-                    v-model.trim="editedBirthday"
-                  >
-                  <label class="active" for="birthday">Дата Рождения</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <select
+                        id="nightShift"
+                        class="browser-default editor-select"
+                        v-model.trim="editedNightShift"
+                      >
+                        <option class="editor-option" value="1">Да</option>
+                        <option class="editor-option" value="2">Нет</option>
+                      </select>
+                      <label class="active">Ночная</label>
+                    </div>
 
-                <div class="input-field">
-                  <select
-                    class="browser-default"
-                    id="sex"
-                    v-model.trim="editedSex"
-                  >
-                    <option value="1">Мужской</option>
-                    <option value="2">Женский</option>
-                  </select>
-                  <label class="active">Биологический Пол</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <select
+                        id="checkMVD"
+                        class="browser-default editor-select"
+                        v-model.trim="editedCheckMVD"
+                      >
+                        <option class="editor-option" value="1">Да</option>
+                        <option class="editor-option" value="2">Нет</option>
+                      </select>
+                      <label class="active">Проверка МВД</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="nationality"
-                    type="text"
-                    v-model.trim="editedNationality"
-                  >
-                  <label class="active" for="nationality">Национальность</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="dateInterview"
+                        class="datepicker"
+                        type="text"
+                        v-model.trim="editedDateInterview"
+                      >
+                      <label class="active" for="dateInterview">Дата Собеседования</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="passportID"
-                    type="text"
-                    v-model.trim="editedPassportID"
-                  >
-                  <label class="active" for="PassportID">Номер Паспорта</label>
-                </div>
+                    <div class="input-field editor-input">
+                      <input
+                        id="uniform"
+                        type="text"
+                        v-model.trim="editedUniform"
+                      >
+                      <label class="active" for="uniform">Униформа</label>
+                    </div>
 
-                <div class="input-field input-field-blue">
-                  <input
-                    id="passportDate"
-                    class="datepicker"
-                    type="text"
-                    v-model.trim="editedPassportDate"
-                  >
-                  <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="passportIssued"
-                    type="text"
-                    v-model.trim="editedPassportIssued"
-                  >
-                  <label class="active" for="passportIssued">Кем выдан</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="registration"
-                    type="text"
-                    v-model.trim="editedRegistration"
-                  >
-                  <label class="active" for="registration">Прописка</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="address"
-                    type="text"
-                    v-model.trim="editedAddress"
-                  >
-                  <label class="active" for="address">Адрес</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="homePhone"
-                    type="text"
-                    v-model.trim="editedHomePhone"
-                  >
-                  <label class="active" for="homePhone">Телефон Домашний</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="mobilePhone"
-                    type="text"
-                    v-model.trim="editedMobilePhone"
-                  >
-                  <label class="active" for="mobilePhone">Телефон Мобильный</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="medicalBook"
-                    type="text"
-                    v-model.trim="editedMedicalBook"
-                  >
-                  <label class="active" for="medicalBook">Медицинская Книга</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="education"
-                    type="text"
-                    v-model.trim="editedEducation"
-                  >
-                  <label class="active" for="education">Образование</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="university"
-                    type="text"
-                    v-model.trim="editedUniversity"
-                  >
-                  <label class="active" for="university">ВУЗ</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="previousWork"
-                    type="text"
-                    v-model.trim="editedPreviousWork"
-                  >
-                  <label class="active" for="previousWork">Прежняя Работа</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="reasonComing"
-                    type="text"
-                    v-model.trim="editedReasonComing"
-                  >
-                  <label class="active" for="reasonComing">Почему пришел к нам</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="professions"
-                    type="text"
-                    v-model.trim="editedProfessions"
-                  >
-                  <label class="active" for="professions">Профессии</label>
-                </div>
-
-                <div class="input-field">
-                  <select
-                    id="nightShift"
-                    class="browser-default"
-                    v-model.trim="editedNightShift"
-                  >
-                    <option value="1">Да</option>
-                    <option value="2">Нет</option>
-                  </select>
-                  <label class="active">Ночная</label>
-                </div>
-
-                <div class="input-field">
-                  <select
-                    id="checkMVD"
-                    class="browser-default"
-                    v-model.trim="editedCheckMVD"
-                  >
-                    <option value="1">Да</option>
-                    <option value="2">Нет</option>
-                  </select>
-                  <label class="active">Проверка МВД</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="dateInterview"
-                    class="datepicker"
-                    type="text"
-                    v-model.trim="editedDateInterview"
-                  >
-                  <label class="active" for="dateInterview">Дата Собеседования</label>
-                </div>
-
-                <div class="input-field input-field-blue">
-                  <input
-                    id="uniform"
-                    type="text"
-                    v-model.trim="editedUniform"
-                  >
-                  <label class="active" for="uniform">Униформа</label>
-                </div>
-
-                <div class="input-field">
-                  <select
-                    id="fired"
-                    class="browser-default"
-                    v-model.trim="editedFired"
-                  >
-                    <option value="1">Да</option>
-                    <option value="2">Нет</option>
-                  </select>
-                  <label class="active">Уволен</label>
+                    <div class="input-field editor-input">
+                      <select
+                        id="fired"
+                        class="browser-default editor-select"
+                        v-model.trim="editedFired"
+                      >
+                        <option class="editor-option" value="1">Да</option>
+                        <option class="editor-option" value="2">Нет</option>
+                      </select>
+                      <label class="active">Уволен</label>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="button-container">
+              <div class="editor-btns">
                 <button
-                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
                   v-on:click="editorCollection(workers)"
                 >
                   <i class="material-icons">create</i> Редактировать
                 </button>
 
                 <button
-                  class="btn waves-effect waves-light auth-submit blue darken-1"
+                  class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
                   v-on:click.prevent="popupVisibility"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
@@ -521,40 +555,147 @@ export default {
 </script>
 
 <style scoped>
-  .row .col {
-    padding: 0;
-  }
-
-  .btn {
-    margin-right: 10px;
-  }
-
-  form {
-    width: 100%;
-  }
-
-  .form-content {
+  .editor-title{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editor-form,
+  .editor-form-content,
+  .editor-card-content {
+    color: white !important;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
-  .input-field {
-    width: 48%;
+  .editor-card {
+    width: 100%;
   }
 
-  select {
+  .editor-input {
+    width: 50%;
+  }
+
+  .editor-input input {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .editor-input label {
+    color: white;
+  }
+
+  input:not([type]),
+  input[type=text]:not(.browser-default),
+  input[type=password]:not(.browser-default),
+  input[type=email]:not(.browser-default),
+  input[type=url]:not(.browser-default),
+  input[type=time]:not(.browser-default),
+  input[type=date]:not(.browser-default),
+  input[type=datetime]:not(.browser-default),
+  input[type=datetime-local]:not(.browser-default),
+  input[type=tel]:not(.browser-default),
+  input[type=number]:not(.browser-default),
+  input[type=search]:not(.browser-default),
+  textarea.materialize-textarea {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  input.invalid:not([type]),
+  input.invalid:not([type]):focus,
+  input.invalid[type=text]:not(.browser-default),
+  input.invalid[type=text]:not(.browser-default):focus,
+  input.invalid[type=password]:not(.browser-default),
+  input.invalid[type=password]:not(.browser-default):focus,
+  input.invalid[type=email]:not(.browser-default),
+  input.invalid[type=email]:not(.browser-default):focus,
+  input.invalid[type=url]:not(.browser-default),
+  input.invalid[type=url]:not(.browser-default):focus,
+  input.invalid[type=time]:not(.browser-default),
+  input.invalid[type=time]:not(.browser-default):focus,
+  input.invalid[type=date]:not(.browser-default),
+  input.invalid[type=date]:not(.browser-default):focus,
+  input.invalid[type=datetime]:not(.browser-default),
+  input.invalid[type=datetime]:not(.browser-default):focus,
+  input.invalid[type=datetime-local]:not(.browser-default),
+  input.invalid[type=datetime-local]:not(.browser-default):focus,
+  input.invalid[type=tel]:not(.browser-default),
+  input.invalid[type=tel]:not(.browser-default):focus,
+  input.invalid[type=number]:not(.browser-default),
+  input.invalid[type=number]:not(.browser-default):focus,
+  input.invalid[type=search]:not(.browser-default),
+  input.invalid[type=search]:not(.browser-default):focus,
+  textarea.materialize-textarea.invalid,
+  textarea.materialize-textarea.invalid:focus,
+  .select-wrapper.invalid>input.select-dropdown,
+  .select-wrapper.invalid>input.select-dropdown:focus {
+    border: none;
+  }
+
+  /* label focus color */
+  #blue-layout .input-field input:focus + label {
+    color: white;
+  }
+  /* label underline focus color */
+  #blue-layout .input-field input:focus {
+    border-bottom: 1px solid white;
+    box-shadow: 0 1px 0 0 white;
+  }
+
+  .input-field .helper-text {
+    color: rgba(255, 255, 255, 0.7)
+  }
+
+  #blue-layout .editor-select {
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0;
+
+    text-align-last: center;
+    text-align: center;
+
+    margin-top: 10px;
+
+    cursor: pointer;
+  }
+
+  #blue-layout .editor-select .invalid {
+    border: none;
+    border-bottom: 1px solid #F44336;
+  }
+
+  #blue-layout small .invalid {
     border: none !important;
-    border-bottom: 1px solid #9E9E9E !important;
-    padding: 0 !important;
-    appearance: none !important;
   }
 
-  option {
-    margin-left: 10px !important;
+  .editor-option {
+    margin-left: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  select:focus {
+  .editor-select:focus {
     outline: none !important;
+  }
+
+  .editor-btns {
+    width: 50%;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .editor-btn {
+    width: 48%;
   }
 </style>
