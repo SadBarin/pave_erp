@@ -133,7 +133,7 @@
                      <select class="browser-default editor-select"
                              v-model.trim="editedCity"
                      >
-                       <option class="editor-option" disabled>Отсутствует</option>
+                       <option class="editor-option" selected>Отсутствует</option>
                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
                          {{ city.cityName }}
                        </option>
@@ -349,7 +349,38 @@ export default {
   input[type=number]:not(.browser-default),
   input[type=search]:not(.browser-default),
   textarea.materialize-textarea {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  input.invalid:not([type]),
+  input.invalid:not([type]):focus,
+  input.invalid[type=text]:not(.browser-default),
+  input.invalid[type=text]:not(.browser-default):focus,
+  input.invalid[type=password]:not(.browser-default),
+  input.invalid[type=password]:not(.browser-default):focus,
+  input.invalid[type=email]:not(.browser-default),
+  input.invalid[type=email]:not(.browser-default):focus,
+  input.invalid[type=url]:not(.browser-default),
+  input.invalid[type=url]:not(.browser-default):focus,
+  input.invalid[type=time]:not(.browser-default),
+  input.invalid[type=time]:not(.browser-default):focus,
+  input.invalid[type=date]:not(.browser-default),
+  input.invalid[type=date]:not(.browser-default):focus,
+  input.invalid[type=datetime]:not(.browser-default),
+  input.invalid[type=datetime]:not(.browser-default):focus,
+  input.invalid[type=datetime-local]:not(.browser-default),
+  input.invalid[type=datetime-local]:not(.browser-default):focus,
+  input.invalid[type=tel]:not(.browser-default),
+  input.invalid[type=tel]:not(.browser-default):focus,
+  input.invalid[type=number]:not(.browser-default),
+  input.invalid[type=number]:not(.browser-default):focus,
+  input.invalid[type=search]:not(.browser-default),
+  input.invalid[type=search]:not(.browser-default):focus,
+  textarea.materialize-textarea.invalid,
+  textarea.materialize-textarea.invalid:focus,
+  .select-wrapper.invalid>input.select-dropdown,
+  .select-wrapper.invalid>input.select-dropdown:focus {
+    border: none;
   }
 
   /* label focus color */
@@ -362,10 +393,14 @@ export default {
     box-shadow: 0 1px 0 0 white;
   }
 
-  .editor-select {
-    border: none !important;
-    border-bottom: 1px solid white !important;
-    padding: 0 !important;
+  .input-field .helper-text {
+    color: rgba(255, 255, 255, 0.7)
+  }
+
+  #blue-layout .editor-select {
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0;
 
     text-align-last: center;
     text-align: center;
@@ -373,6 +408,15 @@ export default {
     margin-top: 10px;
 
     cursor: pointer;
+  }
+
+  #blue-layout .editor-select .invalid {
+    border: none;
+    border-bottom: 1px solid #F44336;
+  }
+
+  #blue-layout small .invalid {
+    border: none !important;
   }
 
   .editor-option {
