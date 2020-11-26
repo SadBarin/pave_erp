@@ -12,7 +12,7 @@
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}}</h6>
-            <h6><i class="material-icons">phone</i> Номер: {{worker.number}}</h6>
+            <h6><i class="material-icons">phone</i> Номер: {{worker.mobilePhone}}</h6>
           </div>
           <div class="button-container">
             <button class="btn-flat waves-effect waves-light auth-submit white-text"

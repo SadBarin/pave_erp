@@ -108,16 +108,16 @@ export default {
       if (this.$v.$invalid) {
         this.$v.$touch()
       }
-      // for (const city of this.sites) {
-      //   if (city.cityName.toString().toLowerCase() === this.editedSitesName.toString().toLowerCase() || this.$v.$invalid) {
-      //     this.coincidence = true
-      //     this.validateCheck = false
-      //     break
-      //   } else {
-      //     this.coincidence = false
-      //     this.validateCheck = true
-      //   }
-      // }
+      for (const city of this.sites) {
+        if (city.cityName.toString().toLowerCase() === this.editedSitesName.toString().toLowerCase() || this.$v.$invalid) {
+          this.coincidence = true
+          this.validateCheck = false
+          break
+        } else {
+          this.coincidence = false
+          this.validateCheck = true
+        }
+      }
     },
 
     popupVisibility () {

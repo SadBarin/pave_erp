@@ -21,6 +21,12 @@
       >
         Номер должен содержать не менее {{$v.number.$params.minLength.min}} символов.
       </small>
+      <small
+        class="helper-text invalid"
+        v-else-if="coincidence"
+      >
+        Номер уже есть
+      </small>
     </div>
 
     <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">
@@ -36,7 +42,9 @@ export default {
   name: 'AddCardSWorkers',
   data () {
     return {
-      number: ''
+      number: '',
+      coincidence: false,
+      workers: [{}]
     }
   },
   validations: {
@@ -44,19 +52,36 @@ export default {
   },
   methods: {
     submitWorkers () {
+      if (localStorage.getItem('workers')) {
+        try {
+          this.workers = JSON.parse(localStorage.getItem('workers'))
+        } catch (e) {
+          localStorage.removeItem('workers')
+        }
+      }
+
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
 
-      if (this.number.trim()) {
+      for (const worker of this.workers) {
+        if (worker.mobilePhone.toString().toLowerCase() === this.number.toString().toLowerCase()) {
+          this.coincidence = true
+          break
+        } else {
+          this.coincidence = false
+        }
+      }
+
+      if (this.number.trim() && !this.coincidence) {
         const newWorker = {
           id: Date.now(),
           name: 'Новый',
           surname: 'Рабочий',
           patronymic: '',
           accountNumber: '',
-          number: this.number,
+          number: Date.now(),
           nameCard: '',
           surnameCard: '',
           patronymicCard: '',
@@ -71,7 +96,7 @@ export default {
           registration: '',
           address: '',
           homePhone: '',
-          mobilePhone: '',
+          mobilePhone: this.number,
           medicalBook: '',
           education: '',
           university: '',

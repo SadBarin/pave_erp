@@ -18,6 +18,12 @@
         v-else-if="$v.email.$dirty && !$v.email.email"
       >Введите правильно email
       </small>
+      <small
+        class="helper-text invalid"
+        v-else-if="coincidence"
+      >
+        Email уже есть
+      </small>
     </div>
 
     <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">
@@ -33,7 +39,9 @@ export default {
   name: 'AddCardEmployees',
   data () {
     return {
-      email: ''
+      email: '',
+      coincidence: false,
+      employees: [{}]
     }
   },
   validations: {
@@ -41,12 +49,29 @@ export default {
   },
   methods: {
     submitEmployee () {
+      if (localStorage.getItem('employees')) {
+        try {
+          this.employees = JSON.parse(localStorage.getItem('employees'))
+        } catch (e) {
+          localStorage.removeItem('employees')
+        }
+      }
+
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
 
-      if (this.email.trim()) {
+      for (const employee of this.employees) {
+        if (employee.email.toString().toLowerCase() === this.email.toString().toLowerCase()) {
+          this.coincidence = true
+          break
+        } else {
+          this.coincidence = false
+        }
+      }
+
+      if (this.email.trim() && !this.coincidence) {
         const newEmployee = {
           id: Date.now(),
           email: this.email,
