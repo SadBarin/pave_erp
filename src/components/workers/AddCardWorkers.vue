@@ -66,6 +66,7 @@ export default {
       }
 
       for (const worker of this.workers) {
+        if (worker.mobilePhone === undefined) continue
         if (worker.mobilePhone.toString().toLowerCase() === this.number.toString().toLowerCase()) {
           this.coincidence = true
           break

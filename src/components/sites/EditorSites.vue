@@ -51,6 +51,16 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="card editor-card red darken-1 white-text" v-if="coincidence">
+                  <div class="card-content editor-card-content">
+                    <span class="card-title error-title">Ошибка!</span>
+
+                    <div>
+                      <p>Проверьте правильность заполнения формы</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="editor-btns">
@@ -91,11 +101,9 @@ export default {
     return {
       popupShow: false,
       coincidence: false,
-
+      validateCheck: true,
       editedSitesName: '',
       countEmployees: '0',
-      validateCheck: true,
-
       sites: [{}],
       employees: [{}]
     }

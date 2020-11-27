@@ -26,7 +26,7 @@
                        id="email"
                        type="text"
                        v-model.trim="editedEmail"
-                       :class="{invalid: ($v.editedEmail.$dirty && !$v.editedEmail.required) || ($v.editedEmail.$dirty && !$v.editedEmail.editedEmail)}"
+                       :class="{invalid: ($v.editedEmail.$dirty && !$v.editedEmail.required) || ($v.editedEmail.$dirty && !$v.editedEmail.email)}"
                      >
                      <label for="email" class="active">Почта</label>
                      <small
@@ -35,7 +35,7 @@
                      >Введите ваш email</small>
                      <small
                        class="helper-text invalid"
-                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.editedEmail"
+                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.email"
                      >Введите правильно email
                      </small>
                    </div>
@@ -150,6 +150,16 @@
                    </div>
                  </div>
                </div>
+
+               <div class="card editor-card red darken-1 white-text" v-if="!validateCheck">
+                 <div class="card-content editor-card-content">
+                   <span class="card-title error-title">Ошибка!</span>
+
+                   <div>
+                     <p>Проверьте правильность заполнения формы</p>
+                   </div>
+                 </div>
+               </div>
              </div>
 
              <div class="editor-btns">
@@ -188,10 +198,9 @@ export default {
   data () {
     return {
       popupShow: false,
-
+      validateCheck: true,
       employees: [{}],
       sites: [{}],
-
       editedEmail: '',
       editedPassword: '',
       editedName: '',
@@ -220,6 +229,9 @@ export default {
     validate () {
       if (this.$v.$invalid) {
         this.$v.$touch()
+        this.validateCheck = false
+      } else {
+        this.validateCheck = true
       }
     },
 

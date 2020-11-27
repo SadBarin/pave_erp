@@ -63,6 +63,7 @@ export default {
       }
 
       for (const employee of this.employees) {
+        if (employee.email === undefined) continue
         if (employee.email.toString().toLowerCase() === this.email.toString().toLowerCase()) {
           this.coincidence = true
           break
