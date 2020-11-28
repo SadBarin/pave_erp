@@ -35,7 +35,7 @@
                      >Введите ваш email</small>
                      <small
                        class="helper-text invalid"
-                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.email"
+                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmailтзь.email"
                      >Введите правильно email
                      </small>
                    </div>

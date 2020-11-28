@@ -69,7 +69,7 @@ export default {
     return {
       email: 'admin@admin.com',
       password: 'admin2020',
-      localStorageClear: true
+      localStorageClear: false
     }
   },
   validations: {
