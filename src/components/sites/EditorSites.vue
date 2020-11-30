@@ -74,7 +74,7 @@
 
                 <button
                   class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-                  v-on:click="popupVisibility"
+                  v-on:click.prevent="popupVisibility"
                 >
                   <i class="material-icons">arrow_back</i> Вернуться назад
                 </button>

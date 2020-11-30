@@ -7,8 +7,9 @@
 
       <div class="card-action btn-popup">
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+          class="btn-flat white-text waves-effect waves-light auth-submit red darken-1"
           v-on:click.prevent="$emit('yes')"
+          v-on:click="callToast"
         >
           <i class="material-icons">check</i> Да
         </button>
@@ -27,7 +28,15 @@
 <script>
 export default {
   name: 'Popup',
-  props: ['popupTitle']
+  props: ['popupTitle', 'popupToast'],
+  methods: {
+    callToast () {
+      if (this.popupToast) {
+        // eslint-disable-next-line no-undef
+        M.toast({ html: this.popupToast })
+      }
+    }
+  }
 }
 </script>
 

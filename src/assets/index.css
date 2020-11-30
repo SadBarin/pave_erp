@@ -155,15 +155,17 @@ html, body {
 }
 
 .btn-title {
-  width: 1.7rem;
+  box-shadow: none !important;
+
+  width: 2.4rem;
+  height: 2rem;
 
   margin-right: 15px;
   margin-bottom: -10px;
 }
 
 .btn-title .material-icons {
-  margin: 0;
-  font-size: 1.7rem;
+  margin: -3px;
 }
 
 #blue-layout .card-title {
@@ -206,6 +208,11 @@ html, body {
   display: flex !important;
   justify-content: center;
   align-items: center;
+}
+
+#toast-container {
+  right: 2rem !important;
+  top: calc(12vh + 2rem) !important;
 }
 
 #blue-layout [type="checkbox"].filled-in:checked+span:not(.lever):after {

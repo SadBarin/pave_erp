@@ -5,6 +5,7 @@
       v-on:yes="exit"
       v-on:no="popupHidden"
       v-bind:popup-title="'Выйти?'"
+      v-bind:popup-toast="'Вы вышли из системы'"
     />
 
     <nav class="navbar blue darken-1 ">

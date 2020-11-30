@@ -86,6 +86,9 @@ export default {
       this.localStorageRemove()
 
       this.$router.push('/sites')
+
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Вы вошли в систему' })
     },
 
     localStorageRemove () {

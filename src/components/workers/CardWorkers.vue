@@ -5,6 +5,7 @@
       v-on:yes="$emit('remove-worker', worker.id)"
       v-on:no="popupHidden"
       v-bind:popup-title="'Удалить рабочего?'"
+      v-bind:popup-toast="'Рабочий был удалён'"
     />
 
     <div class="col s12">
@@ -28,7 +29,7 @@
               <i class="material-icons">border_color</i> Редактировать принудительно
             </router-link>
 
-            <button class="btn-flat waves-effect waves-light auth-submit white-text"
+            <button class="btn-flat waves-effect waves-red auth-submit white-text"
                     v-if="!worker.edited"
                     v-on:click="popupVisibility"
             >

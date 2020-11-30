@@ -5,7 +5,7 @@
         <h3>Поиск рабочих</h3>
 
         <div class="title-btn-container">
-          <button class="btn-flat btn-title"><i class="material-icons">autorenew</i></button>
+          <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light"><i class="material-icons">autorenew</i></button>
         </div>
       </div>
     </div>
