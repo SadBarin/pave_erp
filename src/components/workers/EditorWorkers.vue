@@ -560,6 +560,11 @@ export default {
       M.FormSelect.init(element)
     })
 
+    const datepicker = document.querySelectorAll('.datepicker')
+    datepicker.forEach((element) => {
+      M.Datepicker.init(element)
+    })
+
     this.outputCollection(this.workers)
   }
 }

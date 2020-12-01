@@ -158,7 +158,6 @@ html, body {
   box-shadow: none !important;
 
   width: 2.4rem;
-  height: 2rem;
 
   margin-right: 15px;
   margin-bottom: -10px;
@@ -218,6 +217,33 @@ html, body {
 #blue-layout [type="checkbox"].filled-in:checked+span:not(.lever):after {
   background-color: #1e88e5;
   border: #1e88e5;
+}
+
+/*Datepicker*/
+
+.datepicker-date-display {
+  background-color: #1e88e5 !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: #1e88e5 !important;
+}
+
+.datepicker-day-button {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.is-today {
+  color: #1e88e5 !important;
+}
+
+.confirmation-btns {
+  display: flex;
+}
+
+.datepicker-cancel,
+.datepicker-done{
+  color: #1e88e5 !important;
 }
 
 @media (max-width: 1300px) {
