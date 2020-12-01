@@ -316,6 +316,13 @@
                 </li>
               </ul>
 
+              <div class="col s12 black-text">
+                <h4 class="title">Найдено:</h4>
+                <div>
+                  <h6>Тут будут отображаться найденные карты</h6>
+                </div>
+              </div>
+
               <div class="editor-btns">
                 <button
                   class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"

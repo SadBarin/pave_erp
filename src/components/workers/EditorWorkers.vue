@@ -555,6 +555,7 @@ export default {
   mounted () {
     this.updateCollection('workers')
 
+    // TODO Сделать универсальную функцию
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
