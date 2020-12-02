@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-page">
     <div class="page-title">
       <div class="title-container">
         <h3>Список городов</h3>
