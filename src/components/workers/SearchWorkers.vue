@@ -322,19 +322,19 @@
                   <h6>Тут будут отображаться найденные карты</h6>
                 </div>
               </div>
-
-              <div class="editor-btns">
-                <button
-                  class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-                >
-                  <i class="material-icons">search</i> Поиск
-                </button>
-              </div>
             </form>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="editor-btns">
+      <button
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+      >
+        <i class="material-icons">search</i> Поиск
+      </button>
+    </div>
   </div>
 </template>
 
@@ -494,8 +494,8 @@ textarea.materialize-textarea.invalid:focus,
 }
 
 .editor-btns {
-  width: 50%;
-  margin-top: 30px;
+  width: 100%;
+  margin-top: 20px;
 
   display: flex;
   justify-content: space-between;
@@ -503,6 +503,6 @@ textarea.materialize-textarea.invalid:focus,
 }
 
 .editor-btn {
-  width: 48%;
+  width: 28%;
 }
 </style>

@@ -7,7 +7,7 @@
 
       <div class="card-action btn-popup">
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit red darken-1"
+          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
           v-on:click.prevent="$emit('yes')"
           v-on:click="callToast"
         >

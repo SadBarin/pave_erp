@@ -55,7 +55,7 @@ html, body {
 
 #blue-layout .navbar {
   width:100%;
-  height: 10vh;
+  height: 4vh;
   min-height: 50px;
   padding:0 2rem;
 
@@ -72,7 +72,7 @@ html, body {
 
 #blue-layout .app-sidenav {
   width: 15vw;
-  height: calc(100% + 10vh);
+  height: calc(100% + 4vh);
   padding-top:50px;
 
   position:absolute;
@@ -98,7 +98,7 @@ html, body {
 }
 
 .app-content {
-  padding-top: 10vh;
+  padding-top: 4vh;
   padding-left: 15vw;
 
   position:relative;

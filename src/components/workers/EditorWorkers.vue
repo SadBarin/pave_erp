@@ -367,27 +367,27 @@
                   </div>
                 </div>
               </div>
-
-              <div class="editor-btns">
-                <button
-                  class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-                  v-on:click="editorCollection(workers)"
-                >
-                  <i class="material-icons">create</i> Редактировать
-                </button>
-
-                <button
-                  class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-                  v-on:click.prevent="popupVisibility"
-                >
-                  <i class="material-icons">arrow_back</i> Вернуться назад
-                </button>
-              </div>
             </form>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="editor-btns">
+      <button
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        v-on:click="editorCollection(workers)"
+      >
+        <i class="material-icons">create</i> Редактировать
+      </button>
+
+      <button
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        v-on:click.prevent="popupVisibility"
+      >
+        <i class="material-icons">arrow_back</i> Вернуться назад
+      </button>
+    </div>
   </div>
 </template>
 
@@ -704,8 +704,8 @@ export default {
   }
 
   .editor-btns {
-    width: 50%;
-    margin-top: 30px;
+    width: 100%;
+    margin-top: 20px;
 
     display: flex;
     justify-content: space-between;
