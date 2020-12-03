@@ -3,7 +3,7 @@
     <div class="card-content">
       <span class="card-title">Вход в систему</span>
 
-      <div class="input-field input-field-blue">
+      <div class="input-field">
         <input
                id="email"
                type="text"
@@ -22,7 +22,7 @@
         </small>
       </div>
 
-      <div class="input-field" id="input-field-blue">
+      <div class="input-field">
         <input
           id="password"
           type="password"
@@ -44,12 +44,17 @@
         </small>
       </div>
 
-      <div>
-        <label>
-          <input type="checkbox" class="filled-in" v-model="localStorageClear"/>
-          <span>Удалить LocalStorage?</span>
-        </label>
-      </div>
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">clear_all</i>Дополнительные функции входа</div>
+          <div class="collapsible-body">
+            <label>
+              <input type="checkbox" class="filled-in" v-model="localStorageClear"/>
+              <span>Удалить LocalStorage?</span>
+            </label>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <div class="card-action">
@@ -61,6 +66,7 @@
 </template>
 
 <script>
+import M from 'materialize-css'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 
 export default {
@@ -87,7 +93,6 @@ export default {
 
       this.$router.push('/sites')
 
-      // eslint-disable-next-line no-undef
       M.toast({ html: 'Вы вошли в систему' })
     },
 
@@ -96,6 +101,18 @@ export default {
         localStorage.clear()
       }
     }
+  },
+  mounted () {
+    const collapsible = document.querySelectorAll('.collapsible')
+    collapsible.forEach((element) => {
+      M.Collapsible.init(element)
+    })
   }
 }
 </script>
+
+<style>
+  .auth-card {
+    width: 500px;
+  }
+</style>

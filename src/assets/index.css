@@ -35,39 +35,21 @@ html, body {
   overflow: hidden;
 }
 
-.empty-layout {
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.app-main-layout {
-  height: 100vh;
-
-  position: relative;
-}
-
-.auth-card {
-  width: 500px;
-}
-
 #blue-layout .navbar {
-  width:100%;
+  width: 100%;
   height: 4vh;
   min-height: 50px;
-  padding:0 2rem;
+  padding: 0 2rem;
 
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 
-  position:absolute;
-  top:0;
-  left:0;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  z-index:100
+  z-index: 100
 }
 
 #blue-layout .app-sidenav {
@@ -92,9 +74,10 @@ html, body {
   transform:translateX(0);
 }
 
-.app-page {
+#blue-layout .app-page {
   width: 85vw;
-  padding: 1.5rem
+
+  padding: 3.5rem 3.5rem 1rem;
 }
 
 .app-content {
@@ -135,16 +118,6 @@ html, body {
 .page-subtitle h4, .page-title {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-}
-
-.empty-list-title {
-  display: flex;
-  align-items: center;
-}
-
-.empty-list-title .material-icons {
-  font-size: 1.7rem;
-  margin-right: 10px;
 }
 
 .title-container {
@@ -189,29 +162,6 @@ html, body {
   margin-bottom: 0;
 }
 
-#blue-layout .input-field {
-  padding: 2px;
-}
-
-#blue-layout .input-add {
-  width: 270px;
-}
-
-/* label focus color */
-#blue-layout .input-field input:focus + label {
-  color: #1e88e5;
-}
-/* label underline focus color */
-#blue-layout .input-field input:focus {
-  border-bottom: 1px solid #1e88e5;
-  box-shadow: 0 1px 0 0 #1e88e5;
-}
-
-#blue-layout .dropdown-content li > a,
-#blue-layout .dropdown-content li > span {
-  color: #1e88e5;
-}
-
 .button-container {
   display: flex !important;
   align-items: center;
@@ -228,9 +178,33 @@ html, body {
   top: calc(12vh + 2rem) !important;
 }
 
+#blue-layout .dropdown-content li > a,
+#blue-layout .dropdown-content li > span {
+  color: #1e88e5;
+}
+
 #blue-layout [type="checkbox"].filled-in:checked+span:not(.lever):after {
   background-color: #1e88e5;
   border: #1e88e5;
+}
+
+/*Input*/
+
+#blue-layout .input-field {
+  padding: 2px;
+}
+
+#blue-layout .input-add {
+  width: 270px;
+}
+
+#blue-layout .input-field input:focus + label {
+  color: #1e88e5;
+}
+
+#blue-layout .input-field input:focus {
+  border-bottom: 1px solid #1e88e5;
+  box-shadow: 0 1px 0 0 #1e88e5;
 }
 
 /*Datepicker*/
