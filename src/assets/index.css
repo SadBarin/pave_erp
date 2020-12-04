@@ -1,9 +1,16 @@
+:root {
+  --navbar-height: 6vh;
+  --sidebar-width: 15vw;
+  --padding-top-page: 35px;
+  --page-title-height: 50px;
+}
+
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   src: url("MaterialIcons-Regular.eot");
-  /* For IE6-8 */
+  /* For IE 6-8 */
   src: local("Material Icons"), local("MaterialIcons-Regular"), url("MaterialIcons-Regular.woff2") format("woff2"), url("MaterialIcons-Regular.woff") format("woff"), url("MaterialIcons-Regular.ttf") format("truetype");
 }
 
@@ -37,8 +44,7 @@ html, body {
 
 #blue-layout .navbar {
   width: 100%;
-  height: 4vh;
-  min-height: 50px;
+  height: var(--navbar-height);
   padding: 0 2rem;
 
   display: flex;
@@ -53,17 +59,13 @@ html, body {
 }
 
 #blue-layout .app-sidenav {
-  width: 15vw;
-  height: calc(100% + 4vh);
-  padding-top:50px;
+  width: var(--sidebar-width);
+  height: 100%;
+  padding-top: calc(var(--navbar-height) + var(--padding-top-page));
 
-  position:absolute;
-  top:7vh;
-  bottom:0;
+  transition: transform .3s;
 
-  transition:transform .3s;
-
-  z-index:50
+  z-index: 50
 }
 
 #blue-layout .sidenav li>a {
@@ -71,18 +73,16 @@ html, body {
 }
 
 .app-sidenav.open {
-  transform:translateX(0);
+  transform: translateX(0);
 }
 
 #blue-layout .app-page {
-  width: 85vw;
-
-  padding: 3.5rem 3.5rem 1rem;
+  padding-top: var(--navbar-height);
+  padding-left: var(--sidebar-width);
 }
 
 .app-content {
-  padding-top: 4vh;
-  padding-left: 15vw;
+  padding: var(--padding-top-page);
 
   position:relative;
 
@@ -90,7 +90,7 @@ html, body {
 }
 
 .app-content section {
-  height: 70vh;
+  height: 76vh;
 
   overflow-y: auto;
 
@@ -103,7 +103,7 @@ html, body {
 }
 
 .page-title {
-  height: 60px;
+  height: var(--page-title-height);
 
   display: flex;
   justify-content: space-between;
@@ -116,7 +116,6 @@ html, body {
 }
 
 .page-subtitle h4, .page-title {
-  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -190,14 +189,6 @@ html, body {
 
 /*Input*/
 
-#blue-layout .input-field {
-  padding: 2px;
-}
-
-#blue-layout .input-add {
-  width: 270px;
-}
-
 #blue-layout .input-field input:focus + label {
   color: #1e88e5;
 }
@@ -235,11 +226,16 @@ html, body {
 }
 
 @media (max-width: 1300px) {
+  #blue-layout .navbar {
+    height: 30px;
+  }
+
   #blue-layout .app-sidenav {
     width: 5vw;
   }
 
   .app-page {
+    padding: 20px !important;
     width: 95vw;
   }
 

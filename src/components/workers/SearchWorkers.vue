@@ -358,151 +358,159 @@ export default {
 </script>
 
 <style scoped>
-.editor-title{
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
+  .app-content section {
+    height: 70vh;
 
-.editor-form,
-.editor-form-content,
-.editor-card-content {
-  color: white !important;
+    overflow-y: auto;
 
-  width: 100%;
+    padding-bottom: 15px;
+  }
 
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+  .editor-title{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
 
-.row .col.s12 {
-  padding: 0;
-}
+  .editor-form,
+  .editor-form-content,
+  .editor-card-content {
+    color: white !important;
 
-.editor-card {
-  width: 100%;
-}
+    width: 100%;
 
-.editor-input {
-  width: 50%;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-.editor-input input {
-  color: rgba(255, 255, 255, 0.9);
-}
+  .row .col.s12 {
+    padding: 0;
+  }
 
-.editor-input label {
-  color: white;
-}
+  .editor-card {
+    width: 100%;
+  }
 
-input:not([type]),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
-input[type=email]:not(.browser-default),
-input[type=url]:not(.browser-default),
-input[type=time]:not(.browser-default),
-input[type=date]:not(.browser-default),
-input[type=datetime]:not(.browser-default),
-input[type=datetime-local]:not(.browser-default),
-input[type=tel]:not(.browser-default),
-input[type=number]:not(.browser-default),
-input[type=search]:not(.browser-default),
-textarea.materialize-textarea {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-}
+  .editor-input {
+    width: 50%;
+  }
 
-input.invalid:not([type]),
-input.invalid:not([type]):focus,
-input.invalid[type=text]:not(.browser-default),
-input.invalid[type=text]:not(.browser-default):focus,
-input.invalid[type=password]:not(.browser-default),
-input.invalid[type=password]:not(.browser-default):focus,
-input.invalid[type=email]:not(.browser-default),
-input.invalid[type=email]:not(.browser-default):focus,
-input.invalid[type=url]:not(.browser-default),
-input.invalid[type=url]:not(.browser-default):focus,
-input.invalid[type=time]:not(.browser-default),
-input.invalid[type=time]:not(.browser-default):focus,
-input.invalid[type=date]:not(.browser-default),
-input.invalid[type=date]:not(.browser-default):focus,
-input.invalid[type=datetime]:not(.browser-default),
-input.invalid[type=datetime]:not(.browser-default):focus,
-input.invalid[type=datetime-local]:not(.browser-default),
-input.invalid[type=datetime-local]:not(.browser-default):focus,
-input.invalid[type=tel]:not(.browser-default),
-input.invalid[type=tel]:not(.browser-default):focus,
-input.invalid[type=number]:not(.browser-default),
-input.invalid[type=number]:not(.browser-default):focus,
-input.invalid[type=search]:not(.browser-default),
-input.invalid[type=search]:not(.browser-default):focus,
-textarea.materialize-textarea.invalid,
-textarea.materialize-textarea.invalid:focus,
-.select-wrapper.invalid>input.select-dropdown,
-.select-wrapper.invalid>input.select-dropdown:focus {
-  border: none;
-}
+  .editor-input input {
+    color: rgba(255, 255, 255, 0.9);
+  }
 
-/* label focus color */
-#blue-layout .input-field input:focus + label {
-  color: white;
-}
-/* label underline focus color */
-#blue-layout .input-field input:focus {
-  border-bottom: 1px solid white;
-  box-shadow: 0 1px 0 0 white;
-}
+  .editor-input label {
+    color: white;
+  }
 
-.input-field .helper-text {
-  color: rgba(255, 255, 255, 0.7)
-}
+  input:not([type]),
+  input[type=text]:not(.browser-default),
+  input[type=password]:not(.browser-default),
+  input[type=email]:not(.browser-default),
+  input[type=url]:not(.browser-default),
+  input[type=time]:not(.browser-default),
+  input[type=date]:not(.browser-default),
+  input[type=datetime]:not(.browser-default),
+  input[type=datetime-local]:not(.browser-default),
+  input[type=tel]:not(.browser-default),
+  input[type=number]:not(.browser-default),
+  input[type=search]:not(.browser-default),
+  textarea.materialize-textarea {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
 
-#blue-layout .editor-select {
-  border: none;
-  border-bottom: 1px solid white;
-  padding: 0;
+  input.invalid:not([type]),
+  input.invalid:not([type]):focus,
+  input.invalid[type=text]:not(.browser-default),
+  input.invalid[type=text]:not(.browser-default):focus,
+  input.invalid[type=password]:not(.browser-default),
+  input.invalid[type=password]:not(.browser-default):focus,
+  input.invalid[type=email]:not(.browser-default),
+  input.invalid[type=email]:not(.browser-default):focus,
+  input.invalid[type=url]:not(.browser-default),
+  input.invalid[type=url]:not(.browser-default):focus,
+  input.invalid[type=time]:not(.browser-default),
+  input.invalid[type=time]:not(.browser-default):focus,
+  input.invalid[type=date]:not(.browser-default),
+  input.invalid[type=date]:not(.browser-default):focus,
+  input.invalid[type=datetime]:not(.browser-default),
+  input.invalid[type=datetime]:not(.browser-default):focus,
+  input.invalid[type=datetime-local]:not(.browser-default),
+  input.invalid[type=datetime-local]:not(.browser-default):focus,
+  input.invalid[type=tel]:not(.browser-default),
+  input.invalid[type=tel]:not(.browser-default):focus,
+  input.invalid[type=number]:not(.browser-default),
+  input.invalid[type=number]:not(.browser-default):focus,
+  input.invalid[type=search]:not(.browser-default),
+  input.invalid[type=search]:not(.browser-default):focus,
+  textarea.materialize-textarea.invalid,
+  textarea.materialize-textarea.invalid:focus,
+  .select-wrapper.invalid>input.select-dropdown,
+  .select-wrapper.invalid>input.select-dropdown:focus {
+    border: none;
+  }
 
-  text-align-last: center;
-  text-align: center;
+  /* label focus color */
+  #blue-layout .input-field input:focus + label {
+    color: white;
+  }
+  /* label underline focus color */
+  #blue-layout .input-field input:focus {
+    border-bottom: 1px solid white;
+    box-shadow: 0 1px 0 0 white;
+  }
 
-  margin-top: 10px;
+  .input-field .helper-text {
+    color: rgba(255, 255, 255, 0.7)
+  }
 
-  cursor: pointer;
-}
+  #blue-layout .editor-select {
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0;
 
-#blue-layout .editor-select .invalid {
-  border: none;
-  border-bottom: 1px solid #F44336;
-}
+    text-align-last: center;
+    text-align: center;
 
-#blue-layout small .invalid {
-  border: none !important;
-}
+    margin-top: 10px;
 
-.editor-option {
-  margin-left: 15px;
+    cursor: pointer;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  #blue-layout .editor-select .invalid {
+    border: none;
+    border-bottom: 1px solid #F44336;
+  }
 
-.editor-select:focus {
-  outline: none !important;
-}
+  #blue-layout small .invalid {
+    border: none !important;
+  }
 
-.editor-btns {
-  width: 100%;
-  margin-top: 20px;
+  .editor-option {
+    margin-left: 15px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.editor-btn {
-  width: 28%;
-}
+  .editor-select:focus {
+    outline: none !important;
+  }
+
+  .editor-btns {
+    width: 100%;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .editor-btn {
+    width: 28%;
+  }
 </style>

@@ -572,6 +572,14 @@ export default {
 </script>
 
 <style scoped>
+  .app-content section {
+    height: 70vh;
+
+    overflow-y: auto;
+
+    padding-bottom: 15px;
+  }
+
   .editor-title{
     display: flex;
     align-items: center;

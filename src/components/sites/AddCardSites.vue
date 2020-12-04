@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitSites" class="button-container" >
-    <div class="input-field input-field-blue">
+    <div class="input-field input-field-blue input-field-add">
       <input
         class="input-add"
         type="text"
