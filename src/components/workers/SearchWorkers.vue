@@ -331,6 +331,7 @@
     <div class="editor-btns">
       <button
         class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        v-on:click="search()"
       >
         <i class="material-icons">search</i> Поиск
       </button>
@@ -343,6 +344,11 @@ import M from 'materialize-css'
 
 export default {
   name: 'SearchWorkers',
+  methods: {
+    search () {
+      M.toast({ html: 'Поиск временно не работает' })
+    }
+  },
   mounted () {
     const collapsible = document.querySelectorAll('.collapsible')
     collapsible.forEach((element) => {
