@@ -10,7 +10,6 @@
 
     <nav class="navbar blue darken-1 ">
       <div class="navbar-left">
-        <span class="white-text"></span>
       </div>
 
       <ul class="right hide-on-small-and-down">
