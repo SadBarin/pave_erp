@@ -10,13 +10,14 @@
           <div>
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
-                <li class="editor-card blue darken-1 white-text">
+                <li class="editor-card blue darken-1 white-text active">
                   <div class="collapsible-header blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
                   <div class="collapsible-body blue">
                     <div class="input-field editor-input">
                       <input
                         id="name"
                         type="text"
+                        v-model.trim="searchName"
                       >
                       <label class="active" for="name">Имя</label>
                     </div>
@@ -39,287 +40,290 @@
                   </div>
                 </li>
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
-                  <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        class="datepicker"
-                        id="birthday"
-                        type="text"
-                      >
-                      <label class="active" for="birthday">Дата Рождения</label>
-                    </div>
+<!--                <li class="editor-card blue darken-1 white-text">-->
+<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>-->
+<!--                  <div class="collapsible-body blue">-->
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        class="datepicker"-->
+<!--                        id="birthday"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="birthday">Дата Рождения</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="sex"
-                      >
-                        <option class="editor-option" value="1">Мужской</option>
-                        <option class="editor-option" value="2">Женский</option>
-                      </select>
-                      <label class="active">Биологический Пол</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <select-->
+<!--                        class="browser-default editor-select"-->
+<!--                        id="sex"-->
+<!--                      >-->
+<!--                        <option class="editor-option" value="1">Мужской</option>-->
+<!--                        <option class="editor-option" value="2">Женский</option>-->
+<!--                      </select>-->
+<!--                      <label class="active">Биологический Пол</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="nationality"
-                        type="text"
-                      >
-                      <label class="active" for="nationality">Национальность</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="nationality"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="nationality">Национальность</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="medicalBook"
-                        type="text"
-                      >
-                      <label class="active" for="medicalBook">Медицинская Книга</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="medicalBook"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="medicalBook">Медицинская Книга</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="education"
-                        type="text"
-                      >
-                      <label class="active" for="education">Образование</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="education"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="education">Образование</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="university"
-                        type="text"
-                      >
-                      <label class="active" for="university">ВУЗ</label>
-                    </div>
-                  </div>
-                </li>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="university"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="university">ВУЗ</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>
-                  <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportID"
-                        type="text"
-                      >
-                      <label class="active" for="PassportID">Номер Паспорта</label>
-                    </div>
+<!--                <li class="editor-card blue darken-1 white-text">-->
+<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
+<!--                  <div class="collapsible-body blue">-->
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="passportID"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="PassportID">Номер Паспорта</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportDate"
-                        class="datepicker"
-                        type="text"
-                      >
-                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="passportDate"-->
+<!--                        class="datepicker"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportIssued"
-                        type="text"
-                      >
-                      <label class="active" for="passportIssued">Кем выдан</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="passportIssued"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="passportIssued">Кем выдан</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="registration"
-                        type="text"
-                      >
-                      <label class="active" for="registration">Прописка</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="registration"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="registration">Прописка</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="address"
-                        type="text"
-                      >
-                      <label class="active" for="address">Адрес</label>
-                    </div>
-                  </div>
-                </li>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="address"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="address">Адрес</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>
-                  <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="nameCard"
-                        type="text"
-                      >
-                      <label class="active" for="nameCard">Имя Держателя Карты</label>
-                    </div>
+<!--                <li class="editor-card blue darken-1 white-text">-->
+<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
+<!--                  <div class="collapsible-body blue">-->
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="nameCard"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="nameCard">Имя Держателя Карты</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="surnameCard"
-                        type="text"
-                      >
-                      <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="surnameCard"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="surnameCard">Фамилия Держателя Карты</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="patronymicCard"
-                        type="text"
-                      >
-                      <label class="active" for="patronymicCard">Отчество Держателя Карты</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="patronymicCard"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="patronymicCard">Отчество Держателя Карты</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="accountNumberCard"
-                        type="text"
-                      >
-                      <label class="active" for="accountNumberCard">Номер Счёта</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="accountNumberCard"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="accountNumberCard">Номер Счёта</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="bank"
-                      >
-                        <option class="editor-option" value="1">СберБанк</option>
-                        <option class="editor-option" value="2">Банк ВТБ</option>
-                        <option class="editor-option" value="3">Газпромбанк</option>
-                        <option class="editor-option" value="4">Национальный Клиринговый Центр</option>
-                        <option class="editor-option" value="5">Альфа-Банк</option>
-                        <option class="editor-option" value="6">Россельхозбанк</option>
-                        <option class="editor-option" value="7">Московский Кредитный Банк</option>
-                        <option class="editor-option" value="8">Банк «Открытие»</option>
-                        <option class="editor-option" value="9">Совкомбанк</option>
-                        <option class="editor-option" value="10">Росбанк</option>
-                        <option class="editor-option" value="11">Тинькофф Банк</option>
-                      </select>
-                      <label class="active">Банк</label>
-                    </div>
-                  </div>
-                </li>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <select-->
+<!--                        class="browser-default editor-select"-->
+<!--                        id="bank"-->
+<!--                      >-->
+<!--                        <option class="editor-option" value="1">СберБанк</option>-->
+<!--                        <option class="editor-option" value="2">Банк ВТБ</option>-->
+<!--                        <option class="editor-option" value="3">Газпромбанк</option>-->
+<!--                        <option class="editor-option" value="4">Национальный Клиринговый Центр</option>-->
+<!--                        <option class="editor-option" value="5">Альфа-Банк</option>-->
+<!--                        <option class="editor-option" value="6">Россельхозбанк</option>-->
+<!--                        <option class="editor-option" value="7">Московский Кредитный Банк</option>-->
+<!--                        <option class="editor-option" value="8">Банк «Открытие»</option>-->
+<!--                        <option class="editor-option" value="9">Совкомбанк</option>-->
+<!--                        <option class="editor-option" value="10">Росбанк</option>-->
+<!--                        <option class="editor-option" value="11">Тинькофф Банк</option>-->
+<!--                      </select>-->
+<!--                      <label class="active">Банк</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
-                  <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="homePhone"
-                        type="text"
-                      >
-                      <label class="active" for="homePhone">Телефон Домашний</label>
-                    </div>
+<!--                <li class="editor-card blue darken-1 white-text">-->
+<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>-->
+<!--                  <div class="collapsible-body blue">-->
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="homePhone"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="homePhone">Телефон Домашний</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="mobilePhone"
-                        type="text"
-                      >
-                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
-                    </div>
-                  </div>
-                </li>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="mobilePhone"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="mobilePhone">Телефон Мобильный</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
-                  <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="accountNumber"
-                        type="text"
-                      >
-                      <label class="active" for="accountNumber">Учётный номер</label>
-                    </div>
+<!--                <li class="editor-card blue darken-1 white-text">-->
+<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>-->
+<!--                  <div class="collapsible-body blue">-->
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="accountNumber"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="accountNumber">Учётный номер</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="number"
-                        type="text"
-                      >
-                      <label class="active" for="number">Номер</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="number"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="number">Номер</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="previousWork"
-                        type="text"
-                      >
-                      <label class="active" for="previousWork">Прежняя Работа</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="previousWork"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="previousWork">Прежняя Работа</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="reasonComing"
-                        type="text"
-                      >
-                      <label class="active" for="reasonComing">Почему пришел к нам</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="reasonComing"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="reasonComing">Почему пришел к нам</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="professions"
-                        type="text"
-                      >
-                      <label class="active" for="professions">Профессии</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="professions"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="professions">Профессии</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="nightShift"
-                        class="browser-default editor-select"
-                      >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
-                      </select>
-                      <label class="active">Ночная</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <select-->
+<!--                        id="nightShift"-->
+<!--                        class="browser-default editor-select"-->
+<!--                      >-->
+<!--                        <option class="editor-option" value="1">Да</option>-->
+<!--                        <option class="editor-option" value="2">Нет</option>-->
+<!--                      </select>-->
+<!--                      <label class="active">Ночная</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="checkMVD"
-                        class="browser-default editor-select"
-                      >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
-                      </select>
-                      <label class="active">Проверка МВД</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <select-->
+<!--                        id="checkMVD"-->
+<!--                        class="browser-default editor-select"-->
+<!--                      >-->
+<!--                        <option class="editor-option" value="1">Да</option>-->
+<!--                        <option class="editor-option" value="2">Нет</option>-->
+<!--                      </select>-->
+<!--                      <label class="active">Проверка МВД</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="dateInterview"
-                        class="datepicker"
-                        type="text"
-                      >
-                      <label class="active" for="dateInterview">Дата Собеседования</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="dateInterview"-->
+<!--                        class="datepicker"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="dateInterview">Дата Собеседования</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="uniform"
-                        type="text"
-                      >
-                      <label class="active" for="uniform">Униформа</label>
-                    </div>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <input-->
+<!--                        id="uniform"-->
+<!--                        type="text"-->
+<!--                      >-->
+<!--                      <label class="active" for="uniform">Униформа</label>-->
+<!--                    </div>-->
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="fired"
-                        class="browser-default editor-select"
-                      >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
-                      </select>
-                      <label class="active">Уволен</label>
-                    </div>
-                  </div>
-                </li>
+<!--                    <div class="input-field editor-input">-->
+<!--                      <select-->
+<!--                        id="fired"-->
+<!--                        class="browser-default editor-select"-->
+<!--                      >-->
+<!--                        <option class="editor-option" value="1">Да</option>-->
+<!--                        <option class="editor-option" value="2">Нет</option>-->
+<!--                      </select>-->
+<!--                      <label class="active">Уволен</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </li>-->
               </ul>
 
               <div class="col s12 black-text">
                 <h4 class="title">Найдено:</h4>
                 <div>
-                  <h6>Тут будут отображаться найденные карты</h6>
+                  <ListWorkers
+                    v-bind:workers="searchWorkers"
+                    @remove-worker="removeWorker"
+                  />
                 </div>
               </div>
             </form>
@@ -341,15 +345,54 @@
 
 <script>
 import M from 'materialize-css'
+import ListWorkers from '@/components/workers/ListWorkers'
 
 export default {
   name: 'SearchWorkers',
+  components: { ListWorkers },
+  data () {
+    return {
+      workers: [],
+
+      searchName: '',
+      searchWorkers: ''
+    }
+  },
   methods: {
     search () {
-      M.toast({ html: 'Поиск временно не работает' })
+      this.searchWorkers = this.workers.filter(worker => worker.name === this.searchName)
+      console.log(this.searchName)
+      console.log(this.searchWorkers)
+    },
+
+    removeWorker (id) {
+      this.workers = this.workers.filter(worker => worker.id !== id)
+      this.saveCollection(this.workers, 'workers')
+    },
+
+    addWorker (worker) {
+      this.workers.push(worker)
+      this.saveCollection(this.workers, 'workers')
+    },
+
+    saveCollection (collection, collectionName) {
+      const parsed = JSON.stringify(collection)
+      localStorage.setItem(collectionName, parsed)
+    },
+
+    updateCollection (collectionName) {
+      if (localStorage.getItem(collectionName)) {
+        try {
+          this.workers = JSON.parse(localStorage.getItem(collectionName))
+        } catch (e) {
+          localStorage.removeItem(collectionName)
+        }
+      }
     }
   },
   mounted () {
+    this.updateCollection('workers')
+
     const collapsible = document.querySelectorAll('.collapsible')
     collapsible.forEach((element) => {
       M.Collapsible.init(element)
