@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="workers_section">
     <CardWorkers
       v-for="worker of workers"
       :key="worker.id"

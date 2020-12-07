@@ -31,7 +31,7 @@
 
             <button class="btn-flat waves-effect waves-red auth-submit white-text"
                     v-if="!worker.edited"
-                    v-on:click="popupVisibility"
+                    v-on:click.prevent="popupVisibility"
             >
               <i class="material-icons">delete</i> Удалить
             </button>

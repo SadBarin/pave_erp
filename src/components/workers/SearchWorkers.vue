@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="search">
     <div class="page-title editor-title">
       <h3>Поиск рабочих</h3>
     </div>
@@ -26,6 +26,7 @@
                       <input
                         id="surname"
                         type="text"
+                        v-model.trim="searchSurname"
                       >
                       <label class="active" for="surname">Фамилия</label>
                     </div>
@@ -34,6 +35,7 @@
                       <input
                         id="patronymic"
                         type="text"
+                        v-model.trim="searchPatronymic"
                       >
                       <label class="active" for="patronymic">Отчество</label>
                     </div>
@@ -321,9 +323,14 @@
                 <h4 class="title">Найдено:</h4>
                 <div>
                   <ListWorkers
+                    v-if="searchWorkers.length"
                     v-bind:workers="searchWorkers"
                     @remove-worker="removeWorker"
                   />
+
+                  <h6 v-if="!searchWorkers.length">
+                    <i class="material-icons">mood_bad</i> Ничего не найдено
+                  </h6>
                 </div>
               </div>
             </form>
@@ -335,7 +342,7 @@
     <div class="editor-btns">
       <button
         class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="search()"
+        v-on:click="searchAll()"
       >
         <i class="material-icons">search</i> Поиск
       </button>
@@ -355,14 +362,37 @@ export default {
       workers: [],
 
       searchName: '',
+      searchSurname: '',
+      searchPatronymic: '',
       searchWorkers: ''
     }
   },
   methods: {
-    search () {
-      this.searchWorkers = this.workers.filter(worker => worker.name === this.searchName)
-      console.log(this.searchName)
-      console.log(this.searchWorkers)
+    searching (obj, searchObj) {
+      return function (key, searchKey) {
+        searchObj = obj.filter(worker => worker.name === searchKey || console.log(worker.name))
+      }
+    },
+
+    searchAll () {
+      // const searchingWorkers = this.searching(this.workers, this.searchWorkers)
+      // searchingWorkers('name', this.searchName)
+
+      if (this.searchName !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.name === this.searchName)
+      }
+
+      if (this.searchSurname !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.surname === this.searchSurname)
+      }
+
+      if (this.searchPatronymic !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.patronymic === this.searchPatronymic)
+      }
+
+      if (this.searchWorkers.length === 0) {
+        M.toast({ html: 'Ничего не найдено.' })
+      }
     },
 
     removeWorker (id) {
@@ -561,5 +591,13 @@ export default {
 
   .editor-btn {
     width: 28%;
+  }
+
+  #search .workers_section {
+    height: auto;
+    width: auto;
+
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
