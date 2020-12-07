@@ -68,6 +68,7 @@ export default {
 
       for (const city of this.sites) {
         if (city.cityName === undefined) continue
+        // TODO Переносим всё это в отдельную дерективу
         if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
           this.coincidence = true
           break

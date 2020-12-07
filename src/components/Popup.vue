@@ -26,6 +26,7 @@
 </template>
 
 <script>
+// TODO следует использовать slot
 export default {
   name: 'Popup',
   props: ['popupTitle', 'popupToast'],
