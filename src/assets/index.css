@@ -1,5 +1,5 @@
 :root {
-  --navbar-height: 6vh;
+  --navbar-height: 7vh;
   --sidebar-width: 15vw;
   --padding-top-page: 35px;
   --page-title-height: 50px;
@@ -84,13 +84,13 @@ html, body {
 .app-content {
   padding: var(--padding-top-page);
 
-  position:relative;
+  position: relative;
 
-  transition:padding-left .3s;
+  transition: padding-left .3s;
 }
 
 .app-content section {
-  height: 76vh;
+  height: 74vh;
 
   overflow-y: auto;
 
@@ -172,11 +172,6 @@ html, body {
   align-items: center;
 }
 
-#toast-container {
-  right: 2rem !important;
-  top: calc(12vh + 2rem) !important;
-}
-
 #blue-layout .dropdown-content li > a,
 #blue-layout .dropdown-content li > span {
   color: #1e88e5;
@@ -189,6 +184,10 @@ html, body {
 
 /*Input*/
 
+#blue-layout .input-field {
+  min-width: 300px;
+}
+
 #blue-layout .input-field input:focus + label {
   color: #1e88e5;
 }
@@ -196,6 +195,17 @@ html, body {
 #blue-layout .input-field input:focus {
   border-bottom: 1px solid #1e88e5;
   box-shadow: 0 1px 0 0 #1e88e5;
+}
+
+/*Toast*/
+
+#toast-container {
+  right: var(--padding-top-page) !important;
+  top: calc(var(--padding-top-page) + var(--navbar-height) - 4px) !important;
+}
+
+#toast-container .toast {
+  background: rgba(25, 118, 210);
 }
 
 /*Datepicker*/

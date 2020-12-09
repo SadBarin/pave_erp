@@ -29,7 +29,7 @@
       </small>
     </div>
 
-    <button class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text" type="submit">
+    <button class="btn-flat waves-effect waves-light auth-submit blue darken-2 white-text" type="submit">
       <i class="material-icons">add</i> Добавить рабочего
     </button>
   </form>

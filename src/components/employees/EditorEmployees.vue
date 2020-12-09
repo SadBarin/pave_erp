@@ -169,14 +169,14 @@
 
     <div class="editor-btns">
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
         v-on:click="editorCollection(employees, sites)"
       >
         <i class="material-icons">create</i> Редактировать
       </button>
 
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
         v-on:click="popupVisibility"
       >
         <i class="material-icons">arrow_back</i> Вернуться назад
@@ -453,7 +453,7 @@ export default {
 
   .editor-btns {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 18px;
 
     display: flex;
     justify-content: space-between;

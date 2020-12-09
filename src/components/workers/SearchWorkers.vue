@@ -11,7 +11,8 @@
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
                 <li class="editor-card blue darken-1 white-text active">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
+                  <div class="collapsible-header blue darken-2"><i class="material-icons">account_box</i>ФИО</div>
+
                   <div class="collapsible-body blue">
                     <div class="input-field editor-input">
                       <input
@@ -330,7 +331,7 @@
 
     <div class="editor-btns">
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
         v-on:click="searchAll()"
       >
         <i class="material-icons">search</i> Поиск
@@ -566,7 +567,7 @@ export default {
 
   .editor-btns {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 18px;
 
     display: flex;
     justify-content: space-between;

@@ -21,20 +21,20 @@
             </p>
           </div>
           <div class="button-container">
-            <button class="btn-flat waves-effect waves-light auth-submit white-text"
+            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
                          v-on:click="editedCityStatus"
                          v-if="!city.edited"
             >
               <i class="material-icons">create</i> Редактировать
             </button>
-            <router-link class="btn-flat waves-effect waves-light auth-submit blue-text text-lighten-3"
+            <router-link class="btn-flat blue darken-2 waves-effect waves-light auth-submit blue-text text-lighten-3"
                          to="/sites/editor"
                          v-if="city.edited"
             >
               <i class="material-icons">border_color</i> Редактировать принудительно
             </router-link>
 
-            <button class="btn-flat waves-effect waves-red auth-submit white-text"
+            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
                     v-if="!city.edited"
                     v-on:click="popupVisibility"
             >

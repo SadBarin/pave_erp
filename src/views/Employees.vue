@@ -5,7 +5,7 @@
         <h3>Список сотрудников</h3>
 
         <div class="title-btn-container">
-          <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light"
+          <button class="btn-floating btn-title blue darken-2 waves-effect waves-circle waves-light"
                   onclick="M.toast({html: 'Сотрудники обновлены'})"
                   v-on:click="updateCollection('employees')"
           ><i class="material-icons">autorenew</i>

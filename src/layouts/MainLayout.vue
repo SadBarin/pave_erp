@@ -8,14 +8,18 @@
       v-bind:popup-toast="'Вы вышли из системы'"
     />
 
-    <nav class="navbar blue darken-1 ">
+    <nav class="navbar blue darken-1">
       <div class="navbar-left">
+        <button
+          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text">
+          <i class="material-icons">menu</i>
+        </button>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
           <button
-            class="btn-flat waves-effect waves-light auth-submit white-text"
+            class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
             v-on:click="popupVisibility">
             <i class="material-icons">arrow_back</i> Выйти
           </button>
@@ -72,4 +76,7 @@ export default {
 </script>
 
 <style scoped>
+  .navbar-left .material-icons {
+    margin: 0;
+  }
 </style>
