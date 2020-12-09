@@ -43,7 +43,15 @@ export default {
   components: { ListWorkers, AddCardWorkers },
   data () {
     return {
-      workers: [],
+      workers: [
+        { id: 1, name: 'Горбачев', surname: 'Артём', patronymic: 'Михайлович', accountNumber: '', mobilePhone: 705878898351, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 2, name: 'Королев', surname: 'Максим', patronymic: 'Дмитриевич', accountNumber: '', mobilePhone: 7275590082, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 3, name: 'Гаврилов', surname: 'Юрий', patronymic: 'Семёнович', accountNumber: '', mobilePhone: 77929469057, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 4, name: 'Белов', surname: 'Илья', patronymic: 'Александрович', accountNumber: '', mobilePhone: 73548930214, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 5, name: 'Абрамова', surname: 'Алиса', patronymic: 'Макаровна', accountNumber: '', mobilePhone: 764871391671, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 6, name: 'Попов', surname: 'Михаил', patronymic: 'Сергеевич', accountNumber: '', mobilePhone: 7318852304, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false },
+        { id: 7, name: 'Дубровина', surname: 'Майя', patronymic: 'Тимуровна', accountNumber: '', mobilePhone: 7981979618, nameCard: '', surnameCard: '', patronymicCard: '', accountNumberCard: '', bank: '', birthday: '', sex: '', nationality: '', passportID: '', passportDate: '', passportIssued: '', registration: '', address: '', homePhone: '', number: '3462325235235', medicalBook: '', education: '', university: '', previousWork: '', reasonComing: '', professions: '', nightShift: '', checkMVD: '', dateInterview: '', uniform: '', fired: '', edited: false }
+      ],
 
       updateTimeout: 60000
     }
@@ -75,6 +83,7 @@ export default {
     }
   },
   mounted () {
+    this.saveCollection(this.workers, 'workers')
     this.updateCollection('workers')
     setInterval(() => this.updateCollection('workers'), this.updateTimeout)
   }

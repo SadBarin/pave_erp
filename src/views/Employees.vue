@@ -40,7 +40,9 @@ export default {
   components: { ListEmployees, AddCardEmployees },
   data () {
     return {
-      employees: [],
+      employees: [
+        { id: 1, email: 'admin@admin.com', password: 'admin2020best', name: 'Захаров', surname: 'Иван', patronymic: 'Михайлович', homePhone: '', mobilePhone: '71272309753', city: 'Ульяновск', duty: 'Админ всея админства', access: 'true', edited: false }
+      ],
 
       updateTimeout: 60000
     }
@@ -72,6 +74,7 @@ export default {
     }
   },
   mounted () {
+    this.saveCollection(this.employees, 'employees')
     this.updateCollection('employees')
     setInterval(() => this.updateCollection('employees'), this.updateTimeout)
   }

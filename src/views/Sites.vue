@@ -40,7 +40,15 @@ export default {
   components: { ListSites, AddCardSites },
   data () {
     return {
-      sites: [],
+      sites: [
+        { id: 1, cityName: 'Самара', employees: 0, edited: false },
+        { id: 2, cityName: 'Казань', employees: 0, edited: false },
+        { id: 3, cityName: 'Москва', employees: 0, edited: false },
+        { id: 4, cityName: 'Ульяновск', employees: 0, edited: false },
+        { id: 5, cityName: 'Набережные Челны', employees: 0, edited: false },
+        { id: 6, cityName: 'Красноярск', employees: 0, edited: false },
+        { id: 7, cityName: 'Оренбург', employees: 0, edited: false }
+      ],
 
       updateTimeout: 60000
     }
@@ -48,7 +56,6 @@ export default {
   methods: {
     removeCity (id) {
       this.sites = this.sites.filter(city => city.id !== id)
-      this.saveCollection(this.sites, 'sites')
     },
 
     addCity (city) {
@@ -72,6 +79,7 @@ export default {
     }
   },
   mounted () {
+    this.saveCollection(this.sites, 'sites')
     this.updateCollection('sites')
     setInterval(() => this.updateCollection('sites'), this.updateTimeout)
   }

@@ -85,7 +85,6 @@ export default {
           number: Date.now(),
           nameCard: '',
           surnameCard: '',
-          patronymicCard: '',
           accountNumberCard: '',
           bank: '',
           birthday: '',

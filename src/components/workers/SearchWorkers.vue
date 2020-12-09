@@ -47,7 +47,6 @@
 <!--                  <div class="collapsible-body blue">-->
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
-<!--                        class="datepicker"-->
 <!--                        id="birthday"-->
 <!--                        type="text"-->
 <!--                      >-->
@@ -113,7 +112,6 @@
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
 <!--                        id="passportDate"-->
-<!--                        class="datepicker"-->
 <!--                        type="text"-->
 <!--                      >-->
 <!--                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>-->
@@ -166,18 +164,10 @@
 
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
-<!--                        id="patronymicCard"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="patronymicCard">Отчество Держателя Карты</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
 <!--                        id="accountNumberCard"-->
 <!--                        type="text"-->
 <!--                      >-->
-<!--                      <label class="active" for="accountNumberCard">Номер Счёта</label>-->
+<!--                      <label class="active" for="accountNumberCard">Номер Карты</label>-->
 <!--                    </div>-->
 
 <!--                    <div class="input-field editor-input">-->
@@ -291,7 +281,6 @@
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
 <!--                        id="dateInterview"-->
-<!--                        class="datepicker"-->
 <!--                        type="text"-->
 <!--                      >-->
 <!--                      <label class="active" for="dateInterview">Дата Собеседования</label>-->
@@ -426,11 +415,6 @@ export default {
     const collapsible = document.querySelectorAll('.collapsible')
     collapsible.forEach((element) => {
       M.Collapsible.init(element)
-    })
-
-    const datepicker = document.querySelectorAll('.datepicker')
-    datepicker.forEach((element) => {
-      M.Datepicker.init(element)
     })
   }
 }

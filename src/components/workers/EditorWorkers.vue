@@ -56,7 +56,6 @@
 
                     <div class="input-field editor-input">
                       <input
-                        class="datepicker"
                         id="birthday"
                         type="text"
                         v-model.trim="editedBirthday"
@@ -73,7 +72,7 @@
                         <option class="editor-option" value="1">Мужской</option>
                         <option class="editor-option" value="2">Женский</option>
                       </select>
-                      <label class="active">Биологический Пол</label>
+                      <label class="active">Пол</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -130,7 +129,6 @@
                     <div class="input-field editor-input">
                       <input
                         id="passportDate"
-                        class="datepicker"
                         type="text"
                         v-model.trim="editedPassportDate"
                       >
@@ -189,20 +187,11 @@
 
                     <div class="input-field editor-input">
                       <input
-                        id="patronymicCard"
-                        type="text"
-                        v-model.trim="editedPatronymicCard"
-                      >
-                      <label class="active" for="patronymicCard">Отчество Держателя Карты</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
                         id="accountNumberCard"
                         type="text"
                         v-model.trim="editedAccountNumberCard"
                       >
-                      <label class="active" for="accountNumberCard">Номер Счёта</label>
+                      <label class="active" for="accountNumberCard">Номер Карты</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -327,7 +316,6 @@
                     <div class="input-field editor-input">
                       <input
                         id="dateInterview"
-                        class="datepicker"
                         type="text"
                         v-model.trim="editedDateInterview"
                       >
@@ -414,7 +402,6 @@ export default {
       editedNumber: '',
       editedNameCard: '',
       editedSurnameCard: '',
-      editedPatronymicCard: '',
       editedAccountNumberCard: '',
       editedBank: '',
       editedBirthday: '',
@@ -475,7 +462,6 @@ export default {
       this.editedNumber = collection[this.searchIndex(collection)].number
       this.editedNameCard = collection[this.searchIndex(collection)].nameCard
       this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
-      this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
       this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
       this.editedBank = collection[this.searchIndex(collection)].bank
       this.editedBirthday = collection[this.searchIndex(collection)].birthday
@@ -509,7 +495,6 @@ export default {
       collection[this.searchIndex(collection)].number = this.editedNumber
       collection[this.searchIndex(collection)].nameCard = this.editedNameCard
       collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
-      collection[this.searchIndex(collection)].patronymicCard = this.editedPatronymicCard
       collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
       collection[this.searchIndex(collection)].bank = this.editedBank
       collection[this.searchIndex(collection)].birthday = this.editedBirthday
@@ -559,11 +544,6 @@ export default {
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
-    })
-
-    const datepicker = document.querySelectorAll('.datepicker')
-    datepicker.forEach((element) => {
-      M.Datepicker.init(element)
     })
 
     this.outputCollection(this.workers)
