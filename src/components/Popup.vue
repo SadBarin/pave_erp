@@ -5,7 +5,7 @@
         <span class="card-title">{{popupTitle}}<br></span>
       </div>
 
-      <div class="card-action btn-popup">
+      <div class="card-action btns-popup">
         <button
           class="btn-flat white-text waves-effect waves-light auth-submit blue darken-2"
           v-on:click.prevent="$emit('yes')"
@@ -60,6 +60,7 @@ export default {
   }
 
   .popup {
+    border-radius: 10px;
     width: 240px !important;
 
     text-align: center;
@@ -73,8 +74,14 @@ export default {
     font-size: 1.1rem;
   }
 
-  .btn-popup {
+  .btns-popup {
+    border-radius: 10px !important;
+
     display: flex;
     justify-content: space-between;
+  }
+
+  .btn-flat {
+    border-radius: 10px;
   }
 </style>

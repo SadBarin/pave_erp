@@ -32,7 +32,7 @@
         <router-link class="waves-effect waves-blue pointer" to="/sites"><i class="material-icons">location_city</i> Города</router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/employees"><i class="material-icons">group</i> Сотрудники</router-link>
+        <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees"><i class="material-icons">group</i> Сотрудники</router-link>
       </li>
       <li>
         <router-link class="waves-effect waves-blue pointer" to="/workers"><i class="material-icons">transfer_within_a_station</i> Рабочие</router-link>

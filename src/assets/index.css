@@ -3,6 +3,7 @@
   --sidebar-width: 15vw;
   --padding-top-page: 35px;
   --page-title-height: 50px;
+  --border-radius: 10px;
 }
 
 @font-face {
@@ -95,6 +96,7 @@ html, body {
   overflow-y: auto;
 
   padding-bottom: 15px;
+  padding-right: var(--border-radius);
 }
 
 .container-page {
@@ -149,7 +151,10 @@ html, body {
   padding: 0px !important;
 }
 
-#blue-layout .card-panel .card {
+#blue-layout .card-panel,
+#blue-layout .card {
+  border-radius: var(--border-radius) !important;
+
   margin-bottom: 0.8rem;
 }
 
@@ -166,7 +171,9 @@ html, body {
   align-items: center;
 }
 
-.btn, .btn-flat {
+.btn, .btn-flat, .btn-floating {
+  border-radius: var(--border-radius) !important;
+
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -205,7 +212,8 @@ html, body {
 }
 
 #toast-container .toast {
-  background: rgba(25, 118, 210);
+  background-color: #369df1;
+  border-radius: var(--border-radius);
 }
 
 /*Datepicker*/
@@ -233,6 +241,25 @@ html, body {
 .datepicker-cancel,
 .datepicker-done{
   color: #1e88e5 !important;
+}
+
+/*Waves*/
+.waves-effect.waves-blue .waves-ripple {
+  background-color: rgba(30, 136, 229, 0.3);
+}
+
+.waves-blue:hover {
+  background-color: rgba(30, 136, 229, 0.3) !important;
+}
+
+/*Card*/
+.card-action{
+  border: none !important;
+  border-radius: var(--border-radius);
+}
+
+.card .card-action:last-child {
+  border-radius: var(--border-radius) !important;
 }
 
 @media (max-width: 1300px) {
