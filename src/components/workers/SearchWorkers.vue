@@ -318,9 +318,36 @@
                     @remove-worker="removeWorker"
                   />
 
-                  <h6 v-if="!searchWorkers.length">
-                    <i class="material-icons">mood_bad</i> Ничего не найдено
-                  </h6>
+                  <table class="search-table">
+                    <tr>
+                      <th>Имя</th>
+                      <th>Фамилия</th>
+                      <th>Отчество</th>
+                      <th>Пол</th>
+                      <th>Возраст</th>
+                      <th>Мед.книжка</th>
+                      <th>Город</th>
+                      <th>Телефон</th>
+                      <th>Профессия</th>
+                      <th>Действие</th>
+                    </tr>
+                    <tr>
+                      <td>Олег</td>
+                      <td>Разин</td>
+                      <td>Степанович</td>
+                      <td>Мужской</td>
+                      <td>38 лет</td>
+                      <td>Да</td>
+                      <td>Москва</td>
+                      <td>7292322323</td>
+                      <td>Электрик</td>
+                      <td>
+                        <button class="btn-flat editor-btn search-button blue darken-2 waves-effect waves-light auth-submit white-text">
+                          <i class="material-icons">create</i> Редактировать
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </form>
@@ -329,9 +356,9 @@
       </div>
     </section>
 
-    <div class="editor-btns">
+    <div>
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
+        class="btn waves-effect waves-light auth-submit blue darken-2"
         v-on:click="searchAll()"
       >
         <i class="material-icons">search</i> Поиск
@@ -565,6 +592,10 @@ export default {
     outline: none !important;
   }
 
+  .search-table, td, th {
+    text-align: center;
+  }
+
   .editor-btns {
     width: 100%;
     margin-top: 18px;
@@ -575,7 +606,7 @@ export default {
   }
 
   .editor-btn {
-    width: 28%;
+    margin: 0 auto;
   }
 
   #search .workers_section {
