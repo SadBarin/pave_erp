@@ -11,7 +11,9 @@
     <nav class="navbar blue darken-1">
       <div class="navbar-left">
         <button
-          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text">
+          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+          v-on:click.prevent="isOpen = !isOpen"
+        >
           <i class="material-icons">menu</i>
         </button>
       </div>
@@ -27,7 +29,10 @@
       </ul>
     </nav>
 
-    <ul class="sidenav app-sidenav open">
+    <ul
+      class="sidenav app-sidenav"
+      v-bind:class="{open: isOpen}"
+    >
       <li>
         <router-link class="waves-effect waves-blue pointer" to="/sites"><i class="material-icons">location_city</i> Города</router-link>
       </li>
@@ -40,7 +45,10 @@
     </ul>
 
     <main class="app-content">
-      <div class="app-page">
+      <div
+        class="app-page"
+        v-bind:class="{full: !isOpen}"
+      >
         <router-view/>
       </div>
     </main>
@@ -56,7 +64,8 @@ export default {
   },
   data () {
     return {
-      popupShow: false
+      popupShow: false,
+      isOpen: true
     }
   },
   methods: {

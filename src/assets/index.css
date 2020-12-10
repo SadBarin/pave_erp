@@ -80,14 +80,18 @@ html, body {
 #blue-layout .app-page {
   padding-top: var(--navbar-height);
   padding-left: var(--sidebar-width);
+
+  transition: padding-left .3s;
+}
+
+#blue-layout .app-page.full {
+  padding-left: 0px;
 }
 
 .app-content {
   padding: var(--padding-top-page);
 
   position: relative;
-
-  transition: padding-left .3s;
 }
 
 .app-content section {
