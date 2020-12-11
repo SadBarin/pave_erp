@@ -46,7 +46,7 @@
 
       <ul class="collapsible black-text form-content">
         <li class="white-text">
-          <div class="collapsible-header blue darken-2"><i class="material-icons">clear_all</i>Дополнительные функции входа</div>
+          <div class="collapsible-header blue darken-1"><i class="material-icons">clear_all</i>Дополнительные функции входа</div>
           <div class="collapsible-body white black-text">
             <label>
               <input type="checkbox" class="filled-in" v-model="localStorageClear"/>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="card-action">
-      <button type="submit" class="btn waves-effect waves-light auth-submit blue darken-1">
+      <button type="submit" class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text">
         <i class="material-icons">arrow_forward</i> Войти
       </button>
     </div>
