@@ -209,8 +209,13 @@ html, body {
 }
 
 /*Toast*/
-
 #toast-container {
+  background-color: rgba(30, 136, 229, 0.3);
+  border-radius: var(--border-radius);
+
+
+  padding: 10px;
+
   right: var(--padding-top-page) !important;
   top: calc(var(--padding-top-page) + var(--navbar-height) - 4px) !important;
 }
@@ -218,10 +223,10 @@ html, body {
 #toast-container .toast {
   background-color: #369df1;
   border-radius: var(--border-radius);
+  box-shadow: none !important;
 }
 
 /*Datepicker*/
-
 .datepicker-date-display {
   background-color: #1e88e5 !important;
 }
@@ -257,6 +262,11 @@ html, body {
 }
 
 /*Card*/
+.card,
+.card-panel {
+  box-shadow: none !important;
+}
+
 .card-action{
   border: none !important;
   border-radius: var(--border-radius);
