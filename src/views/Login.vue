@@ -44,13 +44,13 @@
         </small>
       </div>
 
-      <ul class="collapsible">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">clear_all</i>Дополнительные функции входа</div>
-          <div class="collapsible-body">
+      <ul class="collapsible black-text form-content">
+        <li class="white-text">
+          <div class="collapsible-header blue darken-2"><i class="material-icons">clear_all</i>Дополнительные функции входа</div>
+          <div class="collapsible-body white black-text">
             <label>
               <input type="checkbox" class="filled-in" v-model="localStorageClear"/>
-              <span>Удалить LocalStorage?</span>
+              <span class="collapsible-label">Удалить LocalStorage?</span>
             </label>
           </div>
         </li>
@@ -114,5 +114,9 @@ export default {
 <style>
   .auth-card {
     width: 500px;
+  }
+
+  .collapsible-label {
+    color: black !important;
   }
 </style>

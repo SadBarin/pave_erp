@@ -10,7 +10,7 @@
           <div>
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
-                <li class="editor-card blue darken-1 white-text active">
+                <li class="editor-card blue white-text active">
                   <div class="collapsible-header blue darken-2"><i class="material-icons">account_box</i>ФИО</div>
 
                   <div class="collapsible-body blue">

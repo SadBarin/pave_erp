@@ -266,6 +266,27 @@ html, body {
   border-radius: var(--border-radius) !important;
 }
 
+/*Collapsible*/
+.collapsible {
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: var(--border-radius);
+}
+
+.collapsible li,
+.collapsible-header,
+.collapsible-body {
+  border-radius: var(--border-radius);
+}
+
+.collapsible-header {
+  border-bottom: 0px !important;
+}
+
+.collapsible-body {
+  border-radius: var(--border-radius) var(--border-radius);
+}
+
 @media (max-width: 1300px) {
   #blue-layout .navbar {
     height: 30px;
