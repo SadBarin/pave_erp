@@ -312,12 +312,6 @@
               <div class="col s12 black-text">
                 <h4 class="title">Найдено:</h4>
                 <div>
-                  <ListWorkers
-                    v-if="searchWorkers.length"
-                    v-bind:workers="searchWorkers"
-                    @remove-worker="removeWorker"
-                  />
-
                   <table class="search-table">
                     <tr>
                       <th>Имя</th>
@@ -331,16 +325,16 @@
                       <th>Профессия</th>
                       <th>Действие</th>
                     </tr>
-                    <tr>
-                      <td>Олег</td>
-                      <td>Разин</td>
-                      <td>Степанович</td>
-                      <td>Мужской</td>
-                      <td>38 лет</td>
-                      <td>Да</td>
-                      <td>Москва</td>
-                      <td>7292322323</td>
-                      <td>Электрик</td>
+                    <tr v-for="worker in searchWorkers" :key="worker">
+                      <td>{{worker.name}}</td>
+                      <td>{{worker.surname}}</td>
+                      <td>{{worker.patronymic}}</td>
+                      <td>{{worker.sex}}</td>
+                      <td>{{worker.birthday}} лет</td>
+                      <td>{{worker.medicalBook}}</td>
+                      <td>{{worker.city}}</td>
+                      <td>{{worker.mobilePhone}}</td>
+                      <td>{{worker.professions}}</td>
                       <td>
                         <button class="btn-flat editor-btn search-button blue darken-2 waves-effect waves-light auth-submit white-text">
                           <i class="material-icons">create</i> Редактировать
@@ -369,11 +363,9 @@
 
 <script>
 import M from 'materialize-css'
-import ListWorkers from '@/components/workers/ListWorkers'
 
 export default {
   name: 'SearchWorkers',
-  components: { ListWorkers },
   data () {
     return {
       workers: [],
@@ -381,6 +373,7 @@ export default {
       searchName: '',
       searchSurname: '',
       searchPatronymic: '',
+
       searchWorkers: ''
     }
   },
@@ -394,6 +387,8 @@ export default {
     searchAll () {
       // const searchingWorkers = this.searching(this.workers, this.searchWorkers)
       // searchingWorkers('name', this.searchName)
+
+      this.searchWorkers = ''
 
       if (this.searchName !== '') {
         this.searchWorkers = this.workers.filter(worker => worker.name === this.searchName)
