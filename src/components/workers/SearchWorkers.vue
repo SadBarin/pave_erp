@@ -11,7 +11,7 @@
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
                 <li class="editor-card blue white-text active">
-                  <div class="collapsible-header blue darken-2"><i class="material-icons">account_box</i>ФИО</div>
+                  <div class="collapsible-header blue darken-2 blue darken-2"><i class="material-icons">account_box</i>ФИО</div>
 
                   <div class="collapsible-body blue">
                     <div class="input-field editor-input">
@@ -43,27 +43,30 @@
                   </div>
                 </li>
 
-<!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>-->
-<!--                  <div class="collapsible-body blue">-->
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="birthday"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="birthday">Дата Рождения</label>-->
-<!--                    </div>-->
+                <li class="editor-card blue darken-1 white-text">
+                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
+                  <div class="collapsible-body blue">
+                    <div class="input-field editor-input">
+                      <input
+                        id="age"
+                        type="number"
+                        v-model.trim="searchAge"
+                      >
+                      <label class="active" for="age">Возраст</label>
+                    </div>
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <select-->
-<!--                        class="browser-default editor-select"-->
-<!--                        id="sex"-->
-<!--                      >-->
-<!--                        <option class="editor-option" value="1">Мужской</option>-->
-<!--                        <option class="editor-option" value="2">Женский</option>-->
-<!--                      </select>-->
-<!--                      <label class="active">Биологический Пол</label>-->
-<!--                    </div>-->
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="sex"
+                        v-model.trim="searchSex"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" value="Мужской">Мужской</option>
+                        <option class="editor-option" value="Женский">Женский</option>
+                      </select>
+                      <label class="active">Биологический Пол</label>
+                    </div>
 
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -73,13 +76,18 @@
 <!--                      <label class="active" for="nationality">Национальность</label>-->
 <!--                    </div>-->
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="medicalBook"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="medicalBook">Медицинская Книга</label>-->
-<!--                    </div>-->
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="medicalBook"
+                        v-model.trim="searchMedicalBook"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" value="Есть">Есть</option>
+                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
+                      </select>
+                      <label class="active">Медицинская Книга</label>
+                    </div>
 
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -96,11 +104,11 @@
 <!--                      >-->
 <!--                      <label class="active" for="university">ВУЗ</label>-->
 <!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
+                  </div>
+                </li>
 
 <!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
+<!--                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
 <!--                  <div class="collapsible-body blue">-->
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -145,7 +153,7 @@
 <!--                </li>-->
 
 <!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
+<!--                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
 <!--                  <div class="collapsible-body blue">-->
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -193,9 +201,9 @@
 <!--                  </div>-->
 <!--                </li>-->
 
-<!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>-->
-<!--                  <div class="collapsible-body blue">-->
+                <li class="editor-card blue darken-1 white-text">
+                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
+                  <div class="collapsible-body blue">
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
 <!--                        id="homePhone"-->
@@ -206,17 +214,39 @@
 
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
-<!--                        id="mobilePhone"-->
+<!--                        id="city"-->
 <!--                        type="text"-->
+<!--                        v-model.trim="searchCity"-->
 <!--                      >-->
-<!--                      <label class="active" for="mobilePhone">Телефон Мобильный</label>-->
+<!--                      <label class="active" for="city">Город</label>-->
 <!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
 
-<!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>-->
-<!--                  <div class="collapsible-body blue">-->
+                    <div class="input-field editor-input">
+                      <select class="browser-default editor-select"
+                              v-model="searchCity"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                          {{ city.cityName }}
+                        </option>
+                      </select>
+                      <label class="active">Город</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="mobilePhone"
+                        type="tel"
+                        v-model.trim="searchMobilePhone"
+                      >
+                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="editor-card blue darken-1 white-text">
+                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
+                  <div class="collapsible-body blue">
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
 <!--                        id="accountNumber"-->
@@ -249,13 +279,17 @@
 <!--                      <label class="active" for="reasonComing">Почему пришел к нам</label>-->
 <!--                    </div>-->
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="professions"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="professions">Профессии</label>-->
-<!--                    </div>-->
+                    <div class="input-field editor-input">
+                      <select class="browser-default editor-select"
+                              v-model="searchProfessions"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
+                          {{ profession }}
+                        </option>
+                      </select>
+                      <label class="active">Профессии</label>
+                    </div>
 
 <!--                    <div class="input-field editor-input">-->
 <!--                      <select-->
@@ -305,8 +339,8 @@
 <!--                      </select>-->
 <!--                      <label class="active">Уволен</label>-->
 <!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
+                  </div>
+                </li>
               </ul>
 
               <div class="col s12 black-text">
@@ -330,7 +364,7 @@
                       <td>{{worker.surname}}</td>
                       <td>{{worker.patronymic}}</td>
                       <td>{{worker.sex}}</td>
-                      <td>{{worker.birthday}} лет</td>
+                      <td>{{worker.age}}</td>
                       <td>{{worker.medicalBook}}</td>
                       <td>{{worker.city}}</td>
                       <td>{{worker.mobilePhone}}</td>
@@ -369,30 +403,34 @@ export default {
   data () {
     return {
       workers: [],
+      sites: [],
 
       searchName: '',
       searchSurname: '',
       searchPatronymic: '',
+      searchAge: '',
+      searchCity: '',
+      searchMobilePhone: '',
+      searchProfessions: '',
+      searchSex: '',
+      searchMedicalBook: '',
 
       searchWorkers: ''
     }
   },
   methods: {
-    searching (obj, searchObj) {
+    searching (obj) {
       return function (key, searchKey) {
-        searchObj = obj.filter(worker => worker.name === searchKey || console.log(worker.name))
+        if (searchKey !== '') {
+          return obj.filter(worker => worker[key].toLowerCase() === searchKey.toLowerCase())
+        }
       }
     },
 
     searchAll () {
-      // const searchingWorkers = this.searching(this.workers, this.searchWorkers)
-      // searchingWorkers('name', this.searchName)
+      const searchingWorkers = this.searching(this.workers)
 
-      this.searchWorkers = ''
-
-      if (this.searchName !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.name === this.searchName)
-      }
+      this.searchWorkers = searchingWorkers('name', this.searchName)
 
       if (this.searchSurname !== '') {
         this.searchWorkers = this.workers.filter(worker => worker.surname === this.searchSurname)
@@ -402,9 +440,52 @@ export default {
         this.searchWorkers = this.workers.filter(worker => worker.patronymic === this.searchPatronymic)
       }
 
-      if (this.searchWorkers.length === 0) {
-        M.toast({ html: 'Ничего не найдено.' })
+      if (this.searchAge !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.age === this.searchAge)
       }
+
+      if (this.searchCity !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.city === this.searchCity)
+      }
+
+      if (this.searchCity !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.city === this.searchCity)
+      }
+
+      if (this.searchMobilePhone !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.mobilePhone === this.searchMobilePhone)
+      }
+
+      if (this.searchProfessions !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.professions === this.searchProfessions)
+      }
+
+      if (this.searchSex !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.sex === this.searchSex)
+      }
+
+      if (this.searchMedicalBook !== '') {
+        this.searchWorkers = this.workers.filter(worker => worker.medicalBook === this.searchMedicalBook)
+      }
+
+      if (this.searchWorkers.length === 0) {
+        M.toast({ html: 'Ничего не найдено!' })
+      } else {
+        M.toast({ html: `Найдено: ${this.searchWorkers.length}` })
+      }
+
+      this.searchingProfessions()
+    },
+
+    searchingProfessions () {
+      const professionsList = []
+      this.workers.forEach((worker) => {
+        if (professionsList.indexOf(worker.professions) === -1) {
+          professionsList.push(worker.professions)
+        }
+      })
+
+      return professionsList
     },
 
     removeWorker (id) {
@@ -434,6 +515,14 @@ export default {
   },
   mounted () {
     this.updateCollection('workers')
+
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
+    }
 
     const collapsible = document.querySelectorAll('.collapsible')
     collapsible.forEach((element) => {
