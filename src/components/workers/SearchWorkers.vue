@@ -18,7 +18,7 @@
                       <input
                         id="name"
                         type="text"
-                        v-model.trim="searchName"
+                        v-model.trim="searchInput.name"
                       >
                       <label class="active" for="name">Имя</label>
                     </div>
@@ -27,7 +27,7 @@
                       <input
                         id="surname"
                         type="text"
-                        v-model.trim="searchSurname"
+                        v-model.trim="searchInput.surname"
                       >
                       <label class="active" for="surname">Фамилия</label>
                     </div>
@@ -36,7 +36,7 @@
                       <input
                         id="patronymic"
                         type="text"
-                        v-model.trim="searchPatronymic"
+                        v-model.trim="searchInput.patronymic"
                       >
                       <label class="active" for="patronymic">Отчество</label>
                     </div>
@@ -50,7 +50,7 @@
                       <input
                         id="age"
                         type="number"
-                        v-model.trim="searchAge"
+                        v-model.trim="searchInput.age"
                       >
                       <label class="active" for="age">Возраст</label>
                     </div>
@@ -59,7 +59,7 @@
                       <select
                         class="browser-default editor-select"
                         id="sex"
-                        v-model.trim="searchSex"
+                        v-model.trim="searchInput.sex"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
                         <option class="editor-option" value="Мужской">Мужской</option>
@@ -80,7 +80,7 @@
                       <select
                         class="browser-default editor-select"
                         id="medicalBook"
-                        v-model.trim="searchMedicalBook"
+                        v-model.trim="searchInput.medicalBook"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
                         <option class="editor-option" value="Есть">Есть</option>
@@ -223,7 +223,7 @@
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
-                              v-model="searchCity"
+                              v-model="searchInput.city"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
                         <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
@@ -237,7 +237,7 @@
                       <input
                         id="mobilePhone"
                         type="tel"
-                        v-model.trim="searchMobilePhone"
+                        v-model.trim="searchInput.mobilePhone"
                       >
                       <label class="active" for="mobilePhone">Телефон Мобильный</label>
                     </div>
@@ -281,7 +281,7 @@
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
-                              v-model="searchProfessions"
+                              v-model="searchInput.professions"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
                         <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
@@ -405,15 +405,17 @@ export default {
       workers: [],
       sites: [],
 
-      searchName: '',
-      searchSurname: '',
-      searchPatronymic: '',
-      searchAge: '',
-      searchCity: '',
-      searchMobilePhone: '',
-      searchProfessions: '',
-      searchSex: '',
-      searchMedicalBook: '',
+      searchInput: {
+        name: '',
+        surname: '',
+        patronymic: '',
+        age: '',
+        city: '',
+        mobilePhone: '',
+        professions: '',
+        sex: '',
+        medicalBook: ''
+      },
 
       searchWorkers: ''
     }
@@ -428,50 +430,27 @@ export default {
     },
 
     searchAll () {
-      const searchingWorkers = this.searching(this.workers)
+      let bufferWorkers = this.workers
 
-      this.searchWorkers = searchingWorkers('name', this.searchName)
+      for (const input in this.searchInput) {
+        const searchingWorkers = this.searching(bufferWorkers)
 
-      if (this.searchSurname !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.surname === this.searchSurname)
+        const workers = searchingWorkers(input, this.searchInput[input])
+        if (workers !== undefined) {
+          bufferWorkers = workers
+        }
       }
 
-      if (this.searchPatronymic !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.patronymic === this.searchPatronymic)
-      }
+      this.searchWorkers = bufferWorkers
 
-      if (this.searchAge !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.age === this.searchAge)
-      }
+      try {
+        if (this.searchWorkers.length === 0) {
+          M.toast({ html: 'Ничего не найдено!' })
+        } else {
+          M.toast({ html: `Найдено: ${this.searchWorkers.length}` })
+        }
+      } catch (e) {
 
-      if (this.searchCity !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.city === this.searchCity)
-      }
-
-      if (this.searchCity !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.city === this.searchCity)
-      }
-
-      if (this.searchMobilePhone !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.mobilePhone === this.searchMobilePhone)
-      }
-
-      if (this.searchProfessions !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.professions === this.searchProfessions)
-      }
-
-      if (this.searchSex !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.sex === this.searchSex)
-      }
-
-      if (this.searchMedicalBook !== '') {
-        this.searchWorkers = this.workers.filter(worker => worker.medicalBook === this.searchMedicalBook)
-      }
-
-      if (this.searchWorkers.length === 0) {
-        M.toast({ html: 'Ничего не найдено!' })
-      } else {
-        M.toast({ html: `Найдено: ${this.searchWorkers.length}` })
       }
 
       this.searchingProfessions()
