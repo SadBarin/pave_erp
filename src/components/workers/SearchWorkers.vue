@@ -357,7 +357,7 @@
                       <th>Город</th>
                       <th>Телефон</th>
                       <th>Профессия</th>
-                      <th>Действие</th>
+<!--                      <th>Действие</th>-->
                     </tr>
                     <tr v-for="worker in searchWorkers" :key="worker">
                       <td>{{worker.name}}</td>
@@ -370,9 +370,9 @@
                       <td>{{worker.mobilePhone}}</td>
                       <td>{{worker.professions}}</td>
                       <td>
-                        <button class="btn-flat editor-btn search-button blue darken-2 waves-effect waves-light auth-submit white-text">
-                          <i class="material-icons">create</i> Редактировать
-                        </button>
+<!--                        <button class="btn-flat editor-btn search-button blue darken-2 waves-effect waves-light auth-submit white-text">-->
+<!--                          <i class="material-icons">create</i> Редактировать-->
+<!--                        </button>-->
                       </td>
                     </tr>
                   </table>
@@ -494,6 +494,7 @@ export default {
   },
   mounted () {
     this.updateCollection('workers')
+    this.searchWorkers = this.workers
 
     if (localStorage.getItem('sites')) {
       try {
