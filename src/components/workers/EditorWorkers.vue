@@ -226,6 +226,18 @@
                     <span class="card-title">Контактные данные</span>
 
                     <div class="input-field editor-input">
+                      <select class="browser-default editor-select"
+                              v-model="editedCity"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                          {{ city.cityName }}
+                        </option>
+                      </select>
+                      <label class="active">Город</label>
+                    </div>
+
+                    <div class="input-field editor-input">
                       <input
                         id="homePhone"
                         type="text"
@@ -429,6 +441,7 @@ export default {
       editedDateInterview: '',
       editedUniform: '',
       editedFired: '',
+      editedCity: '',
       editedEdited: false
     }
   },
@@ -489,6 +502,7 @@ export default {
       this.editedDateInterview = collection[this.searchIndex(collection)].dateInterview
       this.editedUniform = collection[this.searchIndex(collection)].uniform
       this.editedFired = collection[this.searchIndex(collection)].fired
+      this.editedCity = collection[this.searchIndex(collection)].city
     },
 
     editorCollection (collection, additionalCollection) {
@@ -522,6 +536,7 @@ export default {
       collection[this.searchIndex(collection)].dateInterview = this.editedDateInterview
       collection[this.searchIndex(collection)].uniform = this.editedUniform
       collection[this.searchIndex(collection)].fired = this.editedFired
+      collection[this.searchIndex(collection)].city = this.editedCity
 
       this.editorExit(collection)
     },
@@ -543,6 +558,14 @@ export default {
   },
   mounted () {
     this.updateCollection('workers')
+
+    if (localStorage.getItem('sites')) {
+      try {
+        this.sites = JSON.parse(localStorage.getItem('sites'))
+      } catch (e) {
+        localStorage.removeItem('sites')
+      }
+    }
 
     // TODO Сделать универсальную функцию
     const select = document.querySelectorAll('.select')

@@ -89,6 +89,7 @@ export default {
           bank: '',
           age: '',
           sex: '',
+          city: 'Отсутствует',
           nationality: '',
           passportID: '',
           passportDate: '',
