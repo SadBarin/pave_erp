@@ -56,11 +56,11 @@
 
                     <div class="input-field editor-input">
                       <input
-                        id="birthday"
+                        id="age"
                         type="text"
-                        v-model.trim="editedBirthday"
+                        v-model.trim="editedAge"
                       >
-                      <label class="active" for="birthday">Дата Рождения</label>
+                      <label class="active" for="age">Возраст</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -85,12 +85,16 @@
                     </div>
 
                     <div class="input-field editor-input">
-                      <input
+                      <select
+                        class="browser-default editor-select"
                         id="medicalBook"
-                        type="text"
-                        v-model.trim="editedMedicalBook"
+                        v-model="editedMedicalBook"
                       >
-                      <label class="active" for="medicalBook">Медицинская Книга</label>
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" value="Есть">Есть</option>
+                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
+                      </select>
+                      <label class="active">Медицинская Книга</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -404,7 +408,7 @@ export default {
       editedSurnameCard: '',
       editedAccountNumberCard: '',
       editedBank: '',
-      editedBirthday: '',
+      editedAge: '',
       editedSex: '',
       editedNationality: '',
       editedPassportID: '',
@@ -464,7 +468,7 @@ export default {
       this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
       this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
       this.editedBank = collection[this.searchIndex(collection)].bank
-      this.editedBirthday = collection[this.searchIndex(collection)].birthday
+      this.editedAge = collection[this.searchIndex(collection)].age
       this.editedSex = collection[this.searchIndex(collection)].sex
       this.editedNationality = collection[this.searchIndex(collection)].nationality
       this.editedPassportID = collection[this.searchIndex(collection)].passportID
@@ -497,7 +501,7 @@ export default {
       collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
       collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
       collection[this.searchIndex(collection)].bank = this.editedBank
-      collection[this.searchIndex(collection)].birthday = this.editedBirthday
+      collection[this.searchIndex(collection)].age = this.editedAge
       collection[this.searchIndex(collection)].sex = this.editedSex
       collection[this.searchIndex(collection)].nationality = this.editedNationality
       collection[this.searchIndex(collection)].passportID = this.editedPassportID
