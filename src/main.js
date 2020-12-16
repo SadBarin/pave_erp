@@ -6,9 +6,10 @@ import router from './router'
 import store from './store'
 import 'materialize-css/dist/js/materialize.min.js'
 import 'materialize-css/dist/css/materialize.min.css'
+import VueTheMask from 'vue-the-mask'
 
 Vue.config.productionTip = false
-Vue.use(Vuelidate)
+Vue.use(Vuelidate, VueTheMask)
 
 new Vue({
   router,

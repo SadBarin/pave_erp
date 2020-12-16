@@ -3,15 +3,17 @@
     <div class="input-field input-field-blue">
       <input
         class="input-add"
-        type="text"
+        type="tel"
         id="worker"
         v-model.trim="number"
-        :class="{invalid: ($v.number.$dirty && !$v.number.required) || ($v.number.$dirty && !$v.number.numeric) || ($v.number.$dirty && !$v.number.minLength)}"
+        v-mask="'+7 (###) ###-##-##'"
+        placeholder="+7 ( ) "
+        :class="{invalid: ($v.number.$dirty && !$v.number.required) || ($v.number.$dirty && !$v.number.minLength)}"
       >
-      <label for="worker">Номер рабочего</label>
+      <label class="active" for="worker">Номер рабочего</label>
       <small
         class="helper-text invalid"
-        v-if="$v.number.$dirty && !$v.number.numeric || $v.number.$dirty && !$v.number.required"
+        v-if="$v.number.$dirty && !$v.number.required"
       >
         Введите номер рабочего
       </small>
@@ -36,7 +38,8 @@
 </template>
 
 <script>
-import { required, numeric, minLength } from 'vuelidate/lib/validators'
+import { required, minLength } from 'vuelidate/lib/validators'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'AddCardSWorkers',
@@ -47,8 +50,9 @@ export default {
       workers: [{}]
     }
   },
+  directives: { mask },
   validations: {
-    number: { required, numeric, minLength: minLength(7) }
+    number: { required, minLength: minLength(7) }
   },
   methods: {
     submitWorkers () {
@@ -59,6 +63,8 @@ export default {
           localStorage.removeItem('workers')
         }
       }
+
+      console.log(this.number)
 
       if (this.$v.$invalid) {
         this.$v.$touch()

@@ -251,6 +251,8 @@
                         id="mobilePhone"
                         type="text"
                         v-model.trim="editedMobilePhone"
+                        v-mask="'+7 (###) ###-##-##'"
+                        placeholder="+7 ( ) "
                       >
                       <label class="active" for="mobilePhone">Телефон Мобильный</label>
                     </div>
@@ -398,12 +400,14 @@
 <script>
 import Popup from '@/components/Popup'
 import M from 'materialize-css'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'AddWorkers',
   components: {
     Popup
   },
+  directives: { mask },
   data () {
     return {
       popupShow: false,

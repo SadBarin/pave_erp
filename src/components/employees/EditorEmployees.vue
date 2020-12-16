@@ -119,6 +119,8 @@
                      <input type="tel"
                             id="mobilePhone"
                             v-model.trim="editedMobilePhone"
+                            v-mask="'+7 (###) ###-##-##'"
+                            placeholder="+7 ( ) "
                      >
                      <label for="mobilePhone" class="active">Телефон Мобильный</label>
                    </div>
@@ -189,12 +191,14 @@
 import Popup from '@/components/Popup'
 import M from 'materialize-css'
 import { email, minLength, required } from 'vuelidate/lib/validators'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'addEmployees.vue',
   components: {
     Popup
   },
+  directives: { mask },
   data () {
     return {
       popupShow: false,
