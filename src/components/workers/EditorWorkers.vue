@@ -69,8 +69,8 @@
                         id="sex"
                         v-model.trim="editedSex"
                       >
-                        <option class="editor-option" value="1">Мужской</option>
-                        <option class="editor-option" value="2">Женский</option>
+                        <option class="editor-option" value="Мужской">Мужской</option>
+                        <option class="editor-option" value="Женский">Женский</option>
                       </select>
                       <label class="active">Пол</label>
                     </div>

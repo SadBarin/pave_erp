@@ -357,7 +357,7 @@
                       <th>Город</th>
                       <th>Телефон</th>
                       <th>Профессия</th>
-<!--                      <th>Действие</th>-->
+                      <th>Действие</th>
                     </tr>
                     <tr v-for="worker in searchWorkers" :key="worker">
                       <td>{{worker.name}}</td>
@@ -369,10 +369,12 @@
                       <td>{{worker.city}}</td>
                       <td>{{worker.mobilePhone}}</td>
                       <td>{{worker.professions}}</td>
-                      <td>
-<!--                        <button class="btn-flat editor-btn search-button blue darken-2 waves-effect waves-light auth-submit white-text">-->
-<!--                          <i class="material-icons">create</i> Редактировать-->
-<!--                        </button>-->
+                      <td class="action">
+                        <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+                                v-on:click.prevent="editedWorkerStatus(worker.id)"
+                        >
+                          <i class="material-icons">create</i> Редактировать
+                        </button>
                       </td>
                     </tr>
                   </table>
@@ -467,6 +469,13 @@ export default {
       return professionsList
     },
 
+    editedWorkerStatus (id) {
+      const index = this.workers.findIndex((element) => element.id === id)
+      this.workers[index].edited = true
+      this.saveCollection(this.workers, 'workers')
+      this.$router.push('/workers/editor')
+    },
+
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
       this.saveCollection(this.workers, 'workers')
@@ -524,7 +533,7 @@ export default {
   .editor-title{
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .editor-form,
@@ -536,7 +545,7 @@ export default {
 
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
   }

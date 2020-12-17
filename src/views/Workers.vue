@@ -1,5 +1,13 @@
 <template>
   <div>
+    <Popup
+      v-if="popupShow"
+      v-on:yes="removeWorker(worker)"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Удалить рабочего?'"
+      v-bind:popup-toast="'Рабочий был удалён'"
+    />
+
     <div class="page-title">
       <div class="title-container">
         <h3>Список рабочих</h3>
@@ -21,37 +29,89 @@
       />
     </div>
 
-    <div>
-      <ListWorkers
-        v-if="workers.length"
-        v-bind:workers="workers"
-        @remove-worker="removeWorker"
-      />
-      <div v-else class="empty-list">
-        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
-        <p>Добавьте рабочего, чтобы начать работать над ним.</p>
-      </div>
-    </div>
+    <section>
+<!--      <ListWorkers-->
+<!--        v-if="workers.length"-->
+<!--        v-bind:workers="workers"-->
+<!--        @remove-worker="removeWorker"-->
+<!--      />-->
+<!--      <div v-else class="empty-list">-->
+<!--        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>-->
+<!--        <p>Добавьте рабочего, чтобы начать работать над ним.</p>-->
+<!--      </div>-->
+
+      <table>
+        <tr>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Отчество</th>
+          <th>Пол</th>
+          <th>Возраст</th>
+          <th>Мед.книжка</th>
+          <th>Город</th>
+          <th>Телефон</th>
+          <th>Профессия</th>
+          <th style="text-align: center">Действия</th>
+        </tr>
+        <tr v-for="worker in workers" :key="worker">
+          <td>{{worker.name}}</td>
+          <td>{{worker.surname}}</td>
+          <td>{{worker.patronymic}}</td>
+          <td>{{worker.sex}}</td>
+          <td>{{worker.age}}</td>
+          <td>{{worker.medicalBook}}</td>
+          <td>{{worker.city}}</td>
+          <td>{{worker.mobilePhone}}</td>
+          <td>{{worker.professions}}</td>
+          <td class="action">
+            <button class="btn-flat btn-remove blue darken-2 waves-effect waves-light auth-submit white-text"
+                    v-if="!worker.edited"
+                    v-on:click="popupVisibility(worker.id)"
+            >
+              <i class="material-icons">delete</i> Удалить
+            </button>
+
+            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+                    v-on:click="editedWorkerStatus(worker.id)"
+            >
+              <i class="material-icons">create</i> Редактировать
+            </button>
+          </td>
+        </tr>
+      </table>
+    </section>
   </div>
 </template>
 
 <script>
 import AddCardWorkers from '@/components/workers/AddCardWorkers'
-import ListWorkers from '@/components/workers/ListWorkers'
+import Popup from '@/components/Popup'
 export default {
   name: 'Workers',
-  components: { ListWorkers, AddCardWorkers },
+  components: { AddCardWorkers, Popup },
   data () {
     return {
       workers: [],
+      popupShow: false,
+      worker: '',
 
       updateTimeout: 60000
     }
   },
   methods: {
+    popupVisibility (id) {
+      this.popupShow = true
+      this.worker = id
+    },
+
+    popupHidden () {
+      this.popupShow = false
+    },
+
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
       this.saveCollection(this.workers, 'workers')
+      this.popupHidden()
     },
 
     addWorker (worker) {
@@ -62,6 +122,13 @@ export default {
     saveCollection (collection, collectionName) {
       const parsed = JSON.stringify(collection)
       localStorage.setItem(collectionName, parsed)
+    },
+
+    editedWorkerStatus (id) {
+      const index = this.workers.findIndex((element) => element.id === id)
+      this.workers[index].edited = true
+      this.saveCollection(this.workers, 'workers')
+      this.$router.push('/workers/editor')
     },
 
     updateCollection (collectionName) {
@@ -80,3 +147,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .action {
+    display: flex;
+  }
+
+  .btn-remove {
+    margin-right: 10px;
+  }
+</style>

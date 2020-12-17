@@ -40,7 +40,7 @@ export default {
   components: { ListSites, AddCardSites },
   data () {
     return {
-      sites: [],
+      sites: [{}],
 
       updateTimeout: 60000
     }
@@ -48,6 +48,7 @@ export default {
   methods: {
     removeCity (id) {
       this.sites = this.sites.filter(city => city.id !== id)
+      this.saveCollection(this.sites, 'sites')
     },
 
     addCity (city) {
