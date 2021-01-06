@@ -125,7 +125,7 @@ export default {
       ],
 
       additionalEmployees: [
-        { id: 1, email: 'admin@admin.com', password: 'admin2020best', name: 'Захаров', surname: 'Иван', patronymic: 'Михайлович', homePhone: '', mobilePhone: '+7 (354) 010-01-11', city: 'Москва', duty: 'Системный администратор', access: 'true', edited: false }
+        { id: 1, email: 'admin@admin.com', password: 'admin2020best', name: 'Захаров', surname: 'Иван', patronymic: 'Михайлович', homePhone: '', mobilePhone: '+7 (354) 010-01-11', city: 'Москва', duty: 'Системный администратор', access: 'admin', edited: false }
       ],
 
       additionalWorkers: [

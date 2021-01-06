@@ -66,8 +66,11 @@
                      <select class="browser-default editor-select"
                              v-model="editedAccess"
                      >
-                       <option class="editor-option" value="false">Сотрудник</option>
-                       <option class="editor-option" value="true"> Админ</option>
+                       <option class="editor-option" value="employee">Сотрудник</option>
+                       <option class="editor-option" value="admin">Админ</option>
+                       <option class="editor-option" value="staffManager">Менеджер по персоналу</option>
+                       <option class="editor-option" value="customerManager">Менеджер по работе с заказчиками</option>
+                       <option class="editor-option" value="leader">Руководитель обособленного подразделения</option>
                      </select>
                      <label class="active">Доступ</label>
                    </div>
