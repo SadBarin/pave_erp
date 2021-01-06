@@ -191,11 +191,20 @@
 
                     <div class="input-field editor-input">
                       <input
+                        id="patronymicCard"
+                        type="text"
+                        v-model.trim="editedPatronymicCard"
+                      >
+                      <label class="active" for="surnameCard">Отчество Держателя Карты</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
                         id="accountNumberCard"
                         type="text"
                         v-model.trim="editedAccountNumberCard"
                       >
-                      <label class="active" for="accountNumberCard">Номер Карты</label>
+                      <label class="active" for="accountNumberCard">Номер Счёта</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -422,6 +431,7 @@ export default {
       editedNumber: '',
       editedNameCard: '',
       editedSurnameCard: '',
+      editedPatronymicCard: '',
       editedAccountNumberCard: '',
       editedBank: '',
       editedAge: '',
@@ -483,6 +493,7 @@ export default {
       this.editedNumber = collection[this.searchIndex(collection)].number
       this.editedNameCard = collection[this.searchIndex(collection)].nameCard
       this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
+      this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
       this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
       this.editedBank = collection[this.searchIndex(collection)].bank
       this.editedAge = collection[this.searchIndex(collection)].age
@@ -518,6 +529,7 @@ export default {
       collection[this.searchIndex(collection)].nameCard = this.editedNameCard
       collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
       collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
+      collection[this.searchIndex(collection)].patronymicCard = this.editedPatronymicCard
       collection[this.searchIndex(collection)].bank = this.editedBank
       collection[this.searchIndex(collection)].age = this.editedAge
       collection[this.searchIndex(collection)].sex = this.editedSex

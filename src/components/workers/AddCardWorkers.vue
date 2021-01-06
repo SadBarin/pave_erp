@@ -91,6 +91,7 @@ export default {
           number: '',
           nameCard: '',
           surnameCard: '',
+          patronymicCard: '',
           accountNumberCard: '',
           bank: '',
           age: '',
