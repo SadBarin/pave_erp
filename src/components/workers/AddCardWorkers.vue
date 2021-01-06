@@ -88,7 +88,6 @@ export default {
           surname: 'Рабочий',
           patronymic: '',
           accountNumber: '',
-          number: '',
           nameCard: '',
           surnameCard: '',
           patronymicCard: '',

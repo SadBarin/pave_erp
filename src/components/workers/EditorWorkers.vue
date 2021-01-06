@@ -282,15 +282,6 @@
 
                     <div class="input-field editor-input">
                       <input
-                        id="number"
-                        type="text"
-                        v-model.trim="editedNumber"
-                      >
-                      <label class="active" for="number">Номер</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
                         id="previousWork"
                         type="text"
                         v-model.trim="editedPreviousWork"
@@ -428,7 +419,6 @@ export default {
       editedSurname: '',
       editedPatronymic: '',
       editedAccountNumber: '',
-      editedNumber: '',
       editedNameCard: '',
       editedSurnameCard: '',
       editedPatronymicCard: '',
@@ -490,7 +480,6 @@ export default {
       this.editedSurname = collection[this.searchIndex(collection)].surname
       this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
       this.editedAccountNumber = collection[this.searchIndex(collection)].accountNumber
-      this.editedNumber = collection[this.searchIndex(collection)].number
       this.editedNameCard = collection[this.searchIndex(collection)].nameCard
       this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
       this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
@@ -525,7 +514,6 @@ export default {
       collection[this.searchIndex(collection)].surname = this.editedSurname
       collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
       collection[this.searchIndex(collection)].accountNumber = this.editedAccountNumber
-      collection[this.searchIndex(collection)].number = this.editedNumber
       collection[this.searchIndex(collection)].nameCard = this.editedNameCard
       collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
       collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
