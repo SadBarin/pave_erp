@@ -20,7 +20,7 @@
 
       <div class="navbar-right">
 <!--        <button-->
-<!--          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"-->
+<!--          class="btn-flat blue darken-1 waves-effect waves-light auth-submit white-text"-->
 <!--          v-on:click="popupVisibility">-->
 <!--          <i class="material-icons">arrow_back</i> Выйти-->
 <!--        </button>-->

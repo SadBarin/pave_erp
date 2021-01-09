@@ -16,13 +16,13 @@
             <h6><i class="material-icons">phone</i> Номер: {{worker.mobilePhone}}</h6>
           </div>
           <div class="btn-container">
-            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-flat blue darken-1 waves-effect waves-light auth-submit white-text"
                     v-on:click="editedWorkerStatus"
             >
               <i class="material-icons">create</i> Редактировать
             </button>
 
-            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-flat blue darken-1 waves-effect waves-light auth-submit white-text"
                     v-if="!worker.edited"
                     v-on:click.prevent="popupVisibility"
             >

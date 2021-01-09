@@ -11,7 +11,7 @@
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
                 <li class="editor-card blue white-text active">
-                  <div class="collapsible-header blue darken-2 blue darken-2"><i class="material-icons">account_box</i>ФИО</div>
+                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
 
                   <div class="collapsible-body blue">
                     <div class="input-field editor-input">
@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
+                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
                   <div class="collapsible-body blue">
                     <div class="input-field editor-input">
                       <input
@@ -108,7 +108,7 @@
                 </li>
 
 <!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
+<!--                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
 <!--                  <div class="collapsible-body blue">-->
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -153,7 +153,7 @@
 <!--                </li>-->
 
 <!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
+<!--                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
 <!--                  <div class="collapsible-body blue">-->
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -202,7 +202,7 @@
 <!--                </li>-->
 
                 <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
+                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
                   <div class="collapsible-body blue">
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -245,7 +245,7 @@
                 </li>
 
                 <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-2 blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
+                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
                   <div class="collapsible-body blue">
 <!--                    <div class="input-field editor-input">-->
 <!--                      <input-->
@@ -348,8 +348,8 @@
                 <div>
                   <table class="search-table">
                     <tr>
-                      <th>Имя</th>
                       <th>Фамилия</th>
+                      <th>Имя</th>
                       <th>Отчество</th>
                       <th>Пол</th>
                       <th>Возраст</th>
@@ -357,11 +357,11 @@
                       <th>Город</th>
                       <th>Телефон</th>
                       <th>Профессия</th>
-                      <th>Действие</th>
+                      <th></th>
                     </tr>
                     <tr v-for="worker in searchWorkers" :key="worker">
-                      <td>{{worker.name}}</td>
                       <td>{{worker.surname}}</td>
+                      <td>{{worker.name}}</td>
                       <td>{{worker.patronymic}}</td>
                       <td>{{worker.sex}}</td>
                       <td>{{worker.age}}</td>
@@ -369,12 +369,14 @@
                       <td>{{worker.city}}</td>
                       <td>{{worker.mobilePhone}}</td>
                       <td>{{worker.professions}}</td>
-                      <td class="action btn-container">
-                        <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
-                                v-on:click.prevent="editedWorkerStatus(worker.id)"
-                        >
-                          <i class="material-icons">create</i> Редактировать
-                        </button>
+                      <td>
+                        <div class="btn-container">
+                          <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
+                                  v-on:click.prevent="editedWorkerStatus(worker.id)"
+                          >
+                            <i class="material-icons">create</i>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   </table>
@@ -388,7 +390,7 @@
 
     <div>
       <button
-        class="btn waves-effect waves-light auth-submit blue darken-2"
+        class="btn waves-effect waves-light auth-submit blue darken-1"
         v-on:click="searchAll()"
       >
         <i class="material-icons">search</i> Поиск
@@ -667,19 +669,6 @@ export default {
 
   .search-table, td, th {
     text-align: center;
-  }
-
-  .editor-btns {
-    width: 100%;
-    margin-top: 18px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .editor-btn {
-    margin: 0 auto;
   }
 
   #search .workers_section {

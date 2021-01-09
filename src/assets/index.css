@@ -119,8 +119,9 @@ html, body {
 }
 
 #app .sidenav li > a {
-  width: inherit;
+  border-radius: var(--border-radius);
 
+  width: inherit;
   padding: 0 0 0 var(--padding-width);
 }
 
@@ -205,13 +206,6 @@ html, body {
   padding: 0px !important;
 }
 
-#app .card-panel,
-#app .card {
-  border-radius: var(--border-radius) !important;
-
-  margin-bottom: 0.8rem;
-}
-
 #app .card-title {
   margin-bottom: 30px;
 }
@@ -233,14 +227,32 @@ html, body {
 /*Table*/
 #app tr {
   border: none;
+  border-radius: 10px;
+}
+
+#app tr:hover:not(:first-child) {
+  background: rgba(206, 206, 206, 0.4);
+
+  border-radius: var(--border-radius);
 }
 
 #app td, #app th {
   border: none;
+  border-radius: 0rem;
 
   text-align: center;
 
   padding: 0.2rem;
+}
+
+#app td:first-child {
+  border-bottom-left-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+
+#app td:last-child {
+  border-bottom-right-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 }
 
 /*Button*/
@@ -271,8 +283,13 @@ html, body {
 
 #app .btn-transparent {
   height: inherit;
+  border: none;
 
-  padding-left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0rem;
 }
 
 #app .btn-floating *,
@@ -350,6 +367,7 @@ html, body {
 #app .card,
 #app .card-panel {
   box-shadow: none;
+  border-radius: var(--border-radius);
 
   margin-bottom: var(--margin-bottom);
   padding: 0.8rem;
@@ -378,10 +396,18 @@ html, body {
   margin-bottom: var(--margin-bottom);
 }
 
-.collapsible-header {
+#app .collapsible-header {
   border-bottom: 0px !important;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0.8rem;
 }
 
-.collapsible-body {
+#app .collapsible-body {
+  border: none;
   border-radius: var(--border-radius) var(--border-radius);
+
+  padding: 1rem;
 }

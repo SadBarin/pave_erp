@@ -7,7 +7,7 @@
 
       <div class="card-action btns-popup">
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-2"
+          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
           v-on:click.prevent="$emit('yes')"
           v-on:click="callToast"
         >
@@ -15,7 +15,7 @@
         </button>
 
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-2"
+          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
           v-on:click.prevent="$emit('no')"
         >
           <i class="material-icons">clear</i> Нет

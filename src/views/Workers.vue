@@ -13,13 +13,13 @@
         <h3>Список рабочих</h3>
 
         <div class="title-btn-container">
-          <button class="btn-floating btn-title blue darken-2 waves-effect waves-circle waves-light"
+          <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light"
                   onclick="M.toast({html: 'Рабочие обновлены'})"
                   v-on:click="updateCollection('workers')"
           ><i class="material-icons">autorenew</i>
           </button>
 
-          <router-link class="btn-floating btn-title blue darken-2 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
+          <router-link class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
           </router-link>
         </div>
       </div>
@@ -42,8 +42,8 @@
 
       <table>
         <tr>
-          <th>Имя</th>
           <th>Фамилия</th>
+          <th>Имя</th>
           <th>Отчество</th>
           <th>Пол</th>
           <th>Возраст</th>
@@ -51,11 +51,11 @@
           <th>Город</th>
           <th>Телефон</th>
           <th>Профессия</th>
-          <th style="text-align: center">Действия</th>
+          <th></th>
         </tr>
         <tr v-for="worker in workers" :key="worker">
-          <td>{{worker.name}}</td>
           <td>{{worker.surname}}</td>
+          <td>{{worker.name}}</td>
           <td>{{worker.patronymic}}</td>
           <td>{{worker.sex}}</td>
           <td>{{worker.age}}</td>
@@ -63,21 +63,23 @@
           <td>{{worker.city}}</td>
           <td>{{worker.mobilePhone}}</td>
           <td>{{worker.professions}}</td>
-          <td class="action btn-container">
-            <button class="btn-floating btn-remove blue darken-2 waves-effect waves-light auth-submit white-text"
-                    title="Удалить"
-                    v-if="!worker.edited"
-                    v-on:click="popupVisibility(worker.id)"
-            >
-              <i class="material-icons">delete</i>
-            </button>
+          <td>
+            <div class="btn-container">
+              <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                      title="Удалить"
+                      v-if="!worker.edited"
+                      v-on:click="popupVisibility(worker.id)"
+              >
+                <i class="material-icons">delete</i>
+              </button>
 
-            <button class="btn-floating blue darken-2 waves-effect waves-light auth-submit white-text"
-                    title="Редактировать"
-                    v-on:click="editedWorkerStatus(worker.id)"
-            >
-              <i class="material-icons">create</i>
-            </button>
+              <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
+                      title="Редактировать"
+                      v-on:click="editedWorkerStatus(worker.id)"
+              >
+                <i class="material-icons">create</i>
+              </button>
+            </div>
           </td>
         </tr>
       </table>
@@ -151,10 +153,6 @@ export default {
 </script>
 
 <style scoped>
-  .action {
-    display: flex;
-  }
-
   .btn-remove {
     margin-right: 0.5rem;
   }

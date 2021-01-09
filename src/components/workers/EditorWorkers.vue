@@ -381,14 +381,14 @@
 
     <div class="btn-container editor-btns">
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
         v-on:click="editorCollection(workers)"
       >
         <i class="material-icons">create</i> Редактировать
       </button>
 
       <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
+        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
         v-on:click.prevent="popupVisibility"
       >
         <i class="material-icons">arrow_back</i> Вернуться назад

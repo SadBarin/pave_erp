@@ -31,7 +31,7 @@
       </small>
     </div>
 
-    <button class="btn-floating waves-effect waves-light auth-submit blue darken-2 white-text" title="Добавить рабочего" type="submit">
+    <button class="btn-floating waves-effect waves-light auth-submit blue darken-1 white-text" title="Добавить рабочего" type="submit">
       <i class="material-icons">add</i>
     </button>
   </form>

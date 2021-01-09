@@ -20,14 +20,14 @@
             </p>
           </div>
           <div class="btn-container btn-container--column">
-            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
                     title="Редактировать"
                     v-on:click="editedEmployeeStatus"
             >
               <i class="material-icons">create</i>
             </button>
 
-            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
                     title="Удалить"
                     v-if="!employee.edited"
                     v-on:click="popupVisibility"
