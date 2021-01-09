@@ -1,29 +1,41 @@
-:root {
-  --navbar-height: 7vh;
-  --sidebar-width: 15vw;
-  --padding-top-page: 35px;
-  --page-title-height: 50px;
-  --border-radius: 10px;
-}
-
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   src: url("MaterialIcons-Regular.eot");
-  /* For IE 6-8 */
   src: local("Material Icons"), local("MaterialIcons-Regular"), url("MaterialIcons-Regular.woff2") format("woff2"), url("MaterialIcons-Regular.woff") format("woff"), url("MaterialIcons-Regular.ttf") format("truetype");
 }
 
-/*TODO убрать от сюда все лишние стили, оставив только общие*/
+:root {
+  --navbar-height: 34px;
+  --sidebar-width: 12rem;
+  --padding-width: 1rem;
+  --padding-top-page: 1.8rem;
+  --margin-bottom: 0.2rem;
+  --page-title-height: 3rem;
+  --border-radius: 10px;
+  --font-size: calc(0.5em + 0.5vw);
 
-.material-icons {
+  font-size: var(--font-size);
+}
+
+#app * {
+  box-shadow: none;
+}
+
+html, body {
+  height: 100%;
+
+  overflow: hidden;
+}
+
+#app .material-icons {
   font-family: "Material Icons";
-  font-weight: normal;
   font-style: normal;
   font-size: 1.3rem;
-  display: inline-block;
-  line-height: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -34,22 +46,51 @@
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
 
-  margin-right: 5px;
+  margin-right: 0.5rem;
+
+  height: inherit;
 }
 
-html, body {
-  height: 100vh;
-
-  overflow: hidden;
+#app p, #app a {
+  font-size: var(--font-size);
 }
 
-#blue-layout .navbar {
-  width: 100%;
+#app h1 {
+  font-size: calc(var(--font-size) * 2.8);
+}
+
+#app h2 {
+  font-size: calc(var(--font-size) * 2.4);
+}
+
+#app h3 {
+  font-size: calc(var(--font-size) * 2.1);
+}
+
+#app h4 {
+  font-size: calc(var(--font-size) * 1.8);
+}
+
+#app h5 {
+  font-size: calc(var(--font-size) * 1.4);
+}
+
+#app h6 {
+  font-size: calc(var(--font-size) * 1.1);
+}
+
+#app .navbar,
+.navbar-left,
+.navbar-right {
   height: var(--navbar-height);
-  padding: 0 2rem;
 
   display: flex;
   align-items: center;
+}
+
+#app .navbar {
+  padding: 0 var(--padding-width);
+
   justify-content: space-between;
 
   position: absolute;
@@ -59,47 +100,56 @@ html, body {
   z-index: 100
 }
 
-#blue-layout .app-sidenav {
+#app .app-sidenav {
   width: var(--sidebar-width);
   height: 100%;
   padding-top: calc(var(--navbar-height) + var(--padding-top-page));
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   transition: transform .3s;
 
   z-index: 50
 }
 
-#blue-layout .sidenav li>a {
-  padding: 0 2vw;
+#app .sidenav li {
+  width: inherit;
+}
+
+#app .sidenav li > a {
+  width: inherit;
+
+  padding: 0 0 0 var(--padding-width);
 }
 
 .app-sidenav.open {
   transform: translateX(0);
 }
 
-#blue-layout .app-page {
+#app .app-page {
   padding-top: var(--navbar-height);
   padding-left: var(--sidebar-width);
 
   transition: padding-left .3s;
 }
 
-#blue-layout .app-page.full {
-  padding-left: 0px;
+#app .app-page.full {
+  padding-left: 0rem;
 }
 
 .app-content {
-  padding: var(--padding-top-page);
+  padding: var(--padding-top-page) var(--padding-width);
 
   position: relative;
 }
 
 .app-content section {
-  height: 74vh;
+  height: 75vh;
 
   overflow-y: auto;
 
-  padding-bottom: 15px;
   padding-right: var(--border-radius);
 }
 
@@ -155,55 +205,91 @@ html, body {
   padding: 0px !important;
 }
 
-#blue-layout .card-panel,
-#blue-layout .card {
+#app .card-panel,
+#app .card {
   border-radius: var(--border-radius) !important;
 
   margin-bottom: 0.8rem;
 }
 
-#blue-layout .card-title {
+#app .card-title {
   margin-bottom: 30px;
 }
 
-#blue-layout .error-title {
+#app .error-title {
   margin-bottom: 0;
 }
 
-.button-container {
-  display: flex !important;
-  align-items: center;
-}
-
-.btn, .btn-flat, .btn-floating {
-  border-radius: var(--border-radius) !important;
-
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
-#blue-layout .dropdown-content li > a,
-#blue-layout .dropdown-content li > span {
+#app .dropdown-content li > a,
+#app .dropdown-content li > span {
   color: #1e88e5;
 }
 
-#blue-layout [type="checkbox"].filled-in:checked+span:not(.lever):after {
+#app [type="checkbox"].filled-in:checked+span:not(.lever):after {
   background-color: #1e88e5;
   border: #1e88e5;
 }
 
-/*Input*/
+/*Table*/
+#app tr {
+  border: none;
+}
 
-#blue-layout .input-field {
+#app td, #app th {
+  border: none;
+
+  text-align: center;
+
+  padding: 0.2rem;
+}
+
+/*Button*/
+#app .btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app .btn-container--column {
+  flex-direction: column;
+}
+
+#app .btn,
+#app .btn-flat,
+#app .btn-floating {
+  border-radius: var(--border-radius);
+  box-shadow: none;
+
+  font-size: var(--font-size);
+  line-height: 1rem;
+
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#app .btn-transparent {
+  height: inherit;
+
+  padding-left: 0px;
+}
+
+#app .btn-floating *,
+#app .btn-transparent *{
+  margin: 0rem;
+}
+
+/*Input*/
+#app .input-field {
   min-width: 300px;
 }
 
-#blue-layout .input-field input:focus + label {
+#app .input-field input:focus + label {
   color: #1e88e5;
 }
 
-#blue-layout .input-field input:focus {
+#app .input-field input:focus {
   border-bottom: 1px solid #1e88e5;
   box-shadow: 0 1px 0 0 #1e88e5;
 }
@@ -212,7 +298,6 @@ html, body {
 #toast-container {
   background-color: rgba(30, 136, 229, 0.3);
   border-radius: var(--border-radius);
-
 
   padding: 10px;
 
@@ -262,9 +347,12 @@ html, body {
 }
 
 /*Card*/
-.card,
-.card-panel {
-  box-shadow: none !important;
+#app .card,
+#app .card-panel {
+  box-shadow: none;
+
+  margin-bottom: var(--margin-bottom);
+  padding: 0.8rem;
 }
 
 .card-action{
@@ -272,14 +360,14 @@ html, body {
   border-radius: var(--border-radius);
 }
 
-.card .card-action:last-child {
+.card .card-action {
   border-radius: var(--border-radius) !important;
 }
 
 /*Collapsible*/
-.collapsible {
-  box-shadow: none !important;
-  border: none !important;
+#app .collapsible {
+  box-shadow: none;
+  border: none;
   border-radius: var(--border-radius);
 }
 
@@ -287,6 +375,7 @@ html, body {
 .collapsible-header,
 .collapsible-body {
   border-radius: var(--border-radius);
+  margin-bottom: var(--margin-bottom);
 }
 
 .collapsible-header {
@@ -295,24 +384,4 @@ html, body {
 
 .collapsible-body {
   border-radius: var(--border-radius) var(--border-radius);
-}
-
-@media (max-width: 1300px) {
-  #blue-layout .navbar {
-    height: 30px;
-  }
-
-  #blue-layout .app-sidenav {
-    width: 5vw;
-  }
-
-  .app-page {
-    padding: 20px !important;
-    width: 95vw;
-  }
-
-  .app-content {
-    padding-left: 5vw;
-  }
-
 }

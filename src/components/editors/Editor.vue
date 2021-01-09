@@ -123,11 +123,11 @@ textarea.materialize-textarea.invalid:focus,
 }
 
 /* label focus color */
-#blue-layout .input-field input:focus + label {
+#app .input-field input:focus + label {
   color: white;
 }
 /* label underline focus color */
-#blue-layout .input-field input:focus {
+#app .input-field input:focus {
   border-bottom: 1px solid white;
   box-shadow: 0 1px 0 0 white;
 }
@@ -136,7 +136,7 @@ textarea.materialize-textarea.invalid:focus,
   color: rgba(255, 255, 255, 0.7)
 }
 
-#blue-layout .editor-select {
+#app .editor-select {
   border: none;
   border-bottom: 1px solid white;
   padding: 0;
@@ -149,12 +149,12 @@ textarea.materialize-textarea.invalid:focus,
   cursor: pointer;
 }
 
-#blue-layout .editor-select .invalid {
+#app .editor-select .invalid {
   border: none;
   border-bottom: 1px solid #F44336;
 }
 
-#blue-layout small .invalid {
+#app small .invalid {
   border: none !important;
 }
 

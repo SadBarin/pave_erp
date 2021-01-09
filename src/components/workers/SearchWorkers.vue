@@ -369,7 +369,7 @@
                       <td>{{worker.city}}</td>
                       <td>{{worker.mobilePhone}}</td>
                       <td>{{worker.professions}}</td>
-                      <td class="action">
+                      <td class="action btn-container">
                         <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
                                 v-on:click.prevent="editedWorkerStatus(worker.id)"
                         >
@@ -618,11 +618,11 @@ export default {
   }
 
   /* label focus color */
-  #blue-layout .input-field input:focus + label {
+  #app .input-field input:focus + label {
     color: white;
   }
   /* label underline focus color */
-  #blue-layout .input-field input:focus {
+  #app .input-field input:focus {
     border-bottom: 1px solid white;
     box-shadow: 0 1px 0 0 white;
   }
@@ -631,7 +631,7 @@ export default {
     color: rgba(255, 255, 255, 0.7)
   }
 
-  #blue-layout .editor-select {
+  #app .editor-select {
     border: none;
     border-bottom: 1px solid white;
     padding: 0;
@@ -644,12 +644,12 @@ export default {
     cursor: pointer;
   }
 
-  #blue-layout .editor-select .invalid {
+  #app .editor-select .invalid {
     border: none;
     border-bottom: 1px solid #F44336;
   }
 
-  #blue-layout small .invalid {
+  #app small .invalid {
     border: none !important;
   }
 

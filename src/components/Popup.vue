@@ -66,7 +66,7 @@ export default {
     text-align: center;
   }
 
-  #blue-layout .popup .card-title {
+  #app .popup .card-title {
     margin-bottom: 0;
   }
 
@@ -83,5 +83,9 @@ export default {
 
   .btn-flat {
     border-radius: 10px;
+  }
+
+  .btn-flat:first-child {
+    margin-right: 1rem;
   }
 </style>

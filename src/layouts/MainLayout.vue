@@ -1,5 +1,5 @@
 <template>
-  <div class="app-main-layout" id="blue-layout">
+  <div class="app-main-layout">
     <Popup
       v-if="popupShow"
       v-on:yes="exit"
@@ -11,22 +11,27 @@
     <nav class="navbar blue darken-1">
       <div class="navbar-left">
         <button
-          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+          class="btn btn-transparent transparent"
           v-on:click.prevent="isOpen = !isOpen"
         >
           <i class="material-icons">menu</i>
         </button>
       </div>
 
-      <ul class="right hide-on-small-and-down">
-        <li>
-          <button
-            class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
-            v-on:click="popupVisibility">
-            <i class="material-icons">arrow_back</i> Выйти
-          </button>
-        </li>
-      </ul>
+      <div class="navbar-right">
+<!--        <button-->
+<!--          class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"-->
+<!--          v-on:click="popupVisibility">-->
+<!--          <i class="material-icons">arrow_back</i> Выйти-->
+<!--        </button>-->
+
+        <button
+          class="btn btn-transparent transparent"
+          v-on:click="popupVisibility"
+        >
+          Выйти
+        </button>
+      </div>
     </nav>
 
     <ul
@@ -34,13 +39,22 @@
       v-bind:class="{open: isOpen}"
     >
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/sites"><i class="material-icons">location_city</i> Города</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/sites">
+          <i class="material-icons">location_city</i>
+          Города
+        </router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees"><i class="material-icons">group</i> Сотрудники</router-link>
+        <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees">
+          <i class="material-icons">group</i>
+          Сотрудники
+        </router-link>
       </li>
       <li>
-        <router-link class="waves-effect waves-blue pointer" to="/workers"><i class="material-icons">transfer_within_a_station</i> Рабочие</router-link>
+        <router-link class="waves-effect waves-blue pointer" to="/workers">
+          <i class="material-icons">transfer_within_a_station</i>
+          Рабочие
+        </router-link>
       </li>
     </ul>
 
@@ -57,6 +71,7 @@
 
 <script>
 import Popup from '@/components/Popup'
+
 export default {
   name: 'MainLayout.vue',
   components: {
@@ -85,7 +100,4 @@ export default {
 </script>
 
 <style scoped>
-  .navbar-left .material-icons {
-    margin: 0;
-  }
 </style>

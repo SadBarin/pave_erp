@@ -15,7 +15,7 @@
             <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}}</h6>
             <h6><i class="material-icons">phone</i> Номер: {{worker.mobilePhone}}</h6>
           </div>
-          <div class="button-container">
+          <div class="btn-container">
             <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
                     v-on:click="editedWorkerStatus"
             >
@@ -123,10 +123,5 @@ export default {
 
   .btn-flat {
     margin-left: 10px;
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
   }
 </style>

@@ -20,18 +20,20 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="button-container">
-            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+          <div class="btn-container btn-container--column">
+            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+                         title="Редактировать"
                          v-on:click="editedCityStatus"
             >
-              <i class="material-icons">create</i> Редактировать
+              <i class="material-icons">create</i>
             </button>
 
-            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+                    title="Удалить"
                     v-if="!city.edited"
                     v-on:click="popupVisibility"
             >
-              <i class="material-icons">delete</i> Удалить
+              <i class="material-icons">delete</i>
             </button>
           </div>
         </div>
@@ -163,7 +165,7 @@ export default {
     margin-left: 10px;
   }
 
-  .button-container {
+  .btn-container {
     display: flex;
     justify-content: flex-end;
   }

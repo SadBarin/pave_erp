@@ -63,18 +63,20 @@
           <td>{{worker.city}}</td>
           <td>{{worker.mobilePhone}}</td>
           <td>{{worker.professions}}</td>
-          <td class="action">
-            <button class="btn-flat btn-remove blue darken-2 waves-effect waves-light auth-submit white-text"
+          <td class="action btn-container">
+            <button class="btn-floating btn-remove blue darken-2 waves-effect waves-light auth-submit white-text"
+                    title="Удалить"
                     v-if="!worker.edited"
                     v-on:click="popupVisibility(worker.id)"
             >
-              <i class="material-icons">delete</i> Удалить
+              <i class="material-icons">delete</i>
             </button>
 
-            <button class="btn-flat blue darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-floating blue darken-2 waves-effect waves-light auth-submit white-text"
+                    title="Редактировать"
                     v-on:click="editedWorkerStatus(worker.id)"
             >
-              <i class="material-icons">create</i> Редактировать
+              <i class="material-icons">create</i>
             </button>
           </td>
         </tr>
@@ -154,6 +156,6 @@ export default {
   }
 
   .btn-remove {
-    margin-right: 10px;
+    margin-right: 0.5rem;
   }
 </style>

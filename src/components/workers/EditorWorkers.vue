@@ -379,7 +379,7 @@
       </div>
     </section>
 
-    <div class="editor-btns">
+    <div class="btn-container editor-btns">
       <button
         class="btn editor-btn waves-effect waves-light auth-submit blue darken-2"
         v-on:click="editorCollection(workers)"
@@ -675,11 +675,11 @@ export default {
   }
 
   /* label focus color */
-  #blue-layout .input-field input:focus + label {
+  #app .input-field input:focus + label {
     color: white;
   }
   /* label underline focus color */
-  #blue-layout .input-field input:focus {
+  #app .input-field input:focus {
     border-bottom: 1px solid white;
     box-shadow: 0 1px 0 0 white;
   }
@@ -688,7 +688,7 @@ export default {
     color: rgba(255, 255, 255, 0.7)
   }
 
-  #blue-layout .editor-select {
+  #app .editor-select {
     border: none;
     border-bottom: 1px solid white;
     padding: 0;
@@ -701,12 +701,12 @@ export default {
     cursor: pointer;
   }
 
-  #blue-layout .editor-select .invalid {
+  #app .editor-select .invalid {
     border: none;
     border-bottom: 1px solid #F44336;
   }
 
-  #blue-layout small .invalid {
+  #app small .invalid {
     border: none !important;
   }
 
@@ -725,13 +725,9 @@ export default {
   .editor-btns {
     width: 100%;
     margin-top: 18px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 
-  .editor-btn {
-    width: 48%;
+  .editor-btns .btn:first-child {
+    margin-right: 1rem;
   }
 </style>

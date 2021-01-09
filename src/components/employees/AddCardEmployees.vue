@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitEmployee" class="button-container" >
+  <form @submit.prevent="submitEmployee" class="btn-container" >
     <div class="input-field input-field-blue">
       <input
         class="input-add"
@@ -26,8 +26,8 @@
       </small>
     </div>
 
-    <button class="btn-flat waves-effect waves-light auth-submit blue darken-2 white-text" type="submit">
-      <i class="material-icons">add</i> Добавить сотрудника
+    <button class="btn-floating waves-effect waves-light auth-submit blue darken-2 white-text" title="Добавить сотрудника" type="submit">
+      <i class="material-icons">add</i>
     </button>
   </form>
 </template>
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.button-container .input-field {
-  margin-right: 30px;
+.btn-container .btn-floating {
+  margin-left: 2rem;
 }
 </style>
