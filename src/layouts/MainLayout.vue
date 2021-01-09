@@ -56,6 +56,12 @@
           Рабочие
         </router-link>
       </li>
+      <li>
+        <router-link class="waves-effect waves-blue pointer" to="/workers/search">
+          <i class="material-icons">search</i>
+          Поиск рабочих
+        </router-link>
+      </li>
     </ul>
 
     <main class="app-content">

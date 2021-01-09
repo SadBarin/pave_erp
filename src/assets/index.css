@@ -387,6 +387,8 @@ html, body {
   box-shadow: none;
   border: none;
   border-radius: var(--border-radius);
+
+  margin: 0rem;
 }
 
 .collapsible li,
@@ -402,7 +404,7 @@ html, body {
   display: flex;
   align-items: center;
 
-  padding: 0.8rem;
+  padding: 0.2rem;
 }
 
 #app .collapsible-body {
