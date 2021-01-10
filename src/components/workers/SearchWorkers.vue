@@ -1,6 +1,6 @@
 <template>
   <div id="search">
-    <div class="page-title editor-title">
+    <div class="page-title">
       <h3>Поиск рабочих</h3>
     </div>
 
@@ -10,341 +10,146 @@
           <div>
             <form class="editor-form">
               <ul class="collapsible black-text form-content editor-form-content">
-                <li class="editor-card blue white-text active">
-                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
 
+                <li class="editor-card blue white-text">
+                  <div class="collapsible-header blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
                   <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="name"
-                        type="text"
-                        v-model.trim="searchInput.name"
-                      >
-                      <label class="active" for="name">Имя</label>
+
+                    <div class="collapsible-body-container">
+
+                      <div class="input-field editor-input">
+                        <input
+                          id="name"
+                          type="text"
+                          v-model.trim="searchInput.name"
+                        >
+                        <label class="active" for="name">Имя</label>
+                      </div>
+
+                      <div class="input-field editor-input">
+                        <input
+                          id="surname"
+                          type="text"
+                          v-model.trim="searchInput.surname"
+                        >
+                        <label class="active" for="surname">Фамилия</label>
+                      </div>
+
+                      <div class="input-field editor-input">
+                        <input
+                          id="patronymic"
+                          type="text"
+                          v-model.trim="searchInput.patronymic"
+                        >
+                        <label class="active" for="patronymic">Отчество</label>
+                      </div>
+
                     </div>
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="surname"
-                        type="text"
-                        v-model.trim="searchInput.surname"
-                      >
-                      <label class="active" for="surname">Фамилия</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="patronymic"
-                        type="text"
-                        v-model.trim="searchInput.patronymic"
-                      >
-                      <label class="active" for="patronymic">Отчество</label>
-                    </div>
                   </div>
                 </li>
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
+                <li class="editor-card blue white-text">
+                  <div class="collapsible-header blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
                   <div class="collapsible-body blue">
-                    <div class="input-field editor-input">
-                      <input
-                        id="age"
-                        type="number"
-                        v-model.trim="searchInput.age"
-                      >
-                      <label class="active" for="age">Возраст</label>
+
+                    <div class="collapsible-body-container">
+
+                      <div class="input-field editor-input">
+                        <input
+                          id="age"
+                          type="number"
+                          v-model.trim="searchInput.age"
+                        >
+                        <label class="active" for="age">Возраст</label>
+                      </div>
+
+                      <div class="input-field editor-input">
+                        <select
+                          class="browser-default editor-select"
+                          id="sex"
+                          v-model.trim="searchInput.sex"
+                        >
+                          <option class="editor-option" selected value="">Не отмечено</option>
+                          <option class="editor-option" value="Мужской">Мужской</option>
+                          <option class="editor-option" value="Женский">Женский</option>
+                        </select>
+                        <label class="active">Биологический Пол</label>
+                      </div>
+
+                      <div class="input-field editor-input">
+                        <select
+                          class="browser-default editor-select"
+                          id="medicalBook"
+                          v-model.trim="searchInput.medicalBook"
+                        >
+                          <option class="editor-option" selected value="">Не отмечено</option>
+                          <option class="editor-option" value="Есть">Есть</option>
+                          <option class="editor-option" value="Отсутствует">Отсутствует</option>
+                        </select>
+                        <label class="active">Медицинская Книга</label>
+                      </div>
+
                     </div>
 
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="sex"
-                        v-model.trim="searchInput.sex"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" value="Мужской">Мужской</option>
-                        <option class="editor-option" value="Женский">Женский</option>
-                      </select>
-                      <label class="active">Биологический Пол</label>
-                    </div>
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="nationality"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="nationality">Национальность</label>-->
-<!--                    </div>-->
-
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="medicalBook"
-                        v-model.trim="searchInput.medicalBook"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" value="Есть">Есть</option>
-                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
-                      </select>
-                      <label class="active">Медицинская Книга</label>
-                    </div>
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="education"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="education">Образование</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="university"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="university">ВУЗ</label>-->
-<!--                    </div>-->
                   </div>
                 </li>
 
-<!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">book</i>Паспортные данные</div>-->
-<!--                  <div class="collapsible-body blue">-->
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="passportID"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="PassportID">Номер Паспорта</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="passportDate"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="passportIssued"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="passportIssued">Кем выдан</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="registration"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="registration">Прописка</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="address"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="address">Адрес</label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
-
-<!--                <li class="editor-card blue darken-1 white-text">-->
-<!--                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">credit_card</i>Банковские данные</div>-->
-<!--                  <div class="collapsible-body blue">-->
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="nameCard"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="nameCard">Имя Держателя Карты</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="surnameCard"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="surnameCard">Фамилия Держателя Карты</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="accountNumberCard"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="accountNumberCard">Номер Карты</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <select-->
-<!--                        class="browser-default editor-select"-->
-<!--                        id="bank"-->
-<!--                      >-->
-<!--                        <option class="editor-option" value="1">СберБанк</option>-->
-<!--                        <option class="editor-option" value="2">Банк ВТБ</option>-->
-<!--                        <option class="editor-option" value="3">Газпромбанк</option>-->
-<!--                        <option class="editor-option" value="4">Национальный Клиринговый Центр</option>-->
-<!--                        <option class="editor-option" value="5">Альфа-Банк</option>-->
-<!--                        <option class="editor-option" value="6">Россельхозбанк</option>-->
-<!--                        <option class="editor-option" value="7">Московский Кредитный Банк</option>-->
-<!--                        <option class="editor-option" value="8">Банк «Открытие»</option>-->
-<!--                        <option class="editor-option" value="9">Совкомбанк</option>-->
-<!--                        <option class="editor-option" value="10">Росбанк</option>-->
-<!--                        <option class="editor-option" value="11">Тинькофф Банк</option>-->
-<!--                      </select>-->
-<!--                      <label class="active">Банк</label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </li>-->
-
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
+                <li class="editor-card blue white-text">
+                  <div class="collapsible-header blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
                   <div class="collapsible-body blue">
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="homePhone"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="homePhone">Телефон Домашний</label>-->
-<!--                    </div>-->
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="city"-->
-<!--                        type="text"-->
-<!--                        v-model.trim="searchCity"-->
-<!--                      >-->
-<!--                      <label class="active" for="city">Город</label>-->
-<!--                    </div>-->
+                    <div class="collapsible-body-container">
+                      <div class="input-field editor-input">
+                        <select class="browser-default editor-select"
+                                v-model="searchInput.city"
+                        >
+                          <option class="editor-option" selected value="">Не отмечено</option>
+                          <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                            {{ city.cityName }}
+                          </option>
+                        </select>
+                        <label class="active">Город</label>
+                      </div>
 
-                    <div class="input-field editor-input">
-                      <select class="browser-default editor-select"
-                              v-model="searchInput.city"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
-                          {{ city.cityName }}
-                        </option>
-                      </select>
-                      <label class="active">Город</label>
+                      <div class="input-field editor-input">
+                        <input
+                          id="mobilePhone"
+                          type="tel"
+                          v-model.trim="searchInput.mobilePhone"
+                        >
+                        <label class="active" for="mobilePhone">Телефон Мобильный</label>
+                      </div>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="mobilePhone"
-                        type="tel"
-                        v-model.trim="searchInput.mobilePhone"
-                      >
-                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
-                    </div>
                   </div>
                 </li>
 
-                <li class="editor-card blue darken-1 white-text">
-                  <div class="collapsible-header blue darken-1 blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
+                <li class="editor-card blue white-text">
+                  <div class="collapsible-header blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
                   <div class="collapsible-body blue">
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="accountNumber"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="accountNumber">Учётный номер</label>-->
-<!--                    </div>-->
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="number"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="number">Номер</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="previousWork"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="previousWork">Прежняя Работа</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="reasonComing"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="reasonComing">Почему пришел к нам</label>-->
-<!--                    </div>-->
-
-                    <div class="input-field editor-input">
-                      <select class="browser-default editor-select"
-                              v-model="searchInput.professions"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
-                          {{ profession }}
-                        </option>
-                      </select>
-                      <label class="active">Профессии</label>
+                    <div class="collapsible-body-container">
+                      <div class="input-field editor-input">
+                        <select class="browser-default editor-select"
+                                v-model="searchInput.professions"
+                        >
+                          <option class="editor-option" selected value="">Не отмечено</option>
+                          <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
+                            {{ profession }}
+                          </option>
+                        </select>
+                        <label class="active">Профессии</label>
+                      </div>
                     </div>
 
-<!--                    <div class="input-field editor-input">-->
-<!--                      <select-->
-<!--                        id="nightShift"-->
-<!--                        class="browser-default editor-select"-->
-<!--                      >-->
-<!--                        <option class="editor-option" value="1">Да</option>-->
-<!--                        <option class="editor-option" value="2">Нет</option>-->
-<!--                      </select>-->
-<!--                      <label class="active">Ночная</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <select-->
-<!--                        id="checkMVD"-->
-<!--                        class="browser-default editor-select"-->
-<!--                      >-->
-<!--                        <option class="editor-option" value="1">Да</option>-->
-<!--                        <option class="editor-option" value="2">Нет</option>-->
-<!--                      </select>-->
-<!--                      <label class="active">Проверка МВД</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="dateInterview"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="dateInterview">Дата Собеседования</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="uniform"-->
-<!--                        type="text"-->
-<!--                      >-->
-<!--                      <label class="active" for="uniform">Униформа</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <select-->
-<!--                        id="fired"-->
-<!--                        class="browser-default editor-select"-->
-<!--                      >-->
-<!--                        <option class="editor-option" value="1">Да</option>-->
-<!--                        <option class="editor-option" value="2">Нет</option>-->
-<!--                      </select>-->
-<!--                      <label class="active">Уволен</label>-->
-<!--                    </div>-->
                   </div>
                 </li>
+
               </ul>
 
               <div class="col s12 black-text">
-                <h4 class="title">Найдено:</h4>
+                <h4 class="page-title">Найдено</h4>
                 <div>
                   <table class="search-table">
                     <tr>
@@ -532,10 +337,24 @@ export default {
     padding-bottom: 15px;
   }
 
-  .editor-title{
+  .page-title {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+  }
+
+  .collapsible-header,
+  .collapsible-body-container{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .collapsible-body-container {
+    flex-direction: column;
   }
 
   .editor-form,
@@ -669,13 +488,5 @@ export default {
 
   .search-table, td, th {
     text-align: center;
-  }
-
-  #search .workers_section {
-    height: auto;
-    width: auto;
-
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 </style>
