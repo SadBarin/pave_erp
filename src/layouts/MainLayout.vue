@@ -106,4 +106,7 @@ export default {
 </script>
 
 <style scoped>
+  #app .card-content {
+    padding: 0rem;
+  }
 </style>

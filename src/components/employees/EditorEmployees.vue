@@ -460,7 +460,7 @@ export default {
 
   .editor-btns {
     width: 100%;
-    margin-top: 18px;
+    margin-top: 1rem;
   }
 
   .editor-btns .btn:first-child {

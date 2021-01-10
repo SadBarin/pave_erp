@@ -152,6 +152,8 @@ html, body {
 }
 
 .app-content section {
+  border-radius: var(--border-radius);
+
   height: 75vh;
 
   overflow-y: auto;
@@ -227,6 +229,14 @@ html, body {
 #app [type="checkbox"].filled-in:checked+span:not(.lever):after {
   background-color: #1e88e5;
   border: #1e88e5;
+}
+
+/*Select*/
+
+#app select {
+  border-radius: var(--border-radius);
+
+  height: 2rem;
 }
 
 /*Table*/
@@ -309,10 +319,23 @@ html, body {
 }
 
 /*Input*/
+#app input {
+  border-radius: 4px;
+
+  font-size: var(--font-size) !important;
+
+  padding-left: 0.5rem;
+}
+
 #app .input-field {
   min-width: 18rem;
+}
 
-  font-size: var(--font-size);
+#app .input-field label{
+  padding-left: 0.5rem;
+  text-align: center;
+
+  font-size: var(--font-size) !important;
 }
 
 #app .input-field::placeholder {

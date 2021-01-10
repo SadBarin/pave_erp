@@ -193,7 +193,7 @@
       </div>
     </section>
 
-    <div>
+    <div class="btn-container editor-btns">
       <button
         class="btn waves-effect waves-light auth-submit blue darken-1"
         v-on:click="searchAll()"
@@ -488,5 +488,9 @@ export default {
 
   .search-table, td, th {
     text-align: center;
+  }
+
+  .editor-btns {
+    margin-top: 1rem;
   }
 </style>
