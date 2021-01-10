@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitEmployee" class="btn-container" >
+  <form @submit.prevent="submitEmployee" class="flex-center" >
     <div class="input-field input-field-blue">
       <input
         class="input-add"
@@ -26,7 +26,7 @@
       </small>
     </div>
 
-    <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light" type="submit">
+    <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" type="submit">
       <i class="material-icons">add</i>
     </button>
   </form>
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.btn-container .btn-floating {
+.flex-center .btn-floating {
   margin-left: 2rem;
 }
 </style>

@@ -1,3 +1,5 @@
+/* ~~~~~~~ TEXTS AND ICONS ~~~~~~~ */
+
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
@@ -7,9 +9,11 @@
 }
 
 :root {
+  --main-blue: hsl(208, 79%, 51%);
+
   --navbar-height: 34px;
   --sidebar-width: 12rem;
-  --padding-width: 1rem;
+  --padding-width-nav: 1rem;
   --padding-top-page: 1.8rem;
   --margin-bottom: 0.2rem;
   --page-title-height: 3rem;
@@ -17,16 +21,6 @@
   --font-size: calc(0.5em + 0.5vw);
 
   font-size: var(--font-size);
-}
-
-#app * {
-  box-shadow: none;
-}
-
-html, body {
-  height: 100%;
-
-  overflow: hidden;
 }
 
 #app .material-icons {
@@ -70,10 +64,12 @@ html, body {
 
 #app h3 {
   font-size: calc(var(--font-size) * 2.1);
+  margin: 1.5rem 1.5rem 1.5rem 0rem;
 }
 
 #app h4 {
   font-size: calc(var(--font-size) * 1.8);
+  margin: 1rem 1rem 1rem 0rem;
 }
 
 #app h5 {
@@ -82,6 +78,43 @@ html, body {
 
 #app h6 {
   font-size: calc(var(--font-size) * 1.1);
+}
+
+
+
+/* ~~~~~~~ LAYOUT ~~~~~~~*/
+
+#app .flex-center {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app .flex-column-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#app .flex-between-center {
+  text-align: start;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#app * {
+  box-shadow: none;
+}
+
+html, body {
+  height: 100%;
+
+  overflow: hidden;
 }
 
 #app .navbar,
@@ -94,7 +127,7 @@ html, body {
 }
 
 #app .navbar {
-  padding: 0 var(--padding-width);
+  padding: 0 var(--padding-width-nav);
 
   justify-content: space-between;
 
@@ -127,7 +160,7 @@ html, body {
   border-radius: var(--border-radius);
 
   width: inherit;
-  padding: 0 0 0 var(--padding-width);
+  padding: 0 0 0 var(--padding-width-nav);
 }
 
 .app-sidenav.open {
@@ -146,7 +179,7 @@ html, body {
 }
 
 .app-content {
-  padding: var(--padding-top-page) var(--padding-width);
+  padding: var(--padding-top-page) var(--padding-width-nav);
 
   position: relative;
 }
@@ -166,72 +199,96 @@ html, body {
   height: 100%;
 }
 
-.page-title {
-  height: var(--page-title-height);
+.btn-page-title {
+  box-shadow: none !important;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 2.4rem;
+
+  margin-left: 15px;
+  margin-bottom: -10px;
 }
 
-.page-title h3 {
-  margin:0;
-  font-size:2rem
+.btn-page-title .material-icons {
+  margin: -3px;
 }
 
-.page-subtitle h4, .page-title {
-  margin-bottom: 1.5rem;
+#app .col {
+  padding: 0rem;
 }
 
-.title-container {
-  display: flex;
-  align-items: center;
+
+
+/*TODO А тут нужно поработать*/
+
+/* ~~~~~~~ EDITOR ~~~~~~~ */
+
+.editor-card {
+  width: 100%;
 }
 
-.title-btn-container {
-  margin-left: 35px;
+.editor-input {
+  width: 50%;
+}
+
+#app .editor-input input {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#app .editor-input label {
+  color: white;
+}
+
+#app .editor-select {
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0;
+
+  text-align-last: center;
+  text-align: center;
+
+  margin-top: 10px;
+
+  cursor: pointer;
+}
+
+#app .editor-select .invalid {
+  border: none;
+  border-bottom: 1px solid #F44336;
+}
+
+.editor-option {
+  margin-left: 15px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn-title {
-  box-shadow: none !important;
-
-  width: 2.4rem;
-
-  margin-right: 15px;
-  margin-bottom: -10px;
+.editor-select:focus {
+  outline: none !important;
 }
 
-.btn-title .material-icons {
-  margin: -3px;
+.editor-btns {
+  width: 100%;
+  margin-top: 1rem;
 }
 
-.col {
-  padding: 0px !important;
+.editor-btns .btn:first-child {
+  margin-right: 1rem;
 }
 
-#app .card-title {
-  margin-bottom: 30px;
-}
 
-#app .error-title {
-  margin-bottom: 0;
-}
 
-#app .dropdown-content li > a,
-#app .dropdown-content li > span {
-  color: #1e88e5;
-}
+/* ~~~~~~~ CHECKBOX ~~~~~~~ */
 
 #app [type="checkbox"].filled-in:checked+span:not(.lever):after {
-  background-color: #1e88e5;
-  border: #1e88e5;
+  background-color: var(--main-blue);
+  border: var(--main-blue);
 }
 
-/*Select*/
+
+
+/* ~~~~~~~ SELECT ~~~~~~~ */
 
 #app select {
   border-radius: var(--border-radius);
@@ -239,14 +296,17 @@ html, body {
   height: 2rem;
 }
 
-/*Table*/
+
+
+/* ~~~~~~~ TABLE ~~~~~~~ */
+
 #app tr {
   border: none;
   border-radius: 10px;
 }
 
 #app tr:hover:not(:first-child) {
-  background: rgba(206, 206, 206, 0.4);
+  background: hsla(0, 0%, 81%, 0.4);
 
   border-radius: var(--border-radius);
 }
@@ -270,16 +330,9 @@ html, body {
   border-top-right-radius: var(--border-radius);
 }
 
-/*Button*/
-#app .btn-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-#app .btn-container--column {
-  flex-direction: column;
-}
+
+/* ~~~~~~~ BUTTONS ~~~~~~~ */
 
 #app .btn,
 #app .btn-flat,
@@ -318,7 +371,10 @@ html, body {
   margin: 0rem;
 }
 
-/*Input*/
+
+
+/* ~~~~~~~ INPUT ~~~~~~~*/
+
 #app input {
   border-radius: 4px;
 
@@ -338,23 +394,30 @@ html, body {
   font-size: var(--font-size) !important;
 }
 
+#app .error-title {
+  margin-bottom: 0;
+}
+
 #app .input-field::placeholder {
   font-size: var(--font-size);
-  color: cadetblue;
+  color: hsl(182, 25%, 50%);
 }
 
 #app .input-field input:focus + label {
-  color: #1e88e5;
+  color: var(--main-blue);
 }
 
 #app .input-field input:focus {
-  border-bottom: 1px solid #1e88e5;
-  box-shadow: 0 1px 0 0 #1e88e5;
+  border-bottom: 1px solid var(--main-blue);
+  box-shadow: 0 1px 0 0 var(--main-blue);
 }
 
-/*Toast*/
+
+
+/* ~~~~~~~ TOAST* ~~~~~~~ */
+
 #toast-container {
-  background-color: rgba(30, 136, 229, 0.3);
+  background-color: hsla(0, 0%, 100%, 0.8);
   border-radius: var(--border-radius);
 
   padding: 10px;
@@ -365,47 +428,15 @@ html, body {
 }
 
 #toast-container .toast {
-  background-color: #369df1;
+  background-color: var(--main-blue);
   border-radius: var(--border-radius);
   box-shadow: none !important;
 }
 
-/*Datepicker*/
-.datepicker-date-display {
-  background-color: #1e88e5 !important;
-}
 
-.datepicker-table td.is-selected {
-  background-color: #1e88e5 !important;
-}
 
-.datepicker-day-button {
-  color: rgba(0, 0, 0, 0.87) !important;
-}
+/* ~~~~~~~ CARD ~~~~~~~ */
 
-.is-today {
-  color: #1e88e5 !important;
-}
-
-.confirmation-btns {
-  display: flex;
-}
-
-.datepicker-cancel,
-.datepicker-done{
-  color: #1e88e5 !important;
-}
-
-/*Waves*/
-.waves-effect.waves-blue .waves-ripple {
-  background-color: rgba(30, 136, 229, 0.3);
-}
-
-.waves-blue:hover {
-  background-color: rgba(30, 136, 229, 0.3) !important;
-}
-
-/*Card*/
 #app .card,
 #app .card-panel {
   box-shadow: none;
@@ -413,6 +444,10 @@ html, body {
 
   margin-bottom: var(--margin-bottom);
   padding: 1rem;
+}
+
+#app .card-title {
+  margin-bottom: 30px;
 }
 
 #app .card-content h6:first-child {
@@ -436,7 +471,10 @@ html, body {
   border-radius: var(--border-radius);
 }
 
-/*Collapsible*/
+
+
+/* ~~~~~~~ COLLAPSIBLE ~~~~~~~ */
+
 #app .collapsible {
   box-shadow: none;
   border: none;
@@ -467,6 +505,51 @@ html, body {
 
   padding: 1rem;
 }
+
+
+
+/* ~~~~~~~ DATEPICKER ~~~~~~~ */
+
+.datepicker-date-display {
+  background-color: var(--main-blue) !important;
+}
+
+.datepicker-table td.is-selected {
+  background-color: var(--main-blue) !important;
+}
+
+.datepicker-day-button {
+  color: hsla(0, 0%, 0%, 0.87) !important;
+}
+
+.is-today {
+  color: var(--main-blue) !important;
+}
+
+.confirmation-btns {
+  display: flex;
+}
+
+.datepicker-cancel,
+.datepicker-done{
+  color: var(--main-blue) !important;
+}
+
+
+
+/* ~~~~~~~ WAVES ~~~~~~~ */
+
+.waves-effect.waves-blue .waves-ripple {
+  background-color: hsla(208, 79%, 51%, 0.2);
+}
+
+.waves-blue:hover {
+  background-color: hsla(208, 79%, 51%, 0.2) !important;
+}
+
+
+
+/* ~~~~~~~ ADAPTIVE ~~~~~~~ */
 
 @media (max-width: 900px) {
   #app .app-sidenav {

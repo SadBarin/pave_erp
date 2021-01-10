@@ -20,7 +20,7 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="btn-container btn-container--column">
+          <div class="flex-center flex-centerflex-column-center">
             <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
                          title="Редактировать"
                          v-on:click="editedCityStatus"
@@ -165,7 +165,7 @@ export default {
     margin-left: 10px;
   }
 
-  .btn-container {
+  .flex-center {
     display: flex;
     justify-content: flex-end;
   }

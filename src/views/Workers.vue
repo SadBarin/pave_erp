@@ -8,18 +8,18 @@
       v-bind:popup-toast="'Рабочий был удалён'"
     />
 
-    <div class="page-title">
-      <div class="title-container">
+    <div class="page-title flex-between-center">
+      <div class="flex-center">
         <h3>Список рабочих</h3>
 
-        <div class="title-btn-container">
-          <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light"
+        <div class="flex-center">
+          <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
                   onclick="M.toast({html: 'Рабочие обновлены'})"
                   v-on:click="updateCollection('workers')"
           ><i class="material-icons">autorenew</i>
           </button>
 
-          <router-link class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
+          <router-link class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
           </router-link>
         </div>
       </div>
@@ -46,7 +46,7 @@
           <th>Имя</th>
           <th>Отчество</th>
           <th>Пол</th>
-          <th>Возраст</th>
+          <th>Дата Рождения</th>
           <th>Мед.книжка</th>
           <th>Город</th>
           <th>Телефон</th>
@@ -64,7 +64,7 @@
           <td>{{worker.mobilePhone}}</td>
           <td>{{worker.professions}}</td>
           <td>
-            <div class="btn-container">
+            <div class="flex-center">
               <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                       title="Удалить"
                       v-if="!worker.edited"
@@ -151,9 +151,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .btn-remove {
-    margin-right: 0.5rem;
-  }
-</style>

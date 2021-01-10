@@ -15,7 +15,7 @@
             <h6><i class="material-icons">face</i> Рабочий: {{worker.name}} {{worker.surname}}</h6>
             <h6><i class="material-icons">phone</i> Номер: {{worker.mobilePhone}}</h6>
           </div>
-          <div class="btn-container">
+          <div class="flex-center">
             <button class="btn-flat blue darken-1 waves-effect waves-light auth-submit white-text"
                     v-on:click="editedWorkerStatus"
             >
