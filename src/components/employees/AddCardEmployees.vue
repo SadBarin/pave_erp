@@ -26,7 +26,7 @@
       </small>
     </div>
 
-    <button class="btn-floating waves-effect waves-light auth-submit blue darken-1 white-text" title="Добавить сотрудника" type="submit">
+    <button class="btn-floating btn-title blue darken-1 waves-effect waves-circle waves-light" type="submit">
       <i class="material-icons">add</i>
     </button>
   </form>
