@@ -56,11 +56,11 @@
 
                     <div class="input-field editor-input">
                       <input
-                        id="age"
+                        id="birthday"
                         type="date"
-                        v-model.trim="editedAge"
+                        v-model.trim="editedBirthday"
                       >
-                      <label class="active" for="age">Возраст</label>
+                      <label class="active" for="birthday">День рождения</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -424,7 +424,7 @@ export default {
       editedPatronymicCard: '',
       editedAccountNumberCard: '',
       editedBank: '',
-      editedAge: '',
+      editedBirthday: '',
       editedSex: '',
       editedNationality: '',
       editedPassportID: '',
@@ -485,7 +485,7 @@ export default {
       this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
       this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
       this.editedBank = collection[this.searchIndex(collection)].bank
-      this.editedAge = collection[this.searchIndex(collection)].age
+      this.editedBirthday = collection[this.searchIndex(collection)].birthday
       this.editedSex = collection[this.searchIndex(collection)].sex
       this.editedNationality = collection[this.searchIndex(collection)].nationality
       this.editedPassportID = collection[this.searchIndex(collection)].passportID
@@ -519,7 +519,7 @@ export default {
       collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
       collection[this.searchIndex(collection)].patronymicCard = this.editedPatronymicCard
       collection[this.searchIndex(collection)].bank = this.editedBank
-      collection[this.searchIndex(collection)].age = this.editedAge
+      collection[this.searchIndex(collection)].birthday = this.editedBirthday
       collection[this.searchIndex(collection)].sex = this.editedSex
       collection[this.searchIndex(collection)].nationality = this.editedNationality
       collection[this.searchIndex(collection)].passportID = this.editedPassportID
@@ -541,6 +541,9 @@ export default {
       collection[this.searchIndex(collection)].uniform = this.editedUniform
       collection[this.searchIndex(collection)].fired = this.editedFired
       collection[this.searchIndex(collection)].city = this.editedCity
+      collection[this.searchIndex(collection)].age = (new Date()).getFullYear() - this.editedBirthday.substr(0, 4)
+
+      console.log(collection[this.searchIndex(collection)].age)
 
       this.editorExit(collection)
     },
