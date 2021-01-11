@@ -59,8 +59,10 @@
                         id="birthday"
                         type="date"
                         v-model.trim="editedBirthday"
+                        v-on:change="ageCalc"
                       >
                       <label class="active" for="birthday">День рождения</label>
+                      <p>Возраст: {{editedAge}}</p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -85,16 +87,14 @@
                     </div>
 
                     <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
+                      <input
                         id="medicalBook"
+                        type="date"
                         v-model="editedMedicalBook"
+                        v-on:change="medicalBookCalc"
                       >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" value="Есть">Есть</option>
-                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
-                      </select>
-                      <label class="active">Медицинская Книга</label>
+                      <label class="active" for="medicalBook">Медицинская Книга</label>
+                      <p>Истекает: {{editedMedicalBookStatus}}</p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -424,6 +424,7 @@ export default {
       editedPatronymicCard: '',
       editedAccountNumberCard: '',
       editedBank: '',
+      editedAge: '',
       editedBirthday: '',
       editedSex: '',
       editedNationality: '',
@@ -446,7 +447,9 @@ export default {
       editedUniform: '',
       editedFired: '',
       editedCity: '',
-      editedEdited: false
+      editedEdited: false,
+
+      editedMedicalBookStatus: ''
     }
   },
   methods: {
@@ -485,6 +488,7 @@ export default {
       this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
       this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
       this.editedBank = collection[this.searchIndex(collection)].bank
+      this.editedAge = collection[this.searchIndex(collection)].age
       this.editedBirthday = collection[this.searchIndex(collection)].birthday
       this.editedSex = collection[this.searchIndex(collection)].sex
       this.editedNationality = collection[this.searchIndex(collection)].nationality
@@ -507,6 +511,14 @@ export default {
       this.editedUniform = collection[this.searchIndex(collection)].uniform
       this.editedFired = collection[this.searchIndex(collection)].fired
       this.editedCity = collection[this.searchIndex(collection)].city
+    },
+
+    ageCalc () {
+      this.editedAge = (new Date()).getFullYear() - this.editedBirthday.substr(0, 4)
+    },
+
+    medicalBookCalc () {
+      this.editedMedicalBookStatus = this.editedMedicalBook.substr(0, 4) - (new Date()).getFullYear()
     },
 
     editorCollection (collection, additionalCollection) {
@@ -541,9 +553,8 @@ export default {
       collection[this.searchIndex(collection)].uniform = this.editedUniform
       collection[this.searchIndex(collection)].fired = this.editedFired
       collection[this.searchIndex(collection)].city = this.editedCity
-      collection[this.searchIndex(collection)].age = (new Date()).getFullYear() - this.editedBirthday.substr(0, 4)
 
-      console.log(collection[this.searchIndex(collection)].age)
+      collection[this.searchIndex(collection)].age = this.editedAge
 
       this.editorExit(collection)
     },
