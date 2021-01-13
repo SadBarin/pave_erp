@@ -35,6 +35,7 @@
         v-bind:workers="workers"
         @popup-visibility="popupVisibility"
         @edited-worker-status="editedWorkerStatus"
+        @about-worker="aboutWorker"
       />
       <div v-else class="empty-list">
         <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
@@ -79,6 +80,10 @@ export default {
     addWorker (worker) {
       this.workers.push(worker)
       this.saveCollection(this.workers, 'workers')
+    },
+
+    aboutWorker (id) {
+      this.$router.push('/workers/about')
     },
 
     saveCollection (collection, collectionName) {

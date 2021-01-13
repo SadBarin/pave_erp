@@ -1,6 +1,6 @@
 {
     "name": "PaveERP",
-    "short_name": "PaveERP",
+    "short_name": "Pave",
     "icons": [
         {
             "src": "/icon/android-chrome-192x192.png",
@@ -10,5 +10,7 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/pave-erp-demo/"
 }

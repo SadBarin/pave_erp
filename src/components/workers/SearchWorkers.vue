@@ -1,5 +1,13 @@
 <template>
   <div id="search">
+    <Popup
+      v-if="popupShow"
+      v-on:yes="removeWorker(worker)"
+      v-on:no="popupHidden"
+      v-bind:popup-title="'Удалить рабочего?'"
+      v-bind:popup-toast="'Рабочий был удалён'"
+    />
+
     <div class="page-title flex-center">
       <h3>Поиск рабочих</h3>
     </div>
@@ -150,42 +158,13 @@
 
               <div class="col s12 black-text">
                 <h4 class="page-title">Найдено</h4>
-                <div>
-                  <table class="search-table">
-                    <tr>
-                      <th>Фамилия</th>
-                      <th>Имя</th>
-                      <th>Отчество</th>
-                      <th>Пол</th>
-                      <th>Возраст</th>
-                      <th>Мед.книжка</th>
-                      <th>Город</th>
-                      <th>Телефон</th>
-                      <th>Профессия</th>
-                      <th></th>
-                    </tr>
-                    <tr v-for="worker in searchWorkers" :key="worker">
-                      <td>{{worker.surname}}</td>
-                      <td>{{worker.name}}</td>
-                      <td>{{worker.patronymic}}</td>
-                      <td>{{worker.sex}}</td>
-                      <td>{{worker.age}}</td>
-                      <td>{{worker.medicalBook}}</td>
-                      <td>{{worker.city}}</td>
-                      <td>{{worker.mobilePhone}}</td>
-                      <td>{{worker.professions}}</td>
-                      <td>
-                        <div class="flex-center">
-                          <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
-                                  v-on:click.prevent="editedWorkerStatus(worker.id)"
-                          >
-                            <i class="material-icons">create</i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
+
+                <ListWorkers
+                  v-if="workers.length"
+                  v-bind:workers="searchWorkers"
+                  @popup-visibility="popupVisibility"
+                  @edited-worker-status="editedWorkerStatus"
+                />
               </div>
             </form>
           </div>
@@ -206,13 +185,18 @@
 
 <script>
 import M from 'materialize-css'
+import Popup from '@/components/Popup'
+import ListWorkers from '@/components/workers/ListWorkers'
 
 export default {
   name: 'SearchWorkers',
+  components: { Popup, ListWorkers },
   data () {
     return {
       workers: [],
       sites: [],
+      popupShow: false,
+      worker: '',
 
       searchInput: {
         name: '',
@@ -230,6 +214,15 @@ export default {
     }
   },
   methods: {
+    popupVisibility (id) {
+      this.popupShow = true
+      this.worker = id
+    },
+
+    popupHidden () {
+      this.popupShow = false
+    },
+
     searching (obj) {
       return function (key, searchKey) {
         if (searchKey !== '') {
@@ -286,6 +279,8 @@ export default {
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
       this.saveCollection(this.workers, 'workers')
+      this.popupHidden()
+      this.searchWorkers = this.workers
     },
 
     addWorker (worker) {
@@ -335,12 +330,6 @@ export default {
     overflow-y: auto;
 
     padding-bottom: 15px;
-  }
-
-  .page-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .collapsible-header,

@@ -19,12 +19,6 @@
       </div>
 
       <div class="navbar-right">
-<!--        <button-->
-<!--          class="btn-flat blue darken-1 waves-effect waves-light auth-submit white-text"-->
-<!--          v-on:click="popupVisibility">-->
-<!--          <i class="material-icons">arrow_back</i> Выйти-->
-<!--        </button>-->
-
         <button
           class="btn btn-transparent transparent"
           v-on:click="popupVisibility"

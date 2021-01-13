@@ -13,7 +13,7 @@
         <th>Профессия</th>
         <th></th>
       </tr>
-      <tr v-for="worker in workers" :key="worker">
+      <tr v-for="worker in workers" :key="worker.value">
         <td>{{worker.surname}}</td>
         <td>{{worker.name}}</td>
         <td>{{worker.patronymic}}</td>
@@ -27,6 +27,7 @@
           <div class="flex-center">
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
+                    v-on:click.prevent="aboutWorker(worker.id)"
             >
               <i class="material-icons">remove_red_eye</i>
             </button>
@@ -34,14 +35,14 @@
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
-                    v-on:click="popupVisibility(worker.id)"
+                    v-on:click.prevent="popupVisibility(worker.id)"
             >
               <i class="material-icons">delete</i>
             </button>
 
             <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
                     title="Редактировать"
-                    v-on:click="editedWorkerStatus(worker.id)"
+                    v-on:click.prevent="editedWorkerStatus(worker.id)"
             >
               <i class="material-icons">create</i>
             </button>
@@ -62,6 +63,9 @@ export default {
     },
     editedWorkerStatus (id) {
       this.$emit('edited-worker-status', id)
+    },
+    aboutWorker (id) {
+      this.$emit('about-worker', id)
     }
   },
   props: ['workers']
