@@ -65,6 +65,12 @@
           <td>{{worker.professions}}</td>
           <td>
             <div class="flex-center">
+              <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
+                      title="Подробнее"
+              >
+                <i class="material-icons">remove_red_eye</i>
+              </button>
+
               <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                       title="Удалить"
                       v-if="!worker.edited"
@@ -79,6 +85,7 @@
               >
                 <i class="material-icons">create</i>
               </button>
+
             </div>
           </td>
         </tr>

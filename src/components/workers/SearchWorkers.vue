@@ -74,7 +74,7 @@
                           <option class="editor-option" value="Мужской">Мужской</option>
                           <option class="editor-option" value="Женский">Женский</option>
                         </select>
-                        <label class="active">Биологический Пол</label>
+                        <label class="active">Пол</label>
                       </div>
 
                       <div class="input-field editor-input">
