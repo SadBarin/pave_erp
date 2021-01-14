@@ -7,8 +7,25 @@
       v-bind:popup-title="'Выйти?'"
     />
 
-    <div class="page-title flex-center">
+    <div class="page-title flex-between-center">
       <h3>Редактор города "{{ editedSitesName }}"</h3>
+
+      <div class="editor-btns">
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          type="submit"
+          v-on:click="editorCollection(sites)"
+        >
+          <i class="material-icons">exit_to_app</i> Сохранить и выйти
+        </button>
+
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          v-on:click.prevent="popupVisibility"
+        >
+          <i class="material-icons">location_city</i>К Городам
+        </button>
+      </div>
     </div>
 
     <section>
@@ -67,23 +84,6 @@
         </div>
       </div>
     </section>
-
-    <div class="flex-center editor-btns">
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        type="submit"
-        v-on:click="editorCollection(sites)"
-      >
-        <i class="material-icons">create</i> Редактировать
-      </button>
-
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click.prevent="popupVisibility"
-      >
-        <i class="material-icons">arrow_back</i> Вернуться назад
-      </button>
-    </div>
   </div>
 </template>
 
@@ -110,6 +110,11 @@ export default {
   },
   validations: {
     editedSitesName: { required, minLength: minLength(2) }
+  },
+  beforeDestroy () {
+    try {
+      window.addEventListener('beforeunload', this.editorCollection(this.sites))
+    } catch (e) {}
   },
   methods: {
     validate () {
@@ -163,6 +168,8 @@ export default {
 
         this.sites[this.searchIndex(collection)].employees = this.countEmployees
 
+        console.log('Город сохранён 😉')
+
         this.editorExit(collection)
       }
     },
@@ -204,14 +211,6 @@ export default {
 </script>
 
 <style scoped>
-  .app-content section {
-    height: 70vh;
-
-    overflow-y: auto;
-
-    padding-bottom: 15px;
-  }
-
   input:not([type]),
   input[type=text]:not(.browser-default),
   input[type=password]:not(.browser-default),

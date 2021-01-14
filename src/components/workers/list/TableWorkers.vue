@@ -1,5 +1,4 @@
 <template>
-  <section class="workers_section">
     <table>
       <tr>
         <th>Фамилия</th>
@@ -27,7 +26,7 @@
           <div class="flex-center">
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
-                    v-on:click.prevent="aboutWorker(worker.id)"
+                    v-on:click.prevent="watchAboutWorker(worker)"
             >
               <i class="material-icons">remove_red_eye</i>
             </button>
@@ -51,21 +50,22 @@
         </td>
       </tr>
     </table>
-  </section>
 </template>
 
 <script>
 export default {
-  name: 'ListWorkers',
+  name: 'TableWorkers',
   methods: {
     popupVisibility (id) {
       this.$emit('popup-visibility', id)
     },
+
     editedWorkerStatus (id) {
       this.$emit('edited-worker-status', id)
     },
-    aboutWorker (id) {
-      this.$emit('about-worker', id)
+
+    watchAboutWorker (worker) {
+      this.$emit('watch-about-worker', worker)
     }
   },
   props: ['workers']

@@ -8,8 +8,15 @@
       v-bind:popup-toast="'Рабочий был удалён'"
     />
 
-    <div class="page-title flex-center">
+    <div class="page-title flex-between-center">
       <h3>Поиск рабочих</h3>
+
+      <button
+        class="btn waves-effect waves-light auth-submit blue darken-1"
+        v-on:click="searchAll()"
+      >
+        <i class="material-icons">search</i> Поиск
+      </button>
     </div>
 
     <section>
@@ -17,7 +24,7 @@
         <div class="col s12">
           <div>
             <form>
-              <ul class="collapsible black-text form-content editor-form-content">
+              <ul class="collapsible black-text form-content">
 
                 <li class="editor-card blue white-text">
                   <div class="collapsible-header blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
@@ -159,7 +166,7 @@
               <div class="col s12 black-text">
                 <h4 class="page-title">Найдено</h4>
 
-                <ListWorkers
+                <TableWorkers
                   v-if="workers.length"
                   v-bind:workers="searchWorkers"
                   @popup-visibility="popupVisibility"
@@ -171,26 +178,17 @@
         </div>
       </div>
     </section>
-
-    <div class="flex-center editor-btns">
-      <button
-        class="btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="searchAll()"
-      >
-        <i class="material-icons">search</i> Поиск
-      </button>
-    </div>
   </div>
 </template>
 
 <script>
 import M from 'materialize-css'
 import Popup from '@/components/Popup'
-import ListWorkers from '@/components/workers/ListWorkers'
+import TableWorkers from '@/components/workers/list/TableWorkers'
 
 export default {
   name: 'SearchWorkers',
-  components: { Popup, ListWorkers },
+  components: { Popup, TableWorkers },
   data () {
     return {
       workers: [],
@@ -324,14 +322,6 @@ export default {
 </script>
 
 <style scoped>
-  .app-content section {
-    height: 70vh;
-
-    overflow-y: auto;
-
-    padding-bottom: 15px;
-  }
-
   .collapsible-header,
   .collapsible-body-container{
     width: 100%;
@@ -345,18 +335,6 @@ export default {
   .collapsible-body-container {
     flex-direction: column;
   }
-
-  /*.editor-form-content {*/
-  /*  color: white !important;*/
-
-  /*  width: 100%;*/
-
-  /*  display: flex;*/
-  /*  flex-direction: column;*/
-  /*  align-items: flex-start;*/
-  /*  justify-content: center;*/
-  /*  flex-wrap: wrap;*/
-  /*}*/
 
   .row .col.s12 {
     padding: 0;
@@ -394,13 +372,5 @@ export default {
 
   #app small .invalid {
     border: none !important;
-  }
-
-  .search-table, td, th {
-    text-align: center;
-  }
-
-  .editor-btns {
-    margin-top: 1rem;
   }
 </style>

@@ -1,80 +1,37 @@
 <template>
   <div>
-    <Popup
-      v-if="popupShow"
-      v-on:yes="removeWorker(worker)"
-      v-on:no="popupHidden"
-      v-bind:popup-title="'Удалить рабочего?'"
-      v-bind:popup-toast="'Рабочий был удалён'"
+    <ListWorkers
+      v-if="!aboutStatus"
+      @watch-about-worker="watchAboutWorker"
     />
 
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3>Список рабочих</h3>
-
-        <div class="flex-center">
-          <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
-                  onclick="M.toast({html: 'Рабочие обновлены'})"
-                  v-on:click="updateCollection('workers')"
-          ><i class="material-icons">autorenew</i>
-          </button>
-
-          <router-link class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
-          </router-link>
-        </div>
-      </div>
-
-      <AddCardWorkers
-        @add-worker="addWorker"
-      />
-    </div>
-
-    <section>
-      <ListWorkers
-        v-if="workers.length"
-        v-bind:workers="workers"
-        @popup-visibility="popupVisibility"
-        @edited-worker-status="editedWorkerStatus"
-        @about-worker="aboutWorker"
-      />
-      <div v-else class="empty-list">
-        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
-        <p>Добавьте рабочего, чтобы начать работать над ним.</p>
-      </div>
-    </section>
+    <AboutWorker
+      v-if="aboutStatus"
+      v-bind:worker="aboutWorkerStatus"
+      @exit-about-worker="exitAboutWorker"
+    />
   </div>
 </template>
 
 <script>
-import AddCardWorkers from '@/components/workers/AddCardWorkers'
-import ListWorkers from '@/components/workers/ListWorkers'
-import Popup from '@/components/Popup'
+import ListWorkers from '@/components/workers/list/ListWorkers'
+import AboutWorker from '@/components/workers/about/AboutWorker'
 export default {
   name: 'Workers',
-  components: { AddCardWorkers, ListWorkers, Popup },
+  components: { ListWorkers, AboutWorker },
   data () {
     return {
       workers: [],
-      popupShow: false,
-      worker: '',
+      aboutStatus: false,
+      aboutWorkerStatus: '',
 
       updateTimeout: 60000
     }
   },
   methods: {
-    popupVisibility (id) {
-      this.popupShow = true
-      this.worker = id
-    },
-
-    popupHidden () {
-      this.popupShow = false
-    },
-
     removeWorker (id) {
       this.workers = this.workers.filter(worker => worker.id !== id)
       this.saveCollection(this.workers, 'workers')
-      this.popupHidden()
     },
 
     addWorker (worker) {
@@ -82,8 +39,13 @@ export default {
       this.saveCollection(this.workers, 'workers')
     },
 
-    aboutWorker (id) {
-      this.$router.push('/workers/about')
+    watchAboutWorker (worker) {
+      this.aboutWorkerStatus = worker
+      this.aboutStatus = true
+    },
+
+    exitAboutWorker () {
+      this.aboutStatus = false
     },
 
     saveCollection (collection, collectionName) {

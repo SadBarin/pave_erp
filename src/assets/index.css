@@ -49,6 +49,10 @@
   font-size: var(--font-size);
 }
 
+#app span {
+  font-size: calc(var(--font-size) * 0.9);
+}
+
 #app p, #app h6 {
   margin-top: 0.2rem;
   margin-bottom: 0.6rem;
@@ -266,11 +270,6 @@ html, body {
 
 .editor-select:focus {
   outline: none !important;
-}
-
-.editor-btns {
-  width: 100%;
-  margin-top: 1rem;
 }
 
 .editor-btns .btn:first-child {

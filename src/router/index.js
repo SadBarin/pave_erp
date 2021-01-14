@@ -59,13 +59,7 @@ const router = new VueRouter({
       path: '/workers/about',
       name: 'workersAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/AboutWorker')
-    },
-    {
-      path: '/editor',
-      name: 'editor',
-      meta: { layout: 'main' },
-      component: () => import('../components/editors/Editor')
+      component: () => import('../components/workers/about/AboutWorker')
     }
   ]
 })

@@ -7,8 +7,24 @@
       v-bind:popup-title="'Выйти?'"
     />
 
-    <div class="page-title flex-center">
-      <h3>Редактор рабочего "{{editedName}} {{editedSurname}}"</h3>
+    <div class="page-title flex-between-center">
+      <h3>Редактор рабочего "{{editedSurname}} {{editedName}}"</h3>
+
+      <div class="editor-btns">
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          v-on:click="editorCollection(workers)"
+        >
+          <i class="material-icons">exit_to_app</i>Сохранить и выйти
+        </button>
+
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          v-on:click.prevent="popupVisibility"
+        >
+          <i class="material-icons">transfer_within_a_station</i> К Рабочим
+        </button>
+      </div>
     </div>
 
     <section>
@@ -239,7 +255,7 @@
                               v-model="editedCity"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                        <option class="editor-option" v-for="(city) of this.sites" :key="city.cityName">
                           {{ city.cityName }}
                         </option>
                       </select>
@@ -378,22 +394,6 @@
         </div>
       </div>
     </section>
-
-    <div class="flex-center editor-btns">
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="editorCollection(workers)"
-      >
-        <i class="material-icons">create</i> Редактировать
-      </button>
-
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click.prevent="popupVisibility"
-      >
-        <i class="material-icons">arrow_back</i> Вернуться назад
-      </button>
-    </div>
   </div>
 </template>
 
@@ -403,7 +403,7 @@ import M from 'materialize-css'
 import { mask } from 'vue-the-mask'
 
 export default {
-  name: 'AddWorkers',
+  name: 'EditorWorkers',
   components: {
     Popup
   },
@@ -414,6 +414,7 @@ export default {
       coincidence: false,
 
       workers: [{}],
+      sites: [{}],
 
       editedName: '',
       editedSurname: '',
@@ -451,6 +452,11 @@ export default {
 
       editedMedicalBookStatus: ''
     }
+  },
+  beforeDestroy () {
+    try {
+      window.addEventListener('beforeunload', this.editorCollection(this.workers))
+    } catch (e) {}
   },
   methods: {
     popupVisibility () {
@@ -556,6 +562,8 @@ export default {
 
       collection[this.searchIndex(collection)].age = this.editedAge
 
+      console.log('Рабочий сохранён 😉')
+
       this.editorExit(collection)
     },
 
@@ -597,14 +605,6 @@ export default {
 </script>
 
 <style scoped>
-  .app-content section {
-    height: 70vh;
-
-    overflow-y: auto;
-
-    padding-bottom: 15px;
-  }
-
   input:not([type]),
   input[type=text]:not(.browser-default),
   input[type=password]:not(.browser-default),

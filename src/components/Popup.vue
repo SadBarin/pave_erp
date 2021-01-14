@@ -2,7 +2,7 @@
   <div class="popup-overlay">
     <form class="card auth-card popup">
       <div class="card-content">
-        <span class="card-title">{{popupTitle}}<br></span>
+        <h4 class="card-title">{{popupTitle}}<br></h4>
       </div>
 
       <div class="card-action btns-popup">

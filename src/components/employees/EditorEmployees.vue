@@ -7,8 +7,24 @@
       v-bind:popup-title="'Выйти?'"
     />
 
-    <div class="page-title flex-center">
-      <h3>Редактор сотрудника "{{editedName}} {{editedSurname}}"</h3>
+    <div class="page-title flex-between-center">
+      <h3>Редактор сотрудника "{{editedSurname}} {{editedName}}"</h3>
+
+      <div class="editor-btns">
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          v-on:click="editorCollection(employees, sites)"
+        >
+          <i class="material-icons">exit_to_app</i> Сохранить и выйти
+        </button>
+
+        <button
+          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          v-on:click="popupVisibility"
+        >
+          <i class="material-icons">group</i>К Сотрудникам
+        </button>
+      </div>
     </div>
 
     <section>
@@ -171,22 +187,6 @@
         </div>
       </div>
     </section>
-
-    <div class="flex-center editor-btns">
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="editorCollection(employees, sites)"
-      >
-        <i class="material-icons">create</i> Редактировать
-      </button>
-
-      <button
-        class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="popupVisibility"
-      >
-        <i class="material-icons">arrow_back</i> Вернуться назад
-      </button>
-    </div>
   </div>
 </template>
 
@@ -223,6 +223,11 @@ export default {
   validations: {
     editedEmail: { email, required },
     editedPassword: { required, minLength: minLength(8) }
+  },
+  beforeDestroy () {
+    try {
+      window.addEventListener('beforeunload', this.editorCollection(this.employees))
+    } catch (e) {}
   },
   methods: {
     popupVisibility () {
@@ -279,6 +284,8 @@ export default {
       collection[this.searchIndex(collection)].duty = this.editedDuty
       collection[this.searchIndex(collection)].access = this.editedAccess
 
+      console.log('Сотрудник сохранён 😉')
+
       this.editorExit(collection)
     },
 
@@ -319,14 +326,6 @@ export default {
 </script>
 
 <style scoped>
-  .app-content section {
-    height: 70vh;
-
-    overflow-y: auto;
-
-    padding-bottom: 15px;
-  }
-
   input:not([type]),
   input[type=text]:not(.browser-default),
   input[type=password]:not(.browser-default),
