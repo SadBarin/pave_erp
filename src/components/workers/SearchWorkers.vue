@@ -164,7 +164,7 @@
               </ul>
 
               <div class="col s12 black-text">
-                <h4 class="page-title">Найдено</h4>
+                <h4>Найдено</h4>
 
                 <TableWorkers
                   v-if="workers.length"

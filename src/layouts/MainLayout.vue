@@ -8,55 +8,57 @@
       v-bind:popup-toast="'Вы вышли из системы'"
     />
 
-    <nav class="navbar blue darken-1">
+    <div class="sidenav-menu">
       <div class="navbar-left">
         <button
-          class="btn btn-transparent transparent"
+          class="btn transparent black-text"
           v-on:click.prevent="isOpen = !isOpen"
         >
           <i class="material-icons">menu</i>
         </button>
       </div>
+    </div>
 
-      <div class="navbar-right">
+    <div class="sidenav app-sidenav" v-bind:class="{open: isOpen}">
+      <div class="sidenav-content sidenav-top">
+        <ul>
+          <li>
+            <router-link class="waves-effect waves-blue pointer" to="/sites">
+              <i class="material-icons">location_city</i>
+              Города
+            </router-link>
+          </li>
+          <li>
+            <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees">
+              <i class="material-icons">group</i>
+              Сотрудники
+            </router-link>
+          </li>
+          <li>
+            <router-link class="waves-effect waves-blue pointer" to="/workers">
+              <i class="material-icons">transfer_within_a_station</i>
+              Рабочие
+            </router-link>
+          </li>
+          <li>
+            <router-link class="waves-effect waves-blue pointer" to="/workers/search">
+              <i class="material-icons">search</i>
+              Поиск рабочих
+            </router-link>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidenav-content sidenav-bottom">
         <button
-          class="btn btn-transparent transparent"
+          class="btn transparent black-text"
           v-on:click="popupVisibility"
         >
+          <i class="material-icons">exit_to_app</i>
           Выйти
         </button>
       </div>
-    </nav>
-
-    <ul
-      class="sidenav app-sidenav"
-      v-bind:class="{open: isOpen}"
-    >
-      <li>
-        <router-link class="waves-effect waves-blue pointer" to="/sites">
-          <i class="material-icons">location_city</i>
-          Города
-        </router-link>
-      </li>
-      <li>
-        <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees">
-          <i class="material-icons">group</i>
-          Сотрудники
-        </router-link>
-      </li>
-      <li>
-        <router-link class="waves-effect waves-blue pointer" to="/workers">
-          <i class="material-icons">transfer_within_a_station</i>
-          Рабочие
-        </router-link>
-      </li>
-      <li>
-        <router-link class="waves-effect waves-blue pointer" to="/workers/search">
-          <i class="material-icons">search</i>
-          Поиск рабочих
-        </router-link>
-      </li>
-    </ul>
+    </div>
 
     <main class="app-content">
       <div
