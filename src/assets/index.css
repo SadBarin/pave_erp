@@ -38,7 +38,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsla(202, 79%, 51%);
+  background: hsl(202, 79%, 51%);
 }
 
 #app .material-icons {
@@ -61,6 +61,7 @@
   height: inherit;
   min-height: 1rem;
   margin-right: 0.5rem;
+  vertical-align: text-bottom;
 }
 
 #app p, #app a {
@@ -92,6 +93,11 @@
 #app h4 {
   font-size: calc(var(--font-size) * 1.8);
   margin: 1rem 1rem 1rem 0rem;
+}
+
+#app h4 .material-icons{
+  font-size: calc(var(--font-size) * 1.2);
+  margin-bottom: 0.3rem;
 }
 
 #app h5 {
@@ -245,17 +251,10 @@ section {
   width: 50%;
 }
 
-#app .editor-input input {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-#app .editor-input label {
-  color: white;
-}
-
 #app .editor-select {
+  background: var(--main-blue);
+  color: white;
   border: none;
-  border-bottom: 1px solid white;
   padding: 0;
 
   text-align-last: center;

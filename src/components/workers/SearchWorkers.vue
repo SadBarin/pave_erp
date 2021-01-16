@@ -340,6 +340,10 @@ export default {
     padding: 0;
   }
 
+  input label {
+    color:  white !important;
+  }
+
   input:not([type]),
   input[type=text]:not(.browser-default),
   input[type=password]:not(.browser-default),
@@ -372,5 +376,43 @@ export default {
 
   #app small .invalid {
     border: none !important;
+  }
+
+  #app .editor-input input {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  #app .editor-input label {
+    color: white;
+  }
+
+  #app .editor-select {
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0;
+
+    text-align-last: center;
+    text-align: center;
+
+    margin-top: 10px;
+
+    cursor: pointer;
+  }
+
+  #app .editor-select .invalid {
+    border: none;
+    border-bottom: 1px solid #F44336;
+  }
+
+  .editor-option {
+    margin-left: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .editor-select:focus {
+    outline: none !important;
   }
 </style>

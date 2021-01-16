@@ -33,9 +33,9 @@
           <div>
             <form>
               <div class="form-content">
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">ФИО</span>
+                    <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
 
                     <div class="input-field editor-input">
                       <input
@@ -66,9 +66,9 @@
                   </div>
                 </div>
 
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Личные данные</span>
+                    <h4 class="card-title"><i class="material-icons">assignment</i> Личные данные</h4>
 
                     <div class="input-field editor-input">
                       <input
@@ -133,9 +133,9 @@
                   </div>
                 </div>
 
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Паспортные данные</span>
+                    <h4 class="card-title"><i class="material-icons">book</i> Паспортные данные</h4>
 
                     <div class="input-field editor-input">
                       <input
@@ -184,9 +184,9 @@
                   </div>
                 </div>
 
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Банковские данные</span>
+                    <h4 class="card-title"><i class="material-icons">account_balance_wallet</i> Банковские данные</h4>
                     <div class="input-field editor-input">
                       <input
                         id="nameCard"
@@ -246,9 +246,9 @@
                   </div>
                 </div>
 
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Контактные данные</span>
+                    <h4 class="card-title"><i class="material-icons">local_phone</i> Контактные данные</h4>
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
@@ -284,9 +284,9 @@
                   </div>
                 </div>
 
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Рабочие данные</span>
+                    <h4 class="card-title"><i class="material-icons">rate_review</i> Рабочие данные</h4>
                     <div class="input-field editor-input">
                       <input
                         id="accountNumber"
@@ -605,37 +605,4 @@ export default {
 </script>
 
 <style scoped>
-  input:not([type]),
-  input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=url]:not(.browser-default),
-  input[type=time]:not(.browser-default),
-  input[type=date]:not(.browser-default),
-  input[type=datetime]:not(.browser-default),
-  input[type=datetime-local]:not(.browser-default),
-  input[type=tel]:not(.browser-default),
-  input[type=number]:not(.browser-default),
-  input[type=search]:not(.browser-default),
-  textarea.materialize-textarea {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  }
-
-  /* label focus color */
-  #app .input-field input:focus + label {
-    color: white;
-  }
-  /* label underline focus color */
-  #app .input-field input:focus {
-    border-bottom: 1px solid white;
-    box-shadow: 0 1px 0 0 white;
-  }
-
-  .input-field .helper-text {
-    color: rgba(255, 255, 255, 0.7)
-  }
-
-  #app small .invalid {
-    border: none !important;
-  }
 </style>

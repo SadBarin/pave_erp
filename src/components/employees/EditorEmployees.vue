@@ -33,9 +33,9 @@
           <div>
             <form @submit.prevent="validate">
              <div class="form-content">
-               <div class="card editor-card blue darken-1 white-text">
+               <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
-                   <span class="card-title white-text">Авторизация</span>
+                   <h4 class="card-title"><i class="material-icons">assignment_ind</i> Авторизация</h4>
 
                    <div class="input-field editor-input">
                      <input
@@ -90,12 +90,20 @@
                      </select>
                      <label class="active">Доступ</label>
                    </div>
+
+                   <div class="input-field editor-input">
+                     <input type="text"
+                            id="duty"
+                            v-model.trim="editedDuty"
+                     >
+                     <label for="duty" class="active">Должность</label>
+                   </div>
                  </div>
                </div>
 
-               <div class="card editor-card blue darken-1 white-text">
+               <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
-                   <span class="card-title white-text">ФИО</span>
+                   <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
                    <div class="input-field editor-input">
                      <input type="text"
                             id="name"
@@ -122,9 +130,21 @@
                  </div>
                </div>
 
-               <div class="card editor-card blue darken-1 white-text">
+               <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center black-text">
-                   <span class="card-title white-text">Контактные данные</span>
+                   <h4 class="card-title"><i class="material-icons">local_phone</i> Контактные данные</h4>
+
+                   <div class="input-field editor-input">
+                     <select class="browser-default editor-select"
+                             v-model.trim="editedCity"
+                     >
+                       <option class="editor-option" selected>Отсутствует</option>
+                       <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                         {{ city.cityName }}
+                       </option>
+                     </select>
+                     <label class="active">Город</label>
+                   </div>
 
                    <div class="input-field editor-input">
                      <input type="tel"
@@ -142,32 +162,6 @@
                             placeholder="+7 ( ) "
                      >
                      <label for="mobilePhone" class="active">Телефон Мобильный</label>
-                   </div>
-                 </div>
-               </div>
-
-               <div class="card editor-card blue darken-1 white-text">
-                 <div class="card-content flex-column-center black-text">
-                   <span class="card-title white-text">Дополнительно</span>
-
-                   <div class="input-field editor-input">
-                     <select class="browser-default editor-select"
-                             v-model.trim="editedCity"
-                     >
-                       <option class="editor-option" selected>Отсутствует</option>
-                       <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
-                         {{ city.cityName }}
-                       </option>
-                     </select>
-                     <label class="active">Город</label>
-                   </div>
-
-                   <div class="input-field editor-input">
-                     <input type="text"
-                            id="duty"
-                            v-model.trim="editedDuty"
-                     >
-                     <label for="duty" class="active">Должность</label>
                    </div>
                  </div>
                </div>
@@ -326,36 +320,6 @@ export default {
 </script>
 
 <style scoped>
-  input:not([type]),
-  input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=url]:not(.browser-default),
-  input[type=time]:not(.browser-default),
-  input[type=date]:not(.browser-default),
-  input[type=datetime]:not(.browser-default),
-  input[type=datetime-local]:not(.browser-default),
-  input[type=tel]:not(.browser-default),
-  input[type=number]:not(.browser-default),
-  input[type=search]:not(.browser-default),
-  textarea.materialize-textarea {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  }
-
-  /* label focus color */
-  #app .input-field input:focus + label {
-    color: white;
-  }
-  /* label underline focus color */
-  #app .input-field input:focus {
-    border-bottom: 1px solid white;
-    box-shadow: 0 1px 0 0 white;
-  }
-
-  .input-field .helper-text {
-    color: rgba(255, 255, 255, 0.7)
-  }
-
   #app small .invalid {
     border: none !important;
   }

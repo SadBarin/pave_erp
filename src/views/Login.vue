@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitLogin">
     <div class="card-content">
-      <span class="card-title">Вход в систему</span>
+      <h4 class="card-title">Вход в систему</h4>
 
       <div class="input-field">
         <input

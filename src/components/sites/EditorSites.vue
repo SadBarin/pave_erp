@@ -34,9 +34,9 @@
           <div>
             <form @submit.prevent="validate">
               <div class="form-content">
-                <div class="card editor-card blue darken-1 white-text">
+                <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <span class="card-title">Общее</span>
+                    <h4 class="card-title">Общее</h4>
 
                     <div class="editor-input input-field">
                       <input
@@ -211,37 +211,4 @@ export default {
 </script>
 
 <style scoped>
-  input:not([type]),
-  input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=url]:not(.browser-default),
-  input[type=time]:not(.browser-default),
-  input[type=date]:not(.browser-default),
-  input[type=datetime]:not(.browser-default),
-  input[type=datetime-local]:not(.browser-default),
-  input[type=tel]:not(.browser-default),
-  input[type=number]:not(.browser-default),
-  input[type=search]:not(.browser-default),
-  textarea.materialize-textarea {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  }
-
-  /* label focus color */
-  #app .input-field input:focus + label {
-    color: white;
-  }
-  /* label underline focus color */
-  #app .input-field input:focus {
-    border-bottom: 1px solid white;
-    box-shadow: 0 1px 0 0 white;
-  }
-
-  .input-field .helper-text {
-    color: rgba(255, 255, 255, 0.7)
-  }
-
-  #app small .invalid {
-    border: none !important;
-  }
 </style>
