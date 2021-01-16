@@ -154,7 +154,7 @@
                             {{ profession }}
                           </option>
                         </select>
-                        <label class="active">Профессии</label>
+                        <label class="active">Профессия</label>
                       </div>
                     </div>
 
