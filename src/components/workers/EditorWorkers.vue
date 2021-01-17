@@ -39,6 +39,15 @@
 
                     <div class="input-field editor-input">
                       <input
+                        class="input-field"
+                        id="photoWorker"
+                        type="file"
+                      >
+                      <label class="active" for="PassportScan">Загрузить фото рабочего</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
                         id="name"
                         type="text"
                         v-model.trim="editedName"
@@ -139,6 +148,15 @@
 
                     <div class="input-field editor-input">
                       <input
+                        class="input-field"
+                        id="passportScan"
+                        type="file"
+                      >
+                      <label class="active" for="PassportScan">Загрузить скан пасспорта рабочего</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
                         id="passportID"
                         type="text"
                         v-model.trim="editedPassportID"
@@ -149,7 +167,7 @@
                     <div class="input-field editor-input">
                       <input
                         id="passportDate"
-                        type="text"
+                        type="date"
                         v-model.trim="editedPassportDate"
                       >
                       <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
@@ -229,17 +247,17 @@
                         id="bank"
                         v-model.trim="editedBank"
                       >
-                        <option class="editor-option" value="1">СберБанк</option>
-                        <option class="editor-option" value="2">Банк ВТБ</option>
-                        <option class="editor-option" value="3">Газпромбанк</option>
-                        <option class="editor-option" value="4">Национальный Клиринговый Центр</option>
-                        <option class="editor-option" value="5">Альфа-Банк</option>
-                        <option class="editor-option" value="6">Россельхозбанк</option>
-                        <option class="editor-option" value="7">Московский Кредитный Банк</option>
-                        <option class="editor-option" value="8">Банк «Открытие»</option>
-                        <option class="editor-option" value="9">Совкомбанк</option>
-                        <option class="editor-option" value="10">Росбанк</option>
-                        <option class="editor-option" value="11">Тинькофф Банк</option>
+                        <option class="editor-option" value="СберБанк">СберБанк</option>
+                        <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
+                        <option class="editor-option" value="Газпромбанк">Газпромбанк</option>
+                        <option class="editor-option" value="Национальный Клиринговый Центр">Национальный Клиринговый Центр</option>
+                        <option class="editor-option" value="Альфа-Банк">Альфа-Банк</option>
+                        <option class="editor-option" value="Россельхозбанк">Россельхозбанк</option>
+                        <option class="editor-option" value="Московский Кредитный Банк">Московский Кредитный Банк</option>
+                        <option class="editor-option" value="Банк «Открытие»">Банк «Открытие»</option>
+                        <option class="editor-option" value="Совкомбанк">Совкомбанк</option>
+                        <option class="editor-option" value="Росбанк">Росбанк</option>
+                        <option class="editor-option" value="Тинькофф Банк">Тинькофф Банк</option>
                       </select>
                       <label class="active">Банк</label>
                     </div>
@@ -311,7 +329,7 @@
                         type="text"
                         v-model.trim="editedReasonComing"
                       >
-                      <label class="active" for="reasonComing">Почему пришел к нам</label>
+                      <label class="active" for="reasonComing">Почему пришел к нам (кратко)</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -320,7 +338,7 @@
                         type="text"
                         v-model.trim="editedProfessions"
                       >
-                      <label class="active" for="professions">Профессии</label>
+                      <label class="active" for="professions">Профессия</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -329,10 +347,10 @@
                         class="browser-default editor-select"
                         v-model.trim="editedNightShift"
                       >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
+                        <option class="editor-option" value="Да">Да</option>
+                        <option class="editor-option" value="Нет">Нет</option>
                       </select>
-                      <label class="active">Ночная</label>
+                      <label class="active">Ночная смена</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -341,8 +359,8 @@
                         class="browser-default editor-select"
                         v-model.trim="editedCheckMVD"
                       >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
+                        <option class="editor-option" value="Да">Да</option>
+                        <option class="editor-option" value="Нет">Нет</option>
                       </select>
                       <label class="active">Проверка МВД</label>
                     </div>
@@ -350,7 +368,7 @@
                     <div class="input-field editor-input">
                       <input
                         id="dateInterview"
-                        type="text"
+                        type="date"
                         v-model.trim="editedDateInterview"
                       >
                       <label class="active" for="dateInterview">Дата Собеседования</label>
@@ -371,8 +389,8 @@
                         class="browser-default editor-select"
                         v-model.trim="editedFired"
                       >
-                        <option class="editor-option" value="1">Да</option>
-                        <option class="editor-option" value="2">Нет</option>
+                        <option class="editor-option" value="Да">Да</option>
+                        <option class="editor-option" value="Нет">Нет</option>
                       </select>
                       <label class="active">Уволен</label>
                     </div>
@@ -561,6 +579,7 @@ export default {
       collection[this.searchIndex(collection)].city = this.editedCity
 
       collection[this.searchIndex(collection)].age = this.editedAge
+      collection[this.searchIndex(collection)].editedCount += 1
 
       console.log('Рабочий сохранён 😉')
 

@@ -87,7 +87,7 @@ export default {
           name: 'Новый',
           surname: 'Рабочий',
           patronymic: '',
-          accountNumber: '',
+          accountNumber: Date.now(),
           nameCard: '',
           surnameCard: '',
           patronymicCard: '',
@@ -115,7 +115,8 @@ export default {
           dateInterview: '',
           uniform: '',
           fired: '',
-          edited: false
+          edited: false,
+          editedCount: 0
         }
 
         this.$emit('add-worker', newWorker)
