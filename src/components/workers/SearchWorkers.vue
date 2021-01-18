@@ -24,144 +24,131 @@
         <div class="col s12">
           <div>
             <form>
-              <ul class="collapsible black-text form-content">
+              <div>
+                <ul id="tabs-swipe" class="tabs flex-center">
+                  <li class="tab"><a class="active flex-center" href="#search-swipe-1"><i class="material-icons">account_box</i>ФИО</a></li>
+                  <li class="tab"><a class="flex-center" href="#search-swipe-2"><i class="material-icons">assignment</i>Личные данные</a></li>
+                  <li class="tab"><a class="flex-center" href="#search-swipe-3"><i class="material-icons">local_phone</i>Контактные данные</a></li>
+                  <li class="tab"><a class="flex-center" href="#search-swipe-4"><i class="material-icons">rate_review</i>Рабочие данные</a></li>
+                </ul>
 
-                <li class="editor-card blue white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">account_box</i>ФИО</div>
-                  <div class="collapsible-body blue">
-
-                    <div class="collapsible-body-container">
-
-                      <div class="input-field editor-input">
-                        <input
-                          id="name"
-                          type="text"
-                          v-model.trim="searchInput.name"
-                        >
-                        <label class="active" for="name">Имя</label>
-                      </div>
-
-                      <div class="input-field editor-input">
-                        <input
-                          id="surname"
-                          type="text"
-                          v-model.trim="searchInput.surname"
-                        >
-                        <label class="active" for="surname">Фамилия</label>
-                      </div>
-
-                      <div class="input-field editor-input">
-                        <input
-                          id="patronymic"
-                          type="text"
-                          v-model.trim="searchInput.patronymic"
-                        >
-                        <label class="active" for="patronymic">Отчество</label>
-                      </div>
-
+<!--                <ul id="tabs-swipe" class="tabs flex-center">-->
+<!--                  <li class="tab"><a class="active" href="#search-swipe-1">ФИО</a></li>-->
+<!--                  <li class="tab"><a href="#search-swipe-2">Личные данные</a></li>-->
+<!--                  <li class="tab"><a href="#search-swipe-3">Контактные данные</a></li>-->
+<!--                  <li class="tab"><a href="#search-swipe-4">Рабочие данные</a></li>-->
+<!--                </ul>-->
+                <div id="search-swipe-1" class="tabs-content">
+                  <div class="flex-column-center">
+                    <div class="input-field editor-input">
+                      <input
+                        id="name"
+                        type="text"
+                        v-model.trim="searchInput.name"
+                      >
+                      <label class="active" for="name">Имя</label>
                     </div>
 
-                  </div>
-                </li>
-
-                <li class="editor-card blue white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">assignment</i>Личные данные</div>
-                  <div class="collapsible-body blue">
-
-                    <div class="collapsible-body-container">
-
-                      <div class="input-field editor-input">
-                        <input
-                          id="age"
-                          type="number"
-                          v-model.trim="searchInput.age"
-                        >
-                        <label class="active" for="age">Возраст</label>
-                      </div>
-
-                      <div class="input-field editor-input">
-                        <select
-                          class="browser-default editor-select"
-                          id="sex"
-                          v-model.trim="searchInput.sex"
-                        >
-                          <option class="editor-option" selected value="">Не отмечено</option>
-                          <option class="editor-option" value="Мужской">Мужской</option>
-                          <option class="editor-option" value="Женский">Женский</option>
-                        </select>
-                        <label class="active">Пол</label>
-                      </div>
-
-                      <div class="input-field editor-input">
-                        <select
-                          class="browser-default editor-select"
-                          id="medicalBook"
-                          v-model.trim="searchInput.medicalBook"
-                        >
-                          <option class="editor-option" selected value="">Не отмечено</option>
-                          <option class="editor-option" value="Есть">Есть</option>
-                          <option class="editor-option" value="Отсутствует">Отсутствует</option>
-                        </select>
-                        <label class="active">Медицинская Книга</label>
-                      </div>
-
+                    <div class="input-field editor-input">
+                      <input
+                        id="surname"
+                        type="text"
+                        v-model.trim="searchInput.surname"
+                      >
+                      <label class="active" for="surname">Фамилия</label>
                     </div>
 
+                    <div class="input-field editor-input">
+                      <input
+                        id="patronymic"
+                        type="text"
+                        v-model.trim="searchInput.patronymic"
+                      >
+                      <label class="active" for="patronymic">Отчество</label>
+                    </div>
                   </div>
-                </li>
+                </div>
 
-                <li class="editor-card blue white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">local_phone</i>Контактные данные</div>
-                  <div class="collapsible-body blue">
-
-                    <div class="collapsible-body-container">
-                      <div class="input-field editor-input">
-                        <select class="browser-default editor-select"
-                                v-model="searchInput.city"
-                        >
-                          <option class="editor-option" selected value="">Не отмечено</option>
-                          <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
-                            {{ city.cityName }}
-                          </option>
-                        </select>
-                        <label class="active">Город</label>
-                      </div>
-
-                      <div class="input-field editor-input">
-                        <input
-                          id="mobilePhone"
-                          type="tel"
-                          v-model.trim="searchInput.mobilePhone"
-                        >
-                        <label class="active" for="mobilePhone">Телефон Мобильный</label>
-                      </div>
+                <div id="search-swipe-2" class="tabs-content">
+                  <div class="flex-column-center">
+                    <div class="input-field editor-input">
+                      <input
+                        id="age"
+                        type="number"
+                        v-model.trim="searchInput.age"
+                      >
+                      <label class="active" for="age">Возраст</label>
                     </div>
 
-                  </div>
-                </li>
-
-                <li class="editor-card blue white-text">
-                  <div class="collapsible-header blue darken-1"><i class="material-icons">rate_review</i>Рабочие данные</div>
-                  <div class="collapsible-body blue">
-
-                    <div class="collapsible-body-container">
-                      <div class="input-field editor-input">
-                        <select class="browser-default editor-select"
-                                v-model="searchInput.professions"
-                        >
-                          <option class="editor-option" selected value="">Не отмечено</option>
-                          <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
-                            {{ profession }}
-                          </option>
-                        </select>
-                        <label class="active">Профессия</label>
-                      </div>
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="sex"
+                        v-model.trim="searchInput.sex"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" value="Мужской">Мужской</option>
+                        <option class="editor-option" value="Женский">Женский</option>
+                      </select>
+                      <label class="active">Пол</label>
                     </div>
 
+                    <div class="input-field editor-input">
+                      <select
+                        class="browser-default editor-select"
+                        id="medicalBook"
+                        v-model.trim="searchInput.medicalBook"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" value="Есть">Есть</option>
+                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
+                      </select>
+                      <label class="active">Медицинская Книга</label>
+                    </div>
                   </div>
-                </li>
+                </div>
 
-              </ul>
+                <div id="search-swipe-3" class="tabs-content">
+                  <div class="flex-column-center">
+                    <div class="input-field editor-input">
+                      <select class="browser-default editor-select"
+                              v-model="searchInput.city"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
+                          {{ city.cityName }}
+                        </option>
+                      </select>
+                      <label class="active">Город</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="mobilePhone"
+                        type="tel"
+                        v-model.trim="searchInput.mobilePhone"
+                      >
+                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="search-swipe-4" class="tabs-content">
+                  <div class="flex-column-center">
+                    <div class="input-field editor-input">
+                      <select class="browser-default editor-select"
+                              v-model="searchInput.professions"
+                      >
+                        <option class="editor-option" selected value="">Не отмечено</option>
+                        <option class="editor-option" v-for="(profession) of searchingProfessions()" :key="profession">
+                          {{ profession }}
+                        </option>
+                      </select>
+                      <label class="active">Профессия</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div class="col s12 black-text">
                 <h4>Найдено</h4>
@@ -317,102 +304,14 @@ export default {
     collapsible.forEach((element) => {
       M.Collapsible.init(element)
     })
+
+    const tabs = document.querySelectorAll('.tabs')
+    tabs.forEach((element) => {
+      M.Tabs.init(element)
+    })
   }
 }
 </script>
 
 <style scoped>
-  .collapsible-header,
-  .collapsible-body-container{
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .collapsible-body-container {
-    flex-direction: column;
-  }
-
-  .row .col.s12 {
-    padding: 0;
-  }
-
-  input label {
-    color:  white !important;
-  }
-
-  input:not([type]),
-  input[type=text]:not(.browser-default),
-  input[type=password]:not(.browser-default),
-  input[type=email]:not(.browser-default),
-  input[type=url]:not(.browser-default),
-  input[type=time]:not(.browser-default),
-  input[type=date]:not(.browser-default),
-  input[type=datetime]:not(.browser-default),
-  input[type=datetime-local]:not(.browser-default),
-  input[type=tel]:not(.browser-default),
-  input[type=number]:not(.browser-default),
-  input[type=search]:not(.browser-default),
-  textarea.materialize-textarea {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  }
-
-  /* label focus color */
-  #app .input-field input:focus + label {
-    color: white;
-  }
-  /* label underline focus color */
-  #app .input-field input:focus {
-    border-bottom: 1px solid white;
-    box-shadow: 0 1px 0 0 white;
-  }
-
-  .input-field .helper-text {
-    color: rgba(255, 255, 255, 0.7)
-  }
-
-  #app small .invalid {
-    border: none !important;
-  }
-
-  #app .editor-input input {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  #app .editor-input label {
-    color: white;
-  }
-
-  #app .editor-select {
-    border: none;
-    border-bottom: 1px solid white;
-    padding: 0;
-
-    text-align-last: center;
-    text-align: center;
-
-    margin-top: 10px;
-
-    cursor: pointer;
-  }
-
-  #app .editor-select .invalid {
-    border: none;
-    border-bottom: 1px solid #F44336;
-  }
-
-  .editor-option {
-    margin-left: 15px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .editor-select:focus {
-    outline: none !important;
-  }
 </style>

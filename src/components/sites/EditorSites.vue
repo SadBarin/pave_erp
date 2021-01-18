@@ -43,7 +43,7 @@
                         type="text"
                         id="city"
                         v-model.trim="editedSitesName"
-                        v-on:change="validate"
+                        v-on:input="validate"
                         :class="{invalid: ($v.editedSitesName.$dirty && !$v.editedSitesName.required) || ($v.editedSitesName.$dirty && !$v.editedSitesName.minLength)}"
                       >
                       <label for="city" class="active">Город</label>
@@ -65,16 +65,6 @@
                       >
                         Город уже есть
                       </small>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card editor-card red darken-1 white-text" v-if="coincidence">
-                  <div class="card-content flex-column-center">
-                    <span class="card-title error-title">Ошибка!</span>
-
-                    <div>
-                      <p>Проверьте правильность заполнения формы</p>
                     </div>
                   </div>
                 </div>

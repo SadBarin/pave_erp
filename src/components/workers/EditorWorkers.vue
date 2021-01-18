@@ -273,7 +273,7 @@
                               v-model="editedCity"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(city) of this.sites" :key="city.cityName">
+                        <option class="editor-option" v-for="city of this.sites" :key="city.cityName">
                           {{ city.cityName }}
                         </option>
                       </select>

@@ -239,8 +239,6 @@ section {
 
 
 
-/*TODO А тут нужно поработать*/
-
 /* ~~~~~~~ EDITOR ~~~~~~~ */
 
 .editor-card {
@@ -389,6 +387,7 @@ section {
 
   font-size: var(--font-size) !important;
 
+  height: 2.2rem;
   padding-left: 0.5rem;
 }
 
@@ -419,6 +418,38 @@ section {
 #app .input-field input:focus {
   border-bottom: 1px solid var(--main-blue);
   box-shadow: 0 1px 0 0 var(--main-blue);
+}
+
+
+
+/* ~~~~~~~ TABS* ~~~~~~~ */
+
+#app .tabs {
+  height: calc(var(--font-size) * 2);
+}
+
+#app .tabs .tab{
+  line-height: calc(var(--font-size) * 2);
+  height: calc(var(--font-size) * 2);
+}
+
+#app .tabs .tab a{
+  color: var(--main-blue);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+#app .tabs .tab a:focus,
+#app .tabs .tab a:focus.active {
+  background-color: hsla(208, 79%, 51%, 0.2);
+}
+
+#app .tabs .indicator {
+  background: var(--main-blue);
+}
+
+.tabs-content {
+  padding: 1rem;
 }
 
 
