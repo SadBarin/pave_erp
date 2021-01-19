@@ -32,55 +32,50 @@
                   <li class="tab"><a class="flex-center" href="#search-swipe-4"><i class="material-icons">rate_review</i>Рабочие данные</a></li>
                 </ul>
 
-<!--                <ul id="tabs-swipe" class="tabs flex-center">-->
-<!--                  <li class="tab"><a class="active" href="#search-swipe-1">ФИО</a></li>-->
-<!--                  <li class="tab"><a href="#search-swipe-2">Личные данные</a></li>-->
-<!--                  <li class="tab"><a href="#search-swipe-3">Контактные данные</a></li>-->
-<!--                  <li class="tab"><a href="#search-swipe-4">Рабочие данные</a></li>-->
-<!--                </ul>-->
                 <div id="search-swipe-1" class="tabs-content">
                   <div class="flex-column-center">
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label active" for="name">Имя</label>
                       <input
                         id="name"
                         type="text"
                         v-model.trim="searchInput.name"
                       >
-                      <label class="active" for="name">Имя</label>
                     </div>
 
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label" for="surname">Фамилия</label>
                       <input
                         id="surname"
                         type="text"
                         v-model.trim="searchInput.surname"
                       >
-                      <label class="active" for="surname">Фамилия</label>
                     </div>
 
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label" for="patronymic">Отчество</label>
                       <input
                         id="patronymic"
                         type="text"
                         v-model.trim="searchInput.patronymic"
                       >
-                      <label class="active" for="patronymic">Отчество</label>
                     </div>
                   </div>
                 </div>
 
                 <div id="search-swipe-2" class="tabs-content">
                   <div class="flex-column-center">
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label" for="age">Возраст</label>
                       <input
                         id="age"
                         type="number"
                         v-model.trim="searchInput.age"
                       >
-                      <label class="active" for="age">Возраст</label>
                     </div>
 
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label">Пол</label>
                       <select
                         class="browser-default editor-select"
                         id="sex"
@@ -90,10 +85,10 @@
                         <option class="editor-option" value="Мужской">Мужской</option>
                         <option class="editor-option" value="Женский">Женский</option>
                       </select>
-                      <label class="active">Пол</label>
                     </div>
 
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label">Мед. Книга</label>
                       <select
                         class="browser-default editor-select"
                         id="medicalBook"
@@ -103,14 +98,14 @@
                         <option class="editor-option" value="Есть">Есть</option>
                         <option class="editor-option" value="Отсутствует">Отсутствует</option>
                       </select>
-                      <label class="active">Медицинская Книга</label>
                     </div>
                   </div>
                 </div>
 
                 <div id="search-swipe-3" class="tabs-content">
                   <div class="flex-column-center">
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label">Город</label>
                       <select class="browser-default editor-select"
                               v-model="searchInput.city"
                       >
@@ -119,23 +114,23 @@
                           {{ city.cityName }}
                         </option>
                       </select>
-                      <label class="active">Город</label>
                     </div>
 
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label" for="mobilePhone">Тел. Моб.</label>
                       <input
                         id="mobilePhone"
                         type="tel"
                         v-model.trim="searchInput.mobilePhone"
                       >
-                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
                     </div>
                   </div>
                 </div>
 
                 <div id="search-swipe-4" class="tabs-content">
                   <div class="flex-column-center">
-                    <div class="input-field editor-input">
+                    <div class="input-field editor-input flex-center">
+                      <label class="editor-label">Профессия</label>
                       <select class="browser-default editor-select"
                               v-model="searchInput.professions"
                       >
@@ -144,7 +139,6 @@
                           {{ profession }}
                         </option>
                       </select>
-                      <label class="active">Профессия</label>
                     </div>
                   </div>
                 </div>
@@ -314,4 +308,30 @@ export default {
 </script>
 
 <style scoped>
+  #app .editor-input {
+    width: 50%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .editor-select {
+    width: 80%;
+  }
+
+  #app .editor-input input {
+    width: 80%;
+    height: 2rem;
+    transform: none;
+  }
+
+  #app .editor-label {
+    position: initial;
+    transform: translateY(0px);
+  }
+
+  #app .editor-input>label:not(.label-icon).active {
+    color: var(--main-blue);
+    transform: translateY(0px);
+  }
 </style>

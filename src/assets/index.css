@@ -68,6 +68,11 @@
   font-size: var(--font-size);
 }
 
+#app a {
+  font-size: var(--font-size);
+  cursor: pointer;
+}
+
 #app span {
   font-size: calc(var(--font-size) * 0.9);
 }
@@ -87,12 +92,12 @@
 
 #app h3 {
   font-size: calc(var(--font-size) * 2.1);
-  margin: 1.5rem 1.5rem 1.5rem 0rem;
+  margin: 1.5rem 0rem 1.5rem 0rem;
 }
 
 #app h4 {
   font-size: calc(var(--font-size) * 1.8);
-  margin: 1rem 1rem 1rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
 }
 
 #app h4 .material-icons{
@@ -245,7 +250,7 @@ section {
   width: 100%;
 }
 
-.editor-input {
+#app .editor-input {
   width: 50%;
 }
 
@@ -387,7 +392,6 @@ section {
 
   font-size: var(--font-size) !important;
 
-  height: 2.2rem;
   padding-left: 0.5rem;
 }
 
