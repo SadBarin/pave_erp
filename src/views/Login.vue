@@ -100,7 +100,7 @@ export default {
       addCity: true,
       addWorkers: true,
 
-      employeePermission: {},
+      dataThisEmployee: [],
 
       sites: [],
       employees: [],
@@ -162,7 +162,12 @@ export default {
       }
     },
 
-    authEmployee () {
+    submitLogin () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
       if (this.localStorageClear) {
         this.localStorageRemove()
         console.groupCollapsed('Добавление единиц 📃')
@@ -170,6 +175,14 @@ export default {
 
         this.addElements(true, this.additionalEmployees, 'employees')
         console.log('Сотрудники добавлены 🧍')
+
+        if (localStorage.getItem('employees')) {
+          try {
+            this.employees = JSON.parse(localStorage.getItem('employees'))
+          } catch (e) {
+            localStorage.removeItem('employees')
+          }
+        }
 
         if (this.addCity) {
           this.addElements(this.addCity, this.additionalSites, 'sites')
@@ -185,22 +198,6 @@ export default {
         console.groupEnd()
       }
 
-      for (const employee of this.employees) {
-        if (this.email === employee.email && this.password === employee.password) {
-          this.employeePermission = employee
-          return true
-        }
-      }
-
-      return false
-    },
-
-    submitLogin () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-
       if (this.authEmployee()) {
         M.toast({ html: 'Добро пожаловать!' })
         this.$router.push('/sites')
@@ -208,7 +205,20 @@ export default {
         M.toast({ html: 'Вы вошли в систему' })
       } else {
         M.toast({ html: 'Ошибка входа!' })
+        console.log('Попытка входа ⚠')
       }
+    },
+
+    authEmployee () {
+      for (const employee of this.employees) {
+        if (this.email === employee.email && this.password === employee.password) {
+          this.addElements(true, employee, 'dataThisEmployee')
+
+          return true
+        }
+      }
+
+      return false
     }
   },
   mounted () {
@@ -239,6 +249,20 @@ export default {
       } catch (e) {
         localStorage.removeItem('workers')
       }
+    }
+
+    if (localStorage.getItem('dataThisEmployee')) {
+      try {
+        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+      } catch (e) {
+        localStorage.removeItem('dataThisEmployee')
+      }
+    }
+
+    if (this.dataThisEmployee.length !== 0) {
+      this.localStorageClear = false
+    } else {
+      console.log('Первый вход 🔛')
     }
   }
 }
