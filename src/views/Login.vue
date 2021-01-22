@@ -66,15 +66,6 @@
             </label>
             <br>
             <label v-if="localStorageClear">
-              <input type="checkbox" class="filled-in" v-model="addEmployees"/>
-              <span class="collapsible-label">Добавить сотрудника</span>
-            </label>
-            <label v-if="!localStorageClear" title="Доступно только при очистке предыдущих данных">
-              <input type="checkbox" class="filled-in" disabled="disabled"/>
-              <span class="collapsible-label">Добавить сотрудника</span>
-            </label>
-            <br>
-            <label v-if="localStorageClear">
               <input type="checkbox" class="filled-in" v-model="addWorkers"/>
               <span class="collapsible-label">Добавить рабочих</span>
             </label>
@@ -104,11 +95,12 @@ export default {
   data () {
     return {
       email: 'admin@admin.com',
-      password: 'admin2020',
+      password: 'admin2021best',
       localStorageClear: true,
       addCity: true,
-      addEmployees: true,
       addWorkers: true,
+
+      employeePermission: {},
 
       sites: [],
       employees: [],
@@ -125,7 +117,7 @@ export default {
       ],
 
       additionalEmployees: [
-        { id: 1, email: 'admin@admin.com', password: 'admin2020best', name: 'Захаров', surname: 'Иван', patronymic: 'Михайлович', homePhone: '', mobilePhone: '+7 (354) 010-01-11', city: 'Москва', duty: 'Системный администратор', access: 'admin', edited: false }
+        { id: 1, email: 'admin@admin.com', password: 'admin2021best', name: 'Иван', surname: 'Захаров', patronymic: 'Михайлович', homePhone: '', mobilePhone: '+7 (354) 010-01-11', city: 'Москва', duty: 'Системный администратор', access: 'admin', edited: false }
       ],
 
       additionalWorkers: [
@@ -170,20 +162,53 @@ export default {
       }
     },
 
+    authEmployee () {
+      if (this.localStorageClear) {
+        this.localStorageRemove()
+        console.groupCollapsed('Добавление единиц 📃')
+        console.log('Прошлые записи удалены 🗑')
+
+        this.addElements(true, this.additionalEmployees, 'employees')
+        console.log('Сотрудники добавлены 🧍')
+
+        if (this.addCity) {
+          this.addElements(this.addCity, this.additionalSites, 'sites')
+          console.log('Города добавлены 🏙')
+        }
+
+        if (this.addWorkers) {
+          this.addElements(this.addWorkers, this.additionalWorkers, 'workers')
+          console.log('Рабочие добавлены 👷')
+        }
+
+        console.log('Новые единицы добавлены 😉')
+        console.groupEnd()
+      }
+
+      for (const employee of this.employees) {
+        if (this.email === employee.email && this.password === employee.password) {
+          this.employeePermission = employee
+          return true
+        }
+      }
+
+      return false
+    },
+
     submitLogin () {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
 
-      this.localStorageRemove()
-      this.addElements(this.addCity, this.additionalSites, 'sites')
-      this.addElements(this.addEmployees, this.additionalEmployees, 'employees')
-      this.addElements(this.addWorkers, this.additionalWorkers, 'workers')
+      if (this.authEmployee()) {
+        M.toast({ html: 'Добро пожаловать!' })
+        this.$router.push('/sites')
 
-      this.$router.push('/sites')
-
-      M.toast({ html: 'Вы вошли в систему' })
+        M.toast({ html: 'Вы вошли в систему' })
+      } else {
+        M.toast({ html: 'Ошибка входа!' })
+      }
     }
   },
   mounted () {
