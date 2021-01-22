@@ -106,6 +106,19 @@ export default {
           localStorage.removeItem(collectionName)
         }
       }
+
+      if (localStorage.getItem('dataThisEmployee')) {
+        try {
+          this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+        } catch (e) {
+          localStorage.removeItem('dataThisEmployee')
+        }
+      }
+
+      if (this.dataThisEmployee.access !== 'admin') {
+        this.workers = this.workers.filter((worker) => worker.city === this.dataThisEmployee.city)
+        console.log('Доступ запрещён!')
+      }
     }
   },
   mounted () {

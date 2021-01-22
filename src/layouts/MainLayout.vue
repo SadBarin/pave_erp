@@ -22,13 +22,13 @@
     <div class="sidenav app-sidenav" v-bind:class="{open: isOpen}">
       <div class="sidenav-content sidenav-top">
         <ul>
-          <li>
+          <li v-show="permissions">
             <router-link class="waves-effect waves-blue pointer" to="/sites">
               <i class="material-icons">location_city</i>
               Города
             </router-link>
           </li>
-          <li>
+          <li v-show="permissions">
             <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees">
               <i class="material-icons">group</i>
               Сотрудники
@@ -82,7 +82,9 @@ export default {
   data () {
     return {
       popupShow: false,
-      isOpen: true
+      isOpen: true,
+
+      permissions: true
     }
   },
   methods: {
@@ -96,6 +98,21 @@ export default {
 
     exit () {
       this.$router.push('/')
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('dataThisEmployee')) {
+      try {
+        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+      } catch (e) {
+        localStorage.removeItem('dataThisEmployee')
+      }
+    }
+
+    if (this.dataThisEmployee.access !== 'admin') {
+      this.permissions = false
+
+      console.log('Доступ запрещён!')
     }
   }
 }
