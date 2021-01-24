@@ -200,7 +200,7 @@ export default {
 
       if (this.authEmployee()) {
         M.toast({ html: 'Добро пожаловать!' })
-        this.$router.push('/sites')
+        this.$router.push('/workers')
 
         M.toast({ html: 'Вы вошли в систему' })
       } else {

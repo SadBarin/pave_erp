@@ -31,19 +31,19 @@
       <div class="row">
         <div class="col s12">
           <div>
+
             <form>
               <div class="form-content">
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
                     <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
 
-                    <div class="input-field editor-input">
-                      <input
-                        class="input-field"
-                        id="photoWorker"
-                        type="file"
-                      >
-                      <label class="active" for="PassportScan">Загрузить фото рабочего</label>
+                    <div class="input-field editor-input flex-column-center">
+                      <button id="upload_widget" v-on:click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
+
+                      <div class="photo-container flex-center">
+                        <img v-bind:src="this.editedUploadImage" width="300rem">
+                      </div>
                     </div>
 
                     <div class="input-field editor-input">
@@ -146,13 +146,12 @@
                   <div class="card-content flex-column-center">
                     <h4 class="card-title"><i class="material-icons">book</i> Паспортные данные</h4>
 
-                    <div class="input-field editor-input">
-                      <input
-                        class="input-field"
-                        id="passportScan"
-                        type="file"
-                      >
-                      <label class="active" for="PassportScan">Загрузить скан пасспорта рабочего</label>
+                    <div class="input-field editor-input flex-column-center">
+                      <button v-on:click.prevent="uploadPassport" class="cloudinary-button">Загрузить паспорт рабочего</button>
+
+                      <div class="photo-container flex-center" v-show="editedUploadPassport !== undefined">
+                        <a v-bind:href="editedUploadPassport" target="_blank">Открыть паспорт</a>
+                      </div>
                     </div>
 
                     <div class="input-field editor-input">
@@ -467,6 +466,8 @@ export default {
       editedFired: '',
       editedCity: '',
       editedEdited: false,
+      editedUploadImage: '',
+      editedUploadPassport: '',
 
       editedMedicalBookStatus: ''
     }
@@ -535,6 +536,8 @@ export default {
       this.editedUniform = collection[this.searchIndex(collection)].uniform
       this.editedFired = collection[this.searchIndex(collection)].fired
       this.editedCity = collection[this.searchIndex(collection)].city
+      this.editedUploadImage = collection[this.searchIndex(collection)].UploadImage
+      this.editedUploadPassport = collection[this.searchIndex(collection)].UploadPassport
     },
 
     ageCalc () {
@@ -577,6 +580,8 @@ export default {
       collection[this.searchIndex(collection)].uniform = this.editedUniform
       collection[this.searchIndex(collection)].fired = this.editedFired
       collection[this.searchIndex(collection)].city = this.editedCity
+      collection[this.searchIndex(collection)].UploadImage = this.editedUploadImage
+      collection[this.searchIndex(collection)].UploadPassport = this.editedUploadPassport
 
       collection[this.searchIndex(collection)].age = this.editedAge
       collection[this.searchIndex(collection)].editedCount += 1
@@ -599,8 +604,41 @@ export default {
           localStorage.removeItem(collectionName)
         }
       }
+    },
+
+    upload () {
+      // eslint-disable-next-line no-undef
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: 'db6qzfvbw',
+        uploadPreset: 'ml_default',
+        language: 'ru'
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.editedUploadImage = result.info.secure_url
+        }
+      }
+      )
+
+      myWidget.open()
+    },
+
+    uploadPassport () {
+      // eslint-disable-next-line no-undef
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: 'db6qzfvbw',
+        uploadPreset: 'ml_default',
+        language: 'ru'
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.editedUploadPassport = result.info.secure_url
+        }
+      }
+      )
+
+      myWidget.open()
     }
   },
+
   mounted () {
     this.updateCollection('workers')
 
@@ -624,4 +662,8 @@ export default {
 </script>
 
 <style scoped>
+  .photo-container {
+    margin-top: 2rem;
+    width: 100%;
+  }
 </style>

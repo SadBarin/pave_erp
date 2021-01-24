@@ -33,6 +33,7 @@
       <TableWorkers
         v-if="workers.length"
         v-bind:workers="workers"
+        v-bind:dataThisEmployee="dataThisEmployee"
         @popup-visibility="popupVisibility"
         @edited-worker-status="editedWorkerStatus"
         @watch-about-worker="watchAboutWorker"
@@ -55,6 +56,7 @@ export default {
   data () {
     return {
       workers: [],
+      dataThisEmployee: '',
       popupShow: false,
       worker: '',
 
@@ -113,11 +115,6 @@ export default {
         } catch (e) {
           localStorage.removeItem('dataThisEmployee')
         }
-      }
-
-      if (this.dataThisEmployee.access !== 'admin') {
-        this.workers = this.workers.filter((worker) => worker.city === this.dataThisEmployee.city)
-        console.log('Доступ запрещён!')
       }
     }
   },

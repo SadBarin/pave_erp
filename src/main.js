@@ -9,6 +9,7 @@ import store from './store'
 import 'materialize-css/dist/js/materialize.min.js'
 import 'materialize-css/dist/css/materialize.min.css'
 import VueTheMask from 'vue-the-mask'
+import Cloudinary from 'cloudinary-vue'
 
 Sentry.init({
   Vue,
@@ -22,6 +23,10 @@ Sentry.init({
 
 Vue.config.productionTip = false
 Vue.use(Vuelidate, VueTheMask)
+
+Vue.use(Cloudinary, {
+  configuration: { cloudName: 'db6qzfvbw' }
+})
 
 new Vue({
   router,
