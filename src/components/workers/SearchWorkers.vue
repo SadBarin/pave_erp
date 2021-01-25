@@ -224,16 +224,6 @@ export default {
 
       this.searchWorkers = bufferWorkers
 
-      try {
-        if (this.searchWorkers.length === 0) {
-          M.toast({ html: 'Ничего не найдено!' })
-        } else {
-          M.toast({ html: `Найдено: ${this.searchWorkers.length}` })
-        }
-      } catch (e) {
-
-      }
-
       this.searchingProfessions()
     },
 

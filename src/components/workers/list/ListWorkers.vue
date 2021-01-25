@@ -33,7 +33,6 @@
       <TableWorkers
         v-if="workers.length"
         v-bind:workers="workers"
-        v-bind:dataThisEmployee="dataThisEmployee"
         @popup-visibility="popupVisibility"
         @edited-worker-status="editedWorkerStatus"
         @watch-about-worker="watchAboutWorker"

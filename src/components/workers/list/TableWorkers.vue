@@ -109,6 +109,11 @@
 <script>
 export default {
   name: 'TableWorkers',
+  data () {
+    return {
+      dataThisEmployee: ''
+    }
+  },
   methods: {
     popupVisibility (id) {
       this.$emit('popup-visibility', id)
@@ -122,7 +127,17 @@ export default {
       this.$emit('watch-about-worker', worker)
     }
   },
-  props: ['workers', 'dataThisEmployee']
+  // eslint-disable-next-line vue/no-dupe-keys
+  props: ['workers'],
+  mounted () {
+    if (localStorage.getItem('dataThisEmployee')) {
+      try {
+        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+      } catch (e) {
+        localStorage.removeItem('dataThisEmployee')
+      }
+    }
+  }
 }
 </script>
 
