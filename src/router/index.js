@@ -31,6 +31,12 @@ const router = new VueRouter({
       component: () => import('../views/Employees')
     },
     {
+      path: '/employees/edit/employee:id',
+      name: 'employeeEdit',
+      meta: { layout: 'main' },
+      component: () => import('../components/employees/EditEmployee')
+    },
+    {
       path: '/employees/editor',
       name: 'employeesEditor',
       meta: { layout: 'main' },

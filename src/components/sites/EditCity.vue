@@ -185,13 +185,6 @@ export default {
           localStorage.removeItem(collectionName)
         }
       }
-
-      for (const city of this.sites) {
-        // eslint-disable-next-line eqeqeq
-        if (city.id == this.$route.params.id) {
-          console.log(city.cityName)
-        }
-      }
     }
   },
   mounted () {

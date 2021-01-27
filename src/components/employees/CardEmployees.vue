@@ -26,13 +26,12 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="flex-center flex-centerflex-column-center">
-            <button class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
-                    title="Редактировать"
-                    v-on:click="editedEmployeeStatus"
+          <div class="flex-column-center">
+            <router-link class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
+                    title="Редактировать" :to="{name : 'employeeEdit', params: {id: employee.id}}"
             >
               <i class="material-icons">create</i>
-            </button>
+            </router-link>
 
             <button class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
                     title="Удалить"

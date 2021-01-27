@@ -27,7 +27,7 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="flex-center flex-centerflex-column-center">
+          <div class="flex-column-center">
             <router-link class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
                     title="Новый редактор" :to="{name : 'cityEdit', params: {id: city.id}}"
             >
