@@ -33,19 +33,19 @@
               <i class="material-icons">remove_red_eye</i>
             </button>
 
+            <router-link class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
+                    title="Редактировать"
+                    :to="{name : 'workerEdit', params: {id: worker.id}}"
+            >
+              <i class="material-icons">create</i>
+            </router-link>
+
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
                     v-on:click.prevent="popupVisibility(worker)"
             >
               <i class="material-icons">delete</i>
-            </button>
-
-            <button class="btn-transparent transparent waves-effect auth-submit blue-text text-darken-1"
-                    title="Редактировать"
-                    v-on:click.prevent="editedWorkerStatus(worker.id)"
-            >
-              <i class="material-icons">create</i>
             </button>
 
           </div>

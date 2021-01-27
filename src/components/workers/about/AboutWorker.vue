@@ -3,11 +3,19 @@
     <div class="page-title flex-between-center">
       <h3>Информация о рабочем "{{worker.surname}} {{worker.name}}"</h3>
 
-      <button class="btn waves-effect waves-blue pointer blue darken-1"
-              v-on:click="exitAboutWorker"
-      >
-        <i class="material-icons">transfer_within_a_station</i> К Рабочим
-      </button>
+      <div class="editor-btns">
+        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
+                     :to="{name : 'workerEdit', params: {id: worker.id}}"
+        >
+          <i class="material-icons">create</i> В редактор
+        </router-link>
+
+        <button class="btn waves-effect waves-blue pointer blue darken-1"
+                v-on:click="exitAboutWorker"
+        >
+          <i class="material-icons">transfer_within_a_station</i> К Рабочим
+        </button>
+      </div>
     </div>
 
     <section class="about-section">
