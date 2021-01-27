@@ -11,7 +11,7 @@
       </template>
 
       <template v-slot:text-info-popup>
-        После нажатия кнопки "да" будет удалён сотрудник <b>{{employee.surname}} {{employee.name}}</b>
+        После нажатия кнопки "да" будет удалён(а) сотрудник(ца) <b>{{employee.surname}} {{employee.name}}</b>
       </template>
     </Popup>
 
