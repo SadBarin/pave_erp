@@ -4,9 +4,12 @@
       v-if="popupShow"
       v-on:yes="exit"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Выйти?'"
       v-bind:popup-toast="'Вы вышли из системы'"
-    />
+    >
+      <template v-slot:title-popup>
+        Выйти?
+      </template>
+    </Popup>
 
     <div class="sidenav-menu">
       <div class="navbar-left">

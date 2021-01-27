@@ -1,8 +1,13 @@
 <template>
   <div class="popup-overlay">
     <form class="card auth-card popup">
-      <div class="card-content">
-        <h4 class="card-title">{{popupTitle}}<br></h4>
+      <div class="card-content flex-column-center">
+        <h4 class="card-title">
+          <slot name="title-popup"></slot>
+        </h4>
+          <p>
+            <slot name="text-info-popup"></slot>
+          </p>
       </div>
 
       <div class="card-action btns-popup">
@@ -29,7 +34,7 @@
 // TODO следует использовать slot
 export default {
   name: 'Popup',
-  props: ['popupTitle', 'popupToast'],
+  props: ['popupToast'],
   methods: {
     callToast () {
       if (this.popupToast) {
@@ -61,17 +66,18 @@ export default {
 
   .popup {
     border-radius: 10px;
-    width: 240px !important;
+    max-width: 20rem !important;
 
     text-align: center;
   }
 
-  #app .popup .card-title {
-    margin-bottom: 0;
+  .popup .card-title {
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
   }
 
-  .popup-subtitle {
-    font-size: 1.1rem;
+  .card-action {
+    padding-top: 0 !important;
   }
 
   .btns-popup {

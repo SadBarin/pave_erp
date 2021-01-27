@@ -4,8 +4,15 @@
       v-if="popupShow"
       v-on:yes="editorExit(workers)"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Выйти?'"
-    />
+    >
+      <template v-slot:title-popup>
+        Покинуть редактор рабочего?
+      </template>
+
+      <template v-slot:text-info-popup>
+        Введённые данные не будут сохранены!
+      </template>
+    </Popup>
 
     <div class="page-title flex-between-center">
       <h3>Редактор рабочего "{{editedSurname}} {{editedName}}"</h3>
@@ -87,7 +94,7 @@
                         v-on:change="ageCalc"
                       >
                       <label class="active" for="birthday">День рождения</label>
-                      <p>Возраст: {{editedAge}}</p>
+                      <p>Возраст: {{editedAge}} лет</p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -116,10 +123,10 @@
                         id="medicalBook"
                         type="date"
                         v-model="editedMedicalBook"
-                        v-on:change="medicalBookCalc"
+                        v-on:input="medicalBookCalc"
                       >
                       <label class="active" for="medicalBook">Медицинская Книга</label>
-                      <p>Истекает: {{editedMedicalBookStatus}}</p>
+                      <p>Истекает через: {{editedMedicalBookStatus}} лет</p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -657,6 +664,8 @@ export default {
     })
 
     this.outputCollection(this.workers)
+
+    this.medicalBookCalc()
   }
 }
 </script>

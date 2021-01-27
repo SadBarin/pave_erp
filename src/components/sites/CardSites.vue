@@ -4,9 +4,16 @@
       v-if="popupShow"
       v-on:yes="$emit('remove-city', city.id)"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Удалить город?'"
-      v-bind:popup-toast="'Город был удалён'"
-    />
+      v-bind:popup-toast="`Город ${city.cityName} был удалён!`"
+    >
+      <template v-slot:title-popup>
+        Удалить?
+      </template>
+
+      <template v-slot:text-info-popup>
+        После нажатия кнопки "да" будет удалён город <b>{{city.cityName}}</b>
+      </template>
+    </Popup>
 
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">

@@ -4,16 +4,23 @@
       v-if="popupShow"
       v-on:yes="$emit('remove-employee', employee.id)"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Удалить сотрудника?'"
-      v-bind:popup-toast="'Сотрудник был удалён'"
-    />
+      v-bind:popup-toast="`Сотрудник ${employee.surname} ${employee.name} был(а) удалён!`"
+    >
+      <template v-slot:title-popup>
+        Удалить?
+      </template>
+
+      <template v-slot:text-info-popup>
+        После нажатия кнопки "да" будет удалён сотрудник <b>{{employee.surname}} {{employee.name}}</b>
+      </template>
+    </Popup>
 
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">email</i> Почта: {{employee.email}}</h6>
-            <h6><i class="material-icons">person</i> Сотрудник: {{employee.name}} {{employee.surname}}</h6>
+            <h6><i class="material-icons">person</i> Сотрудник: {{employee.surname}} {{employee.name}}</h6>
             <h6><i class="material-icons">location_city</i> Город: {{employee.city}}</h6>
             <p v-if="employee.edited" class="card-report">
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником

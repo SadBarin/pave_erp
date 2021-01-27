@@ -4,8 +4,15 @@
       v-if="popupShow"
       v-on:yes="editorExit(employees)"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Выйти?'"
-    />
+    >
+      <template v-slot:title-popup>
+        Покинуть редактор сотрудника?
+      </template>
+
+      <template v-slot:text-info-popup>
+        Введённые данные не будут сохранены!
+      </template>
+    </Popup>
 
     <div class="page-title flex-between-center">
       <h3>Редактор сотрудника "{{editedSurname}} {{editedName}}"</h3>

@@ -27,6 +27,7 @@
           <div class="flex-center">
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
+                    v-show="eye"
                     v-on:click.prevent="watchAboutWorker(worker)"
             >
               <i class="material-icons">remove_red_eye</i>
@@ -35,7 +36,7 @@
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
-                    v-on:click.prevent="popupVisibility(worker.id)"
+                    v-on:click.prevent="popupVisibility(worker)"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -79,6 +80,7 @@
           <div class="flex-center">
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
+                    v-show="eye"
                     v-on:click.prevent="watchAboutWorker(worker)"
             >
               <i class="material-icons">remove_red_eye</i>
@@ -87,7 +89,7 @@
             <button class="btn-transparent btn-remove transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
-                    v-on:click.prevent="popupVisibility(worker.id)"
+                    v-on:click.prevent="popupVisibility(worker)"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -115,8 +117,8 @@ export default {
     }
   },
   methods: {
-    popupVisibility (id) {
-      this.$emit('popup-visibility', id)
+    popupVisibility (worker) {
+      this.$emit('popup-visibility', worker)
     },
 
     editedWorkerStatus (id) {
@@ -128,7 +130,7 @@ export default {
     }
   },
   // eslint-disable-next-line vue/no-dupe-keys
-  props: ['workers'],
+  props: ['workers', 'eye'],
   mounted () {
     if (localStorage.getItem('dataThisEmployee')) {
       try {

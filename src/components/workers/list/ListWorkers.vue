@@ -2,11 +2,18 @@
   <div>
     <Popup
       v-if="popupShow"
-      v-on:yes="removeWorker(worker)"
+      v-on:yes="removeWorker(worker.id)"
       v-on:no="popupHidden"
-      v-bind:popup-title="'Удалить рабочего?'"
-      v-bind:popup-toast="'Рабочий был удалён'"
-    />
+      v-bind:popup-toast="`Рабочий ${worker.surname} ${worker.name} был(а) удалён!`"
+    >
+      <template v-slot:title-popup>
+        Удалить?
+      </template>
+
+      <template v-slot:text-info-popup>
+        После нажатия кнопки "да" будет удалён рабочий <b>{{worker.surname}} {{worker.name}}</b>
+      </template>
+    </Popup>
 
     <div class="page-title flex-between-center">
       <div class="flex-center">
@@ -33,6 +40,7 @@
       <TableWorkers
         v-if="workers.length"
         v-bind:workers="workers"
+        v-bind:eye="true"
         @popup-visibility="popupVisibility"
         @edited-worker-status="editedWorkerStatus"
         @watch-about-worker="watchAboutWorker"
@@ -67,9 +75,11 @@ export default {
       this.$emit('watch-about-worker', id)
     },
 
-    popupVisibility (id) {
+    popupVisibility (worker) {
       this.popupShow = true
-      this.worker = id
+      this.worker = worker
+
+      console.log(worker)
     },
 
     popupHidden () {
