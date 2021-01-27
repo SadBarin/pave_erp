@@ -5,7 +5,6 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -20,10 +19,10 @@ const router = new VueRouter({
       component: () => import('../views/Sites')
     },
     {
-      path: '/sites/editor',
-      name: 'sitesEditor',
+      path: '/sites/edit/city:id',
+      name: 'cityEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/sites/EditorSites')
+      component: () => import('../components/sites/EditCity')
     },
     {
       path: '/employees',
@@ -60,6 +59,10 @@ const router = new VueRouter({
       name: 'workersAbout',
       meta: { layout: 'main' },
       component: () => import('../components/workers/about/AboutWorker')
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

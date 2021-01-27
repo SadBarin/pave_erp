@@ -28,12 +28,11 @@
             </p>
           </div>
           <div class="flex-center flex-centerflex-column-center">
-            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
-                         title="Редактировать"
-                         v-on:click="editedCityStatus"
+            <router-link class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+                    title="Новый редактор" :to="{name : 'cityEdit', params: {id: city.id}}"
             >
               <i class="material-icons">create</i>
-            </button>
+            </router-link>
 
             <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
                     title="Удалить"

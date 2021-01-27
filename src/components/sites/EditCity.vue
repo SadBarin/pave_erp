@@ -139,7 +139,8 @@ export default {
     },
 
     searchIndex (collection) {
-      const object = collection.filter(element => element.edited !== false)
+      // eslint-disable-next-line eqeqeq
+      const object = collection.filter(element => element.id == this.$route.params.id)
       return collection.findIndex((element) => element.id === object[0].id)
     },
 
@@ -182,6 +183,13 @@ export default {
           this.sites = JSON.parse(localStorage.getItem(collectionName))
         } catch (e) {
           localStorage.removeItem(collectionName)
+        }
+      }
+
+      for (const city of this.sites) {
+        // eslint-disable-next-line eqeqeq
+        if (city.id == this.$route.params.id) {
+          console.log(city.cityName)
         }
       }
     }
