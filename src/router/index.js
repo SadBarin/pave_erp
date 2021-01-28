@@ -55,10 +55,10 @@ const router = new VueRouter({
       component: () => import('../components/workers/SearchWorkers')
     },
     {
-      path: '/workers/about',
-      name: 'workersAbout',
+      path: '/workers/about/worker:id',
+      name: 'workerAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/about/AboutWorker')
+      component: () => import('../components/workers/AboutWorker')
     },
     {
       path: '*',

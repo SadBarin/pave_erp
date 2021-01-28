@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CardEmployees from '@/components/employees/CardEmployees'
+import CardEmployees from '@/components/employees/list/CardEmployees'
 export default {
   name: 'ListEmployees',
   components: { CardEmployees },

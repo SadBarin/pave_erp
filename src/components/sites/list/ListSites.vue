@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CardSites from '@/components/sites/CardSites'
+import CardSites from '@/components/sites/list/CardSites'
 export default {
   name: 'ListSites',
   components: { CardSites },

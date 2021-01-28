@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import ListEmployees from '@/components/employees/ListEmployees'
+import ListEmployees from '@/components/employees/list/ListEmployees'
 import AddCardEmployees from '@/components/employees/AddCardEmployees'
 export default {
   name: 'Employees',

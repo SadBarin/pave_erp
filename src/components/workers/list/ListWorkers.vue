@@ -71,10 +71,6 @@ export default {
     }
   },
   methods: {
-    watchAboutWorker (id) {
-      this.$emit('watch-about-worker', id)
-    },
-
     popupVisibility (worker) {
       this.popupShow = true
       this.worker = worker

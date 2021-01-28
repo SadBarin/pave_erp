@@ -10,11 +10,11 @@
           <i class="material-icons">create</i> В редактор
         </router-link>
 
-        <button class="btn waves-effect waves-blue pointer blue darken-1"
-                v-on:click="exitAboutWorker"
+        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
+                     to="/workers"
         >
           <i class="material-icons">transfer_within_a_station</i> К Рабочим
-        </button>
+        </router-link>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
       <div>
         <h5><i class="material-icons">assessment</i> Системные данные</h5>
         <h6>Идентификационный номер: <span>{{worker.id}}</span></h6>
-        <h6>Сейчас редактируется: <span>{{worker.edited | booleanToWord}}</span></h6>
+<!--        <h6>Сейчас редактируется: <span>{{worker.edited | booleanToWord}}</span></h6>-->
         <h6>Сколько раз редактировался: <span>{{worker.editedCount}}</span></h6>
       </div>
 
@@ -95,15 +95,32 @@
 <script>
 export default {
   name: 'AboutWorker',
-  props: ['worker'],
-  methods: {
-    exitAboutWorker () {
-      this.$emit('exit-about-worker')
+  data () {
+    return {
+      workers: '',
+      worker: ''
     }
   },
   filters: {
     booleanToWord: function (boolean) {
       return (boolean === true) ? 'Да' : 'Нет'
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('workers')) {
+      try {
+        this.workers = JSON.parse(localStorage.getItem('workers'))
+      } catch (e) {
+        localStorage.removeItem('workers')
+      }
+    }
+
+    for (const worker of this.workers) {
+      // eslint-disable-next-line eqeqeq
+      if (worker.id == this.$route.params.id) {
+        console.log(worker)
+        this.worker = worker
+      }
     }
   }
 }

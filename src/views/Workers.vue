@@ -4,21 +4,14 @@
       v-if="!aboutStatus"
       @watch-about-worker="watchAboutWorker"
     />
-
-    <AboutWorker
-      v-if="aboutStatus"
-      v-bind:worker="aboutWorkerStatus"
-      @exit-about-worker="exitAboutWorker"
-    />
   </div>
 </template>
 
 <script>
 import ListWorkers from '@/components/workers/list/ListWorkers'
-import AboutWorker from '@/components/workers/about/AboutWorker'
 export default {
   name: 'Workers',
-  components: { ListWorkers, AboutWorker },
+  components: { ListWorkers },
   data () {
     return {
       workers: [],
@@ -37,15 +30,6 @@ export default {
     addWorker (worker) {
       this.workers.push(worker)
       this.saveCollection(this.workers, 'workers')
-    },
-
-    watchAboutWorker (worker) {
-      this.aboutWorkerStatus = worker
-      this.aboutStatus = true
-    },
-
-    exitAboutWorker () {
-      this.aboutStatus = false
     },
 
     saveCollection (collection, collectionName) {

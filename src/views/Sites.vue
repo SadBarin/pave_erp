@@ -34,7 +34,7 @@
 
 <script>
 import AddCardSites from '@/components/sites/AddCardSites'
-import ListSites from '@/components/sites/ListSites'
+import ListSites from '@/components/sites/list/ListSites'
 export default {
   name: 'Sites',
   components: { ListSites, AddCardSites },
