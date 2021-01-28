@@ -43,7 +43,6 @@
         v-bind:eye="true"
         @popup-visibility="popupVisibility"
         @edited-worker-status="editedWorkerStatus"
-        @watch-about-worker="watchAboutWorker"
       />
       <div v-else class="empty-list">
         <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
@@ -57,6 +56,7 @@
 import AddCardWorkers from '@/components/workers/AddCardWorkers'
 import TableWorkers from '@/components/workers/list/TableWorkers'
 import Popup from '@/components/Popup'
+
 export default {
   name: 'ListWorkers',
   components: { AddCardWorkers, TableWorkers, Popup },

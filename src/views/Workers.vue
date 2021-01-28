@@ -2,7 +2,6 @@
   <div>
     <ListWorkers
       v-if="!aboutStatus"
-      @watch-about-worker="watchAboutWorker"
     />
   </div>
 </template>
