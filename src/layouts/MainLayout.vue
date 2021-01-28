@@ -112,10 +112,20 @@ export default {
       }
     }
 
-    if (this.dataThisEmployee.access !== 'admin') {
-      this.permissions = false
+    console.log(this.dataThisEmployee)
 
-      console.log('Доступ запрещён!')
+    try {
+      if (this.dataThisEmployee.access !== 'admin') {
+        this.permissions = false
+
+        console.log('Доступ ограничен!')
+      }
+    } catch (e) {
+      console.log('Пользователь без пароля!')
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Войдите в систему для продолжения.' })
+
+      this.$router.push('/')
     }
   }
 }
