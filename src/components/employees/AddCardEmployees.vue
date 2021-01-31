@@ -48,6 +48,17 @@ export default {
     email: { email, required }
   },
   methods: {
+    getPassword () {
+      let password = ''
+      const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!№;%:?*()@_+='
+
+      for (let i = 0; i < 10; i++) {
+        password += symbols.charAt(Math.floor(Math.random() * symbols.length))
+      }
+
+      return password
+    },
+
     submitEmployee () {
       if (localStorage.getItem('employees')) {
         try {
@@ -76,20 +87,32 @@ export default {
         const newEmployee = {
           id: Date.now(),
           email: this.email,
-          password: '',
+          password: this.getPassword(),
           name: 'Сотрудник',
           surname: 'Новый',
           patronymic: '',
+          sex: 'Мужской',
           homePhone: '',
           mobilePhone: '',
-          city: 'Отсутствует',
-          duty: '',
-          access: false,
+          city: this.dataThisEmployee.city,
+          duty: 'Сотрудник',
+          access: 'employee',
           edited: false
         }
 
         this.$emit('add-employee', newEmployee)
         this.email = ''
+
+        this.$router.push(`/employees/edit/employee${newEmployee.id}`)
+      }
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('dataThisEmployee')) {
+      try {
+        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+      } catch (e) {
+        localStorage.removeItem('dataThisEmployee')
       }
     }
   }

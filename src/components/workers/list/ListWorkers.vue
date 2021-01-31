@@ -4,7 +4,7 @@
       v-if="popupShow"
       v-on:yes="removeWorker(worker.id)"
       v-on:no="popupHidden"
-      v-bind:popup-toast="`Рабочий ${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+      v-bind:popup-toast="`${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
     >
       <template v-slot:title-popup>
         Удалить?

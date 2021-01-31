@@ -4,14 +4,14 @@
       v-if="popupShow"
       v-on:yes="$emit('remove-employee', employee.id)"
       v-on:no="popupHidden"
-      v-bind:popup-toast="`Сотрудник ${employee.surname} ${employee.name} был(а) удалён!`"
+      v-bind:popup-toast="`${employee.surname} ${employee.name} ${(employee.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
     >
       <template v-slot:title-popup>
         Удалить?
       </template>
 
       <template v-slot:text-info-popup>
-        После нажатия кнопки "да" будет удалён(а) сотрудник(ца) <b>{{employee.surname}} {{employee.name}}</b>
+        {{employee.sex | sexDelete }} <b>{{employee.surname}} {{employee.name}}</b>
       </template>
     </Popup>
 
@@ -95,6 +95,15 @@ export default {
     saveEmployees () {
       const parsed = JSON.stringify(this.employees)
       localStorage.setItem('employees', parsed)
+    }
+  },
+  filters: {
+    sexDelete (sex) {
+      if (sex === 'Женский') {
+        return 'При нажатии кнопки "да" будет удалена работница '
+      } else {
+        return 'При нажатии кнопки "да" будет удалён рабочий '
+      }
     }
   },
   mounted () {

@@ -64,8 +64,6 @@ export default {
         }
       }
 
-      console.log(this.number)
-
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -88,14 +86,14 @@ export default {
           surname: 'Рабочий',
           patronymic: '',
           accountNumber: Date.now(),
-          nameCard: '',
-          surnameCard: '',
+          nameCard: 'Новый',
+          surnameCard: 'Рабочий',
           patronymicCard: '',
           accountNumberCard: '',
-          bank: '',
+          bank: 'СберБанк',
           age: '',
-          sex: '',
-          city: 'Отсутствует',
+          sex: 'Мужской',
+          city: this.dataThisEmployee.city,
           nationality: '',
           passportID: '',
           passportDate: '',
@@ -110,17 +108,28 @@ export default {
           previousWork: '',
           reasonComing: '',
           professions: '',
-          nightShift: '',
-          checkMVD: '',
+          nightShift: 'Нет',
+          checkMVD: 'Да',
           dateInterview: '',
           uniform: '',
-          fired: '',
+          fired: 'Нет',
           edited: false,
           editedCount: 0
         }
 
         this.$emit('add-worker', newWorker)
         this.number = ''
+
+        this.$router.push(`/workers/edit/worker${newWorker.id}`)
+      }
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('dataThisEmployee')) {
+      try {
+        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
+      } catch (e) {
+        localStorage.removeItem('dataThisEmployee')
       }
     }
   }

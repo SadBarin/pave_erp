@@ -79,21 +79,6 @@ export default {
       this.popupShow = false
     },
 
-    editedCityStatus () {
-      if (localStorage.getItem('sites')) {
-        try {
-          this.sites = JSON.parse(localStorage.getItem('sites'))
-        } catch (e) {
-          localStorage.removeItem('sites')
-        }
-      }
-
-      const index = this.sites.findIndex((element) => element.id === this.city.id)
-      this.sites[index].edited = true
-      this.saveSites()
-      this.$router.push('/sites/editor')
-    },
-
     amountEmployees () {
       try {
         const index = this.sites.findIndex((element) => element.id === this.city.id)

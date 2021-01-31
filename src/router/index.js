@@ -60,10 +60,6 @@ const router = new VueRouter({
       name: 'workerAbout',
       meta: { layout: 'main' },
       component: () => import('../components/workers/AboutWorker')
-    },
-    {
-      path: '*',
-      redirect: '/'
     }
   ]
 })

@@ -402,16 +402,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="card editor-card red darken-1 white-text" v-if="coincidence">
-                  <div class="card-content flex-column-center">
-                    <span class="card-title error-title">Ошибка!</span>
-
-                    <div>
-                      <p>Проверьте правильность заполнения формы</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </form>
           </div>

@@ -43,7 +43,7 @@ export default {
     return {
       sites: [{}],
 
-      updateTimeout: 60000
+      updateTimeout: 5000
     }
   },
   methods: {

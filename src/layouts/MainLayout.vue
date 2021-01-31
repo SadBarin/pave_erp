@@ -4,7 +4,7 @@
       v-if="popupShow"
       v-on:yes="exit"
       v-on:no="popupHidden"
-      v-bind:popup-toast="'Вы вышли из системы'"
+      v-bind:popup-toast="`До свидания, ${this.dataThisEmployee.surname} ${this.dataThisEmployee.name}!`"
     >
       <template v-slot:title-popup>
         Выйти?
@@ -118,7 +118,7 @@ export default {
       if (this.dataThisEmployee.access !== 'admin') {
         this.permissions = false
 
-        console.log('Доступ ограничен!')
+        console.log('Доступ ограничен ⚠')
       }
     } catch (e) {
       console.log('Пользователь без пароля!')

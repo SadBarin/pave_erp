@@ -66,7 +66,7 @@
                    <div class="input-field editor-input">
                      <input
                        id="password"
-                       type="password"
+                       type="text"
                        v-model.trim="editedPassword"
                        :class="{invalid: ($v.editedPassword.$dirty && !$v.editedPassword.required) || ($v.editedPassword.$dirty && !$v.editedPassword.minLength)}"
                      >
@@ -110,7 +110,7 @@
 
                <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
-                   <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
+                   <h4 class="card-title"><i class="material-icons">account_box</i>ФИО</h4>
                    <div class="input-field editor-input">
                      <input type="text"
                             id="name"
@@ -173,12 +173,19 @@
                  </div>
                </div>
 
-               <div class="card editor-card red darken-1 white-text" v-if="!validateCheck">
+               <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
-                   <span class="card-title white-text error-title">Ошибка!</span>
-
-                   <div>
-                     <p>Проверьте правильность заполнения формы</p>
+                   <h4 class="card-title"><i class="material-icons">account_box</i>Личные данные</h4>
+                   <div class="input-field editor-input">
+                     <select
+                       class="browser-default editor-select"
+                       id="sex"
+                       v-model.trim="editedSex"
+                     >
+                       <option class="editor-option" value="Мужской">Мужской</option>
+                       <option class="editor-option" value="Женский">Женский</option>
+                     </select>
+                     <label class="active">Пол</label>
                    </div>
                  </div>
                </div>
@@ -214,6 +221,7 @@ export default {
       editedName: '',
       editedSurname: '',
       editedPatronymic: '',
+      editedSex: '',
       editedHomePhone: '',
       editedMobilePhone: '',
       editedCity: '',
@@ -267,6 +275,7 @@ export default {
       this.editedName = collection[this.searchIndex(collection)].name
       this.editedSurname = collection[this.searchIndex(collection)].surname
       this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
+      this.editedSex = collection[this.searchIndex(collection)].sex
       this.editedHomePhone = collection[this.searchIndex(collection)].homePhone
       this.editedMobilePhone = collection[this.searchIndex(collection)].mobilePhone
       this.editedCity = collection[this.searchIndex(collection)].city
@@ -280,6 +289,7 @@ export default {
       collection[this.searchIndex(collection)].name = this.editedName
       collection[this.searchIndex(collection)].surname = this.editedSurname
       collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
+      collection[this.searchIndex(collection)].sex = this.editedSex
       collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
       collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
       collection[this.searchIndex(collection)].city = this.editedCity
