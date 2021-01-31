@@ -86,7 +86,7 @@
       <div>
         <h5><i class="material-icons">photo</i> Фото рабочего</h5>
         <p v-show="worker.UploadImage === undefined">Загрузите фото рабочего в редакторе</p>
-        <img v-bind:src="worker.UploadImage" width="300rem">
+        <img v-bind:src="worker.UploadImage" width="200rem">
       </div>
     </section>
   </div>

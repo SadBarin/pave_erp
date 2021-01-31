@@ -49,7 +49,7 @@
                       <button id="upload_widget" v-on:click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
 
                       <div class="photo-container flex-center">
-                        <img v-bind:src="this.editedUploadImage" width="300rem">
+                        <img v-bind:src="this.editedUploadImage" width="200rem">
                       </div>
                     </div>
 
