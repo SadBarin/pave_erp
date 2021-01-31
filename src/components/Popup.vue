@@ -66,7 +66,7 @@ export default {
 
   .popup {
     border-radius: 10px;
-    width: 20rem !important;
+    width: 18rem !important;
 
     text-align: center;
   }
