@@ -17,6 +17,7 @@
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0-rc.2",
     "register-service-worker": "^1.7.1",
+    "semver": "^7.3.4",
     "vue": "^2.6.11",
     "vue-page-transition": "^0.2.2",
     "vue-router": "^3.4.9",

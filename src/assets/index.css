@@ -140,6 +140,10 @@
   align-items: center;
 }
 
+#app .margin-fix {
+  padding: 1px;
+}
+
 #app * {
   box-shadow: none;
 }
