@@ -10,6 +10,7 @@ import 'materialize-css/dist/js/materialize.min.js'
 import 'materialize-css/dist/css/materialize.min.css'
 import VueTheMask from 'vue-the-mask'
 import Cloudinary from 'cloudinary-vue'
+import Popup from '@/components/Popup'
 
 Sentry.init({
   Vue,
@@ -27,6 +28,8 @@ Vue.use(Vuelidate, VueTheMask)
 Vue.use(Cloudinary, {
   configuration: { cloudName: 'db6qzfvbw' }
 })
+
+Vue.component('Popup', Popup)
 
 new Vue({
   router,

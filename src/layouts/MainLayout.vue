@@ -112,7 +112,7 @@ export default {
       }
     }
 
-    console.log(this.dataThisEmployee)
+    console.log('Вошёл пользователь с id: ', this.dataThisEmployee.id)
 
     try {
       if (this.dataThisEmployee.access !== 'admin') {

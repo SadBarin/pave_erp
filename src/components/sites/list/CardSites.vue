@@ -2,15 +2,15 @@
   <div class="row">
     <Popup
       v-if="popupShow"
-      v-on:yes="$emit('remove-city', city.id)"
-      v-on:no="popupHidden"
-      v-bind:popup-toast="`Город ${city.cityName} был удалён!`"
+      @yes="$emit('remove-city', city.id)"
+      @no="popupHidden"
+      :popup-toast="`Город ${city.cityName} был удалён!`"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Удалить?
       </template>
 
-      <template v-slot:text-info-popup>
+      <template #text-info-popup>
         После нажатия кнопки "да" будет удалён город <b>{{city.cityName}}</b>
       </template>
     </Popup>
@@ -20,16 +20,15 @@
         <div class="card-content dark-text card-line">
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
-            <h6><i class="material-icons">group</i> Количество сотрудников: {{city.employees}}</h6>
             <p class="card-report"
                v-if="city.edited"
             >
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="flex-column-center">
+          <div class="flex-center">
             <router-link class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
-                    title="Новый редактор" :to="{name : 'cityEdit', params: {id: city.id}}"
+                    title="Редактировать" :to="{name : 'cityEdit', params: {id: city.id}}"
             >
               <i class="material-icons">create</i>
             </router-link>
@@ -37,7 +36,7 @@
             <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
                     title="Удалить"
                     v-if="!city.edited"
-                    v-on:click="popupVisibility"
+                    @click="popupVisibility"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -49,76 +48,12 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
+import popupMixin from '@/mixins/popupMixin'
+
 export default {
   name: 'CardSites',
-  components: {
-    Popup
-  },
-  props: {
-    city: {
-      type: Object
-    },
-    index: Number
-  },
-  data () {
-    return {
-      sites: [],
-      employees: [],
-
-      popupShow: false,
-      countEmployees: 0
-    }
-  },
-  methods: {
-    popupVisibility () {
-      this.popupShow = true
-    },
-
-    popupHidden () {
-      this.popupShow = false
-    },
-
-    amountEmployees () {
-      try {
-        const index = this.sites.findIndex((element) => element.id === this.city.id)
-
-        this.employees.forEach((employee) => {
-          if (employee.city === this.sites[index].cityName) {
-            this.countEmployees++
-          }
-        })
-
-        this.sites[index].employees = this.countEmployees
-      } catch (e) {}
-
-      this.saveSites()
-    },
-
-    saveSites () {
-      const parsed = JSON.stringify(this.sites)
-      localStorage.setItem('sites', parsed)
-    }
-  },
-  mounted () {
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
-
-    if (localStorage.getItem('employees')) {
-      try {
-        this.employees = JSON.parse(localStorage.getItem('employees'))
-      } catch (e) {
-        localStorage.removeItem('employees')
-      }
-    }
-
-    this.amountEmployees()
-  }
+  mixins: [popupMixin],
+  props: ['city']
 }
 </script>
 
@@ -150,14 +85,5 @@ export default {
 
   .card-report {
     margin: 20px 0 0;
-  }
-
-  .btn-flat {
-    margin-left: 10px;
-  }
-
-  .flex-center {
-    display: flex;
-    justify-content: flex-end;
   }
 </style>

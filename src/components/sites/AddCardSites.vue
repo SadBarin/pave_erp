@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitSites" class="flex-center" >
-    <div class="input-field input-field-blue input-field-add">
+    <div class="input-field">
       <input
         class="input-add"
         type="text"
@@ -43,32 +43,17 @@ export default {
   data () {
     return {
       cityName: '',
-      coincidence: false,
-
-      sites: [{}]
+      coincidence: false
     }
   },
+  props: ['sites'],
   validations: {
     cityName: { required, minLength: minLength(2) }
   },
   methods: {
-    submitSites () {
-      if (localStorage.getItem('sites')) {
-        try {
-          this.sites = JSON.parse(localStorage.getItem('sites'))
-        } catch (e) {
-          localStorage.removeItem('sites')
-        }
-      }
-
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-
+    searchSimilar () {
       for (const city of this.sites) {
         if (city.cityName === undefined) continue
-        // TODO Переносим всё это в отдельную дерективу
         if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
           this.coincidence = true
           break
@@ -76,10 +61,14 @@ export default {
           this.coincidence = false
         }
       }
+    },
 
-      if (this.cityName.trim() && !this.coincidence) {
+    createNewCity () {
+      if (this.cityName && !this.coincidence) {
+        // Capitalize City Name
         this.cityName = this.cityName[0].toUpperCase() + this.cityName.substring(1)
 
+        // Body New City
         const newCity = {
           id: Date.now(),
           cityName: this.cityName,
@@ -90,13 +79,24 @@ export default {
         this.$emit('add-city', newCity)
         this.cityName = ''
       }
+    },
+
+    submitSites () {
+      // For validations
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+      this.searchSimilar()
+      this.createNewCity()
     }
   }
 }
 </script>
 
 <style scoped>
-  .flex-center .btn-floating {
+  .btn-floating {
     margin-left: 2rem;
   }
 </style>

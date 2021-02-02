@@ -3,8 +3,8 @@
     <CardSites
       v-for="city of sites"
       :key="city.id"
-      v-bind:city="city"
-      v-on:remove-city="removeCity"
+      :city="city"
+      @remove-city="removeCity"
     />
   </section>
 </template>

@@ -7,7 +7,7 @@
         <div class="flex-center">
           <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
                   onclick="M.toast({html: 'Города обновлены'})"
-                  v-on:click="updateCollection('sites')"
+                  @click="this.updateSites"
           ><i class="material-icons">autorenew</i>
           </button>
         </div>
@@ -15,6 +15,7 @@
 
       <AddCardSites
         @add-city="addCity"
+        :sites="sites"
       />
     </div>
 
@@ -35,46 +36,47 @@
 <script>
 import AddCardSites from '@/components/sites/AddCardSites'
 import ListSites from '@/components/sites/list/ListSites'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Sites',
   components: { ListSites, AddCardSites },
   data () {
     return {
-      sites: [{}],
-
-      updateTimeout: 5000
+      updateTimeout: 50000
     }
   },
+  computed: {
+    ...mapGetters([
+      'sites'
+    ])
+  },
   methods: {
+    ...mapMutations([
+      'SET_SITES'
+    ]),
+
+    updateSites () {
+      this.SET_SITES()
+      console.log('Города обновлены 🌀')
+    },
+
     removeCity (id) {
-      this.sites = this.sites.filter(city => city.id !== id)
-      this.saveCollection(this.sites, 'sites')
+      const buffer = this.sites.filter(city => city.id !== id)
+      console.log('Город удалён 🗑️')
+      this.SET_SITES(buffer)
     },
 
     addCity (city) {
-      this.sites.push(city)
-      this.saveCollection(this.sites, 'sites')
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.sites = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
+      const buffer = this.sites
+      buffer.push(city)
+      console.log('Город добавлен ➕')
+      this.SET_SITES(buffer)
     }
   },
   mounted () {
-    this.updateCollection('sites')
-    setInterval(() => this.updateCollection('sites'), this.updateTimeout)
+    this.updateSites()
+    setInterval(() => this.updateSites(), this.updateTimeout)
   }
 }
 </script>

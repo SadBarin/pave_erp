@@ -6,10 +6,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    sites: '',
-    employees: '',
-    workers: '',
-    dataThisEmployee: ''
+    sites: [],
+    employees: [],
+    workers: [],
+    dataThisEmployee: '',
+
+    sitesTrash: [],
+    employeesTrash: [],
+    workersTrash: []
   },
 
   getters: {
@@ -50,6 +54,10 @@ export default new Vuex.Store({
 
       // Crutch
       localStorage.setItem('dataThisEmployee', JSON.stringify(data))
+    },
+
+    SET_TRASH_SITES (state, data) {
+      state.sitesTrash.push(data)
     }
   },
   actions: {},
