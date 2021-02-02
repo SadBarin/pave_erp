@@ -67,9 +67,9 @@ export default {
       this.SET_EMPLOYEES(buffer)
     },
 
-    addEmployee (email) {
+    addEmployee (employee) {
       const buffer = this.employees
-      buffer.push(email)
+      buffer.push(employee)
       console.log('Сотрудник добавлен ➕')
       this.SET_EMPLOYEES(buffer)
     }

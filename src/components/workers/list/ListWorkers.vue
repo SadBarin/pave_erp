@@ -123,15 +123,6 @@ export default {
       }
     }
   },
-  filters: {
-    sexMsgDelete (sex) {
-      if (sex === 'Женский') {
-        return 'При нажатии кнопки "да" будет удалена работница '
-      } else {
-        return 'При нажатии кнопки "да" будет удалён рабочий '
-      }
-    }
-  },
   mounted () {
     this.updateCollection('workers')
     setInterval(() => this.updateCollection('workers'), this.updateTimeout)

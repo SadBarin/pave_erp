@@ -67,9 +67,9 @@ export default {
       this.SET_SITES(buffer)
     },
 
-    addCity (cityName) {
+    addCity (city) {
       const buffer = this.sites
-      buffer.push(cityName)
+      buffer.push(city)
       console.log('Город добавлен ➕')
       this.SET_SITES(buffer)
     }
