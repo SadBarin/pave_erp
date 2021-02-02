@@ -3,8 +3,8 @@
     <CardEmployees
       v-for="employee of employees"
       :key="employee.id"
-      v-bind:employee="employee"
-      v-on:remove-employee="removeEmployee"
+      :employee="employee"
+      @remove-employee="removeEmployee"
     />
   </section>
 </template>
@@ -22,9 +22,3 @@ export default {
   props: ['employees']
 }
 </script>
-
-<style scoped>
-  .row {
-    margin-bottom: 0;
-  }
-</style>

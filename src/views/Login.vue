@@ -109,14 +109,8 @@ export default {
   },
 
   validations: {
-    email: {
-      email,
-      required
-    },
-    password: {
-      required,
-      minLength: minLength(8)
-    }
+    email: { email, required },
+    password: { required, minLength: minLength(8) }
   },
 
   methods: {

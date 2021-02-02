@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitEmployee" class="flex-center" >
-    <div class="input-field input-field-blue">
+    <div class="input-field">
       <input
         class="input-add"
         id="email"
@@ -40,10 +40,10 @@ export default {
   data () {
     return {
       email: '',
-      coincidence: false,
-      employees: [{}]
+      coincidence: false
     }
   },
+  props: ['employees'],
   validations: {
     email: { email, required }
   },
@@ -59,20 +59,7 @@ export default {
       return password
     },
 
-    submitEmployee () {
-      if (localStorage.getItem('employees')) {
-        try {
-          this.employees = JSON.parse(localStorage.getItem('employees'))
-        } catch (e) {
-          localStorage.removeItem('employees')
-        }
-      }
-
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-
+    searchSimilar () {
       for (const employee of this.employees) {
         if (employee.email === undefined) continue
         if (employee.email.toString().toLowerCase() === this.email.toString().toLowerCase()) {
@@ -82,8 +69,11 @@ export default {
           this.coincidence = false
         }
       }
+    },
 
+    createNewEmployee () {
       if (this.email.trim() && !this.coincidence) {
+        // Body New Employee
         const newEmployee = {
           id: Date.now(),
           email: this.email,
@@ -105,6 +95,16 @@ export default {
 
         this.$router.push(`/employees/edit/employee${newEmployee.id}`)
       }
+    },
+
+    submitEmployee () {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+      this.searchSimilar()
+      this.createNewEmployee()
     }
   },
   mounted () {

@@ -117,6 +117,10 @@
 
 /* ~~~~~~~ LAYOUT ~~~~~~~*/
 
+#app .row {
+  margin-bottom: 0;
+}
+
 #app .flex-center {
   text-align: center;
 

@@ -2,16 +2,16 @@
   <div class="row">
     <Popup
       v-if="popupShow"
-      v-on:yes="$emit('remove-employee', employee.id)"
-      v-on:no="popupHidden"
-      v-bind:popup-toast="`${employee.surname} ${employee.name} ${(employee.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+      @yes="$emit('remove-employee', employee.id)"
+      @no="popupHidden"
+      :popup-toast="`${employee.surname} ${employee.name} ${(employee.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Удалить?
       </template>
 
-      <template v-slot:text-info-popup>
-        {{employee.sex | sexDelete }} <b>{{employee.surname}} {{employee.name}}</b>
+      <template #text-info-popup>
+        {{employee.sex | sexMsgDelete }} <b>{{employee.surname}} {{employee.name}}</b>
       </template>
     </Popup>
 
@@ -26,7 +26,8 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="flex-column-center">
+
+          <div class="flex-center">
             <router-link class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
                     title="Редактировать" :to="{name : 'employeeEdit', params: {id: employee.id}}"
             >
@@ -36,7 +37,7 @@
             <button class="btn-floating transparent darken-1 waves-effect waves-light auth-submit white-text"
                     title="Удалить"
                     v-if="!employee.edited"
-                    v-on:click="popupVisibility"
+                    @click="popupVisibility"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -48,81 +49,16 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
+import popupMixin from '@/mixins/popupMixin'
+
 export default {
   name: 'CardEmployees',
-  components: {
-    Popup
-  },
-  props: {
-    employee: {
-      type: Object
-    },
-    index: Number
-  },
-  data () {
-    return {
-      employees: [],
-
-      popupShow: false
-    }
-  },
-  methods: {
-    popupVisibility () {
-      this.popupShow = true
-    },
-
-    popupHidden () {
-      this.popupShow = false
-    },
-
-    editedEmployeeStatus () {
-      if (localStorage.getItem('employees')) {
-        try {
-          this.employees = JSON.parse(localStorage.getItem('employees'))
-        } catch (e) {
-          localStorage.removeItem('employees')
-        }
-      }
-
-      const index = this.employees.findIndex((element) => element.id === this.employee.id)
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.employees[index].edited = true
-      this.saveEmployees()
-      this.$router.push('/employees/editor')
-    },
-
-    saveEmployees () {
-      const parsed = JSON.stringify(this.employees)
-      localStorage.setItem('employees', parsed)
-    }
-  },
-  filters: {
-    sexDelete (sex) {
-      if (sex === 'Женский') {
-        return 'При нажатии кнопки "да" будет удалена работница '
-      } else {
-        return 'При нажатии кнопки "да" будет удалён рабочий '
-      }
-    }
-  },
-  mounted () {
-    if (localStorage.getItem('employees')) {
-      try {
-        this.employees = JSON.parse(localStorage.getItem('employees'))
-      } catch (e) {
-        localStorage.removeItem('employees')
-      }
-    }
-  }
+  mixins: [popupMixin],
+  props: ['employee']
 }
 </script>
 
 <style scoped>
-.row .col {
-  padding: 0;
-}
-
 .card-line {
   display: flex;
   flex-direction: row;
@@ -131,7 +67,7 @@ export default {
 }
 
 .info-container {
-  width: 50%;
+  width: 60%;
 }
 
 h6, .card-report {
@@ -146,14 +82,5 @@ h6 .material-icons,
 
 .card-report {
   margin: 20px 0 0;
-}
-
-.btn-flat {
-  margin-left: 10px;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

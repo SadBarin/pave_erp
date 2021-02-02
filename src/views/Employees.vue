@@ -7,7 +7,7 @@
         <div class="flex-center">
           <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
                   onclick="M.toast({html: 'Сотрудники обновлены'})"
-                  v-on:click="updateCollection('employees')"
+                  @click="updateEmployees"
           ><i class="material-icons">autorenew</i>
           </button>
         </div>
@@ -15,13 +15,14 @@
 
       <AddCardEmployees
         @add-employee="addEmployee"
+        :employees="employees"
       />
     </div>
 
     <div>
       <ListEmployees
         v-if="employees.length"
-        v-bind:employees="employees"
+        :employees="employees"
         @remove-employee="removeEmployee"
       />
       <div v-else class="empty-list">
@@ -35,45 +36,47 @@
 <script>
 import ListEmployees from '@/components/employees/list/ListEmployees'
 import AddCardEmployees from '@/components/employees/AddCardEmployees'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Employees',
   components: { ListEmployees, AddCardEmployees },
   data () {
     return {
-      employees: [],
-
       updateTimeout: 60000
     }
   },
+  computed: {
+    ...mapGetters([
+      'employees'
+    ])
+  },
   methods: {
+    ...mapMutations([
+      'SET_EMPLOYEES'
+    ]),
+
+    updateEmployees () {
+      this.SET_EMPLOYEES()
+      console.log('Сотрудники обновлены 🌀')
+    },
+
     removeEmployee (id) {
-      this.employees = this.employees.filter(employee => employee.id !== id)
-      this.saveCollection(this.employees, 'employees')
+      const buffer = this.employees.filter(employee => employee.id !== id)
+      console.log('Сотрудник удалён 🗑️')
+      this.SET_EMPLOYEES(buffer)
     },
 
     addEmployee (email) {
-      this.employees.push(email)
-      this.saveCollection(this.employees, 'employees')
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.employees = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
+      const buffer = this.employees
+      buffer.push(email)
+      console.log('Сотрудник добавлен ➕')
+      this.SET_EMPLOYEES(buffer)
     }
   },
   mounted () {
-    this.updateCollection('employees')
-    setInterval(() => this.updateCollection('employees'), this.updateTimeout)
+    this.updateEmployees()
+    setInterval(() => this.updateEmployees, this.updateTimeout)
   }
 }
 </script>

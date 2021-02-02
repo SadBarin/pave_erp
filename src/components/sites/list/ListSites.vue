@@ -22,9 +22,3 @@ export default {
   props: ['sites']
 }
 </script>
-
-<style scoped>
-  .row {
-    margin-bottom: 0;
-  }
-</style>

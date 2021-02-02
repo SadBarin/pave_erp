@@ -11,7 +11,7 @@
       </template>
 
       <template v-slot:text-info-popup>
-        {{worker.sex | sexDelete }} <b>{{worker.surname}} {{worker.name}}</b>
+        {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
       </template>
     </Popup>
 
@@ -124,7 +124,7 @@ export default {
     }
   },
   filters: {
-    sexDelete (sex) {
+    sexMsgDelete (sex) {
       if (sex === 'Женский') {
         return 'При нажатии кнопки "да" будет удалена работница '
       } else {

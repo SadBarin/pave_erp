@@ -31,6 +31,14 @@ Vue.use(Cloudinary, {
 
 Vue.component('Popup', Popup)
 
+Vue.filter('sexMsgDelete', function (sex) {
+  if (sex === 'Женский') {
+    return 'При нажатии кнопки "да" будет удалена работница '
+  } else {
+    return 'При нажатии кнопки "да" будет удалён рабочий '
+  }
+})
+
 new Vue({
   router,
   store,
