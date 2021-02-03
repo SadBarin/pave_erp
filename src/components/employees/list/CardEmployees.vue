@@ -17,7 +17,7 @@
 
     <div class="col s12">
       <div class="card-panel blue darken-1 white-text">
-        <div class="card-content dark-text card-line">
+        <div class="card-content dark-text flex-between-center">
           <div class="info-container">
             <h6><i class="material-icons">email</i> Почта: {{employee.email}}</h6>
             <h6><i class="material-icons">person</i> Сотрудник: {{employee.surname}} {{employee.name}}</h6>
@@ -59,15 +59,12 @@ export default {
 </script>
 
 <style scoped>
-.card-line {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .info-container {
   width: 60%;
+}
+
+#app h6 {
+  margin: 0px;
 }
 
 h6, .card-report {
