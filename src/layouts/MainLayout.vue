@@ -2,11 +2,11 @@
   <div class="app-main-layout">
     <Popup
       v-if="popupShow"
-      v-on:yes="exit"
-      v-on:no="popupHidden"
-      v-bind:popup-toast="`До свидания, ${this.dataThisEmployee.surname} ${this.dataThisEmployee.name}!`"
+      @yes="exit"
+      @no="popupHidden"
+      :popup-toast="`До свидания, ${this.dataThisEmployee.surname} ${this.dataThisEmployee.name}!`"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Выйти?
       </template>
     </Popup>
@@ -15,14 +15,14 @@
       <div class="navbar-left">
         <button
           class="btn transparent black-text"
-          v-on:click.prevent="isOpen = !isOpen"
+          @click.prevent="isOpen = !isOpen"
         >
           <i class="material-icons">menu</i>
         </button>
       </div>
     </div>
 
-    <div class="sidenav app-sidenav" v-bind:class="{open: isOpen}">
+    <div class="sidenav app-sidenav" :class="{open: isOpen}">
       <div class="sidenav-content sidenav-top">
         <ul>
           <li v-show="permissions">
@@ -55,7 +55,7 @@
       <div class="sidenav-content sidenav-bottom">
         <button
           class="btn transparent black-text"
-          v-on:click="popupVisibility"
+          @click="popupVisibility"
         >
           <i class="material-icons">exit_to_app</i>
           Выйти
@@ -66,7 +66,7 @@
     <main class="app-content">
       <div
         class="app-page"
-        v-bind:class="{full: !isOpen}"
+        :class="{full: !isOpen}"
       >
         <router-view/>
       </div>
@@ -75,30 +75,19 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
+import popupMixin from '@/mixins/popupMixin'
 
 export default {
   name: 'MainLayout.vue',
-  components: {
-    Popup
-  },
+  mixins: [popupMixin],
   data () {
     return {
-      popupShow: false,
       isOpen: true,
 
       permissions: true
     }
   },
   methods: {
-    popupVisibility () {
-      this.popupShow = true
-    },
-
-    popupHidden () {
-      this.popupShow = false
-    },
-
     exit () {
       this.$router.push('/')
     }
@@ -130,9 +119,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  #app .card-content {
-    padding: 0rem;
-  }
-</style>

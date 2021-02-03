@@ -14,11 +14,11 @@ import CardSites from '@/components/sites/list/CardSites'
 export default {
   name: 'ListSites',
   components: { CardSites },
+  props: ['sites'],
   methods: {
     removeCity (id) {
       this.$emit('remove-city', id)
     }
-  },
-  props: ['sites']
+  }
 }
 </script>

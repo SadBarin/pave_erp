@@ -2,15 +2,15 @@
   <div id="search">
     <Popup
       v-if="popupShow"
-      v-on:yes="removeWorker(worker.id)"
-      v-on:no="popupHidden"
-      v-bind:popup-toast="`Рабочий ${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+      @yes="removeWorker(worker.id)"
+      @no="popupHidden"
+      :popup-toast="`Рабочий ${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Удалить?
       </template>
 
-      <template v-slot:text-info-popup>
+      <template #text-info-popup>
         {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
       </template>
     </Popup>
@@ -20,7 +20,7 @@
 
       <button
         class="btn waves-effect waves-light auth-submit blue darken-1"
-        v-on:click="searchAll()"
+        @click="searchAll()"
       >
         <i class="material-icons">search</i> Поиск
       </button>
@@ -156,10 +156,9 @@
 
                 <TableWorkers
                   v-if="workers.length"
-                  v-bind:workers="searchWorkers"
-                  v-bind:eye="false"
-                  @popup-visibility="popupVisibility"
-                  @edited-worker-status="editedWorkerStatus"
+                  @remove-worker="removeWorker"
+                  :workers="workers"
+                  :data-this-employee="dataThisEmployee"
                 />
               </div>
             </form>
@@ -172,18 +171,17 @@
 
 <script>
 import M from 'materialize-css'
-import Popup from '@/components/Popup'
-import TableWorkers from '@/components/workers/list/TableWorkers'
+import TableWorkers from '@/components/workers/TableWorkers'
+import popupMixin from '@/mixins/popupMixin'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'SearchWorkers',
-  components: { Popup, TableWorkers },
+  components: { TableWorkers },
+  mixins: [popupMixin],
   data () {
     return {
-      workers: [],
-      sites: [],
-      popupShow: false,
-      worker: '',
+      updateTimeout: 60000,
 
       searchInput: {
         name: '',
@@ -197,18 +195,20 @@ export default {
         medicalBook: ''
       },
 
-      searchWorkers: ''
+      searchWorkers: []
     }
   },
+  computed: {
+    ...mapGetters([
+      'sites',
+      'workers',
+      'dataThisEmployee'
+    ])
+  },
   methods: {
-    popupVisibility (worker) {
-      this.popupShow = true
-      this.worker = worker
-    },
-
-    popupHidden () {
-      this.popupShow = false
-    },
+    ...mapMutations([
+      'SET_WORKERS'
+    ]),
 
     searching (obj) {
       return function (key, searchKey) {
@@ -246,65 +246,23 @@ export default {
       return professionsList
     },
 
-    editedWorkerStatus (id) {
-      const index = this.workers.findIndex((element) => element.id === id)
-      this.workers[index].edited = true
-      this.saveCollection(this.workers, 'workers')
-      this.$router.push('/workers/editor')
+    updateWorkers () {
+      this.SET_WORKERS()
+      console.log('Рабочие обновлены 🌀')
     },
 
     removeWorker (id) {
-      this.workers = this.workers.filter(worker => worker.id !== id)
-      this.saveCollection(this.workers, 'workers')
+      const buffer = this.workers.filter(worker => worker.id !== id)
+      console.log('Рабочий удалён 🗑️')
       this.popupHidden()
-      this.searchWorkers = this.workers
-    },
-
-    addWorker (worker) {
-      this.workers.push(worker)
-      this.saveCollection(this.workers, 'workers')
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.workers = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
-    }
-  },
-  filters: {
-    sexMsgDelete (sex) {
-      if (sex === 'Женский') {
-        return 'При нажатии кнопки "да" будет удалена работница '
-      } else {
-        return 'При нажатии кнопки "да" будет удалён рабочий '
-      }
+      this.SET_WORKERS(buffer)
     }
   },
   mounted () {
-    this.updateCollection('workers')
+    this.updateWorkers()
+    setInterval(() => this.updateWorkers(), this.updateTimeout)
+
     this.searchWorkers = this.workers
-
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
-
-    const collapsible = document.querySelectorAll('.collapsible')
-    collapsible.forEach((element) => {
-      M.Collapsible.init(element)
-    })
 
     const tabs = document.querySelectorAll('.tabs')
     tabs.forEach((element) => {

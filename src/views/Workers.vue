@@ -1,16 +1,49 @@
 <template>
   <div>
-    <ListWorkers/>
+    <div class="page-title flex-between-center">
+      <div class="flex-center">
+        <h3>Список рабочих</h3>
+
+        <div class="flex-center">
+          <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
+                  onclick="M.toast({html: 'Рабочие обновлены'})"
+                  @click="updateWorkers()"
+          ><i class="material-icons">autorenew</i>
+          </button>
+
+          <router-link class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
+          </router-link>
+        </div>
+      </div>
+
+      <AddCardWorkers
+        @add-worker="addWorker"
+      />
+    </div>
+
+    <section>
+      <TableWorkers
+        v-if="workers.length"
+        @remove-worker="removeWorker"
+        :workers="workers"
+        :data-this-employee="dataThisEmployee"
+      />
+      <div v-else class="empty-list">
+        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
+        <p>Добавьте рабочего, чтобы начать работать над ним.</p>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import ListWorkers from '@/components/workers/list/ListWorkers'
+import TableWorkers from '@/components/workers/TableWorkers'
+import AddCardWorkers from '@/components/workers/AddCardWorkers'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Workers',
-  components: { ListWorkers },
+  components: { TableWorkers, AddCardWorkers },
   data () {
     return {
       updateTimeout: 60000
@@ -18,7 +51,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'workers'
+      'workers',
+      'dataThisEmployee'
     ])
   },
   methods: {
@@ -34,14 +68,14 @@ export default {
     removeWorker (id) {
       const buffer = this.workers.filter(worker => worker.id !== id)
       console.log('Рабочий удалён 🗑️')
-      this.SET_SITES(buffer)
+      this.SET_WORKERS(buffer)
     },
 
     addWorker (worker) {
       const buffer = this.workers
       buffer.push(worker)
       console.log('Рабочий добавлен ➕')
-      this.SET_SITES(buffer)
+      this.SET_WORKERS(buffer)
     }
   },
   mounted () {

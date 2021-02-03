@@ -1,5 +1,20 @@
 <template>
 <div>
+  <Popup
+    v-if="popupShow"
+    @yes="removeWorker(worker)"
+    @no="popupHidden()"
+    :popup-toast="`${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+  >
+    <template #title-popup>
+      Удалить?
+    </template>
+
+    <template #text-info-popup>
+      {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
+    </template>
+  </Popup>
+
   <table v-if="dataThisEmployee.access === 'admin'">
     <tr>
       <th>Фамилия</th>
@@ -27,14 +42,14 @@
           <div class="flex-center">
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
-                    :to="{name : 'workerAbout', params: {id: worker.id, toSearch: true}}"
+                    :to="{name : 'workerAbout', params: {id: worker.id}}"
             >
               <i class="material-icons">remove_red_eye</i>
             </router-link>
 
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Редактировать"
-                    :to="{name : 'workerEdit', params: {id: worker.id, toSearch: true}}"
+                    :to="{name : 'workerEdit', params: {id: worker.id}}"
             >
               <i class="material-icons">create</i>
             </router-link>
@@ -42,7 +57,7 @@
             <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
-                    v-on:click.prevent="popupVisibility(worker)"
+                    @click="popupVisibility(worker); setWorker(worker)"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -86,7 +101,7 @@
 
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                          title="Редактировать"
-                         :to="{name : 'workerEdit', params: {id: worker.id, toSearch: true}}"
+                         :to="{name : 'workerEdit', params: {id: worker.id}}"
             >
               <i class="material-icons">create</i>
             </router-link>
@@ -94,7 +109,7 @@
             <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Удалить"
                     v-if="!worker.edited"
-                    v-on:click.prevent="popupVisibility(worker)"
+                    @click="popupVisibility(worker); setWorker(worker)"
             >
               <i class="material-icons">delete</i>
             </button>
@@ -106,35 +121,26 @@
 </template>
 
 <script>
+import popupMixin from '@/mixins/popupMixin'
+
 export default {
   name: 'TableWorkers',
+  mixins: [popupMixin],
+  props: ['workers', 'dataThisEmployee'],
   data () {
     return {
-      dataThisEmployee: ''
+      worker: ''
     }
   },
   methods: {
-    popupVisibility (worker) {
-      this.$emit('popup-visibility', worker)
+    setWorker (worker) {
+      this.worker = worker
     },
 
-    editedWorkerStatus (id) {
-      this.$emit('edited-worker-status', id)
-    }
-  },
-  // eslint-disable-next-line vue/no-dupe-keys
-  props: ['workers', 'eye'],
-  mounted () {
-    if (localStorage.getItem('dataThisEmployee')) {
-      try {
-        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
-      } catch (e) {
-        localStorage.removeItem('dataThisEmployee')
-      }
+    removeWorker (worker) {
+      this.$emit('remove-worker', worker.id)
+      this.popupHidden()
     }
   }
 }
 </script>
-
-<style scoped>
-</style>
