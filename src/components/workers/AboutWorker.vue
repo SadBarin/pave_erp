@@ -93,13 +93,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'AboutWorker',
   data () {
     return {
-      workers: '',
       worker: ''
     }
+  },
+  computed: {
+    ...mapGetters([
+      'workers'
+    ])
   },
   filters: {
     booleanToWord: function (boolean) {
@@ -107,14 +113,6 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('workers')) {
-      try {
-        this.workers = JSON.parse(localStorage.getItem('workers'))
-      } catch (e) {
-        localStorage.removeItem('workers')
-      }
-    }
-
     for (const worker of this.workers) {
       // eslint-disable-next-line eqeqeq
       if (worker.id == this.$route.params.id) {
