@@ -2,10 +2,10 @@
   <div>
     <div class="page-title flex-between-center">
       <div class="flex-center">
-        <h3>Список сотрудников</h3>
+        <h3 class="right-margin-big">Список сотрудников</h3>
 
         <div class="flex-center">
-          <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
+          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
                   onclick="M.toast({html: 'Сотрудники обновлены'})"
                   @click="updateEmployees"
           ><i class="material-icons">autorenew</i>

@@ -9,10 +9,22 @@
     <div class="info-content">
       <div>
         <h5>Локальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются только для пользователя"><i class="material-icons">info</i></a></h5>
-        <h6>Автообновление страниц: <span><input class="info-input" type="number"> мс.</span></h6>
+        <h6>Автообновление страниц через: <span><input class="info-input" type="number"> мс.</span></h6>
       </div>
       <div>
         <h5>Глобальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются для всей системы"><i class="material-icons">info</i></a></h5>
+        <h6>
+          <router-link class="pointer" to="/sites">
+            <i class="material-icons">location_city</i>
+            Настроить города
+          </router-link>
+        </h6>
+        <h6>
+          <router-link class="pointer" to="/employees">
+            <i class="material-icons">group</i>
+            Настроить сотрудников
+          </router-link>
+        </h6>
       </div>
     </div>
   </div>

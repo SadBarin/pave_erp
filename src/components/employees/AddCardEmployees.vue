@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="submitEmployee" class="flex-center" >
-    <div class="input-field">
+    <div class="input-field margin-fix right-margin-little">
       <input
         class="input-add"
         id="email"
         type="text"
+        placeholder="Почта нового рабочего"
         v-model.trim="email"
         :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
       >
-      <label for="email">Почта</label>
       <small
         class="helper-text invalid"
         v-if="$v.email.$dirty && !$v.email.required"
@@ -26,8 +26,8 @@
       </small>
     </div>
 
-    <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" type="submit">
-      <i class="material-icons">add</i>
+    <button class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Добавить нового сотрудника" type="submit">
+      <i class="material-icons big-material-icons">add</i>
     </button>
   </form>
 </template>
@@ -118,9 +118,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.flex-center .btn-floating {
-  margin-left: 2rem;
-}
-</style>

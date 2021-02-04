@@ -2,16 +2,17 @@
   <div>
     <div class="page-title flex-between-center">
       <div class="flex-center">
-        <h3>Список рабочих</h3>
+        <h3 class="right-margin-big">Список рабочих</h3>
 
         <div class="flex-center">
-          <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light"
+          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
+                  title="Обновить страницу"
                   onclick="M.toast({html: 'Рабочие обновлены'})"
                   @click="updateWorkers()"
           ><i class="material-icons">autorenew</i>
           </button>
 
-          <router-link class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" to="/workers/search"><i class="material-icons">search</i>
+          <router-link class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Начать поиск" to="/workers/search"><i class="material-icons">search</i>
           </router-link>
         </div>
       </div>

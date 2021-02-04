@@ -25,18 +25,6 @@
     <div class="sidenav app-sidenav" :class="{open: isOpen}">
       <div class="sidenav-content sidenav-top">
         <ul>
-          <li v-show="permissions">
-            <router-link class="waves-effect waves-blue pointer" to="/sites">
-              <i class="material-icons">location_city</i>
-              Города
-            </router-link>
-          </li>
-          <li v-show="permissions">
-            <router-link class="waves-effect waves-blue waves-ripple pointer" to="/employees">
-              <i class="material-icons">group</i>
-              Сотрудники
-            </router-link>
-          </li>
           <li>
             <router-link class="waves-effect waves-blue pointer" to="/workers">
               <i class="material-icons">transfer_within_a_station</i>
@@ -88,9 +76,7 @@ export default {
   mixins: [popupMixin],
   data () {
     return {
-      isOpen: true,
-
-      permissions: true
+      isOpen: true
     }
   },
   methods: {

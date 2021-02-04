@@ -64,6 +64,10 @@
   vertical-align: text-bottom;
 }
 
+#app .big-material-icons {
+  font-size: 2rem !important;
+}
+
 #app p, #app a {
   font-size: var(--font-size);
 }
@@ -93,6 +97,11 @@
 #app h3 {
   font-size: calc(var(--font-size) * 2.1);
   margin: 1.5rem 0rem 1.5rem 0rem;
+}
+
+#app h3 .material-icons{
+  font-size: calc(var(--font-size) * 1.2);
+  margin-bottom: 0.1rem;
 }
 
 #app h4 {
@@ -146,6 +155,14 @@
 
 #app .margin-fix {
   padding: 1px;
+}
+
+#app .right-margin-big {
+  margin-right: 2rem;
+}
+
+#app .right-margin-little{
+  margin-right: 1rem;
 }
 
 #app * {
@@ -233,17 +250,19 @@ section {
   height: var(--page-title-height);
 }
 
-.btn-page-title {
+#app .btn-page-title {
   box-shadow: none !important;
 
-  width: 2.4rem;
+  font-size: 1.5rem;
 
-  margin-left: 15px;
+  width: 2.4rem;
   margin-bottom: -10px;
+
+  cursor: pointer;
 }
 
-.btn-page-title .material-icons {
-  margin: -3px;
+#app .btn-page-title .material-icons{
+  font-size: 1.5rem;
 }
 
 #app .col {

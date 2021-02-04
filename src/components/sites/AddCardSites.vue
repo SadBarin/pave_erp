@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="submitSites" class="flex-center" >
-    <div class="input-field">
+    <div class="input-field margin-fix right-margin-little">
       <input
         class="input-add"
         type="text"
         id="city"
+        placeholder="Название нового города"
         v-model.trim="cityName"
         :class="{invalid: ($v.cityName.$dirty && !$v.cityName.required) || ($v.cityName.$dirty && !$v.cityName.minLength)}"
       >
-      <label for="city">Город</label>
       <small
         class="helper-text invalid"
         v-if="$v.cityName.$dirty && !$v.cityName.required"
@@ -29,8 +29,8 @@
       </small>
     </div>
 
-    <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" title="Добавить город" type="submit">
-      <i class="material-icons">add</i>
+    <button class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Добавить новый город" type="submit">
+      <i class="material-icons big-material-icons">add</i>
     </button>
   </form>
 </template>
@@ -94,9 +94,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .btn-floating {
-    margin-left: 2rem;
-  }
-</style>

@@ -1,16 +1,15 @@
 <template>
   <form @submit.prevent="submitWorkers" class="flex-center" >
-    <div class="input-field input-field-blue">
+    <div class="input-field margin-fix right-margin-little">
       <input
         class="input-add"
         type="tel"
         id="worker"
         v-model.trim="number"
         v-mask="'+7 (###) ###-##-##'"
-        placeholder="+7 ( ) "
+        placeholder="Номер нового рабочего"
         :class="{invalid: ($v.number.$dirty && !$v.number.required) || ($v.number.$dirty && !$v.number.minLength)}"
       >
-      <label class="active" for="worker">Номер рабочего</label>
       <small
         class="helper-text invalid"
         v-if="$v.number.$dirty && !$v.number.required"
@@ -31,8 +30,8 @@
       </small>
     </div>
 
-    <button class="btn-floating btn-page-title blue darken-1 waves-effect waves-circle waves-light" title="Добавить рабочего" type="submit">
-      <i class="material-icons">add</i>
+    <button class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Добавить нового рабочего" type="submit">
+      <i class="material-icons big-material-icons">add</i>
     </button>
   </form>
 </template>
@@ -135,9 +134,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.flex-center .btn-floating {
-  margin-left: 2rem;
-}
-</style>
