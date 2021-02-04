@@ -49,6 +49,12 @@
               Поиск рабочих
             </router-link>
           </li>
+          <li>
+            <router-link class="waves-effect waves-blue pointer" to="/settings">
+              <i class="material-icons">settings</i>
+              Настройки
+            </router-link>
+          </li>
         </ul>
       </div>
 

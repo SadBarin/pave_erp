@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <section class="about-section">
+    <section class="info-content">
       <div>
         <h5><i class="material-icons">account_box</i> ФИО</h5>
         <h6>Имя: <span>{{worker.name}}</span></h6>
@@ -125,24 +125,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .about-section {
-    text-align: start;
-
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-  }
-
-  .about-section > div {
-    margin-right: 3rem
-  }
-
-  .photo-example {
-    margin: 1rem 0rem 1rem 0rem;
-  }
-</style>

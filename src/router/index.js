@@ -25,6 +25,7 @@ const router = new VueRouter({
       meta: { layout: 'main' },
       component: () => import('../components/sites/EditCity')
     },
+
     {
       path: '/employees',
       name: 'employees',
@@ -37,6 +38,7 @@ const router = new VueRouter({
       meta: { layout: 'main' },
       component: () => import('../components/employees/EditEmployee')
     },
+
     {
       path: '/workers',
       name: 'workers',
@@ -60,6 +62,13 @@ const router = new VueRouter({
       name: 'workerAbout',
       meta: { layout: 'main' },
       component: () => import('../components/workers/AboutWorker')
+    },
+
+    {
+      path: '/settings',
+      name: 'settings',
+      meta: { layout: 'main' },
+      component: () => import('../views/Settings')
     }
   ]
 })
