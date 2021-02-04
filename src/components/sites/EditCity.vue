@@ -2,14 +2,14 @@
   <div>
     <Popup
       v-if="popupShow"
-      v-on:yes="editorExit(sites)"
-      v-on:no="popupHidden"
+      @yes="editorExit(sites)"
+      @no="popupHidden"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Покинуть редактор города?
       </template>
 
-      <template v-slot:text-info-popup>
+      <template #text-info-popup>
         Введённые данные не будут сохранены!
       </template>
     </Popup>
@@ -85,25 +85,28 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
 import M from 'materialize-css'
+import popupMixin from '@/mixins/popupMixin'
 import { required, minLength } from 'vuelidate/lib/validators'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Sites',
-  components: {
-    Popup
-  },
+  mixins: [popupMixin],
   data () {
     return {
-      popupShow: false,
       coincidence: false,
       validateCheck: true,
-      editedSitesName: '',
-      countEmployees: '0',
-      sites: [{}],
-      employees: [{}]
+
+      editedSitesName: ''
     }
+  },
+  computed: {
+    ...mapGetters([
+      'sites',
+      'employees',
+      'workers'
+    ])
   },
   validations: {
     editedSitesName: { required, minLength: minLength(2) }
@@ -114,6 +117,10 @@ export default {
     } catch (e) {}
   },
   methods: {
+    ...mapMutations([
+      'SET_SITES'
+    ]),
+
     validate () {
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -128,14 +135,6 @@ export default {
           this.validateCheck = true
         }
       }
-    },
-
-    popupVisibility () {
-      this.popupShow = true
-    },
-
-    popupHidden () {
-      this.popupShow = false
     },
 
     searchIndex (collection) {
@@ -157,14 +156,6 @@ export default {
     editorCollection (collection, additionalCollection) {
       if (this.validateCheck) {
         collection[this.searchIndex(collection)].cityName = this.editedSitesName
-
-        this.employees.forEach((employee) => {
-          if (employee.city === this.sites[this.searchIndex(collection)].cityName) {
-            this.countEmployees++
-          }
-        })
-
-        this.sites[this.searchIndex(collection)].employees = this.countEmployees
 
         console.log('Город сохранён 😉')
 

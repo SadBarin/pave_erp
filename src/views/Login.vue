@@ -162,7 +162,7 @@ export default {
       }
     },
 
-    submitLogin () {
+    async submitLogin () {
       // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -171,11 +171,22 @@ export default {
 
       this.addNewElement(this.clearOldData)
 
-      if (this.authEmployee()) {
-        this.$router.push('/workers')
-      } else {
-        M.toast({ html: 'Ошибка входа!' })
-        console.log('Попытка входа ⚠')
+      const formData = {
+        email: this.email,
+        password: this.password
+      }
+
+      try {
+        await this.$store.dispatch('login', formData)
+
+        if (this.authEmployee()) {
+          await this.$router.push('/workers')
+        } else {
+          M.toast({ html: 'Ошибка входа!' })
+          console.log('Попытка входа ⚠')
+        }
+      } catch (e) {
+
       }
     }
   },

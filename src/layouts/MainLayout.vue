@@ -94,8 +94,9 @@ export default {
     }
   },
   methods: {
-    exit () {
-      this.$router.push('/')
+    async exit () {
+      await this.$store.dispatch('logout')
+      await this.$router.push('/')
     }
   },
   mounted () {

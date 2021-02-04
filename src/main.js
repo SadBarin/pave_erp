@@ -12,6 +12,21 @@ import VueTheMask from 'vue-the-mask'
 import Cloudinary from 'cloudinary-vue'
 import Popup from '@/components/Popup'
 
+// eslint-disable-next-line no-unused-vars
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyABOUNJ-twAF_dgCh0Cns3jFeZihOIHQU8',
+  authDomain: 'pave0erp.firebaseapp.com',
+  projectId: 'pave0erp',
+  storageBucket: 'pave0erp.appspot.com',
+  messagingSenderId: '1073821009185',
+  appId: '1:1073821009185:web:c12b166d1736255b872a60',
+  measurementId: 'G-6PK395BWTR'
+})
+
 Sentry.init({
   Vue,
   dsn: 'https://6dad949ef73644a191805fba31018ebf@o505169.ingest.sentry.io/5593013',
@@ -39,8 +54,14 @@ Vue.filter('sexMsgDelete', function (sex) {
   }
 })
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+let app
+
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+})

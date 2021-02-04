@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import additionalData from '@/store/modules/additionalData'
+// eslint-disable-next-line no-unused-vars
+import auth from '@/store/modules/auth'
 
 Vue.use(Vuex)
 
@@ -62,6 +64,6 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {
-    additionalData
+    additionalData, auth
   }
 })
