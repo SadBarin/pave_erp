@@ -107,7 +107,7 @@ export default {
 
       try {
         await this.$store.dispatch('login', formData)
-        setTimeout(() => this.$router.push('/workers'), 5000)
+        setTimeout(() => this.$router.push('/sites'), 5000)
       } catch (e) {
         M.toast({ html: 'Ошибка входа!' })
         console.log('Попытка входа ⚠')
