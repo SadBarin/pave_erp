@@ -2,7 +2,7 @@
   <div class="app-main-layout">
     <Popup
       v-if="popupShow"
-      @yes="exit"
+      @yes="exit()"
       @no="popupHidden"
       :popup-toast="`До свидания, ${this.dataThisEmployee.surname} ${this.dataThisEmployee.name}!`"
     >
@@ -82,7 +82,9 @@ export default {
   methods: {
     async exit () {
       await this.$store.dispatch('logout')
-      await this.$router.push('/')
+      this.$router.push({
+        name: 'login'
+      }).catch()
     }
   },
   mounted () {
@@ -93,8 +95,6 @@ export default {
         localStorage.removeItem('dataThisEmployee')
       }
     }
-
-    console.log('Вошёл пользователь с id:', this.dataThisEmployee.id)
 
     try {
       if (this.dataThisEmployee.access !== 'admin') {

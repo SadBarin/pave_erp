@@ -128,19 +128,6 @@ export default {
       this.SET_DATA_AUTH()
     },
 
-    authEmployee () {
-      for (const employee of this.employees) {
-        if (this.email === employee.email && this.password === employee.password) {
-          this.SET_DATA_AUTH(employee)
-          M.toast({ html: `Добро пожаловать, ${employee.surname} ${employee.name}!` })
-
-          return true
-        }
-      }
-
-      return false
-    },
-
     addNewElement (predicate) {
       if (predicate) {
         localStorage.clear()
@@ -178,15 +165,10 @@ export default {
 
       try {
         await this.$store.dispatch('login', formData)
-
-        if (this.authEmployee()) {
-          await this.$router.push('/workers')
-        } else {
-          M.toast({ html: 'Ошибка входа!' })
-          console.log('Попытка входа ⚠')
-        }
+        await this.$router.push('/workers')
       } catch (e) {
-
+        M.toast({ html: 'Ошибка входа!' })
+        console.log('Попытка входа ⚠')
       }
     }
   },

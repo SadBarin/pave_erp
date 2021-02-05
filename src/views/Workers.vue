@@ -28,7 +28,6 @@
         v-if="workers.length"
         @remove-worker="removeWorker"
         :workers="workers"
-        :data-this-employee="dataThisEmployee"
       />
       <div v-else class="empty-list">
         <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>
