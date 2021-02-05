@@ -1,28 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import additionalData from '@/store/modules/additionalData'
-// eslint-disable-next-line no-unused-vars
-import auth from '@/store/modules/auth'
+import firebase from 'firebase/app'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    sites: [],
-    employees: [],
-    workers: [],
-    dataThisEmployee: '',
-
-    sitesTrash: [],
-    employeesTrash: [],
-    workersTrash: []
+    sites: {},
+    employees: {},
+    workers: {},
+    dataThisEmployee: ''
   },
 
   getters: {
-    additionalSites: state => state.additionalData.additionalSites,
-    additionalEmployees: state => state.additionalData.additionalEmployees,
-    additionalWorkers: state => state.additionalData.additionalWorkers,
-
     sites: state => state.sites,
     employees: state => state.employees,
     workers: state => state.workers,
@@ -30,40 +20,49 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    SET_SITES (state, data = JSON.parse(localStorage.getItem('sites'))) {
+    SET_SITES (state, data) {
       state.sites = data
-
-      // Crutch
-      localStorage.setItem('sites', JSON.stringify(data))
     },
 
-    SET_EMPLOYEES (state, data = JSON.parse(localStorage.getItem('employees'))) {
+    SET_EMPLOYEES (state, data) {
       state.employees = data
-
-      // Crutch
-      localStorage.setItem('employees', JSON.stringify(data))
     },
 
-    SET_WORKERS (state, data = JSON.parse(localStorage.getItem('workers'))) {
+    SET_WORKERS (state, data) {
       state.workers = data
-
-      // Crutch
-      localStorage.setItem('workers', JSON.stringify(data))
     },
 
-    SET_DATA_AUTH (state, data = JSON.parse(localStorage.getItem('dataThisEmployee'))) {
+    SET_DATA_AUTH (state, data) {
       state.dataThisEmployee = data
-
-      // Crutch
-      localStorage.setItem('dataThisEmployee', JSON.stringify(data))
-    },
-
-    SET_TRASH_SITES (state, data) {
-      state.sitesTrash.push(data)
     }
   },
-  actions: {},
-  modules: {
-    additionalData, auth
+  actions: {
+    async login ({ dispatch, commit }, { email, password }) {
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email, password)
+
+        const sites = firebase.database().ref('/sites/')
+        sites.on('value', (snapshot) => {
+          console.log('Sites in Database:', snapshot.val())
+          commit('SET_SITES', snapshot.val())
+        })
+
+        const employees = firebase.database().ref('/employees/')
+        employees.on('value', (snapshot) => {
+          console.log('Employees in Database:', snapshot.val())
+          commit('SET_EMPLOYEES', snapshot.val())
+        })
+
+        const workers = firebase.database().ref('/workers/')
+        workers.on('value', (snapshot) => {
+          console.log('Workers in Database:', snapshot.val())
+          commit('SET_WORKERS', snapshot.val())
+        })
+      } catch (e) {}
+    },
+
+    async logout () {
+      await firebase.auth().signOut()
+    }
   }
 })

@@ -19,7 +19,7 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
+            <h6><i class="material-icons">location_city</i> Город: {{city[0].cityName}}</h6>
             <p class="card-report"
                v-if="city.edited"
             >
@@ -53,7 +53,10 @@ import popupMixin from '@/mixins/popupMixin'
 export default {
   name: 'CardSites',
   mixins: [popupMixin],
-  props: ['city']
+  props: ['city'],
+  mounted () {
+    console.log('City:', this.city)
+  }
 }
 </script>
 

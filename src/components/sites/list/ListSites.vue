@@ -19,6 +19,9 @@ export default {
     removeCity (id) {
       this.$emit('remove-city', id)
     }
+  },
+  mounted () {
+    console.log('Sites for:', this.sites)
   }
 }
 </script>

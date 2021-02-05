@@ -25,7 +25,7 @@
 
     <section>
       <TableWorkers
-        v-if="workers.length"
+        v-if="workers"
         @remove-worker="removeWorker"
         :workers="workers"
       />
@@ -80,6 +80,8 @@ export default {
     }
   },
   mounted () {
+    console.log('Workers:', this.workers)
+
     this.updateWorkers()
     setInterval(() => this.updateWorkers(), this.updateTimeout)
   }

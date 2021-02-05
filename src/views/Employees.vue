@@ -75,6 +75,8 @@ export default {
     }
   },
   mounted () {
+    console.log('Employees:', this.employees)
+
     this.updateEmployees()
     setInterval(() => this.updateEmployees, this.updateTimeout)
   }

@@ -45,27 +45,6 @@
             Пароль должен содержать не менее {{ $v.password.$params.minLength.min }} символов.
           </small>
         </div>
-
-        <ul class="collapsible black-text form-content">
-          <li class="white-text">
-            <div class="collapsible-header blue darken-1"><i class="material-icons">clear_all</i>Дополнительные функции
-              входа
-            </div>
-            <div class="collapsible-body white black-text">
-              <label>
-                <input type="checkbox" class="filled-in" v-model="clearOldData"/>
-                <span class="collapsible-label black-text">Удалить предыдущие данные</span>
-              </label>
-              <br>
-
-              <label v-show="clearOldData">
-                <input type="checkbox" class="filled-in" v-model="addNewData"/>
-                <span class="collapsible-label black-text">Добавить города, сотрудников и рабочих</span>
-              </label>
-              <br>
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
 
@@ -88,19 +67,12 @@ export default {
   data () {
     return {
       email: 'admin@admin.com',
-      password: 'admin2021best',
-
-      clearOldData: true,
-      addNewData: true
+      password: 'admin2021best'
     }
   },
 
   computed: {
     ...mapGetters([
-      'additionalWorkers',
-      'additionalEmployees',
-      'additionalSites',
-
       'sites',
       'employees',
       'workers',
@@ -121,42 +93,12 @@ export default {
       'SET_DATA_AUTH'
     ]),
 
-    updateAllCollection () {
-      this.SET_SITES()
-      this.SET_EMPLOYEES()
-      this.SET_WORKERS()
-      this.SET_DATA_AUTH()
-    },
-
-    addNewElement (predicate) {
-      if (predicate) {
-        localStorage.clear()
-
-        console.groupCollapsed('Добавление единиц 📃')
-        console.log('Прошлые записи удалены 🗑')
-
-        this.SET_EMPLOYEES(this.additionalEmployees)
-        console.log('Сотрудники добавлены 🧍')
-
-        if (this.addNewData) {
-          this.SET_SITES(this.additionalSites)
-          this.SET_WORKERS(this.additionalWorkers)
-
-          console.log('Новые единицы добавлены 😉')
-        }
-
-        console.groupEnd()
-      }
-    },
-
     async submitLogin () {
       // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
-
-      this.addNewElement(this.clearOldData)
 
       const formData = {
         email: this.email,
@@ -165,7 +107,7 @@ export default {
 
       try {
         await this.$store.dispatch('login', formData)
-        await this.$router.push('/workers')
+        setTimeout(() => this.$router.push('/workers'), 5000)
       } catch (e) {
         M.toast({ html: 'Ошибка входа!' })
         console.log('Попытка входа ⚠')
@@ -178,16 +120,6 @@ export default {
     collapsible.forEach((element) => {
       M.Collapsible.init(element)
     })
-
-    this.updateAllCollection()
-
-    try {
-      if (this.dataThisEmployee.length === 0) {
-        console.log('Первый вход 🔛')
-      } else {
-        this.clearOldData = false
-      }
-    } catch (e) {}
   }
 }
 </script>

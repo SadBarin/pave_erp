@@ -75,6 +75,8 @@ export default {
     }
   },
   mounted () {
+    console.log('Sites:', this.sites)
+
     this.updateSites()
     setInterval(() => this.updateSites(), this.updateTimeout)
   }
