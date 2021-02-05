@@ -9,10 +9,11 @@
                   title="Обновить страницу"
                   onclick="M.toast({html: 'Рабочие обновлены'})"
                   @click="updateWorkers()"
-          ><i class="material-icons">autorenew</i>
+          ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
 
-          <router-link class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Начать поиск" to="/workers/search"><i class="material-icons">search</i>
+          <router-link class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Начать поиск" to="/workers/search">
+            <i class="material-icons middle-material-icons">search</i>
           </router-link>
         </div>
       </div>

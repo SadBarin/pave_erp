@@ -5,10 +5,10 @@
         <h3 class="right-margin-big">Список сотрудников</h3>
 
         <div class="flex-center">
-          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
+          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1 "
                   onclick="M.toast({html: 'Сотрудники обновлены'})"
                   @click="updateEmployees"
-          ><i class="material-icons">autorenew</i>
+          ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
         </div>
       </div>

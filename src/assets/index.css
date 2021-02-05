@@ -68,6 +68,10 @@
   font-size: 2rem !important;
 }
 
+#app .middle-material-icons {
+  font-size: 1.7rem !important;
+}
+
 #app p, #app a {
   font-size: var(--font-size);
 }
@@ -97,11 +101,6 @@
 #app h3 {
   font-size: calc(var(--font-size) * 2.1);
   margin: 1.5rem 0rem 1.5rem 0rem;
-}
-
-#app h3 .material-icons{
-  font-size: calc(var(--font-size) * 1.2);
-  margin-bottom: 0.1rem;
 }
 
 #app h4 {

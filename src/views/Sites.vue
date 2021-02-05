@@ -8,7 +8,7 @@
           <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
                   onclick="M.toast({html: 'Города обновлены'})"
                   @click="this.updateSites"
-          ><i class="material-icons">autorenew</i>
+          ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
         </div>
       </div>
