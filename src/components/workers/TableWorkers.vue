@@ -90,6 +90,9 @@ export default {
       this.$emit('remove-worker', worker.id)
       this.popupHidden()
     }
+  },
+  mounted () {
+    console.log('Workers for:', this.workers)
   }
 }
 </script>

@@ -19,6 +19,9 @@ export default {
       this.$emit('remove-employee', id)
     }
   },
-  props: ['employees']
+  props: ['employees'],
+  mounted () {
+    console.log('Employees for:', this.employees)
+  }
 }
 </script>
