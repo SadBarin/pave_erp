@@ -75,8 +75,7 @@ export default {
     ...mapGetters([
       'sites',
       'employees',
-      'workers',
-      'dataThisEmployee'
+      'workers'
     ])
   },
 
@@ -89,8 +88,7 @@ export default {
     ...mapMutations([
       'SET_SITES',
       'SET_EMPLOYEES',
-      'SET_WORKERS',
-      'SET_DATA_AUTH'
+      'SET_WORKERS'
     ]),
 
     async submitLogin () {
@@ -107,7 +105,7 @@ export default {
 
       try {
         await this.$store.dispatch('login', formData)
-        setTimeout(() => this.$router.push('/sites'), 5000)
+        await this.$router.push('/workers')
       } catch (e) {
         M.toast({ html: 'Ошибка входа!' })
         console.log('Попытка входа ⚠')

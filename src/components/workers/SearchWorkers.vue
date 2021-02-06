@@ -1,20 +1,5 @@
 <template>
   <div id="search">
-    <Popup
-      v-if="popupShow"
-      @yes="removeWorker(worker.id)"
-      @no="popupHidden"
-      :popup-toast="`Рабочий ${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
-    >
-      <template #title-popup>
-        Удалить?
-      </template>
-
-      <template #text-info-popup>
-        {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
-      </template>
-    </Popup>
-
     <div class="page-title flex-between-center">
       <h3>Поиск рабочих</h3>
 
@@ -155,10 +140,8 @@
                 <h4>Найдено</h4>
 
                 <TableWorkers
-                  v-if="workers.length"
                   @remove-worker="removeWorker"
                   :workers="workers"
-                  :data-this-employee="dataThisEmployee"
                 />
               </div>
             </form>
@@ -201,13 +184,13 @@ export default {
   computed: {
     ...mapGetters([
       'sites',
-      'workers',
-      'dataThisEmployee'
+      'workers'
     ])
   },
   methods: {
     ...mapMutations([
-      'SET_WORKERS'
+      'SET_WORKERS',
+      'SET_WORKERS_FROM_SERVER'
     ]),
 
     searching (obj) {
@@ -246,11 +229,6 @@ export default {
       return professionsList
     },
 
-    updateWorkers () {
-      this.SET_WORKERS()
-      console.log('Рабочие обновлены 🌀')
-    },
-
     removeWorker (id) {
       const buffer = this.workers.filter(worker => worker.id !== id)
       console.log('Рабочий удалён 🗑️')
@@ -259,9 +237,7 @@ export default {
     }
   },
   mounted () {
-    this.updateWorkers()
-    setInterval(() => this.updateWorkers(), this.updateTimeout)
-
+    this.SET_WORKERS_FROM_SERVER()
     this.searchWorkers = this.workers
 
     const tabs = document.querySelectorAll('.tabs')

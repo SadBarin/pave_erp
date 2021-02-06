@@ -4,13 +4,13 @@
       <div class="flex-center">
         <h3 class="right-margin-big">Список сотрудников</h3>
 
-<!--        <div class="flex-center">-->
-<!--          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1 "-->
-<!--                  onclick="M.toast({html: 'Сотрудники обновлены'})"-->
-<!--                  @click="updateEmployees"-->
-<!--          ><i class="material-icons middle-material-icons">autorenew</i>-->
-<!--          </button>-->
-<!--        </div>-->
+        <div class="flex-center">
+          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1 "
+                  onclick="M.toast({html: 'Сотрудники обновлены'})"
+                  @click="SET_EMPLOYEES_FROM_SERVER()"
+          ><i class="material-icons middle-material-icons">autorenew</i>
+          </button>
+        </div>
       </div>
 
       <AddCardEmployees
@@ -25,10 +25,6 @@
         :employees="employees"
         @remove-employee="removeEmployee"
       />
-<!--      <div v-else class="empty-list">-->
-<!--        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i>Сотрудников не осталось!</h5>-->
-<!--        <p>Добавьте сотрудника, чтобы начать работать над ним.</p>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
@@ -53,13 +49,9 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_EMPLOYEES'
+      'SET_EMPLOYEES',
+      'SET_EMPLOYEES_FROM_SERVER'
     ]),
-
-    // updateEmployees () {
-    //   this.SET_EMPLOYEES()
-    //   console.log('Сотрудники обновлены 🌀')
-    // },
 
     removeEmployee (id) {
       const buffer = this.employees.filter(employee => employee.id !== id)
@@ -75,10 +67,8 @@ export default {
     }
   },
   mounted () {
+    this.SET_EMPLOYEES_FROM_SERVER()
     console.log('Employees:', this.employees)
-
-    // this.updateEmployees()
-    // setInterval(() => this.updateEmployees, this.updateTimeout)
   }
 }
 </script>

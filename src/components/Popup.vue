@@ -13,14 +13,14 @@
       <div class="card-action btns-popup">
         <button
           class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-          @click="$emit('yes'); callToast()"
+          @click.prevent="$emit('yes'); callToast()"
         >
           <i class="material-icons">check</i> Да
         </button>
 
         <button
           class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
-          @click="$emit('no')"
+          @click.prevent="$emit('no')"
         >
           <i class="material-icons">clear</i> Нет
         </button>

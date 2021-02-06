@@ -4,13 +4,13 @@
       <div class="flex-center">
         <h3 class="right-margin-big">Список городов</h3>
 
-<!--        <div class="flex-center">-->
-<!--          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"-->
-<!--                  onclick="M.toast({html: 'Города обновлены'})"-->
-<!--                  @click="this.updateSites"-->
-<!--          ><i class="material-icons middle-material-icons">autorenew</i>-->
-<!--          </button>-->
-<!--        </div>-->
+        <div class="flex-center">
+          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
+                  onclick="M.toast({html: 'Города обновлены'})"
+                  @click="SET_SITES_FROM_SERVER()"
+          ><i class="material-icons middle-material-icons">autorenew</i>
+          </button>
+        </div>
       </div>
 
       <AddCardSites
@@ -24,11 +24,6 @@
         :sites="sites"
         @remove-city="removeCity"
       />
-
-<!--      <div class="empty-list">-->
-<!--        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Городов не осталось!</h5>-->
-<!--        <p>Добавьте город, чтобы начать работать над ним.</p>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
@@ -36,6 +31,8 @@
 <script>
 import AddCardSites from '@/components/sites/AddCardSites'
 import ListSites from '@/components/sites/list/ListSites'
+// eslint-disable-next-line no-unused-vars
+import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -53,7 +50,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_SITES'
+      'SET_SITES',
+      'SET_SITES_FROM_SERVER'
     ]),
 
     removeCity (id) {
@@ -63,13 +61,20 @@ export default {
     },
 
     addCity (city) {
-      const buffer = this.sites
-      buffer.push(city)
-      console.log('Город добавлен ➕')
-      this.SET_SITES(buffer)
+      // const buffer = this.sites
+      // buffer.push(city)
+      // console.log('Город добавлен ➕')
+      // this.SET_SITES(buffer)
+
+      console.log(city)
+
+      // firebase.database().ref('/sites/').set({
+      //   city
+      // })
     }
   },
   mounted () {
+    this.SET_SITES_FROM_SERVER()
     console.log('Sites:', this.sites)
   }
 }

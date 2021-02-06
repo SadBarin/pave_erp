@@ -4,7 +4,6 @@
       v-if="popupShow"
       @yes="exit()"
       @no="popupHidden"
-      :popup-toast="`До свидания, ${this.dataThisEmployee.surname} ${this.dataThisEmployee.name}!`"
     >
       <template #title-popup>
         Выйти?
@@ -70,6 +69,7 @@
 
 <script>
 import popupMixin from '@/mixins/popupMixin'
+import firebase from 'firebase/app'
 
 export default {
   name: 'MainLayout.vue',
@@ -82,18 +82,14 @@ export default {
   methods: {
     async exit () {
       await this.$store.dispatch('logout')
-      this.$router.push({
-        name: 'login'
-      }).catch()
+      await this.$router.push('/')
     }
   },
   mounted () {
-    if (localStorage.getItem('dataThisEmployee')) {
-      try {
-        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
-      } catch (e) {
-        localStorage.removeItem('dataThisEmployee')
-      }
+    if (firebase.auth().currentUser === null) {
+      this.$router.push('/')
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Войдите в систему для продолжения!' })
     }
   }
 }

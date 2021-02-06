@@ -15,8 +15,7 @@ export default new Vuex.Store({
   getters: {
     sites: state => state.sites,
     employees: state => state.employees,
-    workers: state => state.workers,
-    dataThisEmployee: state => state.dataThisEmployee
+    workers: state => state.workers
   },
 
   mutations: {
@@ -32,8 +31,28 @@ export default new Vuex.Store({
       state.workers = data
     },
 
-    SET_DATA_AUTH (state, data) {
-      state.dataThisEmployee = data
+    SET_SITES_FROM_SERVER (state) {
+      const sites = firebase.database().ref('/sites/')
+      sites.on('value', (snapshot) => {
+        console.log('Sites in Database:', snapshot.val())
+        state.sites = snapshot.val()
+      })
+    },
+
+    SET_EMPLOYEES_FROM_SERVER (state) {
+      const employees = firebase.database().ref('/employees/')
+      employees.on('value', (snapshot) => {
+        console.log('Employees in Database:', snapshot.val())
+        state.employees = snapshot.val()
+      })
+    },
+
+    SET_WORKERS_FROM_SERVER (state) {
+      const workers = firebase.database().ref('/workers/')
+      workers.on('value', (snapshot) => {
+        console.log('Workers in Database:', snapshot.val())
+        state.workers = snapshot.val()
+      })
     }
   },
   actions: {
@@ -41,23 +60,9 @@ export default new Vuex.Store({
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
 
-        const sites = firebase.database().ref('/sites/')
-        sites.on('value', (snapshot) => {
-          console.log('Sites in Database:', snapshot.val())
-          commit('SET_SITES', snapshot.val())
-        })
-
-        const employees = firebase.database().ref('/employees/')
-        employees.on('value', (snapshot) => {
-          console.log('Employees in Database:', snapshot.val())
-          commit('SET_EMPLOYEES', snapshot.val())
-        })
-
-        const workers = firebase.database().ref('/workers/')
-        workers.on('value', (snapshot) => {
-          console.log('Workers in Database:', snapshot.val())
-          commit('SET_WORKERS', snapshot.val())
-        })
+        commit('SET_SITES_FROM_SERVER')
+        commit('SET_EMPLOYEES_FROM_SERVER')
+        commit('SET_WORKERS_FROM_SERVER')
       } catch (e) {}
     },
 

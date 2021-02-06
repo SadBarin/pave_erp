@@ -37,6 +37,7 @@
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
+import firebase from 'firebase/app'
 
 export default {
   name: 'AddCardSites',
@@ -76,7 +77,9 @@ export default {
           edited: false
         }
 
-        this.$emit('add-city', newCity)
+        firebase.database().ref('/sites/' + Date.now()).set(newCity)
+
+        // this.$emit('add-city', newCity)
         this.cityName = ''
       }
     },
@@ -88,7 +91,7 @@ export default {
         return
       }
 
-      this.searchSimilar()
+      // this.searchSimilar()
       this.createNewCity()
     }
   }
