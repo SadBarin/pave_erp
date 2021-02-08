@@ -33,6 +33,7 @@
 import ListEmployees from '@/components/employees/list/ListEmployees'
 import AddCardEmployees from '@/components/employees/AddCardEmployees'
 import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase'
 
 export default {
   name: 'Employees',
@@ -54,16 +55,13 @@ export default {
     ]),
 
     removeEmployee (id) {
-      const buffer = this.employees.filter(employee => employee.id !== id)
+      firebase.database().ref('/employees/' + id).remove()
       console.log('Сотрудник удалён 🗑️')
-      this.SET_EMPLOYEES(buffer)
     },
 
     addEmployee (employee) {
-      const buffer = this.employees
-      buffer.push(employee)
+      firebase.database().ref('/employees/' + employee.id).set(employee)
       console.log('Сотрудник добавлен ➕')
-      this.SET_EMPLOYEES(buffer)
     }
   },
   mounted () {

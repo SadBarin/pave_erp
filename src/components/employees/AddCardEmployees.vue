@@ -59,19 +59,19 @@ export default {
       return password
     },
 
-    searchSimilar () {
-      for (const employee of this.employees) {
-        if (employee.email === undefined) continue
-        if (employee.email.toString().toLowerCase() === this.email.toString().toLowerCase()) {
-          this.coincidence = true
-          break
-        } else {
-          this.coincidence = false
-        }
-      }
-    },
+    // searchSimilar () {
+    //   for (const employee of this.employees) {
+    //     if (employee.email === undefined) continue
+    //     if (employee.email.toString().toLowerCase() === this.email.toString().toLowerCase()) {
+    //       this.coincidence = true
+    //       break
+    //     } else {
+    //       this.coincidence = false
+    //     }
+    //   }
+    // },
 
-    createNewEmployee () {
+    createEmployee () {
       if (this.email.trim() && !this.coincidence) {
         // Body New Employee
         const newEmployee = {
@@ -84,10 +84,9 @@ export default {
           sex: 'Мужской',
           homePhone: '',
           mobilePhone: '',
-          city: this.dataThisEmployee.city,
+          city: '',
           duty: 'Сотрудник',
-          access: 'employee',
-          edited: false
+          access: 'employee'
         }
 
         this.$emit('add-employee', newEmployee)
@@ -103,8 +102,7 @@ export default {
         return
       }
 
-      this.searchSimilar()
-      this.createNewEmployee()
+      this.createEmployee()
     }
   },
   mounted () {

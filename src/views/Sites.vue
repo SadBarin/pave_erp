@@ -53,19 +53,17 @@ export default {
     ]),
 
     removeCity (id) {
-      // const buffer = this.sites.filter(city => city.id !== id)
       firebase.database().ref('/sites/' + id).remove()
       console.log('Город удалён 🗑️')
     },
 
     addCity (city) {
       firebase.database().ref('/sites/' + city.id).set(city)
-      console.log(city)
+      console.log('Город добавлен ➕')
     }
   },
   mounted () {
     this.SET_SITES_FROM_SERVER()
-    console.log('Sites:', this.sites)
   }
 }
 </script>
