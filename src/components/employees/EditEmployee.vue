@@ -190,8 +190,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'sites',
-      'employees'
+      'employees',
+      'sites'
     ])
   },
   methods: {

@@ -2,25 +2,25 @@
   <div>
     <Popup
       v-if="popupShow"
-      v-on:yes="editorExit(workers)"
-      v-on:no="popupHidden"
+      @yes="editorExit"
+      @no="popupHidden"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Покинуть редактор рабочего?
       </template>
 
-      <template v-slot:text-info-popup>
+      <template #text-info-popup>
         Введённые данные не будут сохранены!
       </template>
     </Popup>
 
     <div class="page-title flex-between-center">
-      <h3>Редактор рабочего "{{editedSurname}} {{editedName}}"</h3>
+      <h3>Редактор рабочего "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
 
       <div class="editor-btns">
         <button
           class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          v-on:click="editorCollection(workers)"
+          v-on:click="saveEditedWorker(editedWorker)"
         >
           <i class="material-icons">exit_to_app</i>Сохранить и выйти
         </button>
@@ -46,10 +46,10 @@
                     <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
 
                     <div class="input-field editor-input flex-column-center">
-                      <button id="upload_widget" v-on:click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
+                      <button id="upload_widget" @click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
 
                       <div class="photo-container flex-center">
-                        <img v-bind:src="this.editedUploadImage" width="200rem">
+                        <img :src="editedWorker.UploadImage" width="200rem">
                       </div>
                     </div>
 
@@ -57,7 +57,7 @@
                       <input
                         id="name"
                         type="text"
-                        v-model.trim="editedName"
+                        v-model.trim="editedWorker.name"
                       >
                       <label class="active" for="name">Имя</label>
                     </div>
@@ -66,7 +66,7 @@
                       <input
                         id="surname"
                         type="text"
-                        v-model.trim="editedSurname"
+                        v-model.trim="editedWorker.surname"
                       >
                       <label class="active" for="surname">Фамилия</label>
                     </div>
@@ -75,7 +75,7 @@
                       <input
                         id="patronymic"
                         type="text"
-                        v-model.trim="editedPatronymic"
+                        v-model.trim="editedWorker.patronymic"
                       >
                       <label class="active" for="patronymic">Отчество</label>
                     </div>
@@ -90,18 +90,17 @@
                       <input
                         id="birthday"
                         type="date"
-                        v-model.trim="editedBirthday"
-                        v-on:change="ageCalc"
+                        v-model.trim="editedWorker.birthday"
                       >
                       <label class="active" for="birthday">День рождения</label>
-                      <p>Возраст: {{editedAge}} лет</p>
+                      <p>Возраст: {{editedWorker.age}} лет</p>
                     </div>
 
                     <div class="input-field editor-input">
                       <select
                         class="browser-default editor-select"
                         id="sex"
-                        v-model.trim="editedSex"
+                        v-model.trim="editedWorker.sex"
                       >
                         <option class="editor-option" value="Мужской">Мужской</option>
                         <option class="editor-option" value="Женский">Женский</option>
@@ -113,7 +112,7 @@
                       <input
                         id="nationality"
                         type="text"
-                        v-model.trim="editedNationality"
+                        v-model.trim="editedWorker.nationality"
                       >
                       <label class="active" for="nationality">Национальность</label>
                     </div>
@@ -122,18 +121,17 @@
                       <input
                         id="medicalBook"
                         type="date"
-                        v-model="editedMedicalBook"
-                        v-on:input="medicalBookCalc"
+                        v-model="editedWorker.medicalBook"
                       >
                       <label class="active" for="medicalBook">Медицинская Книга</label>
-                      <p>Истекает через: {{editedMedicalBookStatus}} лет</p>
+                      <p>Истекает через: {{editedWorker.medicalBookStatus}} лет</p>
                     </div>
 
                     <div class="input-field editor-input">
                       <input
                         id="education"
                         type="text"
-                        v-model.trim="editedEducation"
+                        v-model.trim="editedWorker.education"
                       >
                       <label class="active" for="education">Образование</label>
                     </div>
@@ -142,7 +140,7 @@
                       <input
                         id="university"
                         type="text"
-                        v-model.trim="editedUniversity"
+                        v-model.trim="editedWorker.university"
                       >
                       <label class="active" for="university">ВУЗ</label>
                     </div>
@@ -154,10 +152,10 @@
                     <h4 class="card-title"><i class="material-icons">book</i> Паспортные данные</h4>
 
                     <div class="input-field editor-input flex-column-center">
-                      <button v-on:click.prevent="uploadPassport" class="cloudinary-button">Загрузить паспорт рабочего</button>
+                      <button @click.prevent="uploadPassport" class="cloudinary-button">Загрузить паспорт рабочего</button>
 
-                      <div class="photo-container flex-center" v-show="editedUploadPassport !== undefined">
-                        <a v-bind:href="editedUploadPassport" target="_blank">Открыть паспорт</a>
+                      <div class="photo-container flex-center" v-show="editedWorker.UploadPassport !== undefined">
+                        <a v-bind:href="editedWorker.UploadPassport" target="_blank">Открыть паспорт</a>
                       </div>
                     </div>
 
@@ -165,7 +163,7 @@
                       <input
                         id="passportID"
                         type="text"
-                        v-model.trim="editedPassportID"
+                        v-model.trim="editedWorker.passportID"
                       >
                       <label class="active" for="PassportID">Номер Паспорта</label>
                     </div>
@@ -174,7 +172,7 @@
                       <input
                         id="passportDate"
                         type="date"
-                        v-model.trim="editedPassportDate"
+                        v-model.trim="editedWorker.passportDate"
                       >
                       <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
                     </div>
@@ -183,7 +181,7 @@
                       <input
                         id="passportIssued"
                         type="text"
-                        v-model.trim="editedPassportIssued"
+                        v-model.trim="editedWorker.passportIssued"
                       >
                       <label class="active" for="passportIssued">Кем выдан</label>
                     </div>
@@ -192,7 +190,7 @@
                       <input
                         id="registration"
                         type="text"
-                        v-model.trim="editedRegistration"
+                        v-model.trim="editedWorker.registration"
                       >
                       <label class="active" for="registration">Прописка</label>
                     </div>
@@ -201,7 +199,7 @@
                       <input
                         id="address"
                         type="text"
-                        v-model.trim="editedAddress"
+                        v-model.trim="editedWorker.address"
                       >
                       <label class="active" for="address">Адрес</label>
                     </div>
@@ -215,7 +213,7 @@
                       <input
                         id="nameCard"
                         type="text"
-                        v-model.trim="editedNameCard"
+                        v-model.trim="editedWorker.nameCard"
                       >
                       <label class="active" for="nameCard">Имя Держателя Карты</label>
                     </div>
@@ -224,7 +222,7 @@
                       <input
                         id="surnameCard"
                         type="text"
-                        v-model.trim="editedSurnameCard"
+                        v-model.trim="editedWorker.surnameCard"
                       >
                       <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
                     </div>
@@ -233,7 +231,7 @@
                       <input
                         id="patronymicCard"
                         type="text"
-                        v-model.trim="editedPatronymicCard"
+                        v-model.trim="editedWorker.patronymicCard"
                       >
                       <label class="active" for="surnameCard">Отчество Держателя Карты</label>
                     </div>
@@ -242,7 +240,7 @@
                       <input
                         id="accountNumberCard"
                         type="text"
-                        v-model.trim="editedAccountNumberCard"
+                        v-model.trim="editedWorker.accountNumberCard"
                       >
                       <label class="active" for="accountNumberCard">Номер Счёта</label>
                     </div>
@@ -251,7 +249,7 @@
                       <select
                         class="browser-default editor-select"
                         id="bank"
-                        v-model.trim="editedBank"
+                        v-model.trim="editedWorker.bank"
                       >
                         <option class="editor-option" value="СберБанк">СберБанк</option>
                         <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
@@ -276,11 +274,11 @@
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
-                              v-model="editedCity"
+                              v-model="editedWorker.city"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="city of this.sites" :key="city.cityName">
-                          {{ city.cityName }}
+                        <option class="editor-option" v-for="city of this.sites" :key="city.value">
+                          {{ city.name }}
                         </option>
                       </select>
                       <label class="active">Город</label>
@@ -290,7 +288,7 @@
                       <input
                         id="homePhone"
                         type="text"
-                        v-model.trim="editedHomePhone"
+                        v-model.trim="editedWorker.homePhone"
                       >
                       <label class="active" for="homePhone">Телефон Домашний</label>
                     </div>
@@ -299,7 +297,7 @@
                       <input
                         id="mobilePhone"
                         type="text"
-                        v-model.trim="editedMobilePhone"
+                        v-model.trim="editedWorker.mobilePhone"
                         v-mask="'+7 (###) ###-##-##'"
                         placeholder="+7 ( ) "
                       >
@@ -315,7 +313,7 @@
                       <input
                         id="accountNumber"
                         type="text"
-                        v-model.trim="editedAccountNumber"
+                        v-model.trim="editedWorker.accountNumber"
                       >
                       <label class="active" for="accountNumber">Учётный номер</label>
                     </div>
@@ -324,7 +322,7 @@
                       <input
                         id="previousWork"
                         type="text"
-                        v-model.trim="editedPreviousWork"
+                        v-model.trim="editedWorker.previousWork"
                       >
                       <label class="active" for="previousWork">Прежняя Работа</label>
                     </div>
@@ -333,7 +331,7 @@
                       <input
                         id="reasonComing"
                         type="text"
-                        v-model.trim="editedReasonComing"
+                        v-model.trim="editedWorker.reasonComing"
                       >
                       <label class="active" for="reasonComing">Почему пришел к нам (кратко)</label>
                     </div>
@@ -342,7 +340,7 @@
                       <input
                         id="professions"
                         type="text"
-                        v-model.trim="editedProfessions"
+                        v-model.trim="editedWorker.professions"
                       >
                       <label class="active" for="professions">Профессия</label>
                     </div>
@@ -351,7 +349,7 @@
                       <select
                         id="nightShift"
                         class="browser-default editor-select"
-                        v-model.trim="editedNightShift"
+                        v-model.trim="editedWorker.nightShift"
                       >
                         <option class="editor-option" value="Да">Да</option>
                         <option class="editor-option" value="Нет">Нет</option>
@@ -363,7 +361,7 @@
                       <select
                         id="checkMVD"
                         class="browser-default editor-select"
-                        v-model.trim="editedCheckMVD"
+                        v-model.trim="editedWorker.checkMVD"
                       >
                         <option class="editor-option" value="Да">Да</option>
                         <option class="editor-option" value="Нет">Нет</option>
@@ -375,7 +373,7 @@
                       <input
                         id="dateInterview"
                         type="date"
-                        v-model.trim="editedDateInterview"
+                        v-model.trim="editedWorker.dateInterview"
                       >
                       <label class="active" for="dateInterview">Дата Собеседования</label>
                     </div>
@@ -384,7 +382,7 @@
                       <input
                         id="uniform"
                         type="text"
-                        v-model.trim="editedUniform"
+                        v-model.trim="editedWorker.uniform"
                       >
                       <label class="active" for="uniform">Униформа</label>
                     </div>
@@ -393,7 +391,7 @@
                       <select
                         id="fired"
                         class="browser-default editor-select"
-                        v-model.trim="editedFired"
+                        v-model.trim="editedWorker.fired"
                       >
                         <option class="editor-option" value="Да">Да</option>
                         <option class="editor-option" value="Нет">Нет</option>
@@ -412,197 +410,49 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
 import M from 'materialize-css'
 import { mask } from 'vue-the-mask'
+import popupMixin from '@/mixins/popupMixin'
+import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase/app'
 
 export default {
   name: 'EditorWorkers',
-  components: {
-    Popup
-  },
+  mixins: [popupMixin],
   directives: { mask },
   data () {
     return {
-      popupShow: false,
-      coincidence: false,
-
-      workers: [{}],
-      sites: [{}],
-
-      editedName: '',
-      editedSurname: '',
-      editedPatronymic: '',
-      editedAccountNumber: '',
-      editedNameCard: '',
-      editedSurnameCard: '',
-      editedPatronymicCard: '',
-      editedAccountNumberCard: '',
-      editedBank: '',
-      editedAge: '',
-      editedBirthday: '',
-      editedSex: '',
-      editedNationality: '',
-      editedPassportID: '',
-      editedPassportDate: '',
-      editedPassportIssued: '',
-      editedRegistration: '',
-      editedAddress: '',
-      editedHomePhone: '',
-      editedMobilePhone: '',
-      editedMedicalBook: '',
-      editedEducation: '',
-      editedUniversity: '',
-      editedPreviousWork: '',
-      editedReasonComing: '',
-      editedProfessions: '',
-      editedNightShift: '',
-      editedCheckMVD: '',
-      editedDateInterview: '',
-      editedUniform: '',
-      editedFired: '',
-      editedCity: '',
-      editedEdited: false,
-      editedUploadImage: '',
-      editedUploadPassport: '',
-
-      editedMedicalBookStatus: ''
+      editedWorker: ''
     }
   },
-  beforeDestroy () {
-    try {
-      window.addEventListener('beforeunload', this.editorCollection(this.workers))
-    } catch (e) {}
+  computed: {
+    ...mapGetters([
+      'workers',
+      'sites'
+    ])
   },
   methods: {
-    popupVisibility () {
-      this.popupShow = true
-    },
+    ...mapMutations([
+      'SET_WORKERS_FROM_SERVER',
+      'SET_SITES_FROM_SERVER'
+    ]),
 
-    popupHidden () {
-      this.popupShow = false
-    },
-
-    validate () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-      }
-    },
-
-    searchIndex (collection) {
-      // eslint-disable-next-line eqeqeq
-      const object = collection.filter(element => element.id == this.$route.params.id)
-      return collection.findIndex((element) => element.id === object[0].id)
-    },
-
-    editorExit (collection) {
-      collection[this.searchIndex(collection)].edited = false
-      this.saveCollection(this.workers, 'workers')
+    editorExit () {
       this.$router.push('/workers')
     },
 
-    outputCollection (collection, additionalCollection) {
-      this.editedName = collection[this.searchIndex(collection)].name
-      this.editedSurname = collection[this.searchIndex(collection)].surname
-      this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
-      this.editedAccountNumber = collection[this.searchIndex(collection)].accountNumber
-      this.editedNameCard = collection[this.searchIndex(collection)].nameCard
-      this.editedSurnameCard = collection[this.searchIndex(collection)].surnameCard
-      this.editedPatronymicCard = collection[this.searchIndex(collection)].patronymicCard
-      this.editedAccountNumberCard = collection[this.searchIndex(collection)].accountNumberCard
-      this.editedBank = collection[this.searchIndex(collection)].bank
-      this.editedAge = collection[this.searchIndex(collection)].age
-      this.editedBirthday = collection[this.searchIndex(collection)].birthday
-      this.editedSex = collection[this.searchIndex(collection)].sex
-      this.editedNationality = collection[this.searchIndex(collection)].nationality
-      this.editedPassportID = collection[this.searchIndex(collection)].passportID
-      this.editedPassportDate = collection[this.searchIndex(collection)].passportDate
-      this.editedPassportIssued = collection[this.searchIndex(collection)].passportIssued
-      this.editedRegistration = collection[this.searchIndex(collection)].registration
-      this.editedAddress = collection[this.searchIndex(collection)].address
-      this.editedHomePhone = collection[this.searchIndex(collection)].homePhone
-      this.editedMobilePhone = collection[this.searchIndex(collection)].mobilePhone
-      this.editedMedicalBook = collection[this.searchIndex(collection)].medicalBook
-      this.editedEducation = collection[this.searchIndex(collection)].education
-      this.editedUniversity = collection[this.searchIndex(collection)].university
-      this.editedPreviousWork = collection[this.searchIndex(collection)].previousWork
-      this.editedReasonComing = collection[this.searchIndex(collection)].reasonComing
-      this.editedProfessions = collection[this.searchIndex(collection)].professions
-      this.editedNightShift = collection[this.searchIndex(collection)].nightShift
-      this.editedCheckMVD = collection[this.searchIndex(collection)].checkMVD
-      this.editedDateInterview = collection[this.searchIndex(collection)].dateInterview
-      this.editedUniform = collection[this.searchIndex(collection)].uniform
-      this.editedFired = collection[this.searchIndex(collection)].fired
-      this.editedCity = collection[this.searchIndex(collection)].city
-      this.editedUploadImage = collection[this.searchIndex(collection)].UploadImage
-      this.editedUploadPassport = collection[this.searchIndex(collection)].UploadPassport
+    saveEditedWorker (worker) {
+      firebase.database().ref('/workers/' + worker.id).set(worker)
+      this.editorExit()
     },
 
-    ageCalc () {
-      this.editedAge = (new Date()).getFullYear() - this.editedBirthday.substr(0, 4)
-    },
-
-    medicalBookCalc () {
-      this.editedMedicalBookStatus = this.editedMedicalBook.substr(0, 4) - (new Date()).getFullYear()
-    },
-
-    editorCollection (collection, additionalCollection) {
-      collection[this.searchIndex(collection)].name = this.editedName
-      collection[this.searchIndex(collection)].surname = this.editedSurname
-      collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
-      collection[this.searchIndex(collection)].accountNumber = this.editedAccountNumber
-      collection[this.searchIndex(collection)].nameCard = this.editedNameCard
-      collection[this.searchIndex(collection)].surnameCard = this.editedSurnameCard
-      collection[this.searchIndex(collection)].accountNumberCard = this.editedAccountNumberCard
-      collection[this.searchIndex(collection)].patronymicCard = this.editedPatronymicCard
-      collection[this.searchIndex(collection)].bank = this.editedBank
-      collection[this.searchIndex(collection)].birthday = this.editedBirthday
-      collection[this.searchIndex(collection)].sex = this.editedSex
-      collection[this.searchIndex(collection)].nationality = this.editedNationality
-      collection[this.searchIndex(collection)].passportID = this.editedPassportID
-      collection[this.searchIndex(collection)].passportDate = this.editedPassportDate
-      collection[this.searchIndex(collection)].passportIssued = this.editedPassportIssued
-      collection[this.searchIndex(collection)].registration = this.editedRegistration
-      collection[this.searchIndex(collection)].address = this.editedAddress
-      collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
-      collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
-      collection[this.searchIndex(collection)].medicalBook = this.editedMedicalBook
-      collection[this.searchIndex(collection)].education = this.editedEducation
-      collection[this.searchIndex(collection)].university = this.editedUniversity
-      collection[this.searchIndex(collection)].previousWork = this.editedPreviousWork
-      collection[this.searchIndex(collection)].reasonComing = this.editedReasonComing
-      collection[this.searchIndex(collection)].professions = this.editedProfessions
-      collection[this.searchIndex(collection)].nightShift = this.editedNightShift
-      collection[this.searchIndex(collection)].checkMVD = this.editedCheckMVD
-      collection[this.searchIndex(collection)].dateInterview = this.editedDateInterview
-      collection[this.searchIndex(collection)].uniform = this.editedUniform
-      collection[this.searchIndex(collection)].fired = this.editedFired
-      collection[this.searchIndex(collection)].city = this.editedCity
-      collection[this.searchIndex(collection)].UploadImage = this.editedUploadImage
-      collection[this.searchIndex(collection)].UploadPassport = this.editedUploadPassport
-
-      collection[this.searchIndex(collection)].age = this.editedAge
-      collection[this.searchIndex(collection)].editedCount += 1
-
-      console.log('Рабочий сохранён 😉')
-
-      this.editorExit(collection)
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.workers = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
-    },
+    // ageCalc () {
+    //   this.editedAge = (new Date()).getFullYear() - this.editedWorker.birthday.substr(0, 4)
+    // },
+    //
+    // medicalBookCalc () {
+    //   this.editedMedicalBookStatus = this.editedWorker.medicalBook.substr(0, 4) - (new Date()).getFullYear()
+    // },
 
     upload () {
       // eslint-disable-next-line no-undef
@@ -638,25 +488,15 @@ export default {
   },
 
   mounted () {
-    this.updateCollection('workers')
-
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
-
-    // TODO Сделать универсальную функцию
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
 
-    this.outputCollection(this.workers)
-
-    this.medicalBookCalc()
+    this.SET_WORKERS_FROM_SERVER()
+    this.SET_SITES_FROM_SERVER()
+    // eslint-disable-next-line no-return-assign
+    setTimeout(() => this.editedWorker = this.workers[this.$route.params.id], 1000)
   }
 }
 </script>

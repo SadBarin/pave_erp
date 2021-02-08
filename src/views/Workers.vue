@@ -38,7 +38,7 @@
 import TableWorkers from '@/components/workers/TableWorkers'
 import AddCardWorkers from '@/components/workers/AddCardWorkers'
 import { mapGetters, mapMutations } from 'vuex'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export default {
   name: 'Workers',
