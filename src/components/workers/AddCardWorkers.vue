@@ -45,40 +45,18 @@ export default {
   data () {
     return {
       number: '',
-      coincidence: false,
-      workers: [{}]
+      coincidence: false
     }
   },
+  props: ['workers'],
   directives: { mask },
   validations: {
     number: { required, minLength: minLength(7) }
   },
   methods: {
-    submitWorkers () {
-      if (localStorage.getItem('workers')) {
-        try {
-          this.workers = JSON.parse(localStorage.getItem('workers'))
-        } catch (e) {
-          localStorage.removeItem('workers')
-        }
-      }
-
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-
-      for (const worker of this.workers) {
-        if (worker.mobilePhone === undefined) continue
-        if (worker.mobilePhone.toString().toLowerCase() === this.number.toString().toLowerCase()) {
-          this.coincidence = true
-          break
-        } else {
-          this.coincidence = false
-        }
-      }
-
+    createWorker () {
       if (this.number.trim() && !this.coincidence) {
+        // Body New Worker
         const newWorker = {
           id: Date.now(),
           name: 'Новый',
@@ -92,7 +70,7 @@ export default {
           bank: 'СберБанк',
           age: '',
           sex: 'Мужской',
-          city: this.dataThisEmployee.city,
+          city: '',
           nationality: '',
           passportID: '',
           passportDate: '',
@@ -121,16 +99,19 @@ export default {
 
         this.$router.push(`/workers/edit/worker${newWorker.id}`)
       }
+    },
+
+    submitWorkers () {
+      // For validations
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+      this.createWorker()
     }
   },
   mounted () {
-    if (localStorage.getItem('dataThisEmployee')) {
-      try {
-        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
-      } catch (e) {
-        localStorage.removeItem('dataThisEmployee')
-      }
-    }
   }
 }
 </script>

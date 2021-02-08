@@ -20,6 +20,7 @@
 
       <AddCardWorkers
         @add-worker="addWorker"
+        :workers="workers"
       />
     </div>
 
@@ -29,10 +30,6 @@
         @remove-worker="removeWorker"
         :workers="workers"
       />
-<!--      <div v-else class="empty-list">-->
-<!--        <h5 class="empty-list-title"><i class="material-icons">mood_bad</i> Рабочих не осталось!</h5>-->
-<!--        <p>Добавьте рабочего, чтобы начать работать над ним.</p>-->
-<!--      </div>-->
     </section>
   </div>
 </template>
@@ -41,6 +38,7 @@
 import TableWorkers from '@/components/workers/TableWorkers'
 import AddCardWorkers from '@/components/workers/AddCardWorkers'
 import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase'
 
 export default {
   name: 'Workers',
@@ -57,21 +55,17 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_WORKERS',
       'SET_WORKERS_FROM_SERVER'
     ]),
 
     removeWorker (id) {
-      const buffer = this.workers.filter(worker => worker.id !== id)
+      firebase.database().ref('/workers/' + id).remove()
       console.log('Рабочий удалён 🗑️')
-      this.SET_WORKERS(buffer)
     },
 
     addWorker (worker) {
-      const buffer = this.workers
-      buffer.push(worker)
+      firebase.database().ref('/workers/' + worker.id).set(worker)
       console.log('Рабочий добавлен ➕')
-      this.SET_WORKERS(buffer)
     }
   },
   mounted () {

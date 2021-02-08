@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_EMPLOYEES',
       'SET_EMPLOYEES_FROM_SERVER'
     ]),
 

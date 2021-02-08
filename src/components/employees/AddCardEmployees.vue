@@ -97,6 +97,7 @@ export default {
     },
 
     submitEmployee () {
+      // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
