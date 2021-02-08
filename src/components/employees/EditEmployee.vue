@@ -2,32 +2,32 @@
   <div>
     <Popup
       v-if="popupShow"
-      v-on:yes="editorExit(employees)"
-      v-on:no="popupHidden"
+      @yes="editorExit"
+      @no="popupHidden"
     >
-      <template v-slot:title-popup>
+      <template #title-popup>
         Покинуть редактор сотрудника?
       </template>
 
-      <template v-slot:text-info-popup>
+      <template #text-info-popup>
         Введённые данные не будут сохранены!
       </template>
     </Popup>
 
     <div class="page-title flex-between-center">
-      <h3>Редактор сотрудника "{{editedSurname}} {{editedName}}"</h3>
+      <h3>Редактор сотрудника "{{editedEmployee.surname}} {{editedEmployee.name}}"</h3>
 
       <div class="editor-btns">
         <button
           class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          v-on:click="editorCollection(employees, sites)"
+          @click="saveEditedEmployee(editedEmployee)"
         >
           <i class="material-icons">exit_to_app</i> Сохранить и выйти
         </button>
 
         <button
           class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          v-on:click="popupVisibility"
+          @click="popupVisibility"
         >
           <i class="material-icons">group</i>К Сотрудникам
         </button>
@@ -38,7 +38,7 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form @submit.prevent="validate">
+            <form>
              <div class="form-content">
                <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
@@ -48,46 +48,20 @@
                      <input
                        id="email"
                        type="text"
-                       v-model.trim="editedEmail"
-                       :class="{invalid: ($v.editedEmail.$dirty && !$v.editedEmail.required) || ($v.editedEmail.$dirty && !$v.editedEmail.email)}"
                      >
-                     <label for="email" class="active">Почта</label>
-                     <small
-                       class="helper-text invalid"
-                       v-if="$v.editedEmail.$dirty && !$v.editedEmail.required"
-                     >Введите ваш email</small>
-                     <small
-                       class="helper-text invalid"
-                       v-else-if="$v.editedEmail.$dirty && !$v.editedEmail.email"
-                     >Введите правильно email
-                     </small>
                    </div>
 
                    <div class="input-field editor-input">
                      <input
                        id="password"
                        type="text"
-                       v-model.trim="editedPassword"
-                       :class="{invalid: ($v.editedPassword.$dirty && !$v.editedPassword.required) || ($v.editedPassword.$dirty && !$v.editedPassword.minLength)}"
                      >
                      <label for="password" class="active">Пароль</label>
-                     <small
-                       class="helper-text invalid"
-                       v-if="$v.editedPassword.$dirty && !$v.editedPassword.required"
-                     >
-                       Введите ваш пароль
-                     </small>
-                     <small
-                       class="helper-text invalid"
-                       v-else-if="$v.editedPassword.$dirty && !$v.editedPassword.minLength"
-                     >
-                       Пароль должен содержать не менее {{$v.editedPassword.$params.minLength.min}} символов.
-                     </small>
                    </div>
 
                    <div class="input-field editor-input">
                      <select class="browser-default editor-select"
-                             v-model="editedAccess"
+                             v-model="editedEmployee.access"
                      >
                        <option class="editor-option" value="employee">Сотрудник</option>
                        <option class="editor-option" value="admin">Админ</option>
@@ -101,7 +75,7 @@
                    <div class="input-field editor-input">
                      <input type="text"
                             id="duty"
-                            v-model.trim="editedDuty"
+                            v-model.trim="editedEmployee.duty"
                      >
                      <label for="duty" class="active">Должность</label>
                    </div>
@@ -114,7 +88,7 @@
                    <div class="input-field editor-input">
                      <input type="text"
                             id="name"
-                            v-model.trim="editedName"
+                            v-model.trim="editedEmployee.name"
                      >
                      <label for="name" class="active">Имя</label>
                    </div>
@@ -122,7 +96,7 @@
                    <div class="input-field editor-input">
                      <input type="text"
                             id="surname"
-                            v-model.trim="editedSurname"
+                            v-model.trim="editedEmployee.surname"
                      >
                      <label for="surname" class="active">Фамилия</label>
                    </div>
@@ -130,7 +104,7 @@
                    <div class="input-field editor-input">
                      <input type="text"
                             id="patronymic"
-                            v-model.trim="editedPatronymic"
+                            v-model.trim="editedEmployee.patronymic"
                      >
                      <label for="patronymic" class="active">Отчество</label>
                    </div>
@@ -143,11 +117,11 @@
 
                    <div class="input-field editor-input">
                      <select class="browser-default editor-select"
-                             v-model.trim="editedCity"
+                             v-model.trim="editedEmployee.city"
                      >
                        <option class="editor-option" selected>Отсутствует</option>
-                       <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
-                         {{ city.cityName }}
+                       <option class="editor-option" v-for="city of sites" :key="city.value">
+                         {{ city.name }}
                        </option>
                      </select>
                      <label class="active">Город</label>
@@ -156,7 +130,7 @@
                    <div class="input-field editor-input">
                      <input type="tel"
                             id="homePhone"
-                            v-model.trim="editedHomePhone"
+                            v-model.trim="editedEmployee.homePhone"
                      >
                      <label for="homePhone" class="active">Телефон Домашний</label>
                    </div>
@@ -164,7 +138,7 @@
                    <div class="input-field editor-input">
                      <input type="tel"
                             id="mobilePhone"
-                            v-model.trim="editedMobilePhone"
+                            v-model.trim="editedEmployee.mobilePhone"
                             v-mask="'+7 (###) ###-##-##'"
                             placeholder="+7 ( ) "
                      >
@@ -180,7 +154,7 @@
                      <select
                        class="browser-default editor-select"
                        id="sex"
-                       v-model.trim="editedSex"
+                       v-model.trim="editedEmployee.sex"
                      >
                        <option class="editor-option" value="Мужской">Мужской</option>
                        <option class="editor-option" value="Женский">Женский</option>
@@ -199,140 +173,52 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup'
+import popupMixin from '@/mixins/popupMixin'
 import M from 'materialize-css'
-import { email, minLength, required } from 'vuelidate/lib/validators'
 import { mask } from 'vue-the-mask'
+import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase/app'
 
 export default {
   name: 'addEmployees.vue',
-  components: {
-    Popup
-  },
+  mixins: [popupMixin],
   directives: { mask },
   data () {
     return {
-      popupShow: false,
-      validateCheck: true,
-      employees: [{}],
-      sites: [{}],
-      editedEmail: '',
-      editedPassword: '',
-      editedName: '',
-      editedSurname: '',
-      editedPatronymic: '',
-      editedSex: '',
-      editedHomePhone: '',
-      editedMobilePhone: '',
-      editedCity: '',
-      editedDuty: '',
-      editedAccess: false
+      editedEmployee: ''
     }
   },
-  validations: {
-    editedEmail: { email, required },
-    editedPassword: { required, minLength: minLength(8) }
-  },
-  beforeDestroy () {
-    try {
-      window.addEventListener('beforeunload', this.editorCollection(this.employees))
-    } catch (e) {}
+  computed: {
+    ...mapGetters([
+      'sites',
+      'employees'
+    ])
   },
   methods: {
-    popupVisibility () {
-      this.popupShow = true
-    },
+    ...mapMutations([
+      'SET_EMPLOYEES_FROM_SERVER',
+      'SET_SITES_FROM_SERVER'
+    ]),
 
-    popupHidden () {
-      this.popupShow = false
-    },
-
-    validate () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        this.validateCheck = false
-      } else {
-        this.validateCheck = true
-      }
-    },
-
-    searchIndex (collection) {
-      // eslint-disable-next-line eqeqeq
-      const object = collection.filter(element => element.id == this.$route.params.id)
-      return collection.findIndex((element) => element.id === object[0].id)
-    },
-
-    editorExit (collection) {
-      collection[this.searchIndex(collection)].edited = false
-      this.saveCollection(this.employees, 'employees')
-      this.saveCollection(this.sites, 'sites')
+    editorExit () {
       this.$router.push('/employees')
     },
 
-    outputCollection (collection, additionalCollection) {
-      this.editedEmail = collection[this.searchIndex(collection)].email
-      this.editedPassword = collection[this.searchIndex(collection)].password
-      this.editedName = collection[this.searchIndex(collection)].name
-      this.editedSurname = collection[this.searchIndex(collection)].surname
-      this.editedPatronymic = collection[this.searchIndex(collection)].patronymic
-      this.editedSex = collection[this.searchIndex(collection)].sex
-      this.editedHomePhone = collection[this.searchIndex(collection)].homePhone
-      this.editedMobilePhone = collection[this.searchIndex(collection)].mobilePhone
-      this.editedCity = collection[this.searchIndex(collection)].city
-      this.editedDuty = collection[this.searchIndex(collection)].duty
-      this.editedAccess = collection[this.searchIndex(collection)].access
-    },
-
-    editorCollection (collection, additionalCollection) {
-      collection[this.searchIndex(collection)].email = this.editedEmail
-      collection[this.searchIndex(collection)].password = this.editedPassword
-      collection[this.searchIndex(collection)].name = this.editedName
-      collection[this.searchIndex(collection)].surname = this.editedSurname
-      collection[this.searchIndex(collection)].patronymic = this.editedPatronymic
-      collection[this.searchIndex(collection)].sex = this.editedSex
-      collection[this.searchIndex(collection)].homePhone = this.editedHomePhone
-      collection[this.searchIndex(collection)].mobilePhone = this.editedMobilePhone
-      collection[this.searchIndex(collection)].city = this.editedCity
-      collection[this.searchIndex(collection)].duty = this.editedDuty
-      collection[this.searchIndex(collection)].access = this.editedAccess
-
-      console.log('Сотрудник сохранён 😉')
-
-      this.editorExit(collection)
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.employees = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
+    saveEditedEmployee (employee) {
+      firebase.database().ref('/employees/' + employee.id).set(employee)
+      this.editorExit()
     }
   },
   mounted () {
-    this.updateCollection('employees')
-
-    if (localStorage.getItem('sites')) {
-      try {
-        this.sites = JSON.parse(localStorage.getItem('sites'))
-      } catch (e) {
-        localStorage.removeItem('sites')
-      }
-    }
-
     const select = document.querySelectorAll('.select')
     select.forEach((element) => {
       M.FormSelect.init(element)
     })
 
-    this.outputCollection(this.employees)
+    this.SET_EMPLOYEES_FROM_SERVER()
+    this.SET_SITES_FROM_SERVER()
+    // eslint-disable-next-line no-return-assign
+    setTimeout(() => this.editedEmployee = this.employees[this.$route.params.id], 1000)
   }
 }
 </script>
