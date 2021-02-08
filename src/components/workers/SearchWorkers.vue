@@ -5,7 +5,7 @@
 
       <button
         class="btn waves-effect waves-light auth-submit blue darken-1"
-        @click="searchAll()"
+        @click="searchAll"
       >
         <i class="material-icons">search</i> Поиск
       </button>
@@ -102,8 +102,8 @@
                               v-model="searchInput.city"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(city) of sites" :key="city.cityName">
-                          {{ city.cityName }}
+                        <option class="editor-option" v-for="(city) of sites" :key="city.value">
+                          {{ city.name }}
                         </option>
                       </select>
                     </div>
@@ -157,6 +157,7 @@ import M from 'materialize-css'
 import TableWorkers from '@/components/workers/TableWorkers'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase/app'
 
 export default {
   name: 'SearchWorkers',
@@ -194,46 +195,44 @@ export default {
     ]),
 
     searching (obj) {
-      return function (key, searchKey) {
-        if (searchKey !== '') {
-          return obj.filter(worker => worker[key].toLowerCase() === searchKey.toLowerCase())
-        }
-      }
+      // return function (key, searchKey) {
+      //   if (searchKey !== '') {
+      //     return obj.filter(worker => worker[key].toLowerCase() === searchKey.toLowerCase())
+      //   }
+      // }
     },
 
     searchAll () {
-      let bufferWorkers = this.workers
-
-      for (const input in this.searchInput) {
-        const searchingWorkers = this.searching(bufferWorkers)
-
-        const workers = searchingWorkers(input, this.searchInput[input])
-        if (workers !== undefined) {
-          bufferWorkers = workers
-        }
-      }
-
-      this.searchWorkers = bufferWorkers
-
-      this.searchingProfessions()
+      // let bufferWorkers = this.workers
+      //
+      // for (const input in this.searchInput) {
+      //   const searchingWorkers = this.searching(bufferWorkers)
+      //
+      //   const workers = searchingWorkers(input, this.searchInput[input])
+      //   if (workers !== undefined) {
+      //     bufferWorkers = workers
+      //   }
+      // }
+      //
+      // this.searchWorkers = bufferWorkers
+      //
+      // this.searchingProfessions()
     },
 
     searchingProfessions () {
-      const professionsList = []
-      this.workers.forEach((worker) => {
-        if (professionsList.indexOf(worker.professions) === -1) {
-          professionsList.push(worker.professions)
-        }
-      })
-
-      return professionsList
+      // const professionsList = []
+      // this.workers.forEach((worker) => {
+      //   if (professionsList.indexOf(worker.professions) === -1) {
+      //     professionsList.push(worker.professions)
+      //   }
+      // })
+      //
+      // return professionsList
     },
 
     removeWorker (id) {
-      const buffer = this.workers.filter(worker => worker.id !== id)
+      firebase.database().ref('/workers/' + id).remove()
       console.log('Рабочий удалён 🗑️')
-      this.popupHidden()
-      this.SET_WORKERS(buffer)
     }
   },
   mounted () {

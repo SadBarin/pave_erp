@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AboutWorker',
@@ -107,19 +107,21 @@ export default {
       'workers'
     ])
   },
+  methods: {
+    ...mapMutations([
+      'SET_WORKERS_FROM_SERVER'
+    ])
+  },
   filters: {
     booleanToWord: function (boolean) {
       return (boolean === true) ? 'Да' : 'Нет'
     }
   },
   mounted () {
-    for (const worker of this.workers) {
-      // eslint-disable-next-line eqeqeq
-      if (worker.id == this.$route.params.id) {
-        console.log(worker)
-        this.worker = worker
-      }
-    }
+    this.SET_WORKERS_FROM_SERVER()
+
+    // eslint-disable-next-line no-return-assign
+    setTimeout(() => this.worker = this.workers[this.$route.params.id], 1000)
   }
 }
 </script>
