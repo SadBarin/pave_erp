@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitSites" class="flex-center" >
+  <form @submit.prevent="addCity" class="flex-center" >
     <div class="input-field margin-fix right-margin-little">
       <input
         class="input-add"
@@ -51,18 +51,6 @@ export default {
     cityName: { required, minLength: minLength(2) }
   },
   methods: {
-    // searchSimilar () {
-    //   for (const city of this.sites) {
-    //     if (city.cityName === undefined) continue
-    //     if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
-    //       this.coincidence = true
-    //       break
-    //     } else {
-    //       this.coincidence = false
-    //     }
-    //   }
-    // },
-
     createNewCity () {
       if (this.cityName && !this.coincidence) {
         // Capitalize City Name
@@ -71,9 +59,7 @@ export default {
         // Body New City
         const newCity = {
           id: Date.now(),
-          cityName: this.cityName,
-          employees: 0,
-          edited: false
+          name: this.cityName
         }
 
         this.$emit('add-city', newCity)
@@ -81,14 +67,13 @@ export default {
       }
     },
 
-    submitSites () {
+    addCity () {
       // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
 
-      // this.searchSimilar()
       this.createNewCity()
     }
   }

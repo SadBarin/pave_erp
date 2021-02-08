@@ -2,7 +2,7 @@
   <div>
     <Popup
       v-if="popupShow"
-      @yes="editorExit(sites)"
+      @yes="editorExit"
       @no="popupHidden"
     >
       <template #title-popup>
@@ -15,20 +15,19 @@
     </Popup>
 
     <div class="page-title flex-between-center">
-      <h3>Редактор города "{{ editedSitesName }}"</h3>
+      <h3>Редактор города "{{ editedCity.name }}"</h3>
 
       <div class="editor-btns">
         <button
           class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          type="submit"
-          v-on:click="editorCollection(sites)"
+          @click="saveEditedCity(editedCity)"
         >
           <i class="material-icons">exit_to_app</i> Сохранить и выйти
         </button>
 
         <button
           class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          v-on:click.prevent="popupVisibility"
+          @click.prevent="popupVisibility"
         >
           <i class="material-icons">location_city</i>К Городам
         </button>
@@ -39,7 +38,7 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form @submit.prevent="validate">
+            <form>
               <div class="form-content">
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
@@ -49,29 +48,9 @@
                       <input
                         type="text"
                         id="city"
-                        v-model.trim="editedSitesName"
-                        v-on:input="validate"
-                        :class="{invalid: ($v.editedSitesName.$dirty && !$v.editedSitesName.required) || ($v.editedSitesName.$dirty && !$v.editedSitesName.minLength)}"
+                        v-model.trim="editedCity.name"
                       >
                       <label for="city" class="active">Город</label>
-                      <small
-                        class="helper-text invalid"
-                        v-if="$v.editedSitesName.$dirty && !$v.editedSitesName.required"
-                      >
-                        Введите город
-                      </small>
-                      <small
-                        class="helper-text invalid"
-                        v-else-if="$v.editedSitesName.$dirty && !$v.editedSitesName.minLength"
-                      >
-                        Город должен содержать не менее {{$v.editedSitesName.$params.minLength.min}} символов.
-                      </small>
-                      <small
-                        class="helper-text invalid"
-                        v-else-if="coincidence"
-                      >
-                        Город уже есть
-                      </small>
                     </div>
                   </div>
                 </div>
@@ -85,9 +64,8 @@
 </template>
 
 <script>
-import M from 'materialize-css'
 import popupMixin from '@/mixins/popupMixin'
-import { required, minLength } from 'vuelidate/lib/validators'
+import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -95,106 +73,32 @@ export default {
   mixins: [popupMixin],
   data () {
     return {
-      coincidence: false,
-      validateCheck: true,
-
-      editedSitesName: ''
+      editedCity: ''
     }
   },
   computed: {
     ...mapGetters([
-      'sites',
-      'employees',
-      'workers'
+      'sites'
     ])
-  },
-  validations: {
-    editedSitesName: { required, minLength: minLength(2) }
-  },
-  beforeDestroy () {
-    try {
-      window.addEventListener('beforeunload', this.editorCollection(this.sites))
-    } catch (e) {}
   },
   methods: {
     ...mapMutations([
-      'SET_SITES'
+      'SET_SITES_FROM_SERVER'
     ]),
 
-    validate () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-      }
-      for (const city of this.sites) {
-        if (city.cityName.toString().toLowerCase() === this.editedSitesName.toString().toLowerCase() || this.$v.$invalid) {
-          this.coincidence = true
-          this.validateCheck = false
-          break
-        } else {
-          this.coincidence = false
-          this.validateCheck = true
-        }
-      }
-    },
-
-    searchIndex (collection) {
-      // eslint-disable-next-line eqeqeq
-      const object = collection.filter(element => element.id == this.$route.params.id)
-      return collection.findIndex((element) => element.id === object[0].id)
-    },
-
-    editorExit (collection) {
-      collection[this.searchIndex(collection)].edited = false
-      this.saveCollection(this.sites, 'sites')
+    editorExit () {
       this.$router.push('/sites')
     },
 
-    outputCollection (collection, additionalCollection) {
-      this.editedSitesName = collection[this.searchIndex(collection)].cityName
-    },
-
-    editorCollection (collection, additionalCollection) {
-      if (this.validateCheck) {
-        collection[this.searchIndex(collection)].cityName = this.editedSitesName
-
-        console.log('Город сохранён 😉')
-
-        this.editorExit(collection)
-      }
-    },
-
-    saveCollection (collection, collectionName) {
-      const parsed = JSON.stringify(collection)
-      localStorage.setItem(collectionName, parsed)
-    },
-
-    updateCollection (collectionName) {
-      if (localStorage.getItem(collectionName)) {
-        try {
-          this.sites = JSON.parse(localStorage.getItem(collectionName))
-        } catch (e) {
-          localStorage.removeItem(collectionName)
-        }
-      }
+    saveEditedCity (city) {
+      firebase.database().ref('/sites/' + city.id).set(city)
+      this.editorExit()
     }
   },
   mounted () {
-    this.updateCollection('sites')
-
-    if (localStorage.getItem('employees')) {
-      try {
-        this.employees = JSON.parse(localStorage.getItem('employees'))
-      } catch (e) {
-        localStorage.removeItem('employees')
-      }
-    }
-
-    const select = document.querySelectorAll('.select')
-    select.forEach((element) => {
-      M.FormSelect.init(element)
-    })
-
-    this.outputCollection(this.sites)
+    this.SET_SITES_FROM_SERVER()
+    // eslint-disable-next-line no-return-assign
+    setTimeout(() => this.editedCity = this.sites[this.$route.params.id], 1000)
   }
 }
 </script>

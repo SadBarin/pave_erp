@@ -4,14 +4,14 @@
       v-if="popupShow"
       @yes="$emit('remove-city', city.id)"
       @no="popupHidden"
-      :popup-toast="`Город ${city.cityName} был удалён!`"
+      :popup-toast="`Город ${city.name} был удалён!`"
     >
       <template #title-popup>
         Удалить?
       </template>
 
       <template #text-info-popup>
-        После нажатия кнопки "да" будет удалён город <b>{{city.cityName}}</b>
+        После нажатия кнопки "да" будет удалён город <b>{{city.name}}</b>
       </template>
     </Popup>
 
@@ -19,7 +19,7 @@
       <div class="card-panel blue darken-1 white-text">
         <div class="card-content dark-text card-line">
           <div class="info-container">
-            <h6><i class="material-icons">location_city</i> Город: {{city.cityName}}</h6>
+            <h6><i class="material-icons">location_city</i> Город: {{city.name}}</h6>
             <p class="card-report"
                v-if="city.edited"
             >
