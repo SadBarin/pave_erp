@@ -31,7 +31,6 @@
 <script>
 import AddCardSites from '@/components/sites/AddCardSites'
 import ListSites from '@/components/sites/list/ListSites'
-// eslint-disable-next-line no-unused-vars
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -50,27 +49,18 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_SITES',
       'SET_SITES_FROM_SERVER'
     ]),
 
     removeCity (id) {
-      const buffer = this.sites.filter(city => city.id !== id)
+      // const buffer = this.sites.filter(city => city.id !== id)
+      firebase.database().ref('/sites/' + id).remove()
       console.log('Город удалён 🗑️')
-      this.SET_SITES(buffer)
     },
 
     addCity (city) {
-      // const buffer = this.sites
-      // buffer.push(city)
-      // console.log('Город добавлен ➕')
-      // this.SET_SITES(buffer)
-
+      firebase.database().ref('/sites/' + city.id).set(city)
       console.log(city)
-
-      // firebase.database().ref('/sites/').set({
-      //   city
-      // })
     }
   },
   mounted () {

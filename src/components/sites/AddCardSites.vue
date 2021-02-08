@@ -37,7 +37,6 @@
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
-import firebase from 'firebase/app'
 
 export default {
   name: 'AddCardSites',
@@ -52,17 +51,17 @@ export default {
     cityName: { required, minLength: minLength(2) }
   },
   methods: {
-    searchSimilar () {
-      for (const city of this.sites) {
-        if (city.cityName === undefined) continue
-        if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
-          this.coincidence = true
-          break
-        } else {
-          this.coincidence = false
-        }
-      }
-    },
+    // searchSimilar () {
+    //   for (const city of this.sites) {
+    //     if (city.cityName === undefined) continue
+    //     if (city.cityName.toString().toLowerCase() === this.cityName.toString().toLowerCase()) {
+    //       this.coincidence = true
+    //       break
+    //     } else {
+    //       this.coincidence = false
+    //     }
+    //   }
+    // },
 
     createNewCity () {
       if (this.cityName && !this.coincidence) {
@@ -77,9 +76,7 @@ export default {
           edited: false
         }
 
-        firebase.database().ref('/sites/' + Date.now()).set(newCity)
-
-        // this.$emit('add-city', newCity)
+        this.$emit('add-city', newCity)
         this.cityName = ''
       }
     },
