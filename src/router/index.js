@@ -63,12 +63,29 @@ const router = new VueRouter({
       meta: { layout: 'main' },
       component: () => import('../components/workers/AboutWorker')
     },
-
     {
       path: '/settings',
       name: 'settings',
       meta: { layout: 'main' },
       component: () => import('../views/Settings')
+    },
+    {
+      path: '/customers',
+      name: 'customers',
+      meta: { layout: 'main' },
+      component: () => import('../views/Customers')
+    },
+    {
+      path: '/customers/about/customer:id',
+      name: 'customerAbout',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/AboutCustomer')
+    },
+    {
+      path: '/customers/edit/customer:id',
+      name: 'customerEdit',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/EditCustomers')
     }
   ]
 })

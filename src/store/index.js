@@ -9,13 +9,14 @@ export default new Vuex.Store({
     sites: {},
     employees: {},
     workers: {},
-    dataThisEmployee: ''
+    customers: {}
   },
 
   getters: {
     sites: state => state.sites,
     employees: state => state.employees,
-    workers: state => state.workers
+    workers: state => state.workers,
+    customers: state => state.customers
   },
 
   mutations: {
@@ -53,6 +54,14 @@ export default new Vuex.Store({
         console.log('Workers in Database:', snapshot.val())
         state.workers = snapshot.val()
       })
+    },
+
+    SET_CUSTOMERS_FROM_SERVER (state) {
+      const customers = firebase.database().ref('/customers/')
+      customers.on('value', (snapshot) => {
+        console.log('Customers in Database:', snapshot.val())
+        state.customers = snapshot.val()
+      })
     }
   },
   actions: {
@@ -60,9 +69,10 @@ export default new Vuex.Store({
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
 
+        commit('SET_WORKERS_FROM_SERVER')
+        commit('SET_CUSTOMERS_FROM_SERVER')
         commit('SET_SITES_FROM_SERVER')
         commit('SET_EMPLOYEES_FROM_SERVER')
-        commit('SET_WORKERS_FROM_SERVER')
       } catch (e) {}
     },
 
