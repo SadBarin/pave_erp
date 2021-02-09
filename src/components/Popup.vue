@@ -5,9 +5,9 @@
         <h4 class="card-title">
           <slot name="title-popup"></slot>
         </h4>
-          <p>
-            <slot name="text-info-popup"></slot>
-          </p>
+        <p>
+          <slot name="text-info-popup"></slot>
+        </p>
       </div>
 
       <div class="card-action btns-popup">
@@ -46,8 +46,8 @@ export default {
 
 <style scoped>
   .popup-overlay {
-    background: rgba(33, 31, 31, 0.5);
-
+    background: hsl(208, 79%, 51%);
+    animation: none !important;
     width: 100vw;
     height: 100vh;
 

@@ -86,7 +86,10 @@ export default {
           mobilePhone: '',
           city: '',
           duty: 'Сотрудник',
-          access: 'employee'
+          access: 'employee',
+          settings: {
+            autoUpdate: 5000
+          }
         }
 
         this.$emit('add-employee', newEmployee)

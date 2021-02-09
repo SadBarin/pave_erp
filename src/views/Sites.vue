@@ -6,8 +6,7 @@
 
         <div class="flex-center">
           <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
-                  onclick="M.toast({html: 'Города обновлены'})"
-                  @click="SET_SITES_FROM_SERVER()"
+                  @click="updateCity"
           ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
         </div>
@@ -29,17 +28,17 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+import firebase from 'firebase/app'
 import AddCardSites from '@/components/sites/AddCardSites'
 import ListSites from '@/components/sites/list/ListSites'
-import firebase from 'firebase/app'
-import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'Sites',
   components: { ListSites, AddCardSites },
   data () {
     return {
-      updateTimeout: 50000
+      show: true
     }
   },
   computed: {
@@ -49,21 +48,36 @@ export default {
   },
   methods: {
     ...mapMutations([
+      'ADD_CITY',
+      'REMOVE_CITY',
+      'SET_SITES_FROM_LOCAL_STORAGE',
       'SET_SITES_FROM_SERVER'
     ]),
 
     removeCity (id) {
       firebase.database().ref('/sites/' + id).remove()
-      console.log('Город удалён 🗑️')
+        .then(() => {
+          console.log('Город удалён 🗑️')
+          this.SET_SITES_FROM_SERVER()
+        })
     },
 
     addCity (city) {
       firebase.database().ref('/sites/' + city.id).set(city)
-      console.log('Город добавлен ➕')
+        .then(() => {
+          console.log('Город добавлен ➕')
+          this.SET_SITES_FROM_SERVER()
+        })
+    },
+
+    updateCity () {
+      this.SET_SITES_FROM_SERVER()
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Города обновлены' })
     }
   },
   mounted () {
-    this.SET_SITES_FROM_SERVER()
+    this.SET_SITES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

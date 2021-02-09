@@ -76,6 +76,7 @@
 <script>
 import popupMixin from '@/mixins/popupMixin'
 import firebase from 'firebase/app'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'MainLayout.vue',
@@ -84,6 +85,11 @@ export default {
     return {
       isOpen: true
     }
+  },
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
   },
   methods: {
     async exit () {

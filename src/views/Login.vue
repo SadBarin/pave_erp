@@ -49,9 +49,13 @@
     </div>
 
     <div class="card-action">
-      <button type="submit" class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text">
+      <button v-if="!loading" type="submit" class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text">
         <i class="material-icons">arrow_forward</i> Войти
       </button>
+
+      <div v-else class="btn-flat waves-effect waves-light auth-submit grey darken-1 white-text">
+        Входим... <div class="lds-ripple"><div></div><div></div></div>
+      </div>
     </div>
   </form>
 </template>
@@ -67,7 +71,8 @@ export default {
   data () {
     return {
       email: 'admin@admin.com',
-      password: 'admin2021best'
+      password: 'admin2021best',
+      loading: false
     }
   },
 
@@ -92,6 +97,8 @@ export default {
     ]),
 
     async submitLogin () {
+      this.loading = true
+
       // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -104,9 +111,11 @@ export default {
       }
 
       try {
-        await this.$store.dispatch('login', formData)
-        await this.$router.push('/workers')
+        await this.$store.dispatch('login', formData).then(() => {
+          setTimeout(() => { this.$router.push('/workers') }, 1000)
+        })
       } catch (e) {
+        this.loading = false
         M.toast({ html: 'Ошибка входа!' })
         console.log('Попытка входа ⚠')
       }
@@ -125,5 +134,67 @@ export default {
 <style>
 #app .auth-card {
   width: 30rem;
+}
+
+.flip-enter-active {
+  animation: flip-vertical-left .5s;
+}
+.flip-leave-active {
+  animation: flip-vertical-left .5s reverse;
+}
+
+@-webkit-keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+}
+@keyframes flip-vertical-left {
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+  }
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin-left: 1rem;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 16px;
+    left: 16px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+  }
 }
 </style>
