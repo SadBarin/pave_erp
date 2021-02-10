@@ -26,7 +26,7 @@
         <div class="sidenav-content sidenav-top">
           <ul>
             <li>
-              <router-link class="waves-effect waves-blue pointer" to="/workers">
+              <router-link class="pointer" to="/workers">
                 <i class="material-icons">transfer_within_a_station</i>
                 Рабочие
               </router-link>
@@ -38,13 +38,13 @@
             <!--            </router-link>-->
             <!--          </li>-->
             <li>
-              <router-link class="waves-effect waves-blue pointer" to="/customers">
+              <router-link class="pointer" to="/customers">
                 <i class="material-icons">business_center</i>
                 Клиенты
               </router-link>
             </li>
             <li>
-              <router-link class="waves-effect waves-blue pointer" to="/settings">
+              <router-link class="pointer" to="/settings">
                 <i class="material-icons">settings</i>
                 Настройки
               </router-link>

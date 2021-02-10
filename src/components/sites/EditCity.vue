@@ -38,7 +38,7 @@
       <div class="row">
         <div class="col s12">
           <div>
-            <form>
+            <form @submit.prevent="">
               <div class="form-content">
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
@@ -48,9 +48,10 @@
                       <input
                         type="text"
                         id="city"
+                        maxlength="20"
                         v-model.trim="editedCity.name"
                       >
-                      <label for="city" class="active">Город</label>
+                      <label for="city" class="active">Название города</label>
                     </div>
                   </div>
                 </div>
@@ -83,7 +84,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_SITES_FROM_SERVER'
+      'SET_SITES_FROM_SERVER',
+      'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
 
     editorExit () {
@@ -92,13 +94,15 @@ export default {
 
     saveEditedCity (city) {
       firebase.database().ref('/sites/' + city.id).set(city)
-      this.editorExit()
+        .then(() => {
+          this.SET_SITES_FROM_SERVER()
+          this.editorExit()
+        })
     }
   },
   mounted () {
-    this.SET_SITES_FROM_SERVER()
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.editedCity = this.sites[this.$route.params.id], 1000)
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedCity = this.sites[this.$route.params.id]
   }
 }
 </script>

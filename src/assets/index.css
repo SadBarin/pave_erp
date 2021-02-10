@@ -202,6 +202,10 @@ html, body {
   width: inherit;
 }
 
+#app .sidenav li > a:hover {
+  color: var(--main-blue) !important;
+}
+
 #app .sidenav li > a {
   border-radius: var(--border-radius);
 
