@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_CUSTOMERS_FROM_SERVER'
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ])
   },
   filters: {
@@ -63,10 +63,8 @@ export default {
     }
   },
   mounted () {
-    this.SET_CUSTOMERS_FROM_SERVER()
-
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.customer = this.customers[this.$route.params.id], 1000)
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
+    this.customer = this.customers[this.$route.params.id]
   }
 }
 </script>

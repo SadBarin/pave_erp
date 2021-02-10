@@ -72,8 +72,6 @@ export default {
           status: 'Действующий'
         }
 
-        console.log('E3')
-
         this.$emit('add-customer', newCustomer)
         this.number = ''
 
@@ -82,14 +80,11 @@ export default {
     },
 
     submitCustomer () {
-      console.log('E1')
       // For validations
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
-
-      console.log('E2')
 
       this.createCustomer()
     }

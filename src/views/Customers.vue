@@ -7,7 +7,7 @@
         <div class="flex-center">
           <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
                   title="Обновить страницу"
-                  onclick="M.toast({html: 'Клиенты обновлены'})"
+                  @click="updateCustomers"
           ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
         </div>
@@ -49,23 +49,34 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_CUSTOMERS_FROM_SERVER'
+      'SET_CUSTOMERS_FROM_SERVER',
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
     removeCustomer (id) {
       firebase.database().ref('/customers/' + id).remove()
-      console.log('Клиент удалён 🗑️')
+        .then(() => {
+          this.SET_CUSTOMERS_FROM_SERVER()
+          console.log('Клиент удалён 🗑️')
+        })
     },
 
     addCustomer (customer) {
-      console.log('E4')
       firebase.database().ref('/customers/' + customer.id).set(customer)
-      console.log('Клиент добавлен ➕')
+        .then(() => {
+          this.SET_CUSTOMERS_FROM_SERVER()
+          console.log('Клиент добавлен ➕')
+        })
+    },
+
+    updateCustomers () {
+      this.SET_CUSTOMERS_FROM_SERVER()
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Наши клиенты обновлены' })
     }
   },
   mounted () {
-    this.SET_CUSTOMERS_FROM_SERVER()
-    console.log('Customers:', this.workers)
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
   }
 }
 </script>

@@ -176,7 +176,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_CUSTOMERS_FROM_SERVER'
+      'SET_CUSTOMERS_FROM_SERVER',
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
     editorExit () {
@@ -185,7 +186,10 @@ export default {
 
     saveEditedCustomer (customer) {
       firebase.database().ref('customers/' + customer.id).set(customer)
-      this.editorExit()
+        .then(() => {
+          this.SET_CUSTOMERS_FROM_SERVER()
+          this.editorExit()
+        })
     }
   },
 
@@ -195,9 +199,8 @@ export default {
       M.FormSelect.init(element)
     })
 
-    this.SET_CUSTOMERS_FROM_SERVER()
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.editedCustomer = this.customers[this.$route.params.id], 1000)
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
+    this.editedCustomer = this.customers[this.$route.params.id]
   }
 }
 </script>
