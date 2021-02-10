@@ -27,7 +27,7 @@
         <h6>Номер: <span>{{customer.number}}</span></h6>
         <h6>Факс: <span>{{customer.fax}}</span></h6>
         <h6>Почта: <span>{{customer.email}}</span></h6>
-        <h6>Сайт: <span>{{customer.site}}</span></h6>
+        <h6>Сайт: <span><a target="_blank" :href="customer.site">{{customer.site}}</a></span></h6>
         <h6>Адрес: <span>{{customer.address}}</span></h6>
         <h6>Примечание: <span>{{customer.note}}</span></h6>
         <h6>Менеджер: <span>{{customer.manager}}</span></h6>

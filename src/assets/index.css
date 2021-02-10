@@ -152,6 +152,14 @@
   align-items: center;
 }
 
+#app .flex-start-center {
+  text-align: start;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 #app .margin-fix {
   padding: 1px;
 }
@@ -349,11 +357,16 @@ section {
 
 
 
-/* ~~~~~~~ CHECKBOX ~~~~~~~ */
+/* ~~~~~~~ CHECKBOX and RADIO ~~~~~~~ */
 
 #app [type="checkbox"].filled-in:checked+span:not(.lever):after {
   background-color: var(--main-blue);
   border: var(--main-blue);
+}
+
+#app [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
+  background-color: var(--main-blue) !important;
+  border: var(--main-blue) !important;
 }
 
 
@@ -376,7 +389,7 @@ section {
 }
 
 #app tr:hover:not(:first-child) {
-  background: hsla(0, 0%, 81%, 0.4);
+  background: hsla(0, 0%, 81%, 0.3);
 
   border-radius: var(--border-radius);
 }
@@ -443,7 +456,7 @@ section {
 
 
 
-/* ~~~~~~~ INPUT ~~~~~~~*/
+/* ~~~~~~~ INPUT and TEXTAREA ~~~~~~~*/
 
 #app input {
   border-radius: 4px;
@@ -457,9 +470,9 @@ section {
   min-width: 18rem;
 }
 
-#app .input-field label{
+#app .input-field label,
+#app .materialize-textarea{
   padding-left: 0.5rem;
-  text-align: center;
 
   font-size: var(--font-size) !important;
 }
@@ -468,16 +481,19 @@ section {
   margin-bottom: 0;
 }
 
-#app .input-field::placeholder {
+#app .input-field::placeholder,
+#app .materialize-textarea::placeholder{
   font-size: var(--font-size);
   color: hsl(182, 25%, 50%);
 }
 
-#app .input-field input:focus + label {
+#app .input-field input:focus + label,
+#app .materialize-textarea:focus + label{
   color: var(--main-blue);
 }
 
-#app .input-field input:focus {
+#app .input-field input:focus,
+#app .materialize-textarea:focus{
   border-bottom: 1px solid var(--main-blue);
   box-shadow: 0 1px 0 0 var(--main-blue);
 }

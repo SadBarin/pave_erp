@@ -3,31 +3,12 @@
     <div class="input-field margin-fix right-margin-little">
       <input
         class="input-add"
-        type="tel"
+        type="text"
+        maxlength="50"
         id="customer"
-        v-model.trim="number"
-        v-mask="'+7 (###) ###-##-##'"
-        placeholder="Номер нового клиента"
-        :class="{invalid: ($v.number.$dirty && !$v.number.required) || ($v.number.$dirty && !$v.number.minLength)}"
+        v-model.trim="name"
+        placeholder="Имя нового клиента"
       >
-      <small
-        class="helper-text invalid"
-        v-if="$v.number.$dirty && !$v.number.required"
-      >
-        Введите номер клиента
-      </small>
-      <small
-        class="helper-text invalid"
-        v-else-if="$v.number.$dirty && !$v.number.minLength"
-      >
-        Номер должен содержать не менее {{$v.number.$params.minLength.min}} символов.
-      </small>
-      <small
-        class="helper-text invalid"
-        v-else-if="coincidence"
-      >
-        Номер уже есть
-      </small>
     </div>
 
     <button class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Добавить нового клиента" type="submit">
@@ -37,59 +18,56 @@
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
-import { mask } from 'vue-the-mask'
+
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AddCustomer',
   data () {
     return {
-      number: '',
-      coincidence: false
+      name: ''
     }
   },
   props: ['customers'],
-  directives: { mask },
-  validations: {
-    number: { required, minLength: minLength(7) }
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
   },
   methods: {
+    ...mapMutations([
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
+    ]),
+
     createCustomer () {
-      if (this.number.trim() && !this.coincidence) {
-        // Body New Customer
-        const newCustomer = {
-          id: Date.now(),
-          name: 'Новый Клиент',
-          contractNumber: '',
-          contractDate: '',
-          number: this.number,
-          fax: '',
-          site: '',
-          email: '',
-          address: '',
-          note: 'Новый клиент',
-          manager: '',
-          status: 'Действующий'
-        }
-
-        this.$emit('add-customer', newCustomer)
-        this.number = ''
-
-        // this.$router.push(`/customers/edit/customers${newCustomer.id}`)
+      // Body New Customer
+      const newCustomer = {
+        id: Date.now(),
+        name: this.name,
+        contractNumber: '',
+        contractDate: '',
+        number: '',
+        fax: '',
+        site: '',
+        email: '',
+        address: this.authEmployee.city,
+        note: 'Новый клиент',
+        manager: this.authEmployee.surname + ' ' + this.authEmployee.name,
+        status: 'Действующий'
       }
+
+      this.$emit('add-customer', newCustomer)
+      this.name = ''
+
+      // this.$router.push(`/customers/edit/customers${newCustomer.id}`)
     },
 
     submitCustomer () {
-      // For validations
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
-
       this.createCustomer()
     }
   },
   mounted () {
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

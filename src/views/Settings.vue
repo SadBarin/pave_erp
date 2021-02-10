@@ -32,9 +32,20 @@
 
 <script>
 import M from 'materialize-css'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Settings.vue',
+  data () {
+    return {
+      autoUpdate: ''
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
+  },
   mounted () {
     const tooltip = document.querySelectorAll('.tooltipped')
     tooltip.forEach((element) => {

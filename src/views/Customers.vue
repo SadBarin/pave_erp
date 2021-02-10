@@ -21,8 +21,8 @@
 
     <section>
       <TableWorkers
-        @remove-worker="removeCustomer"
-        :workers="customers"
+        @remove-customer="removeCustomer"
+        :customers="customers"
       />
     </section>
   </div>

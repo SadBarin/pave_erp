@@ -56,7 +56,7 @@
                     <div class="input-field editor-input">
                       <input
                         id="contractNumber"
-                        type="text"
+                        type="number"
                         v-model.trim="editedCustomer.contractNumber"
                       >
                       <label class="active" for="contractNumber">Номер договора</label>
@@ -74,7 +74,7 @@
                     <div class="input-field editor-input">
                       <input
                         id="number"
-                        type="number"
+                        type="tel"
                         v-model.trim="editedCustomer.number"
                       >
                       <label class="active" for="number">Номер телефона</label>
@@ -108,21 +108,23 @@
                     </div>
 
                     <div class="input-field editor-input">
+                      <textarea
+                        id="note"
+                        class="materialize-textarea"
+                        maxlength="1000"
+                        data-length="1000"
+                        v-model.trim="editedCustomer.note"
+                      ></textarea>
+                      <label class="active" for="note">Примечание</label>
+                    </div>
+
+                    <div class="input-field editor-input">
                       <input
                         id="address"
                         type="text"
                         v-model.trim="editedCustomer.address"
                       >
-                      <label class="active" for="address">Почта</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="note"
-                        type="text"
-                        v-model.trim="editedCustomer.note"
-                      >
-                      <label class="active" for="note">Примечание (кратко)</label>
+                      <label class="active" for="address">Адрес</label>
                     </div>
 
                     <div class="input-field editor-input">
@@ -134,13 +136,19 @@
                       <label class="active" for="manager">Менеджер</label>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="status"
-                        type="text"
-                        v-model.trim="editedCustomer.status"
-                      >
-                      <label class="active" for="note">Состояние</label>
+                    <div class="editor-input flex-start-center">
+                      <p class="right-margin-big">
+                        <label>
+                          <input name="status" type="radio" value="Действующий" v-model.trim="editedCustomer.status"/>
+                          <span>Действующий</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input name="status" type="radio" value="Сотрудничество прервано" v-model.trim="editedCustomer.status"/>
+                          <span>Сотрудничество прервано</span>
+                        </label>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -199,15 +207,13 @@ export default {
       M.FormSelect.init(element)
     })
 
+    const textarea = document.querySelectorAll('.materialize-textarea')
+    textarea.forEach((element) => {
+      M.CharacterCounter.init(element)
+    })
+
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.editedCustomer = this.customers[this.$route.params.id]
   }
 }
 </script>
-
-<style scoped>
-  .photo-container {
-    margin-top: 2rem;
-    width: 100%;
-  }
-</style>
