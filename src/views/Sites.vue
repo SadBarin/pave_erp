@@ -30,7 +30,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
-import AddCardSites from '@/components/sites/AddCardSites'
+import AddCardSites from '@/components/sites/AddSites'
 import ListSites from '@/components/sites/list/ListSites'
 
 export default {
@@ -48,8 +48,6 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'ADD_CITY',
-      'REMOVE_CITY',
       'SET_SITES_FROM_LOCAL_STORAGE',
       'SET_SITES_FROM_SERVER'
     ]),

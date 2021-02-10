@@ -6,8 +6,7 @@
 
         <div class="flex-center">
           <button class="btn-transparent transparent btn-page-title blue-text text-darken-1 "
-                  onclick="M.toast({html: 'Сотрудники обновлены'})"
-                  @click="SET_EMPLOYEES_FROM_SERVER()"
+                  @click="updateEmployees"
           ><i class="material-icons middle-material-icons">autorenew</i>
           </button>
         </div>
@@ -31,7 +30,7 @@
 
 <script>
 import ListEmployees from '@/components/employees/list/ListEmployees'
-import AddCardEmployees from '@/components/employees/AddCardEmployees'
+import AddCardEmployees from '@/components/employees/AddEmployees'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
@@ -50,22 +49,34 @@ export default {
   },
   methods: {
     ...mapMutations([
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE',
       'SET_EMPLOYEES_FROM_SERVER'
     ]),
 
     removeEmployee (id) {
       firebase.database().ref('/employees/' + id).remove()
-      console.log('Сотрудник удалён 🗑️')
+        .then(() => {
+          this.SET_EMPLOYEES_FROM_SERVER()
+          console.log('Сотрудник удалён 🗑️')
+        })
     },
 
     addEmployee (employee) {
       firebase.database().ref('/employees/' + employee.id).set(employee)
-      console.log('Сотрудник добавлен ➕')
+        .then(() => {
+          this.SET_EMPLOYEES_FROM_SERVER()
+          console.log('Сотрудник добавлен ➕')
+        })
+    },
+
+    updateEmployees () {
+      this.SET_EMPLOYEES_FROM_SERVER()
+      // eslint-disable-next-line no-undef
+      M.toast({ html: 'Сотрудники обновлены' })
     }
   },
   mounted () {
-    this.SET_EMPLOYEES_FROM_SERVER()
-    console.log('Employees:', this.employees)
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

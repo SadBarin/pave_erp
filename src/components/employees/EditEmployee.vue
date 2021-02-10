@@ -197,7 +197,8 @@ export default {
   methods: {
     ...mapMutations([
       'SET_EMPLOYEES_FROM_SERVER',
-      'SET_SITES_FROM_SERVER'
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE',
+      'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
 
     editorExit () {
@@ -205,8 +206,10 @@ export default {
     },
 
     saveEditedEmployee (employee) {
-      firebase.database().ref('/employees/' + employee.id).set(employee)
-      this.editorExit()
+      firebase.database().ref('/employees/' + employee.id).set(employee).then(() => {
+        this.SET_EMPLOYEES_FROM_SERVER()
+        this.editorExit()
+      })
     }
   },
   mounted () {
@@ -215,10 +218,9 @@ export default {
       M.FormSelect.init(element)
     })
 
-    this.SET_EMPLOYEES_FROM_SERVER()
-    this.SET_SITES_FROM_SERVER()
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.editedEmployee = this.employees[this.$route.params.id], 1000)
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedEmployee = this.employees[this.$route.params.id]
   }
 }
 </script>

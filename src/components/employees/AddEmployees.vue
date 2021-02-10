@@ -5,6 +5,7 @@
         class="input-add"
         id="email"
         type="text"
+        maxlength="35"
         placeholder="Почта нового рабочего"
         v-model.trim="email"
         :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}"
@@ -34,6 +35,7 @@
 
 <script>
 import { email, required } from 'vuelidate/lib/validators'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AddCardEmployees',
@@ -44,6 +46,11 @@ export default {
     }
   },
   props: ['employees'],
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
+  },
   validations: {
     email: { email, required }
   },
@@ -84,7 +91,7 @@ export default {
           sex: 'Мужской',
           homePhone: '',
           mobilePhone: '',
-          city: '',
+          city: this.authEmployee.city,
           duty: 'Сотрудник',
           access: 'employee',
           settings: {
@@ -95,7 +102,7 @@ export default {
         this.$emit('add-employee', newEmployee)
         this.email = ''
 
-        this.$router.push(`/employees/edit/employee${newEmployee.id}`)
+        // this.$router.push(`/employees/edit/employee${newEmployee.id}`)
       }
     },
 
@@ -107,15 +114,6 @@ export default {
       }
 
       this.createEmployee()
-    }
-  },
-  mounted () {
-    if (localStorage.getItem('dataThisEmployee')) {
-      try {
-        this.dataThisEmployee = JSON.parse(localStorage.getItem('dataThisEmployee'))
-      } catch (e) {
-        localStorage.removeItem('dataThisEmployee')
-      }
     }
   }
 }
