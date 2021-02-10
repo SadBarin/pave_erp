@@ -434,7 +434,9 @@ export default {
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_SERVER',
-      'SET_SITES_FROM_SERVER'
+      'SET_WORKERS_FROM_LOCAL_STORAGE',
+      'SET_SITES_FROM_SERVER',
+      'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
 
     editorExit () {
@@ -443,7 +445,10 @@ export default {
 
     saveEditedWorker (worker) {
       firebase.database().ref('/workers/' + worker.id).set(worker)
-      this.editorExit()
+        .then(() => {
+          this.SET_WORKERS_FROM_SERVER()
+          this.editorExit()
+        })
     },
 
     // ageCalc () {
@@ -493,10 +498,9 @@ export default {
       M.FormSelect.init(element)
     })
 
-    this.SET_WORKERS_FROM_SERVER()
-    this.SET_SITES_FROM_SERVER()
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.editedWorker = this.workers[this.$route.params.id], 1000)
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedWorker = this.workers[this.$route.params.id]
   }
 }
 </script>

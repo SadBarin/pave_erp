@@ -97,7 +97,7 @@ export default {
         this.$emit('add-worker', newWorker)
         this.number = ''
 
-        this.$router.push(`/workers/edit/worker${newWorker.id}`)
+        // this.$router.push(`/workers/edit/worker${newWorker.id}`)
       }
     },
 

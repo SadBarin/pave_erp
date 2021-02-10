@@ -190,8 +190,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_WORKERS',
-      'SET_WORKERS_FROM_SERVER'
+      'SET_WORKERS_FROM_LOCAL_STORAGE'
     ]),
 
     searching (obj) {
@@ -232,11 +231,13 @@ export default {
 
     removeWorker (id) {
       firebase.database().ref('/workers/' + id).remove()
-      console.log('Рабочий удалён 🗑️')
+        .then(() => {
+          console.log('Рабочий удалён 🗑️')
+        })
     }
   },
   mounted () {
-    this.SET_WORKERS_FROM_SERVER()
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.searchWorkers = this.workers
 
     const tabs = document.querySelectorAll('.tabs')

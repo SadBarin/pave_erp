@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'SET_WORKERS_FROM_SERVER'
+      'SET_WORKERS_FROM_LOCAL_STORAGE'
     ])
   },
   filters: {
@@ -118,10 +118,8 @@ export default {
     }
   },
   mounted () {
-    this.SET_WORKERS_FROM_SERVER()
-
-    // eslint-disable-next-line no-return-assign
-    setTimeout(() => this.worker = this.workers[this.$route.params.id], 1000)
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.worker = this.workers[this.$route.params.id]
   }
 }
 </script>
