@@ -1,7 +1,9 @@
 <template>
-  <div class="blue darken-1 empty-layout" id="blue-layout">
-    <router-view />
-  </div>
+  <transition>
+    <div class="blue darken-1 empty-layout" id="blue-layout">
+        <router-view />
+    </div>
+  </transition>
 </template>
 
 <script>

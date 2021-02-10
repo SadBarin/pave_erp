@@ -137,30 +137,26 @@ export default {
 }
 
 .flip-enter-active {
-  animation: flip-vertical-left .5s;
+  animation: fade-in .5s;
 }
 .flip-leave-active {
-  animation: flip-vertical-left .5s reverse;
+  animation: fade-in .5s reverse;
 }
 
-@-webkit-keyframes flip-vertical-left {
+@-webkit-keyframes fade-in {
   0% {
-    -webkit-transform: rotateY(0);
-    transform: rotateY(0);
+    opacity: 0;
   }
   100% {
-    -webkit-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
+    opacity: 1;
   }
 }
-@keyframes flip-vertical-left {
+@keyframes fade-in {
   0% {
-    -webkit-transform: rotateY(0);
-    transform: rotateY(0);
+    opacity: 0;
   }
   100% {
-    -webkit-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
+    opacity: 1;
   }
 }
 

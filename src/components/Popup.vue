@@ -1,5 +1,5 @@
 <template>
-  <div class="popup-overlay">
+  <div class="popup-overlay flex-center">
     <form class="card auth-card popup">
       <div class="card-content flex-column-center">
         <h4 class="card-title">
@@ -10,9 +10,9 @@
         </p>
       </div>
 
-      <div class="card-action btns-popup">
+      <div class="card-action btns-popup flex-between-center">
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+          class="btn-flat right-margin-little white-text waves-effect waves-light auth-submit blue darken-1"
           @click.prevent="$emit('yes'); callToast()"
         >
           <i class="material-icons">check</i> Да
@@ -45,51 +45,29 @@ export default {
 </script>
 
 <style scoped>
-  .popup-overlay {
-    background: hsl(208, 79%, 51%);
+  #app .popup-overlay {
+    background: hsla(0, 0%, 100%, 0.5);
+    backdrop-filter: blur(3px);
     animation: none !important;
     width: 100vw;
     height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     position: absolute;
     top: 0;
     left: 0;
 
-    z-index: 1000;
+    z-index: 10000;
   }
 
-  .popup {
-    border-radius: 10px;
-    width: 18rem !important;
-
+  #app .popup {
+    border: 1px solid;
     text-align: center;
+
+    width: 22rem;
   }
 
-  .popup .card-title {
-    margin-top: 0 !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .card-action {
-    padding-top: 0 !important;
-  }
-
-  .btns-popup {
-    border-radius: 10px !important;
-
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .btn-flat {
-    border-radius: 10px;
-  }
-
-  .btn-flat:first-child {
-    margin-right: 1rem;
+  #app .popup .card-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 </style>
