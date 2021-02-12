@@ -79,8 +79,8 @@
       <div class="margin-fix w35rem">
         <h5><i class="material-icons">assessment</i> Системные данные</h5>
         <h6>Идентификационный номер: <span>{{worker.id}}</span></h6>
-<!--        <h6>Сейчас редактируется: <span>{{worker.edited | booleanToWord}}</span></h6>-->
         <h6>Сколько раз редактировался: <span>{{worker.editedCount}}</span></h6>
+        <h6>История редактирования: <span><a href="#"> Просмотреть</a></span></h6>
       </div>
 
       <div class="margin-fix w35rem">

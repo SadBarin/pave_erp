@@ -20,7 +20,6 @@
       <th>Фамилия</th>
       <th>Имя</th>
       <th>Отчество</th>
-      <th>Пол</th>
       <th>Возраст</th>
       <th>Мед.книжка</th>
       <th>Город</th>
@@ -32,7 +31,6 @@
         <td>{{worker.surname}}</td>
         <td>{{worker.name}}</td>
         <td>{{worker.patronymic}}</td>
-        <td>{{worker.sex}}</td>
         <td>{{worker.age}}</td>
         <td>{{worker.medicalBook}}</td>
         <td>{{worker.city}}</td>
@@ -45,6 +43,13 @@
                     :to="{name : 'workerAbout', params: {id: worker.id}}"
             >
               <i class="material-icons">remove_red_eye</i>
+            </router-link>
+
+            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                         title="История редактирования"
+                         :to="{name : 'workerHistory', params: {id: worker.id}}"
+            >
+              <i class="material-icons">description</i>
             </router-link>
 
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"

@@ -39,7 +39,7 @@
         </td>
         <td>
           <div class="parent-clip-text">
-            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту ' + customer.email">{{customer.email}}</a>
+            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту: ' + customer.email">{{customer.email}}</a>
           </div>
         </td>
         <td>

@@ -38,6 +38,12 @@ const router = new VueRouter({
       meta: { layout: 'main' },
       component: () => import('../components/employees/EditEmployee')
     },
+    {
+      path: '/employees/history/employee:id',
+      name: 'employeeHistory',
+      meta: { layout: 'main' },
+      component: () => import('../components/employees/HistoryEmployee')
+    },
 
     {
       path: '/workers',
@@ -64,11 +70,19 @@ const router = new VueRouter({
       component: () => import('../components/workers/AboutWorker')
     },
     {
+      path: '/workers/history/worker:id',
+      name: 'workerHistory',
+      meta: { layout: 'main' },
+      component: () => import('../components/workers/HistoryWorker')
+    },
+
+    {
       path: '/settings',
       name: 'settings',
       meta: { layout: 'main' },
       component: () => import('../views/Settings')
     },
+
     {
       path: '/customers',
       name: 'customers',

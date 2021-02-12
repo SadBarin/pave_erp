@@ -1,6 +1,7 @@
 <template>
-  <section>
+  <section class="sites-container">
     <CardSites
+      class="city"
       v-for="city of sites"
       :key="city.id"
       :city="city"
@@ -25,3 +26,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .city {
+    width: 48%;
+    height: fit-content;
+    margin-left: 0;
+  }
+
+  .sites-container {
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
+</style>

@@ -37,7 +37,7 @@
       </td>
       <td>
         <div class="parent-clip-text">
-          <a class="clip-text" :href="'mailto:' + employee.email" :title="'Написать на почту ' + employee.email">{{employee.email}}</a>
+          <a class="clip-text" :href="'mailto:' + employee.email" :title="'Написать на почту: ' + employee.email">{{employee.email}}</a>
         </div>
       </td>
       <td><a :href="'tel:' + employee.number" title="Позвонить">{{employee.mobilePhone}}</a></td>
@@ -53,6 +53,13 @@
       </td>
       <td>
         <div class="flex-center">
+          <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                       title="История редактирования"
+                       :to="{name : 'employeeHistory', params: {id: employee.id}}"
+          >
+            <i class="material-icons">description</i>
+          </router-link>
+
           <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                        title="Редактировать"
                        :to="{name : 'employeeEdit', params: {id: employee.id}}"
