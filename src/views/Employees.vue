@@ -19,7 +19,7 @@
     </div>
 
     <div>
-      <ListEmployees
+      <TableEmployees
         v-if="employees"
         :employees="employees"
         @remove-employee="removeEmployee"
@@ -29,14 +29,14 @@
 </template>
 
 <script>
-import ListEmployees from '@/components/employees/list/ListEmployees'
+import TableEmployees from '@/components/employees/TableEmployees'
 import AddCardEmployees from '@/components/employees/AddEmployees'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
   name: 'Employees',
-  components: { ListEmployees, AddCardEmployees },
+  components: { TableEmployees, AddCardEmployees },
   data () {
     return {
       updateTimeout: 60000

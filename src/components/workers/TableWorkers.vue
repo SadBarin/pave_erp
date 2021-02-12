@@ -36,7 +36,7 @@
         <td>{{worker.age}}</td>
         <td>{{worker.medicalBook}}</td>
         <td>{{worker.city}}</td>
-        <td><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></td>
+        <td><a :href="'tel:' + worker.mobilePhone" title="Позвонить">{{worker.mobilePhone}}</a></td>
         <td>{{worker.professions}}</td>
         <td>
           <div class="flex-center">

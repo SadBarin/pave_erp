@@ -11,7 +11,7 @@
     </template>
 
     <template #text-info-popup>
-      Клиент <b>{{customer.name}} будет удалён</b>
+      Клиент <b>{{customer.name}}</b> будет удалён
     </template>
   </Popup>
 
@@ -31,7 +31,7 @@
             <p class="clip-text" :title="customer.name">{{customer.name}}</p>
           </div>
         </td>
-        <td><a :href="'tel:' + customer.number">{{customer.number}}</a></td>
+        <td><a :href="'tel:' + customer.number" title="Позвонить">{{customer.number}}</a></td>
         <td>
           <div class="parent-clip-text">
             <a class="clip-text" :title="customer.site" target="_blank" :href="customer.site">{{customer.site}}</a>
@@ -39,7 +39,7 @@
         </td>
         <td>
           <div class="parent-clip-text">
-            <a class="clip-text" :href="'mailto:' + customer.email" :title="customer.email">{{customer.email}}</a>
+            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту ' + customer.email">{{customer.email}}</a>
           </div>
         </td>
         <td>

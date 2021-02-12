@@ -52,7 +52,7 @@
                         type="text"
                         v-model.trim="editedCustomer.name"
                       >
-                      <label class="active" for="name">Имя</label>
+                      <label class="active" for="name"> Наименование</label>
                     </div>
                   </div>
                 </div>
