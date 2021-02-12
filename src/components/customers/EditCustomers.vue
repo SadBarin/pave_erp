@@ -15,7 +15,7 @@
     </Popup>
 
     <div class="page-title flex-between-center">
-      <h3>Редактор клиента "{{editedCustomer.name}}"</h3>
+      <h3 class="title-clip">Редактор клиента <br> "{{editedCustomer.name}}"</h3>
 
       <div class="editor-btns">
         <button
@@ -41,9 +41,11 @@
 
             <form>
               <div class="form-content">
+
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
                     <h4 class="card-title"><i class="material-icons">account_box</i> Общее</h4>
+
                     <div class="input-field editor-input">
                       <input
                         id="name"
@@ -52,6 +54,12 @@
                       >
                       <label class="active" for="name">Имя</label>
                     </div>
+                  </div>
+                </div>
+
+                <div class="card editor-card white darken-1 black-text">
+                  <div class="card-content flex-column-center">
+                    <h4 class="card-title"><i class="material-icons">business_center</i> Договоры</h4>
 
                     <div class="input-field editor-input">
                       <input
@@ -70,11 +78,18 @@
                       >
                       <label class="active" for="contractDate">Дата договора</label>
                     </div>
+                  </div>
+                </div>
+
+                <div class="card editor-card white darken-1 black-text">
+                  <div class="card-content flex-column-center">
+                    <h4 class="card-title"><i class="material-icons">local_phone</i> Контакты</h4>
 
                     <div class="input-field editor-input">
                       <input
                         id="number"
                         type="tel"
+                        maxlength="20"
                         v-model.trim="editedCustomer.number"
                       >
                       <label class="active" for="number">Номер телефона</label>
@@ -108,23 +123,29 @@
                     </div>
 
                     <div class="input-field editor-input">
-                      <textarea
-                        id="note"
-                        class="materialize-textarea"
-                        maxlength="1000"
-                        data-length="1000"
-                        v-model.trim="editedCustomer.note"
-                      ></textarea>
-                      <label class="active" for="note">Примечание</label>
-                    </div>
-
-                    <div class="input-field editor-input">
                       <input
                         id="address"
                         type="text"
                         v-model.trim="editedCustomer.address"
                       >
                       <label class="active" for="address">Адрес</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card editor-card white darken-1 black-text">
+                  <div class="card-content flex-column-center">
+                    <h4 class="card-title"><i class="material-icons">assessment</i> Системная информация</h4>
+
+                    <div class="input-field editor-input">
+                      <textarea
+                        id="note"
+                        class="materialize-textarea"
+                        maxlength="500"
+                        data-length="500"
+                        v-model.trim="editedCustomer.note"
+                      ></textarea>
+                      <label class="active" for="note">Примечание</label>
                     </div>
 
                     <div class="input-field editor-input">

@@ -121,6 +121,27 @@
   font-size: calc(var(--font-size) * 1.1);
 }
 
+#app .title-clip {
+  max-width: 40rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#app .parent-clip-text {
+  display: inline-flex;
+}
+
+#app .clip-text {
+  display: inline;
+  max-width: 10rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  margin: 0;
+}
+
 
 
 /* ~~~~~~~ LAYOUT ~~~~~~~*/
@@ -158,6 +179,15 @@
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+#app .w35rem {
+  word-wrap: break-word;
+  max-width: 35rem;
+}
+
+.opacity-5 {
+  opacity: 0.5;
 }
 
 #app .margin-fix {

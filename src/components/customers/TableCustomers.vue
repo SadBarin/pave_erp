@@ -25,13 +25,33 @@
       <th>Менеджер</th>
       <th>Статус</th>
     </tr>
-    <tr v-for="customer in customers" :key="customer.value" :class="customer.status === 'Действующий' ? '' : 'opacity'">
-        <td>{{customer.name}}</td>
-        <td>{{customer.number}}</td>
-        <td><a title="В целях безопасности, не сообщайте на сторонних сайтах ваших личных данных!" target="_blank" :href="customer.site">{{customer.site}}</a></td>
-        <td>{{customer.email}}</td>
-        <td>{{customer.address}}</td>
-        <td>{{customer.manager}}</td>
+    <tr v-for="customer in customers" :key="customer.value" :class="customer.status === 'Действующий' ? '' : 'opacity-5'">
+        <td>
+          <div class="parent-clip-text">
+            <p class="clip-text" :title="customer.name">{{customer.name}}</p>
+          </div>
+        </td>
+        <td><a :href="'tel:' + customer.number">{{customer.number}}</a></td>
+        <td>
+          <div class="parent-clip-text">
+            <a class="clip-text" :title="customer.site" target="_blank" :href="customer.site">{{customer.site}}</a>
+          </div>
+        </td>
+        <td>
+          <div class="parent-clip-text">
+            <a class="clip-text" :href="'mailto:' + customer.email" :title="customer.email">{{customer.email}}</a>
+          </div>
+        </td>
+        <td>
+          <div class="parent-clip-text">
+            <p class="clip-text" :title="customer.address">{{customer.address}}</p>
+          </div>
+        </td>
+        <td>
+          <div class="parent-clip-text">
+            <p class="clip-text" :title="customer.manager">{{customer.manager}}</p>
+          </div>
+        </td>
         <td>
           <div v-if="customer.status === 'Действующий'" title="Действующий" class="circle green darken-1"></div>
           <div v-else title="Сотрудничество прервано" class="circle red darken-1"></div>
@@ -96,9 +116,5 @@ export default {
     width: 1rem;
     height: 1rem;
     margin: 0 auto;
-  }
-
-  .opacity {
-    color: grey;
   }
 </style>

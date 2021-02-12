@@ -15,7 +15,7 @@
     </Popup>
 
     <div class="page-title flex-between-center">
-      <h3>Редактор рабочего "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
+      <h3>Редактор рабочего <br> "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
 
       <div class="editor-btns">
         <button
@@ -331,6 +331,7 @@
                       <input
                         id="reasonComing"
                         type="text"
+                        maxlength="100"
                         v-model.trim="editedWorker.reasonComing"
                       >
                       <label class="active" for="reasonComing">Почему пришел к нам (кратко)</label>

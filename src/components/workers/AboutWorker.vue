@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title flex-between-center">
-      <h3>Информация о рабочем "{{worker.surname}} {{worker.name}}"</h3>
+      <h3 class="title-clip">Информация о рабочем <br> "{{worker.surname}} {{worker.name}}"</h3>
 
       <div class="editor-btns">
         <router-link class="btn waves-effect waves-blue pointer blue darken-1"
@@ -19,14 +19,14 @@
     </div>
 
     <section class="info-content">
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">account_box</i> ФИО</h5>
         <h6>Имя: <span>{{worker.name}}</span></h6>
         <h6>Фамилия: <span>{{worker.surname}}</span></h6>
         <h6>Отчество: <span>{{worker.patronymic}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">assignment</i> Личные данные</h5>
         <h6>День рождение: <span>{{worker.birthday}}</span></h6>
         <h6>Возраст: <span>{{worker.age}}</span></h6>
@@ -37,7 +37,7 @@
         <h6>ВУЗ: <span>{{worker.university}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">book</i> Паспортные данные</h5>
         <h6 v-show="worker.UploadPassport !== undefined">Скан: <span><a v-bind:href="worker.UploadPassport" target="_blank">Открыть паспорт</a></span></h6>
         <h6>Номер паспорта: <span>{{worker.passportID}}</span></h6>
@@ -47,7 +47,7 @@
         <h6>Адрес: <span>{{worker.address}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">account_balance_wallet</i> Банковские данные</h5>
         <h6>Имя держателя карты: <span>{{worker.nameCard}}</span></h6>
         <h6>Фамилия держателя карты: <span>{{worker.surnameCard}}</span></h6>
@@ -56,14 +56,14 @@
         <h6>Банк: <span>{{worker.bank}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">local_phone</i> Контактные данные</h5>
         <h6>Город: <span>{{worker.city}}</span></h6>
-        <h6>Мобильный телефон: <span>{{worker.mobilePhone}}</span></h6>
-        <h6>Мобильный телефон: <span>{{worker.homePhone}}</span></h6>
+        <h6>Мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></span></h6>
+        <h6>Домашний телефон: <span>{{worker.homePhone}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">rate_review</i> Рабочие данные</h5>
         <h6>Учётный номер: <span>{{worker.accountNumber}}</span></h6>
         <h6>Прежняя работа: <span>{{worker.previousWork}}</span></h6>
@@ -76,14 +76,14 @@
         <h6>Уволен: <span>{{worker.fired}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">assessment</i> Системные данные</h5>
         <h6>Идентификационный номер: <span>{{worker.id}}</span></h6>
 <!--        <h6>Сейчас редактируется: <span>{{worker.edited | booleanToWord}}</span></h6>-->
         <h6>Сколько раз редактировался: <span>{{worker.editedCount}}</span></h6>
       </div>
 
-      <div>
+      <div class="margin-fix w35rem">
         <h5><i class="material-icons">photo</i> Фото рабочего</h5>
         <p v-show="worker.UploadImage === undefined">Загрузите фото рабочего в редакторе</p>
         <img v-bind:src="worker.UploadImage" width="200rem">

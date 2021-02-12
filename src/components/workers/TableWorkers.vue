@@ -28,7 +28,7 @@
       <th>Профессия</th>
       <th></th>
     </tr>
-    <tr v-for="worker in workers" :key="worker.value">
+    <tr v-for="worker in workers" :key="worker.value" :class="worker.fired === 'Нет' ? '' : 'opacity-5'">
         <td>{{worker.surname}}</td>
         <td>{{worker.name}}</td>
         <td>{{worker.patronymic}}</td>
@@ -36,7 +36,7 @@
         <td>{{worker.age}}</td>
         <td>{{worker.medicalBook}}</td>
         <td>{{worker.city}}</td>
-        <td>{{worker.mobilePhone}}</td>
+        <td><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></td>
         <td>{{worker.professions}}</td>
         <td>
           <div class="flex-center">
