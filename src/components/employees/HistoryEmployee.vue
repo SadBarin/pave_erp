@@ -20,7 +20,7 @@
     </div>
 
     <section>
-      <div v-for="(moment, i) of employee.history" :key="moment">
+      <div v-for="(moment, i) of employee.history" :key="moment.value">
         <p><b>{{i}}:</b> {{moment}}</p>
       </div>
     </section>

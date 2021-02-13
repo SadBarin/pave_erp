@@ -48,6 +48,7 @@
                      <input
                        id="email"
                        type="text"
+                       v-model="editedEmployee.email"
                      >
                    </div>
 
@@ -55,6 +56,7 @@
                      <input
                        id="password"
                        type="text"
+                       v-model="editedEmployee.password"
                      >
                      <label for="password" class="active">Пароль</label>
                    </div>
@@ -190,7 +192,8 @@ export default {
   directives: { mask },
   data () {
     return {
-      editedEmployee: ''
+      editedEmployee: '',
+      history: []
     }
   },
   computed: {
@@ -198,7 +201,96 @@ export default {
       'authEmployee',
       'employees',
       'sites'
-    ])
+    ]),
+
+    editedEmail: function () {
+      return this.editedEmployee.email
+    },
+
+    editedPassword: function () {
+      return this.editedEmployee.password
+    },
+
+    editedAccess: function () {
+      return this.editedEmployee.access
+    },
+
+    editedDuty: function () {
+      return this.editedEmployee.duty
+    },
+
+    editedName: function () {
+      return this.editedEmployee.name
+    },
+
+    editedSurname: function () {
+      return this.editedEmployee.surname
+    },
+
+    editedCity: function () {
+      return this.editedEmployee.city
+    },
+
+    editedHomePhone: function () {
+      return this.editedEmployee.homePhone
+    },
+
+    editedMobilePhone: function () {
+      return this.editedEmployee.mobilePhone
+    },
+
+    editedPatronymic: function () {
+      return this.editedEmployee.patronymic
+    },
+
+    editedSex: function () {
+      return this.editedEmployee.sex
+    }
+  },
+  watch: {
+    editedEmail: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'почта')
+    },
+
+    editedPassword: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'пароль')
+    },
+
+    editedAccess: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'доступ')
+    },
+
+    editedDuty: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'должность')
+    },
+
+    editedName: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'имя')
+    },
+
+    editedSurname: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'фамилия')
+    },
+
+    editedPatronymic: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'отчество')
+    },
+
+    editedCity: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'город')
+    },
+
+    editedHomePhone: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'домашний телефон')
+    },
+
+    editedMobilePhone: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'мобильный телефон')
+    },
+
+    editedSex: function (newQuestion, oldQuestion) {
+      this.changeData(newQuestion, oldQuestion, 'пол')
+    }
   },
   methods: {
     ...mapMutations([
@@ -207,13 +299,20 @@ export default {
       'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
 
+    changeData (newValue, oldValue, data) {
+      if (oldValue !== undefined) {
+        this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] был изменён ${data} с ${oldValue} на ${newValue} сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+      }
+    },
+
     editorExit () {
       this.$router.push('/employees')
     },
 
     saveEditedEmployee (employee) {
       try {
-        employee.history.push(`Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        employee.history.push(...this.history)
       } catch (e) { M.toast({ html: 'Внимание! Данный сотрудник не поддерживает историю' }) }
 
       firebase.database().ref('/employees/' + employee.id).set(employee).then(() => {
