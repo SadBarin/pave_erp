@@ -158,7 +158,8 @@
                     </div>
 
                     <div class="editor-input flex-start-center">
-                      <p class="right-margin-big">
+                      <p class="right-margin-big">Статус: </p>
+                      <p class="right-margin-little">
                         <label>
                           <input name="status" type="radio" value="Действующий" v-model.trim="editedCustomer.status"/>
                           <span>Действующий</span>

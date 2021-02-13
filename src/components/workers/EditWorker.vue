@@ -96,16 +96,20 @@
                       <p>Возраст: {{editedWorker.age}} лет</p>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="sex"
-                        v-model.trim="editedWorker.sex"
-                      >
-                        <option class="editor-option" value="Мужской">Мужской</option>
-                        <option class="editor-option" value="Женский">Женский</option>
-                      </select>
-                      <label class="active">Пол</label>
+                    <div class="editor-input flex-start-center">
+                      <p class="right-margin-big">Пол: </p>
+                      <p class="right-margin-little">
+                        <label>
+                          <input type="radio" value="Мужской" v-model.trim="editedWorker.sex"/>
+                          <span>Мужской</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="radio" value="Женский" v-model.trim="editedWorker.sex"/>
+                          <span>Женский</span>
+                        </label>
+                      </p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -346,28 +350,36 @@
                       <label class="active" for="professions">Профессия</label>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="nightShift"
-                        class="browser-default editor-select"
-                        v-model.trim="editedWorker.nightShift"
-                      >
-                        <option class="editor-option" value="Да">Да</option>
-                        <option class="editor-option" value="Нет">Нет</option>
-                      </select>
-                      <label class="active">Ночная смена</label>
+                    <div class="editor-input flex-start-center">
+                      <p class="right-margin-big">Ночная смена: </p>
+                      <p class="right-margin-little">
+                        <label>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.nightShift"/>
+                          <span>Да</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="radio" value="Нет" v-model.trim="editedWorker.nightShift"/>
+                          <span>Нет</span>
+                        </label>
+                      </p>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="checkMVD"
-                        class="browser-default editor-select"
-                        v-model.trim="editedWorker.checkMVD"
-                      >
-                        <option class="editor-option" value="Да">Да</option>
-                        <option class="editor-option" value="Нет">Нет</option>
-                      </select>
-                      <label class="active">Проверка МВД</label>
+                    <div class="editor-input flex-start-center">
+                      <p class="right-margin-big">Проверка МВД: </p>
+                      <p class="right-margin-little">
+                        <label>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.checkMVD"/>
+                          <span>Да</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="radio" value="Нет" v-model.trim="editedWorker.checkMVD"/>
+                          <span>Нет</span>
+                        </label>
+                      </p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -388,17 +400,22 @@
                       <label class="active" for="uniform">Униформа</label>
                     </div>
 
-                    <div class="input-field editor-input">
-                      <select
-                        id="fired"
-                        class="browser-default editor-select"
-                        v-model.trim="editedWorker.fired"
-                      >
-                        <option class="editor-option" value="Да">Да</option>
-                        <option class="editor-option" value="Нет">Нет</option>
-                      </select>
-                      <label class="active">Уволен</label>
+                    <div class="editor-input flex-start-center">
+                      <p class="right-margin-big">Уволен: </p>
+                      <p class="right-margin-little">
+                        <label>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.fired"/>
+                          <span>Да</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="radio" value="Нет" v-model.trim="editedWorker.fired"/>
+                          <span>Нет</span>
+                        </label>
+                      </p>
                     </div>
+
                   </div>
                 </div>
               </div>

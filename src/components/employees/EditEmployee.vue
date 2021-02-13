@@ -150,16 +150,21 @@
                <div class="card editor-card white darken-1 black-text">
                  <div class="card-content flex-column-center">
                    <h4 class="card-title"><i class="material-icons">account_box</i>Личные данные</h4>
-                   <div class="input-field editor-input">
-                     <select
-                       class="browser-default editor-select"
-                       id="sex"
-                       v-model.trim="editedEmployee.sex"
-                     >
-                       <option class="editor-option" value="Мужской">Мужской</option>
-                       <option class="editor-option" value="Женский">Женский</option>
-                     </select>
-                     <label class="active">Пол</label>
+
+                   <div class="editor-input flex-start-center">
+                     <p class="right-margin-big">Пол: </p>
+                     <p class="right-margin-little">
+                       <label>
+                         <input type="radio" value="Мужской" v-model.trim="editedEmployee.sex"/>
+                         <span>Мужской</span>
+                       </label>
+                     </p>
+                     <p>
+                       <label>
+                         <input type="radio" value="Женский" v-model.trim="editedEmployee.sex"/>
+                         <span>Женский</span>
+                       </label>
+                     </p>
                    </div>
                  </div>
                </div>
@@ -208,7 +213,7 @@ export default {
 
     saveEditedEmployee (employee) {
       try {
-        employee.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        employee.history.push(`Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
       } catch (e) { M.toast({ html: 'Внимание! Данный сотрудник не поддерживает историю' }) }
 
       firebase.database().ref('/employees/' + employee.id).set(employee).then(() => {
