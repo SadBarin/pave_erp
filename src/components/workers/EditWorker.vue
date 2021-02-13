@@ -429,7 +429,9 @@ export default {
   computed: {
     ...mapGetters([
       'workers',
-      'sites'
+      'sites',
+      'employees',
+      'authEmployee'
     ])
   },
   methods: {
@@ -437,7 +439,8 @@ export default {
       'SET_WORKERS_FROM_SERVER',
       'SET_WORKERS_FROM_LOCAL_STORAGE',
       'SET_SITES_FROM_SERVER',
-      'SET_SITES_FROM_LOCAL_STORAGE'
+      'SET_SITES_FROM_LOCAL_STORAGE',
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
     ]),
 
     editorExit () {
@@ -445,6 +448,10 @@ export default {
     },
 
     saveEditedWorker (worker) {
+      try {
+        worker.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+      } catch (e) { M.toast({ html: 'Внимание! Данный рабочий не поддерживает историю' }) }
+
       firebase.database().ref('/workers/' + worker.id).set(worker)
         .then(() => {
           this.SET_WORKERS_FROM_SERVER()
@@ -499,6 +506,7 @@ export default {
       M.FormSelect.init(element)
     })
 
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.SET_SITES_FROM_LOCAL_STORAGE()
     this.editedWorker = this.workers[this.$route.params.id]

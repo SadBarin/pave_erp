@@ -96,7 +96,8 @@ export default {
           access: 'employee',
           settings: {
             autoUpdate: 5000
-          }
+          },
+          history: [`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Сотрудник был создан сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`]
         }
 
         this.$emit('add-employee', newEmployee)

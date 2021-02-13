@@ -194,6 +194,14 @@
   padding: 1px;
 }
 
+#app .top-margin-little {
+  margin-top: 1rem;
+}
+
+#app .top-margin-top{
+  margin-top: 2rem;
+}
+
 #app .right-margin-big {
   margin-right: 2rem;
 }

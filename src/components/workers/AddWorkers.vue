@@ -39,6 +39,7 @@
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
 import { mask } from 'vue-the-mask'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AddCardSWorkers',
@@ -48,12 +49,22 @@ export default {
       coincidence: false
     }
   },
+  computed: {
+    ...mapGetters([
+      'employees',
+      'authEmployee'
+    ])
+  },
   props: ['workers'],
   directives: { mask },
   validations: {
     number: { required, minLength: minLength(7) }
   },
   methods: {
+    ...mapMutations([
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
+    ]),
+
     createWorker () {
       if (this.number.trim() && !this.coincidence) {
         // Body New Worker
@@ -70,7 +81,7 @@ export default {
           bank: 'СберБанк',
           age: '',
           sex: 'Мужской',
-          city: '',
+          city: this.authEmployee.city,
           nationality: '',
           passportID: '',
           passportDate: '',
@@ -91,7 +102,8 @@ export default {
           uniform: '',
           fired: 'Нет',
           edited: false,
-          editedCount: 0
+          editedCount: 0,
+          history: [`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Рабочий был создан сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`]
         }
 
         this.$emit('add-worker', newWorker)
@@ -112,6 +124,7 @@ export default {
     }
   },
   mounted () {
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-title flex-between-center">
+    <div class="page-title flex-between-center margin-fix">
       <h3 class="right-margin-big">История редактирования рабочего<br>"{{worker.surname}} {{worker.name}}"</h3>
 
       <div class="editor-btns">
@@ -19,6 +19,9 @@
     </div>
 
     <section>
+      <div v-for="(moment, i) of worker.history" :key="moment">
+        <p><b>{{i}}:</b> {{moment}}</p>
+      </div>
     </section>
   </div>
 </template>

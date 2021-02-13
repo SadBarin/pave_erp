@@ -190,6 +190,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'authEmployee',
       'employees',
       'sites'
     ])
@@ -206,6 +207,10 @@ export default {
     },
 
     saveEditedEmployee (employee) {
+      try {
+        employee.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+      } catch (e) { M.toast({ html: 'Внимание! Данный сотрудник не поддерживает историю' }) }
+
       firebase.database().ref('/employees/' + employee.id).set(employee).then(() => {
         this.SET_EMPLOYEES_FROM_SERVER()
         this.editorExit()
