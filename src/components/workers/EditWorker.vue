@@ -58,6 +58,7 @@
                         id="name"
                         type="text"
                         v-model.trim="editedWorker.name"
+                        @change="changeData(editedWorker.name, 'имя')"
                       >
                       <label class="active" for="name">Имя</label>
                     </div>
@@ -67,6 +68,7 @@
                         id="surname"
                         type="text"
                         v-model.trim="editedWorker.surname"
+                        @change="changeData(editedWorker.surname, 'фамилия')"
                       >
                       <label class="active" for="surname">Фамилия</label>
                     </div>
@@ -76,6 +78,7 @@
                         id="patronymic"
                         type="text"
                         v-model.trim="editedWorker.patronymic"
+                        @change="changeData(editedWorker.patronymic, 'отчество')"
                       >
                       <label class="active" for="patronymic">Отчество</label>
                     </div>
@@ -91,6 +94,7 @@
                         id="birthday"
                         type="date"
                         v-model.trim="editedWorker.birthday"
+                        @change="changeData(editedWorker.birthday, 'день рождение')"
                       >
                       <label class="active" for="birthday">День рождения</label>
                       <p>Возраст: {{editedWorker.age}} лет</p>
@@ -100,7 +104,7 @@
                       <p class="right-margin-big">Пол: </p>
                       <p class="right-margin-little">
                         <label>
-                          <input type="radio" value="Мужской" v-model.trim="editedWorker.sex"/>
+                          <input type="radio" @change="changeData(editedWorker.sex, 'пол')" value="Мужской" v-model.trim="editedWorker.sex"/>
                           <span>Мужской</span>
                         </label>
                       </p>
@@ -117,6 +121,7 @@
                         id="nationality"
                         type="text"
                         v-model.trim="editedWorker.nationality"
+                        @change="changeData(editedWorker.nationality, 'Национальность')"
                       >
                       <label class="active" for="nationality">Национальность</label>
                     </div>
@@ -126,6 +131,7 @@
                         id="medicalBook"
                         type="date"
                         v-model="editedWorker.medicalBook"
+                        @change="changeData(editedWorker.medicalBook, 'Медицинская Книга')"
                       >
                       <label class="active" for="medicalBook">Медицинская Книга</label>
                       <p>Истекает через: {{editedWorker.medicalBookStatus}} лет</p>
@@ -136,6 +142,7 @@
                         id="education"
                         type="text"
                         v-model.trim="editedWorker.education"
+                        @change="changeData(editedWorker.education, 'Образование')"
                       >
                       <label class="active" for="education">Образование</label>
                     </div>
@@ -145,6 +152,7 @@
                         id="university"
                         type="text"
                         v-model.trim="editedWorker.university"
+                        @change="changeData(editedWorker.university, 'ВУЗ')"
                       >
                       <label class="active" for="university">ВУЗ</label>
                     </div>
@@ -168,6 +176,7 @@
                         id="passportID"
                         type="text"
                         v-model.trim="editedWorker.passportID"
+                        @change="changeData(editedWorker.passportID, 'номер паспорта')"
                       >
                       <label class="active" for="PassportID">Номер Паспорта</label>
                     </div>
@@ -177,6 +186,7 @@
                         id="passportDate"
                         type="date"
                         v-model.trim="editedWorker.passportDate"
+                        @change="changeData(editedWorker.passportDate, 'дата выдачи паспорта')"
                       >
                       <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
                     </div>
@@ -186,6 +196,7 @@
                         id="passportIssued"
                         type="text"
                         v-model.trim="editedWorker.passportIssued"
+                        @change="changeData(editedWorker.passportIssued, 'Кем выдан')"
                       >
                       <label class="active" for="passportIssued">Кем выдан</label>
                     </div>
@@ -195,6 +206,7 @@
                         id="registration"
                         type="text"
                         v-model.trim="editedWorker.registration"
+                        @change="changeData(editedWorker.registration, 'Прописка')"
                       >
                       <label class="active" for="registration">Прописка</label>
                     </div>
@@ -204,6 +216,7 @@
                         id="address"
                         type="text"
                         v-model.trim="editedWorker.address"
+                        @change="changeData(editedWorker.address, 'Адрес')"
                       >
                       <label class="active" for="address">Адрес</label>
                     </div>
@@ -218,6 +231,7 @@
                         id="nameCard"
                         type="text"
                         v-model.trim="editedWorker.nameCard"
+                        @change="changeData(editedWorker.nameCard, 'имя держателя карты')"
                       >
                       <label class="active" for="nameCard">Имя Держателя Карты</label>
                     </div>
@@ -227,6 +241,7 @@
                         id="surnameCard"
                         type="text"
                         v-model.trim="editedWorker.surnameCard"
+                        @change="changeData(editedWorker.surnameCard, 'фамилия держателя карты')"
                       >
                       <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
                     </div>
@@ -236,6 +251,7 @@
                         id="patronymicCard"
                         type="text"
                         v-model.trim="editedWorker.patronymicCard"
+                        @change="changeData(editedWorker.patronymicCard, 'отчество держателя карты')"
                       >
                       <label class="active" for="surnameCard">Отчество Держателя Карты</label>
                     </div>
@@ -245,6 +261,7 @@
                         id="accountNumberCard"
                         type="text"
                         v-model.trim="editedWorker.accountNumberCard"
+                        @change="changeData(editedWorker.accountNumberCard, 'номер счёта')"
                       >
                       <label class="active" for="accountNumberCard">Номер Счёта</label>
                     </div>
@@ -254,6 +271,7 @@
                         class="browser-default editor-select"
                         id="bank"
                         v-model.trim="editedWorker.bank"
+                        @change="changeData(editedWorker.bank, 'банк')"
                       >
                         <option class="editor-option" value="СберБанк">СберБанк</option>
                         <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
@@ -278,6 +296,7 @@
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
+                              @change="changeData(editedWorker.city, 'город')"
                               v-model="editedWorker.city"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
@@ -293,6 +312,7 @@
                         id="homePhone"
                         type="text"
                         v-model.trim="editedWorker.homePhone"
+                        @change="changeData(editedWorker.homePhone, 'домашний телефон')"
                       >
                       <label class="active" for="homePhone">Телефон Домашний</label>
                     </div>
@@ -304,6 +324,7 @@
                         v-model.trim="editedWorker.mobilePhone"
                         v-mask="'+7 (###) ###-##-##'"
                         placeholder="+7 ( ) "
+                        @change="changeData(editedWorker.mobilePhone, 'мобильный телефон')"
                       >
                       <label class="active" for="mobilePhone">Телефон Мобильный</label>
                     </div>
@@ -318,6 +339,7 @@
                         id="accountNumber"
                         type="text"
                         v-model.trim="editedWorker.accountNumber"
+                        @change="changeData(editedWorker.accountNumber, 'учётный номер')"
                       >
                       <label class="active" for="accountNumber">Учётный номер</label>
                     </div>
@@ -327,6 +349,7 @@
                         id="previousWork"
                         type="text"
                         v-model.trim="editedWorker.previousWork"
+                        @change="changeData(editedWorker.previousWork, 'прежняя работа')"
                       >
                       <label class="active" for="previousWork">Прежняя Работа</label>
                     </div>
@@ -337,6 +360,7 @@
                         type="text"
                         maxlength="100"
                         v-model.trim="editedWorker.reasonComing"
+                        @change="changeData(editedWorker.reasonComing, 'почему пришёл к нам')"
                       >
                       <label class="active" for="reasonComing">Почему пришел к нам (кратко)</label>
                     </div>
@@ -346,6 +370,7 @@
                         id="professions"
                         type="text"
                         v-model.trim="editedWorker.professions"
+                        @change="changeData(editedWorker.professions, 'профессия')"
                       >
                       <label class="active" for="professions">Профессия</label>
                     </div>
@@ -354,7 +379,7 @@
                       <p class="right-margin-big">Ночная смена: </p>
                       <p class="right-margin-little">
                         <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.nightShift"/>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.nightShift" @change="changeData(editedWorker.nightShift, 'ночная схема')"/>
                           <span>Да</span>
                         </label>
                       </p>
@@ -370,13 +395,13 @@
                       <p class="right-margin-big">Проверка МВД: </p>
                       <p class="right-margin-little">
                         <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.checkMVD"/>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.checkMVD" />
                           <span>Да</span>
                         </label>
                       </p>
                       <p>
                         <label>
-                          <input type="radio" value="Нет" v-model.trim="editedWorker.checkMVD"/>
+                          <input type="radio" value="Нет" v-model.trim="editedWorker.checkMVD" @change="changeData(editedWorker.nightShift, 'проверка МВД')"/>
                           <span>Нет</span>
                         </label>
                       </p>
@@ -387,6 +412,7 @@
                         id="dateInterview"
                         type="date"
                         v-model.trim="editedWorker.dateInterview"
+                        @change="changeData(editedWorker.nightShift, 'дата собеседования')"
                       >
                       <label class="active" for="dateInterview">Дата Собеседования</label>
                     </div>
@@ -396,6 +422,7 @@
                         id="uniform"
                         type="text"
                         v-model.trim="editedWorker.uniform"
+                        @change="changeData(editedWorker.uniform, 'униформа')"
                       >
                       <label class="active" for="uniform">Униформа</label>
                     </div>
@@ -404,7 +431,7 @@
                       <p class="right-margin-big">Уволен: </p>
                       <p class="right-margin-little">
                         <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.fired"/>
+                          <input type="radio" value="Да" v-model.trim="editedWorker.fired" @change="changeData(editedWorker.fired, 'уволен')"/>
                           <span>Да</span>
                         </label>
                       </p>
@@ -440,7 +467,9 @@ export default {
   directives: { mask },
   data () {
     return {
-      editedWorker: ''
+      oldWorker: '',
+      editedWorker: '',
+      history: []
     }
   },
   computed: {
@@ -460,13 +489,18 @@ export default {
       'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
     ]),
 
+    changeData (newValue, data) {
+      this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] был изменён ${data} на ${newValue} сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+    },
+
     editorExit () {
       this.$router.push('/workers')
     },
 
     saveEditedWorker (worker) {
       try {
-        worker.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        worker.history.push(...this.history)
       } catch (e) { M.toast({ html: 'Внимание! Данный рабочий не поддерживает историю' }) }
 
       firebase.database().ref('/workers/' + worker.id).set(worker)

@@ -49,6 +49,7 @@
                        id="email"
                        type="text"
                        v-model="editedEmployee.email"
+                       @change="changeData(editedEmployee.email, 'почта')"
                      >
                    </div>
 
@@ -57,6 +58,7 @@
                        id="password"
                        type="text"
                        v-model="editedEmployee.password"
+                       @change="changeData(editedEmployee.password, 'пароль')"
                      >
                      <label for="password" class="active">Пароль</label>
                    </div>
@@ -64,6 +66,7 @@
                    <div class="input-field editor-input">
                      <select class="browser-default editor-select"
                              v-model="editedEmployee.access"
+                             @change="changeData(editedEmployee.access, 'доступ')"
                      >
                        <option class="editor-option" value="employee">Сотрудник</option>
                        <option class="editor-option" value="admin">Админ</option>
@@ -78,6 +81,7 @@
                      <input type="text"
                             id="duty"
                             v-model.trim="editedEmployee.duty"
+                            @change="changeData(editedEmployee.duty, 'должность')"
                      >
                      <label for="duty" class="active">Должность</label>
                    </div>
@@ -91,6 +95,7 @@
                      <input type="text"
                             id="name"
                             v-model.trim="editedEmployee.name"
+                            @change="changeData(editedEmployee.name, 'имя')"
                      >
                      <label for="name" class="active">Имя</label>
                    </div>
@@ -99,6 +104,7 @@
                      <input type="text"
                             id="surname"
                             v-model.trim="editedEmployee.surname"
+                            @change="changeData(editedEmployee.surname, 'фамилия')"
                      >
                      <label for="surname" class="active">Фамилия</label>
                    </div>
@@ -107,6 +113,7 @@
                      <input type="text"
                             id="patronymic"
                             v-model.trim="editedEmployee.patronymic"
+                            @change="changeData(editedEmployee.patronymic, 'отчество')"
                      >
                      <label for="patronymic" class="active">Отчество</label>
                    </div>
@@ -120,6 +127,7 @@
                    <div class="input-field editor-input">
                      <select class="browser-default editor-select"
                              v-model.trim="editedEmployee.city"
+                             @change="changeData(editedEmployee.city, 'город')"
                      >
                        <option class="editor-option" selected>Отсутствует</option>
                        <option class="editor-option" v-for="city of sites" :key="city.value">
@@ -133,6 +141,7 @@
                      <input type="tel"
                             id="homePhone"
                             v-model.trim="editedEmployee.homePhone"
+                            @change="changeData(editedEmployee.homePhone, 'домашний телефон')"
                      >
                      <label for="homePhone" class="active">Телефон Домашний</label>
                    </div>
@@ -143,6 +152,7 @@
                             v-model.trim="editedEmployee.mobilePhone"
                             v-mask="'+7 (###) ###-##-##'"
                             placeholder="+7 ( ) "
+                            @change="changeData(editedEmployee.mobilePhone, 'мобильный телефон')"
                      >
                      <label for="mobilePhone" class="active">Телефон Мобильный</label>
                    </div>
@@ -157,7 +167,7 @@
                      <p class="right-margin-big">Пол: </p>
                      <p class="right-margin-little">
                        <label>
-                         <input type="radio" value="Мужской" v-model.trim="editedEmployee.sex"/>
+                         <input type="radio" value="Мужской" v-model.trim="editedEmployee.sex" @change="changeData(editedEmployee.sex, 'пол')"/>
                          <span>Мужской</span>
                        </label>
                      </p>
@@ -201,96 +211,7 @@ export default {
       'authEmployee',
       'employees',
       'sites'
-    ]),
-
-    editedEmail: function () {
-      return this.editedEmployee.email
-    },
-
-    editedPassword: function () {
-      return this.editedEmployee.password
-    },
-
-    editedAccess: function () {
-      return this.editedEmployee.access
-    },
-
-    editedDuty: function () {
-      return this.editedEmployee.duty
-    },
-
-    editedName: function () {
-      return this.editedEmployee.name
-    },
-
-    editedSurname: function () {
-      return this.editedEmployee.surname
-    },
-
-    editedCity: function () {
-      return this.editedEmployee.city
-    },
-
-    editedHomePhone: function () {
-      return this.editedEmployee.homePhone
-    },
-
-    editedMobilePhone: function () {
-      return this.editedEmployee.mobilePhone
-    },
-
-    editedPatronymic: function () {
-      return this.editedEmployee.patronymic
-    },
-
-    editedSex: function () {
-      return this.editedEmployee.sex
-    }
-  },
-  watch: {
-    editedEmail: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'почта')
-    },
-
-    editedPassword: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'пароль')
-    },
-
-    editedAccess: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'доступ')
-    },
-
-    editedDuty: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'должность')
-    },
-
-    editedName: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'имя')
-    },
-
-    editedSurname: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'фамилия')
-    },
-
-    editedPatronymic: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'отчество')
-    },
-
-    editedCity: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'город')
-    },
-
-    editedHomePhone: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'домашний телефон')
-    },
-
-    editedMobilePhone: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'мобильный телефон')
-    },
-
-    editedSex: function (newQuestion, oldQuestion) {
-      this.changeData(newQuestion, oldQuestion, 'пол')
-    }
+    ])
   },
   methods: {
     ...mapMutations([
@@ -299,10 +220,8 @@ export default {
       'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
 
-    changeData (newValue, oldValue, data) {
-      if (oldValue !== undefined) {
-        this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] был изменён ${data} с ${oldValue} на ${newValue} сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
-      }
+    changeData (newValue, data) {
+      this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] был изменён ${data} на ${newValue} сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
     },
 
     editorExit () {
