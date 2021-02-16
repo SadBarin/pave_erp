@@ -75,6 +75,12 @@ const router = new VueRouter({
       meta: { layout: 'main' },
       component: () => import('../components/workers/HistoryWorker')
     },
+    {
+      path: '/workers/calendar/worker:id',
+      name: 'workerCalendar',
+      meta: { layout: 'main' },
+      component: () => import('../components/workers/CalendarWorker')
+    },
 
     {
       path: '/settings',

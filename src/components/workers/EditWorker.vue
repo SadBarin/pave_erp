@@ -490,7 +490,14 @@ export default {
     ]),
 
     changeData (newValue, data) {
-      this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] был изменён ${data} на ${newValue} сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+      this.history.push({
+        date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+        info: `был изменён ${data} на "${newValue}" сотрудником`,
+        employee: {
+          name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+          id: this.authEmployee.id
+        }
+      })
     },
 
     editorExit () {
@@ -499,7 +506,14 @@ export default {
 
     saveEditedWorker (worker) {
       try {
-        this.history.push(`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Работник редактирован сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`)
+        this.history.push({
+          date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+          info: 'Работник сохранён сотрудником',
+          employee: {
+            name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+            id: this.authEmployee.id
+          }
+        })
         worker.history.push(...this.history)
       } catch (e) { M.toast({ html: 'Внимание! Данный рабочий не поддерживает историю' }) }
 

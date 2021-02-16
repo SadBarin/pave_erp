@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="page-title flex-between-center margin-fix">
+    <div class="page-title flex-between-center">
       <h3 class="right-margin-big">История редактирования рабочего<br>"{{worker.surname}} {{worker.name}}"</h3>
 
       <div class="editor-btns">
@@ -19,8 +19,20 @@
     </div>
 
     <section>
-      <div v-for="(moment, i) of worker.history" :key="moment">
-        <p><b>{{i}}:</b> {{moment}}</p>
+      <div v-for="(moment, i) of worker.history" :key="i">
+        <div class="history-line">
+          <p class="history-index">{{i}}:</p>
+          <div class="history-moment">
+            <span class="history-moment-date">{{moment.date}}</span>
+            <p class="history-moment-text">{{moment.info}}</p>
+            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                         title="Перейти к сотруднику"
+                         :to="{name : 'employeeEdit', params: {id: moment.employee.id}}"
+            >
+              {{moment.employee.name}}
+            </router-link>
+          </div>
+        </div>
       </div>
     </section>
   </div>

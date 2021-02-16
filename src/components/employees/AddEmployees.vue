@@ -97,7 +97,14 @@ export default {
           settings: {
             autoUpdate: 5000
           },
-          history: [`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Сотрудник был создан сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`]
+          history: [{
+            date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+            info: 'Сотрудник создан сотрудником ',
+            employee: {
+              name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+              id: this.authEmployee.id
+            }
+          }]
         }
 
         this.$emit('add-employee', newEmployee)

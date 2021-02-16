@@ -103,7 +103,15 @@ export default {
           fired: 'Нет',
           edited: false,
           editedCount: 0,
-          history: [`[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}] Рабочий был создан сотрудником ${this.authEmployee.surname} ${this.authEmployee.name}`]
+          history: [{
+            date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+            info: 'Работник создан сотрудником ',
+            employee: {
+              name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+              id: this.authEmployee.id
+            }
+          }],
+          calendar: [{}]
         }
 
         this.$emit('add-worker', newWorker)

@@ -46,6 +46,13 @@
             </router-link>
 
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                         title="Календарь"
+                         :to="{name : 'workerCalendar', params: {id: worker.id}}"
+            >
+              <i class="material-icons">date_range</i>
+            </router-link>
+
+            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                          title="История редактирования"
                          :to="{name : 'workerHistory', params: {id: worker.id}}"
             >

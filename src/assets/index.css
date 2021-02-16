@@ -297,6 +297,7 @@ section {
 
 .page-title {
   height: var(--page-title-height);
+  margin-bottom: 1rem;
 }
 
 #app .btn-page-title {
@@ -391,6 +392,43 @@ section {
 
 .editor-btns .btn:first-child {
   margin-right: 1rem;
+}
+
+
+
+/* ~~~~~~~ HISTORY ~~~~~~~ */
+
+#app .history-line {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+}
+
+#app .history-line p {
+  margin: 0;
+}
+
+#app .history-moment {
+  display: flex;
+  align-items: center;
+}
+
+#app .history-moment-date {
+  opacity: 0.5;
+  margin-right: 0.5rem !important;
+}
+
+#app .history-moment-text {
+  margin-right: 0.5rem !important;
+}
+
+#app .history-index {
+  box-sizing: border-box;
+
+  background: #d2d2d2;
+  opacity: 0.5;
+
+  margin-right: 0.5rem !important;
+  padding: 0rem 1rem;
 }
 
 
