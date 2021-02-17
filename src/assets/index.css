@@ -10,6 +10,8 @@
 
 :root {
   --main-blue: hsl(208, 79%, 51%);
+  --hover-color: hsla(277, 88%, 36%, 0.5);
+  --hover-bg: hsla(208, 82%, 72%, 0.2);
   --padding-height: 2rem;
   --padding-width: 1rem;
   --sidebar-width: 12rem;
@@ -38,7 +40,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(202, 79%, 51%);
+  background: var(--hover-color);
 }
 
 #app .material-icons {
@@ -58,10 +60,19 @@
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
 
-  height: inherit;
+  height: 0px;
   min-height: 1rem;
   margin-right: 0.5rem;
   vertical-align: text-bottom;
+}
+
+* ::selection {
+  color: black;
+  background: var(--hover-bg);
+}
+
+#app .material-icons:hover {
+  color: var(--hover-color);
 }
 
 #app .big-material-icons {
@@ -79,6 +90,10 @@
 #app a {
   font-size: var(--font-size);
   cursor: pointer;
+}
+
+#app a:hover {
+  color: var(--hover-color);
 }
 
 #app span {
@@ -158,6 +173,14 @@
   align-items: center;
 }
 
+#app .flex-top-center {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 #app .flex-column-center {
   display: flex;
   justify-content: center;
@@ -198,8 +221,8 @@
   margin-top: 1rem;
 }
 
-#app .top-margin-top{
-  margin-top: 2rem;
+#app .big-margin-bottom{
+  margin-bottom: 2rem;
 }
 
 #app .right-margin-big {
@@ -226,6 +249,11 @@ html, body {
 }
 
 #app .sidenav {
+  /*color: white !important;*/
+
+  /*background: var(--hover-bg);*/
+  /*backdrop-filter: blur(13px);*/
+
   width: var(--sidebar-width);
   height: 100%;
   padding: var(--padding-height) 0rem;
@@ -246,17 +274,35 @@ html, body {
 
 #app .sidenav li {
   width: inherit;
+  color: var(--main-blue);
+}
+
+#app .sidenav li > a {
+  color: var(--main-blue);
+}
+
+#app .sidenav li > a .material-icons{
+  color: var(--main-blue);
 }
 
 #app .sidenav li > a:hover {
-  color: var(--main-blue) !important;
+  color: var(--hover-color) !important;
+  background: transparent;
+}
+
+#app .sidenav li > a:hover .material-icons {
+  color: var(--hover-color) !important;
 }
 
 #app .sidenav li > a {
   border-radius: var(--border-radius);
 
-  width: inherit;
+  width: fit-content;
+  height: 2.5rem;
   padding: 0 0 0 var(--padding-width);
+
+  display: flex;
+  align-items: center;
 }
 
 .sidenav.open {
@@ -296,7 +342,7 @@ section {
 }
 
 .page-title {
-  height: var(--page-title-height);
+  max-height: var(--page-title-height);
   margin-bottom: 1rem;
 }
 
@@ -317,6 +363,20 @@ section {
 
 #app .col {
   padding: 0rem;
+}
+
+#app .btn-hover {
+  user-select: none;
+  transition: none;
+}
+
+#app .btn-hover:hover {
+  background: var(--hover-color) !important;
+  color: white;
+}
+
+#app .btn-hover:hover .material-icons {
+  color: white;
 }
 
 
@@ -351,8 +411,22 @@ section {
 
 /* ~~~~~~~ EDITOR ~~~~~~~ */
 
-.editor-card {
+#app .editor-card {
   width: 100%;
+}
+
+#app .editor-card h4 {
+  display: flex;
+  align-items: center;
+}
+
+#app .editor-card p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#app .editor-card .material-icons {
+  margin: 0 1rem 0 0;
 }
 
 #app .editor-input {
@@ -399,8 +473,13 @@ section {
 /* ~~~~~~~ HISTORY ~~~~~~~ */
 
 #app .history-line {
+  border-radius: var(--border-radius);
   display: grid;
   grid-template-columns: 4rem 1fr;
+}
+
+#app .history-line:hover {
+  background: var(--hover-bg);
 }
 
 #app .history-line p {
@@ -424,7 +503,7 @@ section {
 #app .history-index {
   box-sizing: border-box;
 
-  background: #d2d2d2;
+  background: var(--hover-bg);
   opacity: 0.5;
 
   margin-right: 0.5rem !important;
@@ -465,7 +544,7 @@ section {
 }
 
 #app tr:hover:not(:first-child) {
-  background: hsla(0, 0%, 81%, 0.3);
+  background: var(--hover-bg);
 
   border-radius: var(--border-radius);
 }
@@ -530,6 +609,10 @@ section {
   margin: 0rem;
 }
 
+#app .btn-floating i {
+  color: var(--main-blue);
+}
+
 
 
 /* ~~~~~~~ INPUT and TEXTAREA ~~~~~~~*/
@@ -565,13 +648,13 @@ section {
 
 #app .input-field input:focus + label,
 #app .materialize-textarea:focus + label{
-  color: var(--main-blue);
+  color: var(--hover-color);
 }
 
 #app .input-field input:focus,
 #app .materialize-textarea:focus{
-  border-bottom: 1px solid var(--main-blue);
-  box-shadow: 0 1px 0 0 var(--main-blue);
+  border-bottom: 1px solid var(--hover-color);
+  box-shadow: 0 1px 0 0 var(--hover-color);
 }
 
 

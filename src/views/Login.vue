@@ -49,7 +49,7 @@
     </div>
 
     <div class="card-action">
-      <button v-if="!loading" type="submit" class="btn-flat waves-effect waves-light auth-submit blue darken-1 white-text">
+      <button v-if="!loading" type="submit" class="btn-flat btn-hover blue darken-1 white-text">
         <i class="material-icons">arrow_forward</i> Войти
       </button>
 
@@ -192,5 +192,13 @@ export default {
     height: 32px;
     opacity: 0;
   }
+}
+
+.auth-card {
+  background: hsla(0, 0%, 100%, 0.7);
+}
+
+.auth-card .card-action {
+  background: transparent;
 }
 </style>

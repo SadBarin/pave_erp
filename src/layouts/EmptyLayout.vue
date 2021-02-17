@@ -1,6 +1,6 @@
 <template>
   <transition>
-    <div class="blue darken-1 empty-layout" id="blue-layout">
+    <div class="empty-layout" id="blue-layout">
         <router-view />
     </div>
   </transition>
@@ -14,6 +14,8 @@ export default {
 
 <style scoped>
   .empty-layout {
+    background: var(--hover-bg);
+
     height: 100vh;
 
     display: flex;

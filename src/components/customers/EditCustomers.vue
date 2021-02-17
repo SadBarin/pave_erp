@@ -19,14 +19,14 @@
 
       <div class="editor-btns">
         <button
-          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          class="btn editor-btn btn-hover auth-submit blue darken-1"
           v-on:click="saveEditedCustomer(editedCustomer)"
         >
           <i class="material-icons">exit_to_app</i>Сохранить и выйти
         </button>
 
         <button
-          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
+          class="btn editor-btn btn-hover auth-submit blue darken-1"
           v-on:click.prevent="popupVisibility"
         >
           <i class="material-icons">business_center</i> К Клиентам

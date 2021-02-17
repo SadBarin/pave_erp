@@ -7,12 +7,11 @@
     </div>
 
     <div class="info-content">
+<!--      <div>-->
+<!--        <h5>Локальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются только для пользователя"><i class="material-icons">info</i></a></h5>-->
+<!--        <h6 title="Влияет на производительность системы.">Автообновление страниц через: <span><input class="info-input" type="number"> мс.</span></h6>-->
+<!--      </div>-->
       <div>
-        <h5>Локальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются только для пользователя"><i class="material-icons">info</i></a></h5>
-        <h6 title="Влияет на производительность системы.">Автообновление страниц через: <span><input class="info-input" type="number"> мс.</span></h6>
-      </div>
-      <div>
-        <h5>Глобальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются для всей системы"><i class="material-icons">info</i></a></h5>
         <h6>
           <router-link class="pointer" to="/sites">
             <i class="material-icons">location_city</i>
@@ -54,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  h3 {
+    margin-bottom: 0px !important;
+  }
+</style>

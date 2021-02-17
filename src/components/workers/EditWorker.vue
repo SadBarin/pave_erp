@@ -16,22 +16,7 @@
 
     <div class="page-title flex-between-center">
       <h3>Редактор рабочего <br> "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
-
-      <div class="editor-btns">
-        <button
-          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          @click="saveEditedWorker(editedWorker)"
-        >
-          <i class="material-icons">exit_to_app</i>Сохранить и выйти
-        </button>
-
-        <button
-          class="btn editor-btn waves-effect waves-light auth-submit blue darken-1"
-          @click.prevent="popupVisibility"
-        >
-          <i class="material-icons">transfer_within_a_station</i> К Рабочим
-        </button>
-      </div>
+      <NavWorker :worker="editedWorker"/>
     </div>
 
     <section>
@@ -43,7 +28,7 @@
               <div class="form-content">
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">account_box</i> ФИО</h4>
+                    <h4 class="card-title flex-start-center"><i class="material-icons">account_box</i> ФИО</h4>
 
                     <div class="input-field editor-input flex-column-center">
                       <button id="upload_widget" @click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
@@ -100,7 +85,7 @@
                       <p>Возраст: {{editedWorker.age}} лет</p>
                     </div>
 
-                    <div class="editor-input flex-start-center">
+                    <div class="input-field editor-input flex-start-center">
                       <p class="right-margin-big">Пол: </p>
                       <p class="right-margin-little">
                         <label>
@@ -375,7 +360,7 @@
                       <label class="active" for="professions">Профессия</label>
                     </div>
 
-                    <div class="editor-input flex-start-center">
+                    <div class="input-field editor-input flex-start-center">
                       <p class="right-margin-big">Ночная смена: </p>
                       <p class="right-margin-little">
                         <label>
@@ -391,7 +376,7 @@
                       </p>
                     </div>
 
-                    <div class="editor-input flex-start-center">
+                    <div class="input-field editor-input flex-start-center">
                       <p class="right-margin-big">Проверка МВД: </p>
                       <p class="right-margin-little">
                         <label>
@@ -427,7 +412,7 @@
                       <label class="active" for="uniform">Униформа</label>
                     </div>
 
-                    <div class="editor-input flex-start-center">
+                    <div class="input-field editor-input flex-start-center">
                       <p class="right-margin-big">Уволен: </p>
                       <p class="right-margin-little">
                         <label>
@@ -456,6 +441,7 @@
 
 <script>
 import M from 'materialize-css'
+import NavWorker from '@/components/workers/NavWorker'
 import { mask } from 'vue-the-mask'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
@@ -463,6 +449,7 @@ import firebase from 'firebase/app'
 
 export default {
   name: 'EditorWorkers',
+  components: { NavWorker },
   mixins: [popupMixin],
   directives: { mask },
   data () {

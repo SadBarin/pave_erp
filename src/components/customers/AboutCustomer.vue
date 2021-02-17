@@ -4,13 +4,13 @@
       <h3 class="title-clip">Информация о клиенте <br> "{{customer.name}}"</h3>
 
       <div class="editor-btns">
-        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
+        <router-link class="btn btn-hover pointer blue darken-1"
                      :to="{name : 'customerEdit', params: {id: customer.id}}"
         >
           <i class="material-icons">create</i> В редактор
         </router-link>
 
-        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
+        <router-link class="btn btn-hover pointer blue darken-1"
                      to="/customers"
         >
           <i class="material-icons">business_center</i> К Клиентам
@@ -20,13 +20,13 @@
 
     <section class="info-content">
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">business_center</i> Договоры</h5>
+        <h5 class="flex-start-center"><i class="material-icons">business_center</i> Договоры</h5>
         <h6>Номер договора: <span>{{customer.contractNumber}}</span></h6>
         <h6>Дата договора: <span>{{customer.contractDate}}</span></h6>
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">local_phone</i> Контакты</h5>
+        <h5 class="flex-start-center"><i class="material-icons">local_phone</i> Контакты</h5>
         <h6>Номер: <span><a :href="'tel:' + customer.number">{{customer.number}}</a></span></h6>
         <h6>Факс: <span>{{customer.fax}}</span></h6>
         <h6>Почта: <span><a :href="'mailto:' + customer.email">{{customer.email}}</a></span></h6>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">assessment</i> Системная информация</h5>
+        <h5 class="flex-start-center"><i class="material-icons">assessment</i> Системная информация</h5>
         <h6>Наименование: <span>{{customer.name}}</span></h6>
         <h6>Примечание: <span>{{customer.note}}</span></h6>
         <h6>Менеджер: <span>{{customer.manager}}</span></h6>

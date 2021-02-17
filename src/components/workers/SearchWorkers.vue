@@ -4,7 +4,7 @@
       <h3>Поиск рабочих</h3>
 
       <button
-        class="btn waves-effect waves-light auth-submit blue darken-1"
+        class="btn btn-hover blue darken-1"
         @click="searchAll"
       >
         <i class="material-icons">search</i> Поиск

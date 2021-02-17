@@ -18,8 +18,8 @@
     </transition>
 
     <div class="col s12">
-      <div class="card-panel blue darken-1 white-text">
-        <div class="card-content dark-text card-line">
+      <div class="card-panel black-text">
+        <div class="card-content card-line">
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.name}}</h6>
             <p class="card-report"
@@ -29,13 +29,13 @@
             </p>
           </div>
           <div class="flex-center">
-            <router-link class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+            <router-link class="btn-floating transparent blue-text text-darken-1"
                     title="Редактировать" :to="{name : 'cityEdit', params: {id: city.id}}"
             >
               <i class="material-icons">create</i>
             </router-link>
 
-            <button class="btn-floating transparent darken-2 waves-effect waves-light auth-submit white-text"
+            <button class="btn-floating transparent blue-text text-darken-1"
                     title="Удалить"
                     v-if="!city.edited"
                     @click="popupVisibility"
@@ -66,6 +66,11 @@ export default {
 </script>
 
 <style scoped>
+  #app .card-panel {
+    padding: 0 0 0 0.5rem;
+    background: var(--hover-bg);
+  }
+
   .bounce-enter-active {
     animation: bounce-in .5s;
   }

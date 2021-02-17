@@ -12,14 +12,14 @@
 
       <div class="card-action btns-popup flex-between-center">
         <button
-          class="btn-flat right-margin-little white-text waves-effect waves-light auth-submit blue darken-1"
+          class="btn-flat right-margin-little white-text btn-hover blue darken-1"
           @click.prevent="$emit('yes'); callToast()"
         >
           <i class="material-icons">check</i> Да
         </button>
 
         <button
-          class="btn-flat white-text waves-effect waves-light auth-submit blue darken-1"
+          class="btn-flat white-text waves-effect btn-hover blue darken-1"
           @click.prevent="$emit('no')"
         >
           <i class="material-icons">clear</i> Нет
@@ -46,9 +46,9 @@ export default {
 
 <style scoped>
   #app .popup-overlay {
-    background: hsla(0, 0%, 100%, 0.5);
+    background: var(--hover-bg);
     backdrop-filter: blur(3px);
-    animation: none !important;
+    /*animation: none !important;*/
     width: 100vw;
     height: 100vh;
 
@@ -60,10 +60,14 @@ export default {
   }
 
   #app .popup {
-    border: 1px solid;
+    background: hsla(0, 0%, 100%, 0.7);
     text-align: center;
 
     width: 22rem;
+  }
+
+  #app .card-action {
+    background: transparent;
   }
 
   #app .popup .card-title {

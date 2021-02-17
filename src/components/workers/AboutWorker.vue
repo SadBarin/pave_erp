@@ -2,32 +2,19 @@
   <div>
     <div class="page-title flex-between-center">
       <h3 class="title-clip">Информация о рабочем <br> "{{worker.surname}} {{worker.name}}"</h3>
-
-      <div class="editor-btns">
-        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
-                     :to="{name : 'workerEdit', params: {id: worker.id}}"
-        >
-          <i class="material-icons">create</i> В редактор
-        </router-link>
-
-        <router-link class="btn waves-effect waves-blue pointer blue darken-1"
-                     to="/workers"
-        >
-          <i class="material-icons">transfer_within_a_station</i> К Рабочим
-        </router-link>
-      </div>
+      <NavWorker :worker="worker"/>
     </div>
 
     <section class="info-content">
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">account_box</i> ФИО</h5>
+        <h5 class="flex-start-center"><i class="material-icons">account_box</i> ФИО</h5>
         <h6>Имя: <span>{{worker.name}}</span></h6>
         <h6>Фамилия: <span>{{worker.surname}}</span></h6>
         <h6>Отчество: <span>{{worker.patronymic}}</span></h6>
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">assignment</i> Личные данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">assignment</i> Личные данные</h5>
         <h6>День рождение: <span>{{worker.birthday}}</span></h6>
         <h6>Возраст: <span>{{worker.age}}</span></h6>
         <h6>Пол: <span>{{worker.sex}}</span></h6>
@@ -38,7 +25,7 @@
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">book</i> Паспортные данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">book</i> Паспортные данные</h5>
         <h6 v-show="worker.UploadPassport !== undefined">Скан: <span><a v-bind:href="worker.UploadPassport" target="_blank">Открыть паспорт</a></span></h6>
         <h6>Номер паспорта: <span>{{worker.passportID}}</span></h6>
         <h6>Дата выдачи паспорта: <span>{{worker.passportDate}}</span></h6>
@@ -48,7 +35,7 @@
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">account_balance_wallet</i> Банковские данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">account_balance_wallet</i> Банковские данные</h5>
         <h6>Имя держателя карты: <span>{{worker.nameCard}}</span></h6>
         <h6>Фамилия держателя карты: <span>{{worker.surnameCard}}</span></h6>
         <h6>Отчество держателя карты: <span>{{worker.patronymicCard}}</span></h6>
@@ -57,14 +44,14 @@
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">local_phone</i> Контактные данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">local_phone</i> Контактные данные</h5>
         <h6>Город: <span>{{worker.city}}</span></h6>
         <h6>Мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></span></h6>
         <h6>Домашний телефон: <span>{{worker.homePhone}}</span></h6>
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">rate_review</i> Рабочие данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">rate_review</i> Рабочие данные</h5>
         <h6>Учётный номер: <span>{{worker.accountNumber}}</span></h6>
         <h6>Прежняя работа: <span>{{worker.previousWork}}</span></h6>
         <h6>Почему пришёл к нам: <span>{{worker.reasonComing}}</span></h6>
@@ -77,14 +64,29 @@
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">assessment</i> Системные данные</h5>
+        <h5 class="flex-start-center"><i class="material-icons">assessment</i> Системные данные</h5>
         <h6>Идентификационный номер: <span>{{worker.id}}</span></h6>
         <h6>Сколько раз редактировался: <span>{{worker.editedCount}}</span></h6>
-        <h6>История редактирования: <span><a href="#"> Просмотреть</a></span></h6>
+        <h6>История редактирования:
+          <span>
+            <router-link title="История редактирования"
+                         :to="{name : 'workerHistory', params: {id: worker.id}}">
+            Просмотреть
+            </router-link>
+          </span>
+        </h6>
+        <h6>Календарь работника:
+          <span>
+            <router-link title="Календарь"
+                         :to="{name : 'workerCalendar', params: {id: worker.id}}">
+              Просмотреть
+            </router-link>
+        </span>
+        </h6>
       </div>
 
       <div class="margin-fix w35rem">
-        <h5><i class="material-icons">photo</i> Фото рабочего</h5>
+        <h5 class="flex-start-center big-margin-bottom"><i class="material-icons">photo</i> Фото рабочего</h5>
         <p v-show="worker.UploadImage === undefined">Загрузите фото рабочего в редакторе</p>
         <img v-bind:src="worker.UploadImage" width="200rem">
       </div>
@@ -93,10 +95,12 @@
 </template>
 
 <script>
+import NavWorker from '@/components/workers/NavWorker'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AboutWorker',
+  components: { NavWorker },
   data () {
     return {
       worker: ''

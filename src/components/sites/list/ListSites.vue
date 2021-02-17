@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
   .city {
-    width: 48%;
+    width: 32%;
     height: fit-content;
     margin-left: 0;
   }

@@ -14,7 +14,7 @@
       <div class="sidenav-menu">
         <div class="navbar-left">
           <button
-            class="btn transparent black-text"
+            class="btn transparent blue-text text-darken-1"
             @click.prevent="isOpen = !isOpen"
           >
             <i class="material-icons">menu</i>
@@ -31,12 +31,6 @@
                 Рабочие
               </router-link>
             </li>
-            <!--          <li>-->
-            <!--            <router-link class="waves-effect waves-blue pointer" to="/workers/search">-->
-            <!--              <i class="material-icons">search</i>-->
-            <!--              Поиск рабочих-->
-            <!--            </router-link>-->
-            <!--          </li>-->
             <li>
               <router-link class="pointer" to="/customers">
                 <i class="material-icons">business_center</i>
@@ -54,7 +48,7 @@
 
         <div class="sidenav-content sidenav-bottom">
           <button
-            class="btn transparent black-text"
+            class="btn transparent blue-text darken-1"
             @click="popupVisibility"
           >
             <i class="material-icons">exit_to_app</i>
@@ -108,3 +102,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #app .btn.transparent:hover {
+    color: var(--hover-color) !important;
+    background: transparent;
+  }
+
+  #app .btn.transparent:hover .material-icons {
+    color: var(--hover-color) !important;
+  }
+</style>
