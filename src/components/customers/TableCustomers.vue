@@ -57,7 +57,7 @@
           <div v-else title="Сотрудничество прервано" class="circle red darken-1"></div>
         </td>
         <td>
-          <div class="flex-center">
+          <div class="flex-center btns-collection">
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                          title="Просмотреть"
                          :to="{name : 'customerAbout', params: {id: customer.id}}"
@@ -110,11 +110,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .circle {
-    width: 1rem;
-    height: 1rem;
-    margin: 0 auto;
-  }
-</style>

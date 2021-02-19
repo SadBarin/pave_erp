@@ -18,7 +18,7 @@
     </transition>
 
     <div class="col s12">
-      <div class="card-panel black-text">
+      <div class="card-panel grey-text text-darken-3">
         <div class="card-content card-line">
           <div class="info-container">
             <h6><i class="material-icons">location_city</i> Город: {{city.name}}</h6>
@@ -28,14 +28,14 @@
               <i class="material-icons">report</i> Карточка сейчас редактируется другим сотрудником
             </p>
           </div>
-          <div class="flex-center">
-            <router-link class="btn-floating transparent blue-text text-darken-1"
+          <div class="flex-center btns-collection">
+            <router-link class="btn-transparent transparent blue-text text-darken-1"
                     title="Редактировать" :to="{name : 'cityEdit', params: {id: city.id}}"
             >
               <i class="material-icons">create</i>
             </router-link>
 
-            <button class="btn-floating transparent blue-text text-darken-1"
+            <button class="btn-transparent transparent blue-text text-darken-1"
                     title="Удалить"
                     v-if="!city.edited"
                     @click="popupVisibility"
@@ -67,7 +67,10 @@ export default {
 
 <style scoped>
   #app .card-panel {
-    padding: 0 0 0 0.5rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  #app .card-panel:hover {
     background: var(--hover-bg);
   }
 

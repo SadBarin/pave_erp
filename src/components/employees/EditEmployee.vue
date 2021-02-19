@@ -51,6 +51,7 @@
                        v-model="editedEmployee.email"
                        @change="changeData(editedEmployee.email, 'почта')"
                      >
+                     <label for="email" class="active">Почта</label>
                    </div>
 
                    <div class="input-field editor-input">
@@ -163,7 +164,7 @@
                  <div class="card-content flex-column-center">
                    <h4 class="card-title"><i class="material-icons">account_box</i>Личные данные</h4>
 
-                   <div class="editor-input flex-start-center">
+                   <div class="input-field radio-field editor-input flex-start-center">
                      <p class="right-margin-big">Пол: </p>
                      <p class="right-margin-little">
                        <label>

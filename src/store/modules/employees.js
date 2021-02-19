@@ -20,5 +20,17 @@ export default {
         state.employees = JSON.parse(localStorage.getItem('employees'))
       })
     }
+  },
+  actions: {
+    async registerEmployees ({ commit }, { email, password }) {
+      // eslint-disable-next-line no-unused-vars
+      try {
+        const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        return user.user.uid
+      } catch (e) {
+        // eslint-disable-next-line no-undef
+        M.toast({ html: 'Сотрудник уже существует!' })
+      }
+    }
   }
 }

@@ -71,7 +71,7 @@ export default {
         const newWorker = {
           id: Date.now(),
           name: 'Новый',
-          surname: 'Рабочий',
+          surname: 'Рабочий ',
           patronymic: '',
           accountNumber: Date.now(),
           nameCard: 'Новый',

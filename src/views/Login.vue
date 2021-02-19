@@ -53,8 +53,8 @@
         <i class="material-icons">arrow_forward</i> Войти
       </button>
 
-      <div v-else class="btn-flat waves-effect waves-light auth-submit grey darken-1 white-text">
-        Входим... <div class="lds-ripple"><div></div><div></div></div>
+      <div v-else class="btn-flat btn-loading darken-1 white-text">
+        Входим... <div class="ripple"><div></div><div></div></div>
       </div>
     </div>
   </form>
@@ -70,8 +70,8 @@ export default {
 
   data () {
     return {
-      email: 'admin@admin.com',
-      password: 'admin2021best',
+      email: 'root@root.com',
+      password: 'bb%LWz%*W3',
       loading: false
     }
   },
@@ -134,64 +134,6 @@ export default {
 <style>
 #app .auth-card {
   width: 30rem;
-}
-
-.flip-enter-active {
-  animation: fade-in .5s;
-}
-.flip-leave-active {
-  animation: fade-in .5s reverse;
-}
-
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.lds-ripple {
-  display: inline-block;
-  position: relative;
-  width: 32px;
-  height: 32px;
-  margin-left: 1rem;
-}
-.lds-ripple div {
-  position: absolute;
-  border: 4px solid #fff;
-  opacity: 1;
-  border-radius: 50%;
-  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-.lds-ripple div:nth-child(2) {
-  animation-delay: -0.5s;
-}
-@keyframes lds-ripple {
-  0% {
-    top: 16px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    opacity: 1;
-  }
-  100% {
-    top: 0px;
-    left: 0px;
-    width: 32px;
-    height: 32px;
-    opacity: 0;
-  }
 }
 
 .auth-card {

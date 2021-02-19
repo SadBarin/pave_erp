@@ -94,6 +94,8 @@ export default {
     }
   },
   mounted () {
+    console.log('В систему вошёл: ', firebase.auth())
+
     if (firebase.auth().currentUser === null) {
       this.$router.push('/')
       // eslint-disable-next-line no-undef

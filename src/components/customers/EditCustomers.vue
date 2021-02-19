@@ -157,7 +157,7 @@
                       <label class="active" for="manager">Менеджер</label>
                     </div>
 
-                    <div class="editor-input flex-start-center">
+                    <div class="input-field radio-field editor-input flex-start-center">
                       <p class="right-margin-big">Статус: </p>
                       <p class="right-margin-little">
                         <label>

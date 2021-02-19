@@ -35,7 +35,7 @@
 
 <script>
 import { email, required } from 'vuelidate/lib/validators'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AddCardEmployees',
@@ -55,6 +55,10 @@ export default {
     email: { email, required }
   },
   methods: {
+    ...mapActions([
+      'registerEmployees'
+    ]),
+
     getPassword () {
       let password = ''
       const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!№;%:?*()@_+='
@@ -78,7 +82,7 @@ export default {
     //   }
     // },
 
-    createEmployee () {
+    async createEmployee () {
       if (this.email.trim() && !this.coincidence) {
         // Body New Employee
         const newEmployee = {
@@ -108,6 +112,7 @@ export default {
         }
 
         this.$emit('add-employee', newEmployee)
+
         this.email = ''
 
         // this.$router.push(`/employees/edit/employee${newEmployee.id}`)

@@ -31,7 +31,7 @@
 <script>
 import TableEmployees from '@/components/employees/TableEmployees'
 import AddCardEmployees from '@/components/employees/AddEmployees'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
@@ -53,6 +53,10 @@ export default {
       'SET_EMPLOYEES_FROM_SERVER'
     ]),
 
+    ...mapActions([
+      'registerEmployees'
+    ]),
+
     removeEmployee (id) {
       firebase.database().ref('/employees/' + id).remove()
         .then(() => {
@@ -61,7 +65,14 @@ export default {
         })
     },
 
-    addEmployee (employee) {
+    async addEmployee (employee) {
+      const regData = {
+        email: employee.email,
+        password: employee.password
+      }
+
+      employee.id = await this.registerEmployees(regData)
+
       firebase.database().ref('/employees/' + employee.id).set(employee)
         .then(() => {
           this.SET_EMPLOYEES_FROM_SERVER()

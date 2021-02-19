@@ -32,15 +32,19 @@
         <td>{{worker.name}}</td>
         <td>{{worker.patronymic}}</td>
         <td>{{worker.age}}</td>
-        <td>{{worker.medicalBook}}</td>
+        <td>
+          <div v-if="worker.medicalBookStatus === 'Просрочена'" class="red-text darken-1">{{worker.medicalBookStatus}}</div>
+          <div v-else>{{worker.medicalBookStatus}}</div>
+        </td>
         <td>{{worker.city}}</td>
         <td><a :href="'tel:' + worker.mobilePhone" title="Позвонить">{{worker.mobilePhone}}</a></td>
         <td>{{worker.professions}}</td>
         <td>
-          <div class="flex-center">
+          <div class="flex-center btns-collection" v-if="worker">
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                     title="Просмотреть"
-                    :to="{name : 'workerAbout', params: {id: worker.id}}"
+                     v-if="worker"
+                    :to="{name: 'workerAbout', params: {id: worker.id}}"
             >
               <i class="material-icons">remove_red_eye</i>
             </router-link>
@@ -101,9 +105,6 @@ export default {
       this.$emit('remove-worker', worker.id)
       this.popupHidden()
     }
-  },
-  mounted () {
-    console.log('Workers for:', this.workers)
   }
 }
 </script>

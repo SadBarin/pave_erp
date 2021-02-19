@@ -52,7 +52,7 @@
         </div>
       </td>
       <td>
-        <div class="flex-center">
+        <div class="flex-center btns-collection">
           <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                        title="История редактирования"
                        :to="{name : 'employeeHistory', params: {id: employee.id}}"

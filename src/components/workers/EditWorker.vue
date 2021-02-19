@@ -16,7 +16,7 @@
 
     <div class="page-title flex-between-center">
       <h3>Редактор рабочего <br> "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
-      <NavWorker :worker="editedWorker"/>
+      <NavWorker :worker="editedWorker" @save-worker="saveEditedWorker(editedWorker)"/>
     </div>
 
     <section>
@@ -79,13 +79,13 @@
                         id="birthday"
                         type="date"
                         v-model.trim="editedWorker.birthday"
-                        @change="changeData(editedWorker.birthday, 'день рождение')"
+                        @change="ageCalc(), changeData(editedWorker.birthday, 'день рождение')"
                       >
                       <label class="active" for="birthday">День рождения</label>
                       <p>Возраст: {{editedWorker.age}} лет</p>
                     </div>
 
-                    <div class="input-field editor-input flex-start-center">
+                    <div class="input-field radio-field editor-input flex-start-center">
                       <p class="right-margin-big">Пол: </p>
                       <p class="right-margin-little">
                         <label>
@@ -116,10 +116,11 @@
                         id="medicalBook"
                         type="date"
                         v-model="editedWorker.medicalBook"
-                        @change="changeData(editedWorker.medicalBook, 'Медицинская Книга')"
+                        @change="medicalBookCalc(), changeData(editedWorker.medicalBook, 'Медицинская Книга')"
                       >
                       <label class="active" for="medicalBook">Медицинская Книга</label>
-                      <p>Истекает через: {{editedWorker.medicalBookStatus}} лет</p>
+                      <p v-if="editedWorker.medicalBookStatus === 'Просрочена'" class="red-text darken-1">{{editedWorker.medicalBookStatus}}</p>
+                      <p v-else>Истекает через: {{editedWorker.medicalBookStatus}}</p>
                     </div>
 
                     <div class="input-field editor-input">
@@ -360,7 +361,7 @@
                       <label class="active" for="professions">Профессия</label>
                     </div>
 
-                    <div class="input-field editor-input flex-start-center">
+                    <div class="input-field radio-field editor-input flex-start-center">
                       <p class="right-margin-big">Ночная смена: </p>
                       <p class="right-margin-little">
                         <label>
@@ -376,7 +377,7 @@
                       </p>
                     </div>
 
-                    <div class="input-field editor-input flex-start-center">
+                    <div class="input-field radio-field editor-input flex-start-center">
                       <p class="right-margin-big">Проверка МВД: </p>
                       <p class="right-margin-little">
                         <label>
@@ -412,7 +413,7 @@
                       <label class="active" for="uniform">Униформа</label>
                     </div>
 
-                    <div class="input-field editor-input flex-start-center">
+                    <div class="input-field radio-field editor-input flex-start-center">
                       <p class="right-margin-big">Уволен: </p>
                       <p class="right-margin-little">
                         <label>
@@ -454,7 +455,6 @@ export default {
   directives: { mask },
   data () {
     return {
-      oldWorker: '',
       editedWorker: '',
       history: []
     }
@@ -511,13 +511,14 @@ export default {
         })
     },
 
-    // ageCalc () {
-    //   this.editedAge = (new Date()).getFullYear() - this.editedWorker.birthday.substr(0, 4)
-    // },
-    //
-    // medicalBookCalc () {
-    //   this.editedMedicalBookStatus = this.editedWorker.medicalBook.substr(0, 4) - (new Date()).getFullYear()
-    // },
+    ageCalc () {
+      this.editedWorker.age = (new Date()).getFullYear() - this.editedWorker.birthday.substr(0, 4)
+    },
+
+    medicalBookCalc () {
+      const year = this.editedWorker.medicalBook.substr(0, 4) - (new Date()).getFullYear()
+      this.editedWorker.medicalBookStatus = (year > 0) ? year + ' лет' : 'Просрочена'
+    },
 
     upload () {
       // eslint-disable-next-line no-undef
@@ -527,7 +528,7 @@ export default {
         language: 'ru'
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
-          this.editedUploadImage = result.info.secure_url
+          this.editedWorker.UploadImage = result.info.secure_url
         }
       }
       )
@@ -543,7 +544,7 @@ export default {
         language: 'ru'
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
-          this.editedUploadPassport = result.info.secure_url
+          this.this.editedWorker.UploadPassport = result.info.secure_url
         }
       }
       )
@@ -568,6 +569,7 @@ export default {
 
 <style scoped>
   .photo-container {
+    border-radius: var(--border-radius);
     margin-top: 2rem;
     width: 100%;
   }

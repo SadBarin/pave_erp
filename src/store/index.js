@@ -17,7 +17,6 @@ export default new Vuex.Store({
     async login ({ dispatch, commit }, { email, password }) {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
-          .then(() => { console.log('Login!') })
 
         commit('SET_WORKERS_FROM_SERVER')
         commit('SET_CUSTOMERS_FROM_SERVER')
