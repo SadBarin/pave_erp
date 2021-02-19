@@ -759,12 +759,14 @@ section {
 }
 
 #app .tabs .tab a:focus,
-#app .tabs .tab a:focus.active {
-  background-color: hsla(208, 79%, 51%, 0.2);
+#app .tabs .tab a:hover,
+#app .tabs .tab a.active {
+  background-color: transparent;
+  color: var(--hover-color);
 }
 
 #app .tabs .indicator {
-  background: var(--main-blue);
+  background: var(--hover-color);
 }
 
 .tabs-content {

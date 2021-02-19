@@ -78,19 +78,6 @@
                         <option class="editor-option" value="Женский">Женский</option>
                       </select>
                     </div>
-
-                    <div class="input-field editor-input flex-center">
-                      <label class="editor-label">Мед. Книга</label>
-                      <select
-                        class="browser-default editor-select"
-                        id="medicalBook"
-                        v-model.trim="searchInput.medicalBook"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" value="Есть">Есть</option>
-                        <option class="editor-option" value="Отсутствует">Отсутствует</option>
-                      </select>
-                    </div>
                   </div>
                 </div>
 
@@ -102,7 +89,7 @@
                               v-model="searchInput.city"
                       >
                         <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="(city) of sites" :key="city.value">
+                        <option class="editor-option" v-for="city of this.sites" :key="city.value">
                           {{ city.name }}
                         </option>
                       </select>
@@ -141,7 +128,7 @@
 
                 <TableWorkers
                   @remove-worker="removeWorker"
-                  :workers="workers"
+                  :workers="searchWorkers"
                 />
               </div>
             </form>
@@ -194,39 +181,39 @@ export default {
     ]),
 
     searching (obj) {
-      // return function (key, searchKey) {
-      //   if (searchKey !== '') {
-      //     return obj.filter(worker => worker[key].toLowerCase() === searchKey.toLowerCase())
-      //   }
-      // }
+      return function (key, searchKey) {
+        if (searchKey !== '') {
+          return obj.filter(element => element[key].toLowerCase() === searchKey.toLowerCase())
+        }
+      }
     },
 
     searchAll () {
-      // let bufferWorkers = this.workers
-      //
-      // for (const input in this.searchInput) {
-      //   const searchingWorkers = this.searching(bufferWorkers)
-      //
-      //   const workers = searchingWorkers(input, this.searchInput[input])
-      //   if (workers !== undefined) {
-      //     bufferWorkers = workers
-      //   }
-      // }
-      //
-      // this.searchWorkers = bufferWorkers
-      //
-      // this.searchingProfessions()
+      let bufferWorkers = Object.values(this.workers)
+
+      for (const input in this.searchInput) {
+        const searchingWorkers = this.searching(bufferWorkers)
+
+        const workers = searchingWorkers(input, this.searchInput[input])
+        if (workers !== undefined) {
+          bufferWorkers = workers
+        }
+      }
+
+      this.searchWorkers = bufferWorkers
+
+      this.searchingProfessions()
     },
 
     searchingProfessions () {
-      // const professionsList = []
-      // this.workers.forEach((worker) => {
-      //   if (professionsList.indexOf(worker.professions) === -1) {
-      //     professionsList.push(worker.professions)
-      //   }
-      // })
-      //
-      // return professionsList
+      const professionsList = []
+      Object.values(this.workers).forEach((worker) => {
+        if (professionsList.indexOf(worker.professions) === -1) {
+          professionsList.push(worker.professions)
+        }
+      })
+
+      return professionsList
     },
 
     removeWorker (id) {
@@ -238,7 +225,10 @@ export default {
   },
   mounted () {
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
-    this.searchWorkers = this.workers
+    this.searchWorkers = Object.values(this.workers)
+
+    console.log('SearchWorkers', this.searchWorkers)
+    console.log('workers', this.workers)
 
     const tabs = document.querySelectorAll('.tabs')
     tabs.forEach((element) => {

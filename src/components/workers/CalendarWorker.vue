@@ -5,26 +5,31 @@
       <NavWorker :worker="worker"/>
     </div>
 
-    <section class="app-calendar">
-      <div class="calendar-main">
-        <div v-for="month in months" :key="month" class="calendar-month flex-column-center">
-          <h4>{{month}}</h4>
-          <div class="calendar-days">
-            <p v-for="i in days" :key="i" class="calendar-day">
-              {{i}}
-            </p>
+    <main class="calendar-main">
+      <section class="app-calendar">
+        <div class="calendar-body">
+          <div v-for="month in months" :key="month" class="calendar-month">
+            <h4>{{month}}</h4>
+            <div class="calendar-days">
+              <p v-for="i in days" :key="i" class="calendar-day">
+                {{i}}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="calendar-sidenav">
-        <h4>Календарь</h4>
-        <button
-          class="btn-flat right-margin-little white-text btn-hover blue darken-1"
-        >
-          <i class="material-icons">add</i> Добавить событие
-        </button>
-      </div>
-    </section>
+      </section>
+
+      <aside>
+        <div class="calendar-sidenav">
+          <h4>Календарь</h4>
+          <button
+            class="btn-flat right-margin-little white-text btn-hover blue darken-1"
+          >
+            <i class="material-icons">add</i> Добавить событие
+          </button>
+        </div>
+      </aside>
+    </main>
   </div>
 </template>
 
@@ -67,32 +72,33 @@ export default {
 </script>
 
 <style scoped>
-  #app .app-calendar {
+  #app .calendar-main {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 1rem;
   }
 
-  #app .calendar-main {
+  #app .app-calendar {
+    display: grid;
+  }
+
+  #app .calendar-body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
   }
 
   #app .calendar-month {
-    background: var(--hover-bg);
     border-radius: var(--border-radius);
 
     padding: 1rem;
   }
 
   #app .calendar-days {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
   }
 
   #app .calendar-day {
-    margin-left: 0.3rem;
     cursor: pointer;
   }
 
