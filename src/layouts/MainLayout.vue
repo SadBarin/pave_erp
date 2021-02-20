@@ -32,6 +32,12 @@
               </router-link>
             </li>
             <li>
+              <router-link class="pointer" to="/calendar">
+                <i class="material-icons">date_range</i>
+                Календарь
+              </router-link>
+            </li>
+            <li>
               <router-link class="pointer" to="/customers">
                 <i class="material-icons">business_center</i>
                 Клиенты

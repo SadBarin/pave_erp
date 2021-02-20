@@ -11,6 +11,7 @@ import 'materialize-css/dist/css/materialize.min.css'
 import VueTheMask from 'vue-the-mask'
 import Cloudinary from 'cloudinary-vue'
 import Popup from '@/components/Popup'
+import VCalendar from 'v-calendar'
 
 // eslint-disable-next-line no-unused-vars
 import firebase from 'firebase/app'
@@ -38,7 +39,7 @@ Sentry.init({
 })
 
 Vue.config.productionTip = false
-Vue.use(Vuelidate, VueTheMask)
+Vue.use(Vuelidate, VueTheMask, VCalendar)
 
 Vue.use(Cloudinary, {
   configuration: { cloudName: 'db6qzfvbw' }

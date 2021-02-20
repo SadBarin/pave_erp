@@ -106,6 +106,13 @@ const router = new VueRouter({
       name: 'customerEdit',
       meta: { layout: 'main' },
       component: () => import('../components/customers/EditCustomers')
+    },
+
+    {
+      path: '/calendar',
+      name: 'calendar',
+      meta: { layout: 'main' },
+      component: () => import('../views/AppCalendar')
     }
   ]
 })
