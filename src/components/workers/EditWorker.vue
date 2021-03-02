@@ -543,7 +543,7 @@ export default {
         language: 'ru'
       }, (error, result) => {
         if (!error && result && result.event === 'success') {
-          this.this.editedWorker.UploadPassport = result.info.secure_url
+          this.editedWorker.UploadPassport = result.info.secure_url
         }
       }
       )

@@ -111,7 +111,7 @@ export default {
               id: this.authEmployee.id
             }
           }],
-          calendar: [{}]
+          events: [{ id: Date.now(), title: 'Карточка создана', date: new Date().toJSON() }]
         }
 
         this.$emit('add-worker', newWorker)

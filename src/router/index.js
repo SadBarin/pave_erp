@@ -79,7 +79,7 @@ const router = new VueRouter({
       path: '/workers/calendar/worker:id',
       name: 'workerCalendar',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/CalendarWorker')
+      component: () => import('../components/workers/calendar/CalendarWorker')
     },
 
     {

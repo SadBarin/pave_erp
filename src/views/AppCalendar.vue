@@ -1,28 +1,39 @@
 <template>
-  <div>
-    <div class="page-title flex-between-center">
-      <h3>Календарь</h3>
-    </div>
-
-    <section>
-      <Calendar  :columns="$screens({ default: 1, lg: 3 })"
-                 :rows="$screens({ default: 1, lg: 4 })"
-                 :is-expanded="$screens({ default: true, lg: true })" />
-    </section>
-  </div>
+  <FullCalendar :options="calendarOptions" />
 </template>
 
 <script>
-import Calendar from 'v-calendar/lib/components/calendar.umd'
+import FullCalendar from '@fullcalendar/vue'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import ruLocale from '@fullcalendar/core/locales/ru'
 
 export default {
-  name: 'AppCalendar',
   components: {
-    Calendar
+    FullCalendar
+  },
+
+  data () {
+    return {
+      calendarOptions: {
+        plugins: [timeGridPlugin, interactionPlugin],
+        initialView: 'timeGridWeek',
+        timeZone: 'local',
+        locale: 'ru',
+        locales: [ruLocale],
+        dateClick: this.handleDateClick,
+        events: [
+          { title: 'событие 1', date: '2021-02-01' },
+          { title: 'событие 2', date: '2021-02-02' }
+        ]
+      }
+    }
+  },
+
+  methods: {
+    handleDateClick: function (arg) {
+      alert('date click! ' + arg.dateStr)
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

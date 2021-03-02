@@ -559,6 +559,10 @@ section {
   border-radius: var(--border-radius);
 }
 
+#app .full-calendar tr:hover {
+  background: transparent;
+}
+
 #app td, #app th {
   border: none;
   border-radius: 0;

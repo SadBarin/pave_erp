@@ -1,4 +1,5 @@
 <template>
+<div>
   <form class="card auth-card" @submit.prevent="submitLogin">
     <div class="card-content">
       <h4 class="card-title">Вход в систему</h4>
@@ -58,12 +59,16 @@
       </div>
     </div>
   </form>
+
+  <p class="version">Версия: {{version}}</p>
+</div>
 </template>
 
 <script>
 import M from 'materialize-css'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 import { mapGetters, mapMutations } from 'vuex'
+import packageApp from '../../package.json'
 
 export default {
   name: 'Login',
@@ -72,7 +77,9 @@ export default {
     return {
       email: 'root@root.com',
       password: 'bb%LWz%*W3',
-      loading: false
+      loading: false,
+
+      version: packageApp.version
     }
   },
 
@@ -142,5 +149,16 @@ export default {
 
 .auth-card .card-action {
   background: transparent;
+}
+
+#app .version {
+  font-size: 1rem;
+  opacity: 0.7;
+
+  margin: 0;
+
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
 }
 </style>
