@@ -45,8 +45,11 @@
 
       <div class="margin-fix w35rem">
         <h5 class="flex-start-center"><i class="material-icons">local_phone</i> Контактные данные</h5>
+        <h6 v-if="worker.comment != null">Последний комментарий: <span>{{worker.comment}}</span></h6>
         <h6>Город: <span>{{worker.city}}</span></h6>
-        <h6>Мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></span></h6>
+        <h6>Осн. мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhone}}</a></span></h6>
+        <h6 v-if="worker.mobilePhoneAdditional != null">Доп. мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhoneAdditional}}</a></span></h6>
+        <h6 v-if="worker.mobilePhoneStanby != null">Зап. мобильный телефон: <span><a :href="'tel:' + worker.mobilePhone">{{worker.mobilePhoneStandby}}</a></span></h6>
         <h6>Домашний телефон: <span>{{worker.homePhone}}</span></h6>
       </div>
 
@@ -55,7 +58,9 @@
         <h6>Учётный номер: <span>{{worker.accountNumber}}</span></h6>
         <h6>Прежняя работа: <span>{{worker.previousWork}}</span></h6>
         <h6>Почему пришёл к нам: <span>{{worker.reasonComing}}</span></h6>
-        <h6>Профессия: <span>{{worker.professions}}</span></h6>
+        <h6>Профессия 1: <span>{{worker.professions}}</span></h6>
+        <h6 v-if="worker.professionsSecond != null">Профессия 2: <span>{{worker.professionsSecond}}</span></h6>
+        <h6 v-if="worker.professionsThird != null">Профессия 3: <span>{{worker.professionsThird}}</span></h6>
         <h6>Ночная смена: <span>{{worker.nightShift}}</span></h6>
         <h6>Проверка МВД: <span>{{worker.checkMVD}}</span></h6>
         <h6>Дата собеседования: <span>{{worker.dateInterview}}</span></h6>

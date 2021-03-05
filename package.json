@@ -1,6 +1,6 @@
 {
   "name": "pave-erp",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -19,11 +19,9 @@
     "cloudinary-vue": "^1.1.2",
     "core-js": "^3.6.5",
     "firebase": "^8.2.5",
-    "kalendar-vue": "^2.1.1",
     "material-icons": "^0.3.1",
     "materialize-css": "^1.0.0-rc.2",
     "register-service-worker": "^1.7.1",
-    "v-calendar": "^2.2.3",
     "vue": "^2.6.11",
     "vue-page-transition": "^0.2.2",
     "vue-router": "^3.4.9",

@@ -281,6 +281,17 @@
                     <h4 class="card-title"><i class="material-icons">local_phone</i> Контактные данные</h4>
 
                     <div class="input-field editor-input">
+                      <input
+                        id="comment"
+                        type="text"
+                        maxlength="100"
+                        v-model.trim="editedWorker.comment"
+                        @change="changeData(editedWorker.comment, 'комментарий')"
+                      >
+                      <label class="active" for="comment">Комментарий (кратко)</label>
+                    </div>
+
+                    <div class="input-field editor-input">
                       <select class="browser-default editor-select"
                               @change="changeData(editedWorker.city, 'город')"
                               v-model="editedWorker.city"
@@ -310,9 +321,33 @@
                         v-model.trim="editedWorker.mobilePhone"
                         v-mask="'+7 (###) ###-##-##'"
                         placeholder="+7 ( ) "
-                        @change="changeData(editedWorker.mobilePhone, 'мобильный телефон')"
+                        @change="changeData(editedWorker.mobilePhone, 'основной мобильный телефон')"
                       >
-                      <label class="active" for="mobilePhone">Телефон Мобильный</label>
+                      <label class="active" for="mobilePhone">Основной мобильный телефон</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="mobilePhoneAdditional"
+                        type="text"
+                        v-model.trim="editedWorker.mobilePhoneAdditional"
+                        v-mask="'+7 (###) ###-##-##'"
+                        placeholder="+7 ( ) "
+                        @change="changeData(editedWorker.mobilePhone, 'дополнительный мобильный телефон')"
+                      >
+                      <label class="active" for="mobilePhoneAdditional">Дополнительный мобильный телефон</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="mobilePhoneStandby"
+                        type="text"
+                        v-model.trim="editedWorker.mobilePhoneStandby"
+                        v-mask="'+7 (###) ###-##-##'"
+                        placeholder="+7 ( ) "
+                        @change="changeData(editedWorker.mobilePhone, 'запасной мобильный телефон')"
+                      >
+                      <label class="active" for="mobilePhoneStandby">Запасной мобильный телефон</label>
                     </div>
                   </div>
                 </div>
@@ -358,7 +393,27 @@
                         v-model.trim="editedWorker.professions"
                         @change="changeData(editedWorker.professions, 'профессия')"
                       >
-                      <label class="active" for="professions">Профессия</label>
+                      <label class="active" for="professions">Профессия 1</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="professionsSecond"
+                        type="text"
+                        v-model.trim="editedWorker.professionsSecond"
+                        @change="changeData(editedWorker.professionsSecond, 'профессия 2')"
+                      >
+                      <label class="active" for="professionsSecond">Профессия 2</label>
+                    </div>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="professionsThird"
+                        type="text"
+                        v-model.trim="editedWorker.professionsThird"
+                        @change="changeData(editedWorker.professionsThird, 'профессия 3')"
+                      >
+                      <label class="active" for="professionsThird">Профессия 3</label>
                     </div>
 
                     <div class="input-field radio-field editor-input flex-start-center">
@@ -491,6 +546,8 @@ export default {
     },
 
     saveEditedWorker (worker) {
+      this.editedWorker.editedCount += 1
+
       try {
         this.history.push({
           date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
@@ -529,8 +586,7 @@ export default {
         if (!error && result && result.event === 'success') {
           this.editedWorker.UploadImage = result.info.secure_url
         }
-      }
-      )
+      })
 
       myWidget.open()
     },

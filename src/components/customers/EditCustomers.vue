@@ -148,6 +148,14 @@
                       <label class="active" for="note">Примечание</label>
                     </div>
 
+                    <div class="input-field editor-input flex-column-center">
+                      <button id="upload_widget" @click.prevent="upload" class="cloudinary-button">Загрузить фото примечания</button>
+
+                      <div class="photo-container flex-center" v-if="editedCustomer.uploadImage != null">
+                        <img :src="editedCustomer.uploadImage" width="200rem">
+                      </div>
+                    </div>
+
                     <div class="input-field editor-input">
                       <input
                         id="manager"
@@ -209,6 +217,21 @@ export default {
       'SET_CUSTOMERS_FROM_SERVER',
       'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
+
+    upload () {
+      // eslint-disable-next-line no-undef
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: 'db6qzfvbw',
+        uploadPreset: 'ml_default',
+        language: 'ru'
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.editedCustomer.uploadImage = result.info.secure_url
+        }
+      })
+
+      myWidget.open()
+    },
 
     editorExit () {
       this.$router.push('/customers')
