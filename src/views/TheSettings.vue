@@ -31,16 +31,18 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Settings.vue',
-  computed: {
-    ...mapGetters([
-      'authEmployee'
-    ])
-  },
-  mounted () {
+
+  created () {
     const tooltip = document.querySelectorAll('.tooltipped')
     tooltip.forEach((element) => {
       M.Tooltip.init(element)
     })
+  },
+
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
   }
 }
 </script>

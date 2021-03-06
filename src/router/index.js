@@ -23,7 +23,7 @@ const router = new VueRouter({
       path: '/sites/edit/city:id',
       name: 'cityEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/sites/EditCity')
+      component: () => import('../components/sites/CityEdit')
     },
 
     {
@@ -36,13 +36,13 @@ const router = new VueRouter({
       path: '/employees/edit/employee:id',
       name: 'employeeEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/employees/EditEmployee')
+      component: () => import('../components/employees/EmployeeEdit')
     },
     {
       path: '/employees/history/employee:id',
       name: 'employeeHistory',
       meta: { layout: 'main' },
-      component: () => import('../components/employees/HistoryEmployee')
+      component: () => import('../components/employees/EmployeeHistory')
     },
 
     {
@@ -55,31 +55,31 @@ const router = new VueRouter({
       path: '/workers/edit/worker:id',
       name: 'workerEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/EditWorker')
+      component: () => import('../components/workers/WorkerEdit')
     },
     {
       path: '/workers/search',
       name: 'workersSearch',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/SearchWorkers')
+      component: () => import('../components/workers/WorkersSearch')
     },
     {
       path: '/workers/about/worker:id',
       name: 'workerAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/AboutWorker')
+      component: () => import('../components/workers/WorkerAbout')
     },
     {
       path: '/workers/history/worker:id',
       name: 'workerHistory',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/HistoryWorker')
+      component: () => import('../components/workers/WorkerHistory')
     },
     {
       path: '/workers/calendar/worker:id',
       name: 'workerCalendar',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/calendar/CalendarWorker')
+      component: () => import('../components/workers/calendar/WorkerCalendar')
     },
 
     {
@@ -99,13 +99,13 @@ const router = new VueRouter({
       path: '/customers/about/customer:id',
       name: 'customerAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/AboutCustomer')
+      component: () => import('../components/customers/CustomerAbout')
     },
     {
       path: '/customers/edit/customer:id',
       name: 'customerEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/EditCustomers')
+      component: () => import('../components/customers/CustomersEdit')
     }
   ]
 })

@@ -141,7 +141,7 @@
 
 <script>
 import M from 'materialize-css'
-import TableWorkers from '@/components/workers/TableWorkers'
+import TableWorkers from '@/components/workers/WorkersTable'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'

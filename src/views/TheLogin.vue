@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import M from 'materialize-css'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 import { mapGetters, mapMutations } from 'vuex'
 import packageApp from '../../package.json'
@@ -96,6 +95,14 @@ export default {
     password: { required, minLength: minLength(8) }
   },
 
+  created () {
+    const collapsible = document.querySelectorAll('.collapsible')
+    collapsible.forEach((element) => {
+      // eslint-disable-next-line no-undef
+      M.Collapsible.init(element)
+    })
+  },
+
   methods: {
     ...mapMutations([
       'SET_SITES',
@@ -123,17 +130,11 @@ export default {
         })
       } catch (e) {
         this.loading = false
+        // eslint-disable-next-line no-undef
         M.toast({ html: 'Ошибка входа!' })
         console.log('Попытка входа ⚠')
       }
     }
-  },
-
-  mounted () {
-    const collapsible = document.querySelectorAll('.collapsible')
-    collapsible.forEach((element) => {
-      M.Collapsible.init(element)
-    })
   }
 }
 </script>

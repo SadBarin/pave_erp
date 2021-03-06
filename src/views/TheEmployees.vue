@@ -29,24 +29,26 @@
 </template>
 
 <script>
-import TableEmployees from '@/components/employees/TableEmployees'
-import AddCardEmployees from '@/components/employees/AddEmployees'
+import TableEmployees from '@/components/employees/EmployeesTable'
+import AddCardEmployees from '@/components/employees/EmployeesAdd'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
   name: 'Employees',
+
   components: { TableEmployees, AddCardEmployees },
-  data () {
-    return {
-      updateTimeout: 60000
-    }
-  },
+
   computed: {
     ...mapGetters([
       'employees'
     ])
   },
+
+  created () {
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
+  },
+
   methods: {
     ...mapMutations([
       'SET_EMPLOYEES_FROM_LOCAL_STORAGE',
@@ -85,9 +87,6 @@ export default {
       // eslint-disable-next-line no-undef
       M.toast({ html: 'Сотрудники обновлены' })
     }
-  },
-  mounted () {
-    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

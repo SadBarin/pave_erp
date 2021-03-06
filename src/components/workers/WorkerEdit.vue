@@ -496,7 +496,7 @@
 
 <script>
 import M from 'materialize-css'
-import NavWorker from '@/components/workers/NavWorker'
+import NavWorker from '@/components/workers/WorkerNav'
 import { mask } from 'vue-the-mask'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'

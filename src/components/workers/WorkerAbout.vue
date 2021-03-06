@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import NavWorker from '@/components/workers/NavWorker'
+import NavWorker from '@/components/workers/WorkerNav'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {

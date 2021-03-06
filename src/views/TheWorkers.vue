@@ -34,24 +34,26 @@
 </template>
 
 <script>
-import TableWorkers from '@/components/workers/TableWorkers'
-import AddCardWorkers from '@/components/workers/AddWorkers'
+import TableWorkers from '@/components/workers/WorkersTable'
+import AddCardWorkers from '@/components/workers/WorkerAdd'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
   name: 'Workers',
+
   components: { TableWorkers, AddCardWorkers },
-  data () {
-    return {
-      updateTimeout: 60000
-    }
-  },
+
   computed: {
     ...mapGetters([
       'workers'
     ])
   },
+
+  created () {
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+  },
+
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_SERVER',
@@ -79,9 +81,6 @@ export default {
       // eslint-disable-next-line no-undef
       M.toast({ html: 'Сотрудники обновлены' })
     }
-  },
-  mounted () {
-    this.SET_WORKERS_FROM_LOCAL_STORAGE()
   }
 }
 </script>

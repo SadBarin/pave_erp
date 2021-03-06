@@ -32,7 +32,9 @@
 <script>
 export default {
   name: 'Popup',
+
   props: { popupToast: String },
+
   methods: {
     callToast () {
       if (this.popupToast) {

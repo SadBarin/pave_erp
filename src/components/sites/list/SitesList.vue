@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CardSites from '@/components/sites/list/CardSites'
+import CardSites from '@/components/sites/list/CityCard'
 export default {
   name: 'ListSites',
   components: { CardSites },

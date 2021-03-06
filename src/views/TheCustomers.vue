@@ -29,24 +29,26 @@
 </template>
 
 <script>
-import AddCustomer from '@/components/customers/AddCustomer'
-import TableWorkers from '@/components/customers/TableCustomers'
+import AddCustomer from '@/components/customers/CustomerAdd'
+import TableWorkers from '@/components/customers/CustomersTable'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
   name: 'Customers',
+
   components: { AddCustomer, TableWorkers },
-  data () {
-    return {
-      updateTimeout: 60000
-    }
-  },
+
   computed: {
     ...mapGetters([
       'customers'
     ])
   },
+
+  created () {
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
+  },
+
   methods: {
     ...mapMutations([
       'SET_CUSTOMERS_FROM_SERVER',
@@ -74,13 +76,6 @@ export default {
       // eslint-disable-next-line no-undef
       M.toast({ html: 'Наши клиенты обновлены' })
     }
-  },
-  mounted () {
-    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
   }
 }
 </script>
-
-<style scoped>
-
-</style>

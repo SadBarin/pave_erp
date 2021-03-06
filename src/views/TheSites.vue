@@ -30,22 +30,24 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
-import AddCardSites from '@/components/sites/AddSites'
-import ListSites from '@/components/sites/list/ListSites'
+import AddCardSites from '@/components/sites/CityAdd'
+import ListSites from '@/components/sites/list/SitesList'
 
 export default {
   name: 'Sites',
+
   components: { ListSites, AddCardSites },
-  data () {
-    return {
-      show: true
-    }
-  },
+
   computed: {
     ...mapGetters([
       'sites'
     ])
   },
+
+  created () {
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+  },
+
   methods: {
     ...mapMutations([
       'SET_SITES_FROM_LOCAL_STORAGE',
@@ -73,9 +75,6 @@ export default {
       // eslint-disable-next-line no-undef
       M.toast({ html: 'Города обновлены' })
     }
-  },
-  mounted () {
-    this.SET_SITES_FROM_LOCAL_STORAGE()
   }
 }
 </script>

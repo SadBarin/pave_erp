@@ -15,7 +15,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import ruLocale from '@fullcalendar/core/locales/ru'
 import { mapGetters, mapMutations } from 'vuex'
-import AddCalendarEvent from '@/components/workers/calendar/AddCalendarEvent'
+import AddCalendarEvent from '@/components/workers/calendar/WorkerAddEvent'
 
 export default {
   components: {

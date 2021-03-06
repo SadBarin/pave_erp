@@ -15,6 +15,7 @@ export default {
     EmptyLayout,
     MainLayout
   },
+
   computed: {
     layout () {
       return (this.$route.meta.layout || 'empty') + '-layout'
