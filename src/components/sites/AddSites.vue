@@ -46,7 +46,7 @@ export default {
       coincidence: false
     }
   },
-  props: ['sites'],
+  props: { sites: Object },
   validations: {
     cityName: { required, minLength: minLength(2) }
   },

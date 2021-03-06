@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import Popup from '@/components/Popup'
+import Popup from '@/components/AppPopup'
 
 import * as Sentry from '@sentry/browser'
 import { Integrations } from '@sentry/tracing'

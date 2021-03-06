@@ -45,7 +45,7 @@ export default {
       coincidence: false
     }
   },
-  props: ['employees'],
+  props: { employees: Object },
   computed: {
     ...mapGetters([
       'authEmployee'
@@ -114,8 +114,6 @@ export default {
         this.$emit('add-employee', newEmployee)
 
         this.email = ''
-
-        // this.$router.push(`/employees/edit/employee${newEmployee.id}`)
       }
     },
 

@@ -32,7 +32,7 @@
 <script>
 export default {
   name: 'Popup',
-  props: ['popupToast'],
+  props: { popupToast: String },
   methods: {
     callToast () {
       if (this.popupToast) {
@@ -48,7 +48,6 @@ export default {
   #app .popup-overlay {
     background: var(--hover-bg);
     backdrop-filter: blur(3px);
-    /*animation: none !important;*/
     width: 100vw;
     height: 100vh;
 

@@ -4,14 +4,14 @@
       v-if="popupShow"
       @yes="removeWorker(worker.id)"
       @no="popupHidden()"
-      :popup-toast="`${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+      :popup-toast="`Рабочий ${worker.surname} ${worker.name} был удалён!`"
     >
       <template #title-popup>
         Удалить?
       </template>
 
       <template #text-info-popup>
-        {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
+        После нажатие кнопки "да" будет удалён <b>{{worker.surname}} {{worker.name}}</b>!
       </template>
     </Popup>
 
@@ -74,7 +74,7 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'NavWorker',
   mixins: [popupMixin],
-  props: ['worker'],
+  props: { worker: Object },
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_SERVER'

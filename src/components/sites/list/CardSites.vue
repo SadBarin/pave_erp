@@ -1,21 +1,19 @@
 <template>
   <div class="row">
-    <transition name="bounce">
-      <Popup
-        v-if="popupShow"
-        @yes="removeCity(city)"
-        @no="popupHidden"
-        :popup-toast="`Город ${city.name} был удалён!`"
-      >
-        <template #title-popup>
-          Удалить?
-        </template>
+    <Popup
+      v-if="popupShow"
+      @yes="removeCity(city)"
+      @no="popupHidden"
+      :popup-toast="`Город ${city.name} был удалён!`"
+    >
+      <template #title-popup>
+        Удалить?
+      </template>
 
-        <template #text-info-popup>
-          После нажатия кнопки "да" будет удалён город <b>{{city.name}}</b>
-        </template>
-      </Popup>
-    </transition>
+      <template #text-info-popup>
+        После нажатия кнопки "да" будет удалён город <b>{{city.name}}</b>
+      </template>
+    </Popup>
 
     <div class="col s12">
       <div class="card-panel grey-text text-darken-3">
@@ -55,7 +53,7 @@ import popupMixin from '@/mixins/popupMixin'
 export default {
   name: 'CardSites',
   mixins: [popupMixin],
-  props: ['city'],
+  props: { city: Object },
   methods: {
     removeCity (city) {
       this.popupHidden()
@@ -72,24 +70,6 @@ export default {
 
   #app .card-panel:hover {
     background: var(--hover-bg);
-  }
-
-  .bounce-enter-active {
-    animation: bounce-in .5s;
-  }
-  .bounce-leave-active {
-    animation: bounce-in .5s reverse;
-  }
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.5);
-    }
-    100% {
-      transform: scale(1);
-    }
   }
 
   .row .col {

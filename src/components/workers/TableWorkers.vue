@@ -4,14 +4,14 @@
     v-if="popupShow"
     @yes="removeWorker(worker)"
     @no="popupHidden()"
-    :popup-toast="`${worker.surname} ${worker.name} ${(worker.sex === 'Женский')? ' была удалена' : ' был удалён!'}`"
+    :popup-toast="`Рабочий ${worker.surname} ${worker.name} был удалён!'`"
   >
     <template #title-popup>
       Удалить?
     </template>
 
     <template #text-info-popup>
-      {{worker.sex | sexMsgDelete }} <b>{{worker.surname}} {{worker.name}}</b>
+      После нажатия кнопки "да" будет удалён <b>{{worker.surname}} {{worker.name}}</b>!
     </template>
   </Popup>
 
@@ -90,7 +90,7 @@ import popupMixin from '@/mixins/popupMixin'
 export default {
   name: 'TableWorkers',
   mixins: [popupMixin],
-  props: ['workers'],
+  props: { workers: Object },
   data () {
     return {
       worker: ''

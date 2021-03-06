@@ -7,10 +7,6 @@
     </div>
 
     <div class="info-content">
-<!--      <div>-->
-<!--        <h5>Локальные настройки <a class="tooltipped" data-position="right" data-tooltip="Настройки применяются только для пользователя"><i class="material-icons">info</i></a></h5>-->
-<!--        <h6 title="Влияет на производительность системы.">Автообновление страниц через: <span><input class="info-input" type="number"> мс.</span></h6>-->
-<!--      </div>-->
       <div>
         <h6>
           <router-link class="pointer" to="/sites">
@@ -35,11 +31,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Settings.vue',
-  data () {
-    return {
-      autoUpdate: ''
-    }
-  },
   computed: {
     ...mapGetters([
       'authEmployee'

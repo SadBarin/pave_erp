@@ -55,7 +55,7 @@ export default {
       'authEmployee'
     ])
   },
-  props: ['workers'],
+  props: { workers: Object },
   directives: { mask },
   validations: {
     number: { required, minLength: minLength(7) }
@@ -81,7 +81,7 @@ export default {
           bank: 'СберБанк',
           age: '',
           sex: 'Мужской',
-          city: this.authEmployee.city,
+          city: this.authEmployee.city || '',
           nationality: '',
           passportID: '',
           passportDate: '',
@@ -116,8 +116,6 @@ export default {
 
         this.$emit('add-worker', newWorker)
         this.number = ''
-
-        // this.$router.push(`/workers/edit/worker${newWorker.id}`)
       }
     },
 

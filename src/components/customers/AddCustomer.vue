@@ -28,7 +28,7 @@ export default {
       name: ''
     }
   },
-  props: ['customers'],
+  props: { customers: Object },
   computed: {
     ...mapGetters([
       'authEmployee'

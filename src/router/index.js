@@ -11,13 +11,13 @@ const router = new VueRouter({
       path: '/',
       name: 'login',
       meta: { layout: 'empty' },
-      component: () => import('../views/Login')
+      component: () => import('../views/TheLogin')
     },
     {
       path: '/sites',
       name: 'sites',
       meta: { layout: 'main' },
-      component: () => import('../views/Sites')
+      component: () => import('../views/TheSites')
     },
     {
       path: '/sites/edit/city:id',
@@ -30,7 +30,7 @@ const router = new VueRouter({
       path: '/employees',
       name: 'employees',
       meta: { layout: 'main' },
-      component: () => import('../views/Employees')
+      component: () => import('../views/TheEmployees')
     },
     {
       path: '/employees/edit/employee:id',
@@ -49,7 +49,7 @@ const router = new VueRouter({
       path: '/workers',
       name: 'workers',
       meta: { layout: 'main' },
-      component: () => import('../views/Workers')
+      component: () => import('../views/TheWorkers')
     },
     {
       path: '/workers/edit/worker:id',
@@ -86,14 +86,14 @@ const router = new VueRouter({
       path: '/settings',
       name: 'settings',
       meta: { layout: 'main' },
-      component: () => import('../views/Settings')
+      component: () => import('../views/TheSettings')
     },
 
     {
       path: '/customers',
       name: 'customers',
       meta: { layout: 'main' },
-      component: () => import('../views/Customers')
+      component: () => import('../views/TheCustomers')
     },
     {
       path: '/customers/about/customer:id',
@@ -106,13 +106,6 @@ const router = new VueRouter({
       name: 'customerEdit',
       meta: { layout: 'main' },
       component: () => import('../components/customers/EditCustomers')
-    },
-
-    {
-      path: '/calendar',
-      name: 'calendar',
-      meta: { layout: 'main' },
-      component: () => import('../views/AppCalendar')
     }
   ]
 })

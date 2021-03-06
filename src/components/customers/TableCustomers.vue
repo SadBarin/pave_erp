@@ -92,7 +92,7 @@ import popupMixin from '@/mixins/popupMixin'
 export default {
   name: 'TableCustomers',
   mixins: [popupMixin],
-  props: ['customers'],
+  props: { customers: Object },
   data () {
     return {
       customer: ''
