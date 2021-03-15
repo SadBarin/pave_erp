@@ -13,9 +13,9 @@
         </div>
       </div>
 
-      <AddCustomer
-        @add-customer="addCustomer"
-        :сustomers="customers"
+      <InputAdd
+        @add-element="addCustomer"
+        placeholder="Добавить нового клиента"
       />
     </div>
 
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import AddCustomer from '@/components/customers/CustomerAdd'
+import InputAdd from '@/components/InputAdd'
 import TableWorkers from '@/components/customers/CustomersTable'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
@@ -37,22 +37,25 @@ import firebase from 'firebase/app'
 export default {
   name: 'Customers',
 
-  components: { AddCustomer, TableWorkers },
+  components: { InputAdd, TableWorkers },
 
   computed: {
     ...mapGetters([
-      'customers'
+      'customers',
+      'authEmployee'
     ])
   },
 
   created () {
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
   },
 
   methods: {
     ...mapMutations([
       'SET_CUSTOMERS_FROM_SERVER',
-      'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE',
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
     ]),
 
     removeCustomer (id) {
@@ -63,8 +66,31 @@ export default {
         })
     },
 
-    addCustomer (customer) {
-      firebase.database().ref('/customers/' + customer.id).set(customer)
+    addCustomer (name) {
+      // Body New Customer
+      const newCustomer = {
+        id: Date.now(),
+        name,
+        note: 'Новый клиент',
+        subdivisions: {
+          0: {
+            id: '0',
+            name: 'Главное подразделение',
+            contractNumber: '',
+            contractDate: '',
+            number: '',
+            fax: '',
+            site: '',
+            email: '',
+            note: 'Главное подразделение клиента',
+            address: this.authEmployee.city,
+            manager: this.authEmployee.surname + ' ' + this.authEmployee.name,
+            status: 'Действующий'
+          }
+        }
+      }
+
+      firebase.database().ref('/customers/' + newCustomer.id).set(newCustomer)
         .then(() => {
           this.SET_CUSTOMERS_FROM_SERVER()
           console.log('Клиент добавлен ➕')

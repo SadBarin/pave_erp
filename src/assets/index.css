@@ -153,7 +153,7 @@
 
 #app .clip-text {
   display: inline;
-  max-width: 10rem;
+  max-width: 12rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -214,9 +214,9 @@
   margin: 0 auto;
 }
 
-#app .w35rem {
+#app .w20rem {
   word-wrap: break-word;
-  max-width: 35rem;
+  max-width: 20rem;
 }
 
 .opacity-5 {

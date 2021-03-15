@@ -72,6 +72,31 @@
 
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
+                    <h4 class="card-title"><i class="material-icons">comment</i>Примечание</h4>
+
+                    <div class="input-field editor-input">
+                      <input
+                        id="note"
+                        type="text"
+                        maxlength="100"
+                        v-model.trim="editedWorker.note"
+                        @change="changeData(editedWorker.note, 'Примечание')"
+                      >
+                      <label class="active" for="note">Тестовое примечание</label>
+                    </div>
+
+                    <div class="input-field editor-input flex-column-center">
+                      <button id="upload_widget" @click.prevent="uploadNote" class="cloudinary-button">Загрузить фото примечания</button>
+
+                      <div class="photo-container flex-center" v-if="editedWorker.uploadImageNote != null">
+                        <img :src="editedWorker.uploadImageNote" width="200rem">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card editor-card white darken-1 black-text">
+                  <div class="card-content flex-column-center">
                     <h4 class="card-title"><i class="material-icons">assignment</i> Личные данные</h4>
 
                     <div class="input-field editor-input">
@@ -279,17 +304,6 @@
                 <div class="card editor-card white darken-1 black-text">
                   <div class="card-content flex-column-center">
                     <h4 class="card-title"><i class="material-icons">local_phone</i> Контактные данные</h4>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="comment"
-                        type="text"
-                        maxlength="100"
-                        v-model.trim="editedWorker.comment"
-                        @change="changeData(editedWorker.comment, 'комментарий')"
-                      >
-                      <label class="active" for="comment">Комментарий (кратко)</label>
-                    </div>
 
                     <div class="input-field editor-input">
                       <select class="browser-default editor-select"
@@ -504,15 +518,20 @@ import firebase from 'firebase/app'
 
 export default {
   name: 'EditorWorkers',
+
   components: { NavWorker },
+
   mixins: [popupMixin],
+
   directives: { mask },
+
   data () {
     return {
       editedWorker: '',
       history: []
     }
   },
+
   computed: {
     ...mapGetters([
       'workers',
@@ -521,6 +540,19 @@ export default {
       'authEmployee'
     ])
   },
+
+  created () {
+    const select = document.querySelectorAll('.select')
+    select.forEach((element) => {
+      M.FormSelect.init(element)
+    })
+
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedWorker = this.workers[this.$route.params.id]
+  },
+
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_SERVER',
@@ -605,19 +637,22 @@ export default {
       )
 
       myWidget.open()
+    },
+
+    uploadNote () {
+      // eslint-disable-next-line no-undef
+      const myWidget = cloudinary.createUploadWidget({
+        cloudName: 'db6qzfvbw',
+        uploadPreset: 'ml_default',
+        language: 'ru'
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          this.editedWorker.uploadImageNote = result.info.secure_url
+        }
+      })
+
+      myWidget.open()
     }
-  },
-
-  mounted () {
-    const select = document.querySelectorAll('.select')
-    select.forEach((element) => {
-      M.FormSelect.init(element)
-    })
-
-    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
-    this.SET_WORKERS_FROM_LOCAL_STORAGE()
-    this.SET_SITES_FROM_LOCAL_STORAGE()
-    this.editedWorker = this.workers[this.$route.params.id]
   }
 }
 </script>

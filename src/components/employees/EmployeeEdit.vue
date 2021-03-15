@@ -199,14 +199,18 @@ import firebase from 'firebase/app'
 
 export default {
   name: 'addEmployees.vue',
+
   mixins: [popupMixin],
+
   directives: { mask },
+
   data () {
     return {
       editedEmployee: '',
       history: []
     }
   },
+
   computed: {
     ...mapGetters([
       'authEmployee',
@@ -214,6 +218,18 @@ export default {
       'sites'
     ])
   },
+
+  created () {
+    const select = document.querySelectorAll('.select')
+    select.forEach((element) => {
+      M.FormSelect.init(element)
+    })
+
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedEmployee = this.employees[this.$route.params.id]
+  },
+
   methods: {
     ...mapMutations([
       'SET_EMPLOYEES_FROM_SERVER',
@@ -254,16 +270,6 @@ export default {
         this.editorExit()
       })
     }
-  },
-  mounted () {
-    const select = document.querySelectorAll('.select')
-    select.forEach((element) => {
-      M.FormSelect.init(element)
-    })
-
-    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
-    this.SET_SITES_FROM_LOCAL_STORAGE()
-    this.editedEmployee = this.employees[this.$route.params.id]
   }
 }
 </script>

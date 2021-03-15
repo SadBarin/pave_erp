@@ -105,7 +105,45 @@ const router = new VueRouter({
       path: '/customers/edit/customer:id',
       name: 'customerEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/CustomersEdit')
+      component: () => import('../components/customers/CustomerEdit')
+    },
+
+    {
+      path: '/customers/subdivisions/customer:id',
+      name: 'customerSubdivisions',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/CustomerSubdivisions')
+    },
+    {
+      path: '/customers/subdivisions/customer:id/about/subdivision:subId',
+      name: 'customerAboutSubdivision',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/CustomerSubdivisionAbout')
+    },
+    {
+      path: '/customers/subdivisions/customer:id/edit/subdivision:subId',
+      name: 'customerEditSubdivision',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/CustomerSubdivisionEdit')
+    },
+
+    {
+      path: '/customers/subdivisions/customer:id/subdivision:subId/employees',
+      name: 'subdivisionEmployees',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/employees/CustomerEmployees')
+    },
+    {
+      path: '/customers/subdivisions/customer:id/subdivision:subId/employees/about/employee:empId',
+      name: 'subdivisionAboutEmployee',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/employees/CustomerEmployeeAbout')
+    },
+    {
+      path: '/customers/subdivisions/customer:id/subdivision:subId/employees/edit/employee:empId',
+      name: 'subdivisionEditEmployee',
+      meta: { layout: 'main' },
+      component: () => import('../components/customers/subdivisions/employees/CustomerEmployeeEdit')
     }
   ]
 })

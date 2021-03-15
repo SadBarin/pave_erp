@@ -22,42 +22,38 @@
       <th>Сайт</th>
       <th>Почта</th>
       <th>Адрес</th>
-      <th>Менеджер</th>
-      <th>Статус</th>
     </tr>
-    <tr v-for="customer in customers" :key="customer.value" :class="customer.status === 'Действующий' ? '' : 'opacity-5'">
+    <tr v-for="customer in customers" :key="customer.value">
         <td>
           <div class="parent-clip-text">
             <p class="clip-text" :title="customer.name">{{customer.name}}</p>
           </div>
         </td>
-        <td><a :href="'tel:' + customer.number" title="Позвонить">{{customer.number}}</a></td>
+        <td><a :href="'tel:' + customer.number" title="Позвонить">{{customer.subdivisions['0'].number}}</a></td>
         <td>
           <div class="parent-clip-text">
-            <a class="clip-text" :title="customer.site" target="_blank" :href="customer.site">{{customer.site}}</a>
+            <a class="clip-text" :title="customer.site" target="_blank" :href="customer.site">{{customer.subdivisions['0'].site}}</a>
           </div>
         </td>
         <td>
           <div class="parent-clip-text">
-            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту: ' + customer.email">{{customer.email}}</a>
+            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту: ' + customer.email">{{customer.subdivisions['0'].email}}</a>
           </div>
         </td>
         <td>
           <div class="parent-clip-text">
-            <p class="clip-text" :title="customer.address">{{customer.address}}</p>
+            <p class="clip-text" :title="customer.address">{{customer.subdivisions['0'].address}}</p>
           </div>
-        </td>
-        <td>
-          <div class="parent-clip-text">
-            <p class="clip-text" :title="customer.manager">{{customer.manager}}</p>
-          </div>
-        </td>
-        <td>
-          <div v-if="customer.status === 'Действующий'" title="Действующий" class="circle green darken-1"></div>
-          <div v-else title="Сотрудничество прервано" class="circle red darken-1"></div>
         </td>
         <td>
           <div class="flex-center btns-collection">
+            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
+                         title="Подразделения"
+                         :to="{name : 'customerSubdivisions', params: {id: customer.id}}"
+            >
+              <i class="material-icons">domain</i>
+            </router-link>
+
             <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                          title="Просмотреть"
                          :to="{name : 'customerAbout', params: {id: customer.id}}"
@@ -91,13 +87,21 @@ import popupMixin from '@/mixins/popupMixin'
 
 export default {
   name: 'TableCustomers',
+
   mixins: [popupMixin],
+
   props: { customers: Object },
+
   data () {
     return {
       customer: ''
     }
   },
+
+  created () {
+    console.log(this.customers)
+  },
+
   methods: {
     setCustomer (customer) {
       this.customer = customer
