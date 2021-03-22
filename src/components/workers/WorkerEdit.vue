@@ -79,10 +79,10 @@
                         id="note"
                         type="text"
                         maxlength="100"
-                        v-model.trim="editedWorker.note"
-                        @change="changeData(editedWorker.note, 'Примечание')"
+                        v-model.trim="note"
+                        @change="changeData(note, 'Примечание')"
                       >
-                      <label class="active" for="note">Тестовое примечание</label>
+                      <label class="active" for="note">Текст нового примечания</label>
                     </div>
 
                     <div class="input-field editor-input flex-column-center">
@@ -528,7 +528,8 @@ export default {
   data () {
     return {
       editedWorker: '',
-      history: []
+      history: [],
+      note: ''
     }
   },
 
@@ -579,6 +580,10 @@ export default {
 
     saveEditedWorker (worker) {
       this.editedWorker.editedCount += 1
+
+      if (this.note.length) {
+        this.editedWorker.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+      }
 
       try {
         this.history.push({

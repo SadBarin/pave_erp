@@ -85,7 +85,7 @@
                         class="materialize-textarea"
                         maxlength="500"
                         data-length="500"
-                        v-model.trim="editedCustomer.note"
+                        v-model.trim="note"
                       ></textarea>
                       <label class="active" for="note">Примечание</label>
                     </div>
@@ -165,7 +165,8 @@ export default {
 
   data () {
     return {
-      editedCustomer: ''
+      editedCustomer: '',
+      note: ''
     }
   },
 
@@ -245,6 +246,10 @@ export default {
     },
 
     saveEditedCustomer (customer) {
+      if (this.note.length) {
+        this.editedCustomer.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+      }
+
       firebase.database().ref('/customers/' + this.customerId + '/subdivisions/' + this.currentSubdivision.id + '/employees/' + customer.id).set(customer)
         .then(() => {
           this.SET_CUSTOMERS_FROM_SERVER()

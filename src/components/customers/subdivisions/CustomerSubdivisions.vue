@@ -97,7 +97,7 @@ export default {
         site: '',
         email: '',
         address: this.authEmployee.city,
-        note: 'Новое подразделение',
+        notes: ['Новое подразделение'],
         manager: this.authEmployee.surname + ' ' + this.authEmployee.name,
         status: 'Действующий'
       }

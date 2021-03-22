@@ -97,7 +97,8 @@ export default {
         patronymic: 'Сотрудник',
         post: 'Сотрудник',
         email: '',
-        number: ''
+        number: '',
+        notes: ['Новый рабочий клиента']
       }
 
       firebase.database().ref('/customers/' + this.customerId + '/subdivisions/' + this.currentSubdivision.id + '/employees/' + newCustomer.id).set(newCustomer)

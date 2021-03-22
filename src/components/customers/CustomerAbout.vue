@@ -27,7 +27,11 @@
 
       <div class="margin-fix w20rem">
         <h5 class="flex-start-center"><i class="material-icons">comment</i> Примечание</h5>
-        <h6 v-if="customer.note !== '' || null"><span>{{customer.note}}</span></h6>
+        <h6 v-if="customer.notes !== '' || null">
+          <p v-for="(note, i) in customer.notes" :key="i">
+            {{ note }}
+          </p>
+        </h6>
         <h6 v-show="customer.uploadImageNote !== undefined || ''">Изображение: <wbr> <span><a v-bind:href="customer.uploadImageNote" target="_blank">Открыть</a></span></h6>
       </div>
 
@@ -85,6 +89,8 @@ export default {
   created () {
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.customer = this.customers[this.customerId]
+
+    console.log(this.customer)
   },
 
   methods: {

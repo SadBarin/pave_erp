@@ -111,7 +111,8 @@ export default {
               id: this.authEmployee.id
             }
           }],
-          events: [{ id: Date.now(), title: 'Карточка создана', date: new Date().toJSON() }]
+          events: [{ id: Date.now(), title: 'Карточка создана', date: new Date().toJSON() }],
+          notes: [`${new Date().toLocaleDateString()}: Рабочий создан`]
         }
 
         this.$emit('add-worker', newWorker)

@@ -71,7 +71,7 @@ export default {
       const newCustomer = {
         id: Date.now(),
         name,
-        note: 'Новый клиент',
+        notes: [`${new Date().toLocaleDateString()}: Клиент создан`],
         subdivisions: {
           0: {
             id: '0',
@@ -85,7 +85,8 @@ export default {
             note: 'Главное подразделение клиента',
             address: this.authEmployee.city,
             manager: this.authEmployee.surname + ' ' + this.authEmployee.name,
-            status: 'Действующий'
+            status: 'Действующий',
+            notes: [`${new Date().toLocaleDateString()}: Главное подразделение`]
           }
         }
       }

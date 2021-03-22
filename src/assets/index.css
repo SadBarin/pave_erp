@@ -356,6 +356,11 @@ section {
   margin-bottom: 1rem;
 }
 
+#app .page-title .material-icons{
+  margin-bottom: 0.4rem;
+  font-size: 1.8rem !important;
+}
+
 #app .btn-page-title {
   box-shadow: none !important;
 
