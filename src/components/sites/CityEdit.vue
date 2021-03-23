@@ -34,31 +34,15 @@
       </div>
     </div>
 
-    <section>
-      <div class="row">
-        <div class="col s12">
-          <div>
-            <form @submit.prevent="">
-              <div class="form-content">
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title">Общее</h4>
+    <section class="flex-column-center">
+      <h4>Общие настройки</h4>
 
-                    <div class="editor-input input-field">
-                      <input
-                        type="text"
-                        id="city"
-                        maxlength="20"
-                        v-model.trim="editedCity.name"
-                      >
-                      <label for="city" class="active">Название города</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+      <div class="edit-container">
+        <AppInput
+          label="Название города"
+          maxLength="10"
+          v-model="editedCity.name"
+        />
       </div>
     </section>
   </div>
@@ -68,9 +52,11 @@
 import popupMixin from '@/mixins/popupMixin'
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
+import AppInput from '@/components/AppInput'
 
 export default {
   name: 'Sites',
+  components: { AppInput },
   mixins: [popupMixin],
   data () {
     return {
@@ -108,4 +94,7 @@ export default {
 </script>
 
 <style scoped>
+.edit-container {
+  width: 70%;
+}
 </style>
