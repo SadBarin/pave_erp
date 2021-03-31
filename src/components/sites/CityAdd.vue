@@ -59,7 +59,9 @@ export default {
         // Body New City
         const newCity = {
           id: Date.now(),
-          name: this.cityName
+          name: this.cityName,
+          notes: [],
+          notesCount: 5
         }
 
         this.$emit('add-city', newCity)

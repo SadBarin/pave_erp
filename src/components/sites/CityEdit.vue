@@ -1,73 +1,83 @@
 <template>
-  <div>
-    <Popup
-      v-if="popupShow"
-      @yes="editorExit"
-      @no="popupHidden"
-    >
-      <template #title-popup>
-        Покинуть редактор города?
-      </template>
+  <div id="app-edit">
+    <div class="edit-top-panel">
+      <AppHeader header-level="3" material-icon="location_city" :header-text="'Редактор города: ' + editedCity.name"/>
 
-      <template #text-info-popup>
-        Введённые данные не будут сохранены!
-      </template>
-    </Popup>
-
-    <div class="page-title flex-between-center">
-      <h3>Редактор города "{{ editedCity.name }}"</h3>
-
-      <div class="editor-btns">
-        <button
-          class="btn editor-btn btn-hover blue darken-1"
-          @click="saveEditedCity(editedCity)"
-        >
-          <i class="material-icons">exit_to_app</i> Сохранить и выйти
-        </button>
-
-        <button
-          class="btn editor-btn btn-hover blue darken-1"
-          @click.prevent="popupVisibility"
-        >
-          <i class="material-icons">location_city</i>К Городам
-        </button>
+      <div class="edit-nav-buttons">
+        <NavButton ref="button-update" material-icon="save" title="Сохранить и выйти" title-pressed="Сохраняем..." @button-click="saveEditedCity(editedCity)"/>
+        <NavButton material-icon="location_city" title="Вернуться к городам" title-pressed="Выходим..." @button-click="editorExit"/>
       </div>
     </div>
 
-    <section class="flex-column-center">
-      <h4>Общие настройки</h4>
+    <section class="edit-section">
+      <div class="edit-block">
+        <AppHeader header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
 
-      <div class="edit-container">
-        <AppInput
-          label="Название города"
-          maxLength="10"
-          v-model="editedCity.name"
-        />
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-city"
+            label="Название города: "
+            maxLength="20"
+            v-model="editedCity.name"
+          />
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeader header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
+
+        <div class="edit-block-content">
+          <AppNumbers
+            inputID="input-note-count"
+            label="Заметок в списке:  "
+            minValue="0"
+            maxValue="35"
+            maxLength="3"
+            v-model="editedCity.notesCount"
+          />
+
+          <AppLineText
+            placeholder="Введите новую заметку"
+            inputID="input-note"
+            label="Новая Заметка: "
+            maxLength="35"
+            v-model="note"
+          />
+
+          <AppNotesList :notes-list="editedCity.notes" :notes-count="editedCity.notesCount"/>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
-import AppInput from '@/components/AppInput'
+
+import AppNotesList from '@/components/AppNotesList'
+import AppLineText from '@/components/AppLineText'
+import AppNumbers from '@/components/AppNumbers'
+import AppHeader from '@/components/AppHeader'
+import NavButton from '@/components/NavButton'
 
 export default {
   name: 'Sites',
-  components: { AppInput },
-  mixins: [popupMixin],
+
+  components: { AppLineText, AppNumbers, AppHeader, NavButton, AppNotesList },
+
   data () {
     return {
-      editedCity: ''
+      editedCity: '',
+      note: ''
     }
   },
+
   computed: {
     ...mapGetters([
       'sites'
     ])
   },
+
   methods: {
     ...mapMutations([
       'SET_SITES_FROM_SERVER',
@@ -79,13 +89,25 @@ export default {
     },
 
     saveEditedCity (city) {
+      if (this.note.length) {
+        try {
+          this.editedCity.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+        } catch (error) {
+          this.editedCity.notes = []
+          this.editedCity.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+        }
+      }
+
       firebase.database().ref('/sites/' + city.id).set(city)
         .then(() => {
           this.SET_SITES_FROM_SERVER()
           this.editorExit()
+          // eslint-disable-next-line no-undef
+          M.toast({ html: 'Данные сохранены!' })
         })
     }
   },
+
   mounted () {
     this.SET_SITES_FROM_LOCAL_STORAGE()
     this.editedCity = this.sites[this.$route.params.id]
@@ -94,7 +116,31 @@ export default {
 </script>
 
 <style scoped>
-.edit-container {
-  width: 70%;
-}
+  #app-edit .edit-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #app-edit .edit-top-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #app-edit .edit-top-panel:first-child{
+    margin: 1.6rem 0 2.7rem 0;
+  }
+
+  #app-edit .edit-block-content {
+    margin-top: 1rem;
+  }
+
+  #app-edit .edit-nav-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  #app-edit .edit-nav-buttons > * {
+    margin-right: 1rem;
+  }
 </style>
