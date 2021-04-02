@@ -144,6 +144,13 @@ const router = new VueRouter({
       name: 'subdivisionEditEmployee',
       meta: { layout: 'main' },
       component: () => import('../components/customers/subdivisions/employees/CustomerEmployeeEdit')
+    },
+
+    {
+      path: '/deal',
+      name: 'deal',
+      meta: { layout: 'main' },
+      component: () => import('../views/TheDeal')
     }
   ]
 })

@@ -67,7 +67,6 @@ export default {
     },
 
     addCustomer (name) {
-      // Body New Customer
       const newCustomer = {
         id: Date.now(),
         name,

@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'appButton',
+  name: 'AppButtonIcon',
 
   data () {
     return {
@@ -38,7 +38,7 @@ export default {
   methods: {
     buttonClick () {
       this.$emit('button-click')
-      this.clickStatus = !this.clickStatus
+      // this.clickStatus = !this.clickStatus
     }
   }
 }

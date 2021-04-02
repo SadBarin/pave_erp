@@ -49,7 +49,6 @@ export default {
   mounted () {
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.worker = this.workers[this.$route.params.id]
-    console.log(this.worker)
   }
 }
 </script>

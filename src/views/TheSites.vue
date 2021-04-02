@@ -1,24 +1,19 @@
 <template>
-  <div class="container-page">
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3 class="right-margin-big">Список городов</h3>
-
-        <div class="flex-center">
-          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
-                  @click="updateCity"
-          ><i class="material-icons middle-material-icons">autorenew</i>
-          </button>
-        </div>
+  <div id="app-sites">
+    <div class="app-sites-top-panel">
+      <div class="app-sites-header">
+        <AppHeaderIcon header-level="3" material-icon="" header-text="Список городов"/>
+        <AppButtonIcon material-icon="autorenew" @button-click="updateCity"/>
       </div>
 
-      <AddCardSites
+      <LineTextAdd
         @add-city="addCity"
-        :sites="sites"
+        line-text-label="Добавить город: "
+        line-text-placeholder="Название нового города"
       />
     </div>
 
-    <div>
+    <div class="app-sites-content">
       <ListSites
         :sites="sites"
         @remove-city="removeCity"
@@ -30,13 +25,16 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
-import AddCardSites from '@/components/sites/CityAdd'
+
+import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import LineTextAdd from '@/components/LineTextAdd'
 import ListSites from '@/components/sites/list/SitesList'
 
 export default {
   name: 'Sites',
 
-  components: { ListSites, AddCardSites },
+  components: { AppHeaderIcon, AppButtonIcon, ListSites, LineTextAdd },
 
   computed: {
     ...mapGetters([
@@ -63,7 +61,16 @@ export default {
     },
 
     addCity (city) {
-      firebase.database().ref('/sites/' + city.id).set(city)
+      const name = city[0].toUpperCase() + city.substring(1)
+
+      const newCity = {
+        id: Date.now(),
+        name,
+        notes: [],
+        notesCount: 5
+      }
+
+      firebase.database().ref('/sites/' + newCity.id).set(newCity)
         .then(() => {
           console.log('Город добавлен ➕')
           this.SET_SITES_FROM_SERVER()
@@ -78,3 +85,24 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #app-sites .app-sites-top-panel {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin: 1.6rem 0 2.7rem 0;
+  }
+
+  #app-sites .app-sites-header {
+    display: flex;
+    align-items: flex-end;
+
+    margin-left: -1rem;
+  }
+
+  .app-sites-header > *:first-child {
+    margin-right: 2rem;
+  }
+</style>

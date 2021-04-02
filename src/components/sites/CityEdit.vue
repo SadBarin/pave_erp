@@ -1,17 +1,17 @@
 <template>
   <div id="app-edit">
     <div class="edit-top-panel">
-      <AppHeader header-level="3" material-icon="location_city" :header-text="'Редактор города: ' + editedCity.name"/>
+      <AppHeaderIcon header-level="3" material-icon="location_city" :header-text="'Редактор города: ' + editedCity.name"/>
 
       <div class="edit-nav-buttons">
-        <NavButton ref="button-update" material-icon="save" title="Сохранить и выйти" title-pressed="Сохраняем..." @button-click="saveEditedCity(editedCity)"/>
-        <NavButton material-icon="location_city" title="Вернуться к городам" title-pressed="Выходим..." @button-click="editorExit"/>
+        <AppButtonIcon material-icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
+        <AppButtonIcon material-icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
       </div>
     </div>
 
     <section class="edit-section">
       <div class="edit-block">
-        <AppHeader header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
+        <AppHeaderIcon header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
 
         <div class="edit-block-content">
           <AppLineText
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="edit-block">
-        <AppHeader header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
+        <AppHeaderIcon header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
 
         <div class="edit-block-content">
           <AppNumbers
@@ -57,13 +57,13 @@ import { mapGetters, mapMutations } from 'vuex'
 import AppNotesList from '@/components/AppNotesList'
 import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
-import AppHeader from '@/components/AppHeader'
-import NavButton from '@/components/NavButton'
+import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
   name: 'Sites',
 
-  components: { AppLineText, AppNumbers, AppHeader, NavButton, AppNotesList },
+  components: { AppButtonIcon, AppLineText, AppNumbers, AppHeaderIcon, AppNotesList },
 
   data () {
     return {
@@ -127,7 +127,7 @@ export default {
     justify-content: space-between;
   }
 
-  #app-edit .edit-top-panel:first-child{
+  #app-edit .edit-top-panel:first-child {
     margin: 1.6rem 0 2.7rem 0;
   }
 

@@ -8,7 +8,7 @@
 
 <script>
 import EmptyLayout from '@/layouts/EmptyLayout'
-import MainLayout from '@/layouts/MainLayout'
+import MainLayout from '@/layouts/main/MainLayout'
 
 export default {
   components: {

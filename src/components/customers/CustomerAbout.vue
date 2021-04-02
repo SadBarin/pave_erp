@@ -89,8 +89,6 @@ export default {
   created () {
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.customer = this.customers[this.customerId]
-
-    console.log(this.customer)
   },
 
   methods: {

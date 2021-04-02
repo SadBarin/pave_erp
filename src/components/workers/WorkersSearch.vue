@@ -227,9 +227,6 @@ export default {
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.searchWorkers = Object.values(this.workers)
 
-    console.log('SearchWorkers', this.searchWorkers)
-    console.log('workers', this.workers)
-
     const tabs = document.querySelectorAll('.tabs')
     tabs.forEach((element) => {
       M.Tabs.init(element)

@@ -98,10 +98,6 @@ export default {
     }
   },
 
-  created () {
-    console.log(this.customers)
-  },
-
   methods: {
     setCustomer (customer) {
       this.customer = customer

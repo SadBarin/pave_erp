@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'AppHeaderFour',
+  name: 'AppHeaderIconFour',
 
   props: {
     headerLevel: String,
@@ -38,11 +38,15 @@ export default {
   }
 
   #app-header-container .app-header-three {
+    opacity: 0.9;
+
     margin-left: -0.2rem;
     font-size: 1.9rem;
   }
 
   #app-header-container .app-header-four {
+    opacity: 0.8;
+
     font-size: 1.7rem;
   }
 

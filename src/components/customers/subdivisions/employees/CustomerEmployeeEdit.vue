@@ -217,7 +217,6 @@ export default {
 
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.editedCustomer = this.customers[this.customerId].subdivisions[this.subId].employees[this.empId]
-    console.log(this.customer)
   },
 
   methods: {

@@ -1,54 +1,33 @@
 <template>
-  <div class="container-page">
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3>Настройки</h3>
-      </div>
+  <div id="app-settings">
+    <div class="settings-header">
+      <AppHeaderIcon header-level="3" material-icon="" header-text="Настройки"/>
     </div>
 
-    <div class="info-content">
-      <div>
-        <h6>
-          <router-link class="pointer" to="/sites">
-            <i class="material-icons">location_city</i>
-            Настроить города
-          </router-link>
-        </h6>
-        <h6>
-          <router-link class="pointer" to="/employees">
-            <i class="material-icons">group</i>
-            Настроить сотрудников
-          </router-link>
-        </h6>
-      </div>
+    <div class="settings-content">
+      <AppLinkIcon link-content="Список городов" link-icon="location_city" link-path="/sites"/>
+      <AppLinkIcon link-content="Список сотрудников" link-icon="group" link-path="/employees"/>
     </div>
   </div>
 </template>
 
 <script>
-import M from 'materialize-css'
-import { mapGetters } from 'vuex'
+import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppLinkIcon from '@/components/AppLinkIcon'
 
 export default {
   name: 'Settings.vue',
-
-  created () {
-    const tooltip = document.querySelectorAll('.tooltipped')
-    tooltip.forEach((element) => {
-      M.Tooltip.init(element)
-    })
-  },
-
-  computed: {
-    ...mapGetters([
-      'authEmployee'
-    ])
-  }
+  components: { AppHeaderIcon, AppLinkIcon }
 }
 </script>
 
 <style scoped>
-  h3 {
-    margin-bottom: 0px !important;
+  #app-settings .settings-header {
+    margin: 1.6rem 0 2rem -1rem;
+  }
+
+  #app-settings .settings-content {
+    display: flex;
+    flex-direction: column;
   }
 </style>

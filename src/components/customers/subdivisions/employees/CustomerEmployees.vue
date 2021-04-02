@@ -67,8 +67,6 @@ export default {
   },
 
   created () {
-    console.log('currentSubDiv: ', this.currentSubdivision)
-
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
   },
