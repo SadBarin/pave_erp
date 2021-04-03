@@ -54,7 +54,7 @@
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
-import AppNotesList from '@/components/AppNotesList'
+import AppNotesList from '@/components/edit/AppNotesList'
 import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
 import AppHeaderIcon from '@/components/AppHeaderIcon'

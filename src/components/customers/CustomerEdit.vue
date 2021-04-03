@@ -1,197 +1,49 @@
 <template>
-  <div>
-    <Popup
-      v-if="popupShow"
-      @yes="editorExit"
-      @no="popupHidden"
-    >
-      <template #title-popup>
-        Покинуть редактор клиента?
-      </template>
+  <div id="app-edit">
+    <div class="edit-top-panel">
+      <AppHeaderIcon header-level="3" material-icon="business_center" :header-text="'Редактор клиента: ' + editedCustomer.name"/>
 
-      <template #text-info-popup>
-        Введённые данные не будут сохранены!
-      </template>
-    </Popup>
-
-    <div class="page-title flex-between-center">
-      <h3 class="title-clip">Редактор клиента <br> "{{editedCustomer.name}}"</h3>
-
-      <div class="editor-btns">
-        <button
-          class="btn editor-btn btn-hover auth-submit blue darken-1"
-          v-on:click="saveEditedCustomer(editedCustomer)"
-        >
-          <i class="material-icons">exit_to_app</i>Сохранить и выйти
-        </button>
-
-        <button
-          class="btn editor-btn btn-hover auth-submit blue darken-1"
-          v-on:click.prevent="popupVisibility"
-        >
-          <i class="material-icons">business_center</i> К Клиентам
-        </button>
+      <div class="edit-nav-buttons">
+        <AppButtonIcon material-icon="save" title="Сохранить и выйти" @button-click="saveEditedCustomer(editedCustomer)"/>
+        <AppButtonIcon material-icon="business_center" title="Вернуться к клиентам" @button-click="editorExit"/>
       </div>
     </div>
 
-    <section>
-      <div class="row">
-        <div class="col s12">
-          <div>
+    <section class="edit-section">
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
 
-            <form>
-              <div class="form-content">
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-city"
+            label="Название клиента: "
+            maxLength="20"
+            v-model="editedCustomer.name"
+          />
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">account_box</i> Общее</h4>
+        <div class="edit-block-content">
+          <AppNumbers
+            inputID="input-note-count"
+            label="Заметок в списке:  "
+            minValue="0"
+            maxValue="35"
+            maxLength="3"
+            v-model="editedCustomer.notesCount"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="name"
-                        type="text"
-                        v-model.trim="editedCustomer.name"
-                      >
-                      <label class="active" for="name"> Наименование</label>
-                    </div>
-                  </div>
-                </div>
+          <AppLineText
+            placeholder="Введите новую заметку"
+            inputID="input-note"
+            label="Новая Заметка: "
+            maxLength="35"
+            v-model="note"
+          />
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">comment</i>Примечание</h4>
-
-                    <div class="input-field editor-input">
-                      <textarea
-                        id="note"
-                        class="materialize-textarea"
-                        maxlength="500"
-                        data-length="500"
-                        v-model.trim="note"
-                      ></textarea>
-                      <label class="active" for="note">Примечание</label>
-                    </div>
-
-                    <div class="input-field editor-input flex-column-center">
-                      <button id="upload_widget" @click.prevent="upload" class="cloudinary-button">Загрузить фото примечания</button>
-
-                      <div class="photo-container flex-center" v-if="editedCustomer.uploadImage != null">
-                        <img :src="editedCustomer.uploadImage" width="200rem">
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-<!--                <div class="card editor-card white darken-1 black-text">-->
-<!--                  <div class="card-content flex-column-center">-->
-<!--                    <h4 class="card-title"><i class="material-icons">business_center</i> Договоры</h4>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="contractNumber"-->
-<!--                        type="number"-->
-<!--                        v-model.trim="editedCustomer.contractNumber"-->
-<!--                      >-->
-<!--                      <label class="active" for="contractNumber">Номер договора</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="contractDate"-->
-<!--                        type="date"-->
-<!--                        v-model.trim="editedCustomer.contractDate"-->
-<!--                      >-->
-<!--                      <label class="active" for="contractDate">Дата договора</label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="card editor-card white darken-1 black-text">-->
-<!--                  <div class="card-content flex-column-center">-->
-<!--                    <h4 class="card-title"><i class="material-icons">local_phone</i> Контакты</h4>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="number"-->
-<!--                        type="tel"-->
-<!--                        maxlength="20"-->
-<!--                        v-model.trim="editedCustomer.number"-->
-<!--                      >-->
-<!--                      <label class="active" for="number">Номер телефона</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="fax"-->
-<!--                        type="number"-->
-<!--                        v-model.trim="editedCustomer.fax"-->
-<!--                      >-->
-<!--                      <label class="active" for="fax">Факс</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="site"-->
-<!--                        type="text"-->
-<!--                        v-model.trim="editedCustomer.site"-->
-<!--                      >-->
-<!--                      <label class="active" for="site">Сайт</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="email"-->
-<!--                        type="email"-->
-<!--                        v-model.trim="editedCustomer.email"-->
-<!--                      >-->
-<!--                      <label class="active" for="email">Почта</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="address"-->
-<!--                        type="text"-->
-<!--                        v-model.trim="editedCustomer.address"-->
-<!--                      >-->
-<!--                      <label class="active" for="address">Адрес</label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="card editor-card white darken-1 black-text">-->
-<!--                  <div class="card-content flex-column-center">-->
-<!--                    <h4 class="card-title"><i class="material-icons">assessment</i> Системная информация</h4>-->
-
-<!--                    <div class="input-field editor-input">-->
-<!--                      <input-->
-<!--                        id="manager"-->
-<!--                        type="text"-->
-<!--                        v-model.trim="editedCustomer.manager"-->
-<!--                      >-->
-<!--                      <label class="active" for="manager">Менеджер</label>-->
-<!--                    </div>-->
-
-<!--                    <div class="input-field radio-field editor-input flex-start-center">-->
-<!--                      <p class="right-margin-big">Статус: </p>-->
-<!--                      <p class="right-margin-little">-->
-<!--                        <label>-->
-<!--                          <input name="status" type="radio" value="Действующий" v-model.trim="editedCustomer.status"/>-->
-<!--                          <span>Действующий</span>-->
-<!--                        </label>-->
-<!--                      </p>-->
-<!--                      <p>-->
-<!--                        <label>-->
-<!--                          <input name="status" type="radio" value="Сотрудничество прервано" v-model.trim="editedCustomer.status"/>-->
-<!--                          <span>Сотрудничество прервано</span>-->
-<!--                        </label>-->
-<!--                      </p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-              </div>
-            </form>
-          </div>
+          <AppNotesList :notes-list="editedCustomer.notes" :notes-count="editedCustomer.notesCount"/>
         </div>
       </div>
     </section>
@@ -199,18 +51,19 @@
 </template>
 
 <script>
-import M from 'materialize-css'
-import { mask } from 'vue-the-mask'
-import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
+
+import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import AppNumbers from '@/components/AppNumbers'
+import AppLineText from '@/components/AppLineText'
+import AppNotesList from '@/components/edit/AppNotesList'
 
 export default {
   name: 'EditorWorkers',
 
-  mixins: [popupMixin],
-
-  directives: { mask },
+  components: { AppHeaderIcon, AppButtonIcon, AppNumbers, AppLineText, AppNotesList },
 
   data () {
     return {
@@ -226,16 +79,6 @@ export default {
   },
 
   created () {
-    const select = document.querySelectorAll('.select')
-    select.forEach((element) => {
-      M.FormSelect.init(element)
-    })
-
-    const textarea = document.querySelectorAll('.materialize-textarea')
-    textarea.forEach((element) => {
-      M.CharacterCounter.init(element)
-    })
-
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
     this.editedCustomer = this.customers[this.$route.params.id]
   },
@@ -246,28 +89,18 @@ export default {
       'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
-    upload () {
-      // eslint-disable-next-line no-undef
-      const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'db6qzfvbw',
-        uploadPreset: 'ml_default',
-        language: 'ru'
-      }, (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.editedCustomer.uploadImage = result.info.secure_url
-        }
-      })
-
-      myWidget.open()
-    },
-
     editorExit () {
       this.$router.push('/customers')
     },
 
     saveEditedCustomer (customer) {
       if (this.note.length) {
-        this.editedCustomer.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+        try {
+          this.editedCustomer.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+        } catch (error) {
+          this.editedCustomer.notes = []
+          this.editedCustomer.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+        }
       }
 
       firebase.database().ref('customers/' + customer.id).set(customer)
@@ -279,3 +112,33 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #app-edit .edit-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #app-edit .edit-top-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #app-edit .edit-top-panel:first-child {
+    margin: 1.6rem 0 2.7rem 0;
+  }
+
+  #app-edit .edit-block-content {
+    margin-top: 1rem;
+  }
+
+  #app-edit .edit-nav-buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  #app-edit .edit-nav-buttons > * {
+    margin-right: 1rem;
+  }
+</style>

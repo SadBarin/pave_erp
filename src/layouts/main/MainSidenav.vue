@@ -15,14 +15,14 @@
 
     <aside class="main-sidenav" v-else-if="!open">
       <div class="main-sidenav-top">
-        <AppLinkIcon link-content="" link-icon="transfer_within_a_station" link-path="/workers"/>
-        <AppLinkIcon link-content="" link-icon="business_center" link-path="/customers"/>
-        <AppLinkIcon link-content="" link-icon="attach_money" link-path="/deal"/>
-        <AppLinkIcon link-content="" link-icon="settings" link-path="/settings"/>
+        <AppButtonIcon material-icon="transfer_within_a_station" @button-click="$router.push('/workers')"/>
+        <AppButtonIcon material-icon="business_center" @button-click="$router.push('/customers')"/>
+        <AppButtonIcon material-icon="attach_money" @button-click="$router.push('/deal')"/>
+        <AppButtonIcon material-icon="settings" @button-click="$router.push('/settings')"/>
       </div>
 
       <div class="main-sidenav-bottom">
-        <AppLinkIcon link-content="" link-icon="exit_to_app" link-path="/"/>
+        <AppButtonIcon material-icon="exit_to_app" @button-click="$router.push('/')"/>
       </div>
     </aside>
   </div>
@@ -30,6 +30,7 @@
 
 <script>
 import AppLinkIcon from '@/components/AppLinkIcon'
+import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
   name: 'MainSidenav',
@@ -38,7 +39,11 @@ export default {
     open: Boolean
   },
 
-  components: { AppLinkIcon }
+  components: { AppLinkIcon, AppButtonIcon },
+
+  created () {
+    console.log(this.$router)
+  }
 }
 </script>
 
