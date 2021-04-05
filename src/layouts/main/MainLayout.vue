@@ -11,47 +11,47 @@
         </template>
       </Popup>
 
-<!--      <div class="sidenav-menu">-->
-<!--        <div class="navbar-left">-->
-<!--          <button-->
-<!--            class="btn transparent blue-text text-darken-1"-->
-<!--            @click.prevent="isOpen = !isOpen"-->
-<!--          >-->
-<!--            <i class="material-icons">menu</i>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="sidenav-menu">
+        <div class="navbar-left">
+          <button
+            class="btn transparent blue-text text-darken-1"
+            @click.prevent="isOpen = !isOpen"
+          >
+            <i class="material-icons">menu</i>
+          </button>
+        </div>
+      </div>
 
-<!--      <div class="sidenav app-sidenav" :class="{open: isOpen}">-->
-<!--        <div class="sidenav-content sidenav-top">-->
-<!--          <ul>-->
-<!--            <li>-->
-<!--              <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station" link-path="/workers"/>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deal"/>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
+      <div class="sidenav app-sidenav" :class="{open: isOpen}">
+        <div class="sidenav-content sidenav-top">
+          <ul>
+            <li>
+              <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station" link-path="/workers"/>
+            </li>
+            <li>
+              <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>
+            </li>
+            <li>
+              <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deal"/>
+            </li>
+            <li>
+              <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>
+            </li>
+          </ul>
+        </div>
 
-<!--        <div class="sidenav-content sidenav-bottom">-->
-<!--          <button-->
-<!--            class="btn transparent blue-text darken-1"-->
-<!--            @click="popupVisibility"-->
-<!--          >-->
-<!--            <i class="material-icons">exit_to_app</i>-->
-<!--            Выйти-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
+        <div class="sidenav-content sidenav-bottom">
+          <button
+            class="btn transparent blue-text darken-1"
+            @click="popupVisibility"
+          >
+            <i class="material-icons">exit_to_app</i>
+            Выйти
+          </button>
+        </div>
+      </div>
 
-      <MainSidenav :open="false"/>
+<!--      <MainSidenav :open="false"/>-->
 
       <main class="app-content">
         <div
@@ -70,12 +70,12 @@ import popupMixin from '@/mixins/popupMixin'
 import firebase from 'firebase/app'
 import { mapGetters } from 'vuex'
 
-import MainSidenav from '@/layouts/main/MainSidenav'
+import AppLinkIcon from '@/components/AppLinkIcon'
 
 export default {
   name: 'MainLayout.vue',
 
-  components: { MainSidenav },
+  components: { AppLinkIcon },
 
   mixins: [popupMixin],
 

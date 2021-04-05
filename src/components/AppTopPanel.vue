@@ -1,0 +1,40 @@
+<template>
+  <div id="app-top-panel">
+    <h3 class="top-panel-header">{{header}}</h3>
+
+    <div class="top-panel-nav-buttons">
+      <slot name="nav-buttons"></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AppTopPanel',
+  props: {
+    header: String
+  }
+}
+</script>
+
+<style scoped>
+  #app-top-panel {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin: 1.6rem 0 2.7rem 0;
+  }
+
+  #app-top-panel .top-panel-header {
+    margin: 0 2rem 0 0;
+  }
+
+  #app-top-panel .top-panel-nav-buttons {
+    display: flex;
+  }
+
+  #app-top-panel .top-panel-nav-buttons > * {
+    margin-left: 1rem;
+  }
+</style>

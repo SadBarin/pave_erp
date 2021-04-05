@@ -39,11 +39,7 @@ export default {
     open: Boolean
   },
 
-  components: { AppLinkIcon, AppButtonIcon },
-
-  created () {
-    console.log(this.$router)
-  }
+  components: { AppLinkIcon, AppButtonIcon }
 }
 </script>
 

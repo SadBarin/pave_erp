@@ -1,17 +1,21 @@
 <template>
   <div id="app-sites">
-    <div class="app-sites-top-panel">
-      <div class="app-sites-header">
-        <AppHeaderIcon header-level="3" material-icon="" header-text="Список городов"/>
-        <AppButtonIcon material-icon="autorenew" @button-click="updateCity"/>
-      </div>
+    <AppPopupWrapper :hidden="popupHidden">
+      <h3>Меню добавление города</h3>
 
       <LineTextAdd
         @add-city="addCity"
-        line-text-label="Добавить город: "
-        line-text-placeholder="Название нового города"
+        line-text-label="Название: "
+        line-text-placeholder="Например Москва"
       />
-    </div>
+    </AppPopupWrapper>
+
+    <AppTopPanel header="Список городов">
+      <template #nav-buttons>
+        <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateCity"/>
+        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupHidden = false"/>
+      </template>
+    </AppTopPanel>
 
     <div class="app-sites-content">
       <ListSites
@@ -26,15 +30,22 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import LineTextAdd from '@/components/LineTextAdd'
 import ListSites from '@/components/sites/list/SitesList'
+import AppPopupWrapper from '@/components/AppPopupWrapper'
 
 export default {
   name: 'Sites',
 
-  components: { AppHeaderIcon, AppButtonIcon, ListSites, LineTextAdd },
+  components: { AppTopPanel, AppButtonIcon, ListSites, LineTextAdd, AppPopupWrapper },
+
+  data () {
+    return {
+      popupHidden: true
+    }
+  },
 
   computed: {
     ...mapGetters([
@@ -73,6 +84,7 @@ export default {
       firebase.database().ref('/sites/' + newCity.id).set(newCity)
         .then(() => {
           console.log('Город добавлен ➕')
+          this.popupHidden = true
           this.SET_SITES_FROM_SERVER()
         })
     },
@@ -98,11 +110,13 @@ export default {
   #app-sites .app-sites-header {
     display: flex;
     align-items: flex-end;
-
-    margin-left: -1rem;
   }
 
-  .app-sites-header > *:first-child {
-    margin-right: 2rem;
+  #app-sites .app-sites-header h3 {
+    margin: 0 2rem 0 0;
+  }
+
+  #app-sites .app-sites-nav-buttons {
+    display: flex;
   }
 </style>

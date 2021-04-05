@@ -1,20 +1,20 @@
 <template>
   <div class="app-button-container">
     <button
-      v-if="!clickStatus"
+      v-if="!pressed"
       class="app-button"
-      @click="buttonClick"
+      @click="$emit('button-click')"
       :title="title"
     >
-      <i class="material-icons app-button-icon">{{materialIcon}}</i>
+      <i class="material-icons app-button-icon" :style="'font-size: ' + size + ' !important'">{{icon}}</i>
     </button>
 
     <div
       v-else
       class="app-button pressed"
-      :title="titlePressed"
+      :title="title"
     >
-      <i class="material-icons app-button-icon">{{materialIcon}}</i>
+      <i class="material-icons app-button-icon" :style="'font-size: ' + size + ' !important'">{{icon}}</i>
     </div>
   </div>
 </template>
@@ -23,23 +23,11 @@
 export default {
   name: 'AppButtonIcon',
 
-  data () {
-    return {
-      clickStatus: false
-    }
-  },
-
   props: {
+    icon: String,
+    size: String,
     title: String,
-    titlePressed: String,
-    materialIcon: String
-  },
-
-  methods: {
-    buttonClick () {
-      this.$emit('button-click')
-      // this.clickStatus = !this.clickStatus
-    }
+    pressed: Boolean
   }
 }
 </script>
@@ -59,7 +47,7 @@ export default {
     border: none;
 
     width: fit-content;
-    height: 1.8rem;
+    height: 2rem;
     padding: 0;
     cursor: pointer;
 
@@ -72,7 +60,7 @@ export default {
 
   .app-button-icon {
     color: hsl(208, 79%, 51%);
-    font-size: 1.8rem !important;
+    font-size: 2rem !important;
     margin: 0 !important;
   }
 

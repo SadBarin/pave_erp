@@ -10,7 +10,7 @@
       />
     </div>
 
-    <AppButtonIcon material-icon="add" @button-click="submitElement"/>
+    <AppButtonIcon icon="add" @button-click="submitElement"/>
   </div>
 </template>
 

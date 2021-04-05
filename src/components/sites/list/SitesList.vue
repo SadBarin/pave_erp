@@ -1,39 +1,31 @@
 <template>
-  <section class="sites-container">
-    <CardSites
-      class="city"
+  <section class="sites-items-container">
+    <CityItem
       v-for="city of sites"
       :key="city.id"
       :city="city"
-      @remove-city="removeCity"
+      @remove-city="$emit('remove-city', city.id)"
     />
   </section>
 </template>
 
 <script>
-import CardSites from '@/components/sites/list/CityCard'
+import CityItem from '@/components/sites/list/CityItem'
+
 export default {
   name: 'ListSites',
-  components: { CardSites },
-  props: { sites: Object },
-  methods: {
-    removeCity (id) {
-      this.$emit('remove-city', id)
-    }
-  }
+
+  components: { CityItem },
+
+  props: { sites: Object }
 }
 </script>
 
 <style scoped>
-  .city {
-    width: 32%;
-    height: fit-content;
-    margin-left: 0;
-  }
-
-  .sites-container {
-    display: flex;
-    align-content: flex-start;
-    flex-wrap: wrap;
+  .sites-items-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 0 1rem;
   }
 </style>

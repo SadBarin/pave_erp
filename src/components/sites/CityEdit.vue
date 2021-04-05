@@ -1,13 +1,11 @@
 <template>
   <div id="app-edit">
-    <div class="edit-top-panel">
-      <AppHeaderIcon header-level="3" material-icon="location_city" :header-text="'Редактор города: ' + editedCity.name"/>
-
-      <div class="edit-nav-buttons">
-        <AppButtonIcon material-icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
-        <AppButtonIcon material-icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
-      </div>
-    </div>
+    <AppTopPanel :header="'Редактор города: ' + editedCity.name">
+      <template #nav-buttons>
+        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
+        <AppButtonIcon icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
+      </template>
+    </AppTopPanel>
 
     <section class="edit-section">
       <div class="edit-block">
@@ -54,16 +52,17 @@
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
+import AppTopPanel from '@/components/AppTopPanel'
+import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppNotesList from '@/components/edit/AppNotesList'
 import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
-import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
   name: 'Sites',
 
-  components: { AppButtonIcon, AppLineText, AppNumbers, AppHeaderIcon, AppNotesList },
+  components: { AppTopPanel, AppHeaderIcon, AppButtonIcon, AppLineText, AppNumbers, AppNotesList },
 
   data () {
     return {
@@ -125,6 +124,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  #app-edit .edit-top-panel h3{
+    margin: 0;
   }
 
   #app-edit .edit-top-panel:first-child {

@@ -9,6 +9,11 @@
       <i class="material-icons header-icon header-four-icon">{{materialIcon}}</i>
       {{headerText}}
     </h4>
+
+    <h6 class="app-header app-header-six" v-else-if="headerLevel === '6'">
+      <i class="material-icons header-icon header-six-icon">{{materialIcon}}</i>
+      {{headerText}}
+    </h6>
   </div>
 </template>
 
@@ -50,6 +55,12 @@ export default {
     font-size: 1.7rem;
   }
 
+  #app-header-container .app-header-six {
+    opacity: 0.8;
+
+    font-size: 1.2rem;
+  }
+
   #app-header-container .header-icon {
     color: hsla(0, 0%, 0%, 0.87);
 
@@ -66,5 +77,9 @@ export default {
 
   #app-header-container .header-four-icon {
     font-size: 1.6rem;
+  }
+
+  #app-header-container .header-six-icon {
+    font-size: 1.3rem;
   }
 </style>
