@@ -120,30 +120,11 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  #app-edit .edit-top-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   #app-edit .edit-top-panel h3{
     margin: 0;
   }
 
-  #app-edit .edit-top-panel:first-child {
-    margin: 1.6rem 0 2.7rem 0;
-  }
-
   #app-edit .edit-block-content {
     margin-top: 1rem;
-  }
-
-  #app-edit .edit-nav-buttons {
-    display: flex;
-    align-items: center;
-  }
-
-  #app-edit .edit-nav-buttons > * {
-    margin-right: 1rem;
   }
 </style>

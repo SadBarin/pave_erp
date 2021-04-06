@@ -1,19 +1,15 @@
 <template>
   <div id="app-sites">
-    <AppPopupWrapper :hidden="popupHidden">
-      <h3>Меню добавление города</h3>
-
-      <LineTextAdd
-        @add-city="addCity"
-        line-text-label="Название: "
-        line-text-placeholder="Например Москва"
-      />
-    </AppPopupWrapper>
+    <CityPopupAdd
+      :popupHidden="popupHidden"
+      @add-city="addCity"
+      @popup-toggle="popupToggle"
+    />
 
     <AppTopPanel header="Список городов">
       <template #nav-buttons>
         <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateCity"/>
-        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupHidden = false"/>
+        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupToggle"/>
       </template>
     </AppTopPanel>
 
@@ -32,18 +28,23 @@ import firebase from 'firebase/app'
 
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import LineTextAdd from '@/components/LineTextAdd'
 import ListSites from '@/components/sites/list/SitesList'
-import AppPopupWrapper from '@/components/AppPopupWrapper'
+import CityPopupAdd from '@/components/sites/CityPopupAdd'
 
 export default {
   name: 'Sites',
 
-  components: { AppTopPanel, AppButtonIcon, ListSites, LineTextAdd, AppPopupWrapper },
+  components: { AppTopPanel, AppButtonIcon, ListSites, CityPopupAdd },
 
   data () {
     return {
-      popupHidden: true
+      popupHidden: true,
+      addedCity: {
+        id: Date.now(),
+        name: '',
+        notes: [],
+        notesCount: 5
+      }
     }
   },
 
@@ -63,6 +64,10 @@ export default {
       'SET_SITES_FROM_SERVER'
     ]),
 
+    popupToggle () {
+      this.popupHidden = !this.popupHidden
+    },
+
     removeCity (id) {
       firebase.database().ref('/sites/' + id).remove()
         .then(() => {
@@ -72,20 +77,19 @@ export default {
     },
 
     addCity (city) {
-      const name = city[0].toUpperCase() + city.substring(1)
+      city.name = city.name[0].toUpperCase() + city.name.substring(1)
 
-      const newCity = {
-        id: Date.now(),
-        name,
-        notes: [],
-        notesCount: 5
-      }
-
-      firebase.database().ref('/sites/' + newCity.id).set(newCity)
+      firebase.database().ref('/sites/' + city.id).set(city)
         .then(() => {
           console.log('Город добавлен ➕')
           this.popupHidden = true
           this.SET_SITES_FROM_SERVER()
+          this.addedCity = {
+            id: Date.now(),
+            name: '',
+            notes: [],
+            notesCount: 5
+          }
         })
     },
 
