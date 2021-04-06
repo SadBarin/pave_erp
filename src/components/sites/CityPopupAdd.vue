@@ -14,6 +14,13 @@
         maxLength="20"
         v-model="addedCity.name"
       />
+
+      <AppLineText
+        inputID="input-first-note"
+        label="Заметка: "
+        maxLength="30"
+        v-model="firstNote"
+      />
     </div>
   </AppPopupWrapper>
 </template>
@@ -33,27 +40,36 @@ export default {
 
   data () {
     return {
-      addedCity: {}
+      addedCity: {},
+      firstNote: 'Город был создан'
     }
   },
 
   created () {
-    this.renewAddedCity()
+    this.renewAddedData()
+  },
+
+  watch: {
+    firstNote: function (note) {
+      this.addedCity.notes[0] = note
+    }
   },
 
   methods: {
-    renewAddedCity () {
+    renewAddedData () {
       this.addedCity = {
         id: Date.now(),
         name: '',
-        notes: [],
-        notesCount: 5
+        notes: ['Город был создан'],
+        notesCount: '5'
       }
+
+      this.firstNote = 'Город был создан'
     },
 
     addCity (city) {
       this.$emit('add-city', city)
-      this.renewAddedCity()
+      this.renewAddedData()
     }
   }
 }

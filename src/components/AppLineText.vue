@@ -63,7 +63,7 @@ export default {
     color: #3e3e3e;
 
     max-width: 35%;
-    margin-top: -0.15rem;
+    margin-bottom: -0.1rem !important;
     order: 0;
 
     user-select: none;
