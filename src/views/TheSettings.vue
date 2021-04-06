@@ -1,23 +1,25 @@
 <template>
   <div id="app-settings">
-    <div class="settings-header">
-      <AppHeaderIcon header-level="3" material-icon="" header-text="Настройки"/>
-    </div>
+    <AppTopPanel header="Список настроек"/>
 
-    <div class="settings-content">
-      <AppLinkIcon link-content="Список городов" link-icon="location_city" link-path="/sites"/>
-      <AppLinkIcon link-content="Список сотрудников" link-icon="group" link-path="/employees"/>
-    </div>
+    <section class="settings-section">
+      <div class="settings-block">
+        <div class="settings-block-content">
+          <AppLinkIcon link-content="Список городов" link-icon="location_city" link-path="/sites"/>
+          <AppLinkIcon link-content="Список сотрудников" link-icon="group" link-path="/employees"/>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppTopPanel from '@/components/AppTopPanel'
 import AppLinkIcon from '@/components/AppLinkIcon'
 
 export default {
   name: 'Settings.vue',
-  components: { AppHeaderIcon, AppLinkIcon }
+  components: { AppTopPanel, AppLinkIcon }
 }
 </script>
 
@@ -26,8 +28,13 @@ export default {
     margin: 1.6rem 0 2rem -1rem;
   }
 
-  #app-settings .settings-content {
+  #app-settings .settings-block,
+  #app-settings .settings-block-content {
     display: flex;
     flex-direction: column;
+  }
+
+  #app-settings .settings-block-content > * {
+    font-size: 1.2rem !important;
   }
 </style>

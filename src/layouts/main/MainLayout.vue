@@ -41,13 +41,7 @@
         </div>
 
         <div class="sidenav-content sidenav-bottom">
-          <button
-            class="btn transparent blue-text darken-1"
-            @click="popupVisibility"
-          >
-            <i class="material-icons">exit_to_app</i>
-            Выйти
-          </button>
+          <AppLinkIcon link-content="Выйти" link-icon="exit_to_app" link-path="/"/>
         </div>
       </div>
 
@@ -116,5 +110,10 @@ export default {
 
   #app .btn.transparent:hover .material-icons {
     color: var(--hover-color) !important;
+  }
+
+  .sidenav-bottom {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 </style>

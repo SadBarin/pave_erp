@@ -23,7 +23,7 @@ export default {
     align-items: flex-end;
     justify-content: space-between;
 
-    margin: 1.6rem 0 2.7rem 0;
+    margin: 1rem 0 2.4rem 0;
   }
 
   #app-top-panel .top-panel-header {

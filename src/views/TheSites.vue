@@ -97,26 +97,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  #app-sites .app-sites-top-panel {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-
-    margin: 1.6rem 0 2.7rem 0;
-  }
-
-  #app-sites .app-sites-header {
-    display: flex;
-    align-items: flex-end;
-  }
-
-  #app-sites .app-sites-header h3 {
-    margin: 0 2rem 0 0;
-  }
-
-  #app-sites .app-sites-nav-buttons {
-    display: flex;
-  }
-</style>
