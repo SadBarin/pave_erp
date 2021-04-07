@@ -346,7 +346,7 @@ section {
 
   height: calc(100vh - var(--padding-height) - var(--padding-height) - var(--page-title-height));
 
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .page-title {

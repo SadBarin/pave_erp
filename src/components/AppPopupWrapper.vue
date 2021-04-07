@@ -40,7 +40,6 @@ export default {
   #app-popup-wrapper .popup-wrapper-content {
     background: hsla(0, 0%, 100%, 0.7);
     border-radius: 10px;
-    text-align: center;
 
     width: fit-content;
     padding: 2rem;

@@ -1,15 +1,15 @@
 <template>
   <div id="app-sites">
     <CityPopupAdd
-      :popupHidden="popupHidden"
+      :popupHidden="popupAddHidden"
       @add-city="addCity"
-      @popup-toggle="popupToggle"
+      @popup-toggle="popupAddToggle"
     />
 
     <AppTopPanel header="Список городов">
       <template #nav-buttons>
         <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateCity"/>
-        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupToggle"/>
+        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 
@@ -38,7 +38,7 @@ export default {
 
   data () {
     return {
-      popupHidden: true,
+      popupAddHidden: true,
       addedCity: {
         id: Date.now(),
         name: '',
@@ -64,8 +64,8 @@ export default {
       'SET_SITES_FROM_SERVER'
     ]),
 
-    popupToggle () {
-      this.popupHidden = !this.popupHidden
+    popupAddToggle () {
+      this.popupAddHidden = !this.popupAddHidden
     },
 
     removeCity (id) {
@@ -82,7 +82,7 @@ export default {
       firebase.database().ref('/sites/' + city.id).set(city)
         .then(() => {
           console.log('Город добавлен ➕')
-          this.popupHidden = true
+          this.popupAddHidden = true
           this.SET_SITES_FROM_SERVER()
           this.addedCity = {
             id: Date.now(),

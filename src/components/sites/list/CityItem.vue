@@ -1,48 +1,52 @@
 <template>
   <div>
-    <Popup
-      v-if="popupShow"
-      @yes="removeCity(city)"
-      @no="popupHidden"
-      :popup-toast="`Город ${city.name} был удалён!`"
+    <PopupRemove
+      :popupHidden="popupRemoveHidden"
+      @close="popupRemoveToggle"
+      @delete="removeCity(city)"
+      :header="`Удаление города ${city.name}`"
     >
-      <template #title-popup>
-        Удалить?
+      <template #popup-content>
+        После нажатия на иконку корзины будет удалён город <b>{{city.name}}</b>
       </template>
-
-      <template #text-info-popup>
-        После нажатия кнопки "да" будет удалён город <b>{{city.name}}</b>
-      </template>
-    </Popup>
+    </PopupRemove>
 
       <div class="city-item">
         <AppHeaderIcon header-level="6" material-icon="location_city" :header-text="city.name"/>
 
         <div class="city-item-nav-buttons">
           <AppButtonIcon size="1.3rem" icon="create" title="Редактировать" @button-click="$router.push({name : 'cityEdit', params: {id: city.id}})"/>
-          <AppButtonIcon size="1.3rem" icon="delete" title="Удалить" @button-click="popupVisibility"/>
+          <AppButtonIcon size="1.3rem" icon="delete" title="Удалить" @button-click="popupRemoveToggle"/>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
+import PopupRemove from '@/components/PopupRemove'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
   name: 'CardSites',
 
-  mixins: [popupMixin],
-
-  components: { AppHeaderIcon, AppButtonIcon },
+  components: { PopupRemove, AppHeaderIcon, AppButtonIcon },
 
   props: { city: Object },
 
+  data () {
+    return {
+      popupRemoveHidden: true
+    }
+  },
+
   methods: {
+    popupRemoveToggle () {
+      this.popupRemoveHidden = !this.popupRemoveHidden
+    },
+
     removeCity (city) {
-      this.popupHidden()
+      this.popupRemoveToggle()
       this.$emit('remove-city', city.id)
     }
   }

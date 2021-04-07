@@ -11,6 +11,7 @@
 <script>
 export default {
   name: 'AppTopPanel',
+
   props: {
     header: String
   }
@@ -19,11 +20,11 @@ export default {
 
 <style scoped>
   #app-top-panel {
+    margin: 1rem 0 2.4rem 0;
+
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-
-    margin: 1rem 0 2.4rem 0;
   }
 
   #app-top-panel .top-panel-header {
@@ -31,6 +32,8 @@ export default {
   }
 
   #app-top-panel .top-panel-nav-buttons {
+    margin-left: 2rem;
+
     display: flex;
   }
 

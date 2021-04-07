@@ -1,7 +1,19 @@
 <template>
   <div id="app-edit">
+    <PopupRemove
+      :popupHidden="popupRemoveHidden"
+      @close="popupRemoveToggle"
+      @delete="removeCity(editedCity)"
+      :header="`Удаление города ${editedCity.name}`"
+    >
+      <template #popup-content>
+        После нажатия на иконку корзины будет удалён город <b>{{editedCity.name}}</b>
+      </template>
+    </PopupRemove>
+
     <AppTopPanel :header="'Редактор города: ' + editedCity.name">
       <template #nav-buttons>
+        <AppButtonIcon icon="delete" title="Удалить город" @button-click="popupRemoveToggle"/>
         <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
         <AppButtonIcon icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
       </template>
@@ -58,14 +70,16 @@ import AppNotesList from '@/components/edit/AppNotesList'
 import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
 import AppButtonIcon from '@/components/AppButtonIcon'
+import PopupRemove from '@/components/PopupRemove'
 
 export default {
   name: 'Sites',
 
-  components: { AppTopPanel, AppHeaderIcon, AppButtonIcon, AppLineText, AppNumbers, AppNotesList },
+  components: { AppTopPanel, AppHeaderIcon, AppButtonIcon, AppLineText, AppNumbers, AppNotesList, PopupRemove },
 
   data () {
     return {
+      popupRemoveHidden: true,
       editedCity: '',
       note: ''
     }
@@ -82,6 +96,21 @@ export default {
       'SET_SITES_FROM_SERVER',
       'SET_SITES_FROM_LOCAL_STORAGE'
     ]),
+
+    popupRemoveToggle () {
+      this.popupRemoveHidden = !this.popupRemoveHidden
+    },
+
+    removeCity (city) {
+      this.popupRemoveToggle()
+      this.editorExit()
+
+      firebase.database().ref('/sites/' + city.id).remove()
+        .then(() => {
+          console.log('Город удалён 🗑️')
+          this.SET_SITES_FROM_SERVER()
+        })
+    },
 
     editorExit () {
       this.$router.push('/sites')
