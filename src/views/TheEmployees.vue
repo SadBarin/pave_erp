@@ -1,22 +1,18 @@
 <template>
-  <div>
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3 class="right-margin-big">Список сотрудников</h3>
+  <div id="app-employees">
+    <EmployeePopupAdd
+      :popup-hidden="popupAddHidden"
+      @popupToggle="popupAddToggle"
+      @addEmployee="addEmployee"
+      :employees="employees"
+    />
 
-        <div class="flex-center">
-          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1 "
-                  @click="updateEmployees"
-          ><i class="material-icons middle-material-icons">autorenew</i>
-          </button>
-        </div>
-      </div>
-
-      <AddCardEmployees
-        @add-employee="addEmployee"
-        :employees="employees"
-      />
-    </div>
+    <AppTopPanel header="Список сотрудников">
+      <template #nav-buttons>
+        <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateEmployees"/>
+        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupAddToggle"/>
+      </template>
+    </AppTopPanel>
 
     <div>
       <TableEmployees
@@ -29,20 +25,34 @@
 </template>
 
 <script>
-import TableEmployees from '@/components/employees/EmployeesTable'
-import AddCardEmployees from '@/components/employees/EmployeesAdd'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
+
+import TableEmployees from '@/components/employees/EmployeesTable'
+import AppTopPanel from '@/components/AppTopPanel'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import EmployeePopupAdd from '@/components/employees/EmployeePopupAdd'
 
 export default {
   name: 'Employees',
 
-  components: { TableEmployees, AddCardEmployees },
+  components: {
+    TableEmployees,
+    AppTopPanel,
+    AppButtonIcon,
+    EmployeePopupAdd
+  },
 
   computed: {
     ...mapGetters([
       'employees'
     ])
+  },
+
+  data () {
+    return {
+      popupAddHidden: true
+    }
   },
 
   created () {
@@ -59,6 +69,10 @@ export default {
       'registerEmployees'
     ]),
 
+    popupAddToggle () {
+      this.popupAddHidden = !this.popupAddHidden
+    },
+
     removeEmployee (id) {
       firebase.database().ref('/employees/' + id).remove()
         .then(() => {
@@ -68,6 +82,8 @@ export default {
     },
 
     async addEmployee (employee) {
+      this.popupAddToggle()
+
       const regData = {
         email: employee.email,
         password: employee.password

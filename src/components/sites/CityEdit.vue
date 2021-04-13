@@ -32,6 +32,7 @@
           />
         </div>
       </div>
+
       <div class="edit-block">
         <AppHeaderIcon header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
 
@@ -147,6 +148,8 @@ export default {
   #app-edit .edit-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: min-content;
+    grid-row-gap: 2rem
   }
 
   #app-edit .edit-top-panel h3{
