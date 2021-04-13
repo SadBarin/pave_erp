@@ -1,507 +1,300 @@
 <template>
-  <div>
-    <Popup
-      v-if="popupShow"
-      @yes="editorExit"
-      @no="popupHidden"
-    >
-      <template #title-popup>
-        Покинуть редактор рабочего?
+  <div id="app-edit">
+    <AppTopPanel :header="'Редактор рабочего: ' + editedWorker.surname + ' ' + editedWorker.name">
+      <template #nav-buttons>
+        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedWorker(editedWorker)"/>
+        <AppButtonIcon icon="location_city" title="Вернуться к рабочим" @button-click="editorExit"/>
       </template>
+    </AppTopPanel>
 
-      <template #text-info-popup>
-        Введённые данные не будут сохранены!
-      </template>
-    </Popup>
+    <section class="edit-section">
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="ФИО"/>
 
-    <div class="page-title flex-between-center">
-      <h3>Редактор рабочего <br> "{{editedWorker.surname}} {{editedWorker.name}}"</h3>
-      <NavWorker :worker="editedWorker" @save-worker="saveEditedWorker(editedWorker)"/>
-    </div>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-surname"
+            label="Фамилия: "
+            maxLength="20"
+            v-model="editedWorker.surname"
+          />
 
-    <section>
-      <div class="row">
-        <div class="col s12">
-          <div>
+          <AppLineText
+            inputID="input-name"
+            label="Имя: "
+            maxLength="20"
+            v-model="editedWorker.name"
+          />
 
-            <form>
-              <div class="form-content">
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title flex-start-center"><i class="material-icons">account_box</i> ФИО</h4>
+          <AppLineText
+            inputID="input-patronymic"
+            label="Отчество: "
+            maxLength="20"
+            v-model="editedWorker.patronymic"
+          />
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Паспортные данные"/>
 
-                    <div class="input-field editor-input flex-column-center">
-                      <button id="upload_widget" @click.prevent="upload" class="cloudinary-button">Загрузить фото рабочего</button>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-passport-id"
+            label="Номер паспорта: "
+            maxLength="20"
+            v-model="editedWorker.passportID"
+          />
 
-                      <div class="photo-container flex-center">
-                        <img :src="editedWorker.UploadImage" width="200rem">
-                      </div>
-                    </div>
+          <AppLineText
+            inputID="input-passport-date"
+            label="Дата выдачи: "
+            maxLength="20"
+            v-model="editedWorker.passportDate"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="name"
-                        type="text"
-                        v-model.trim="editedWorker.name"
-                        @change="changeData(editedWorker.name, 'имя')"
-                      >
-                      <label class="active" for="name">Имя</label>
-                    </div>
+          <AppLineText
+            inputID="input-passport-issued"
+            label="Кем выдан: "
+            maxLength="20"
+            v-model="editedWorker.passportIssued"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="surname"
-                        type="text"
-                        v-model.trim="editedWorker.surname"
-                        @change="changeData(editedWorker.surname, 'фамилия')"
-                      >
-                      <label class="active" for="surname">Фамилия</label>
-                    </div>
+          <!--          <AppLineText-->
+          <!--            inputID="input-registration"-->
+          <!--            label="Прописка: "-->
+          <!--            maxLength="20"-->
+          <!--            v-model="editedWorker.registration"-->
+          <!--          />-->
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="patronymic"
-                        type="text"
-                        v-model.trim="editedWorker.patronymic"
-                        @change="changeData(editedWorker.patronymic, 'отчество')"
-                      >
-                      <label class="active" for="patronymic">Отчество</label>
-                    </div>
-                  </div>
-                </div>
+          <AppLineText
+            inputID="input-passport-address"
+            label="Адрес: "
+            maxLength="20"
+            v-model="editedWorker.address"
+          />
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Личные данные"/>
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">comment</i>Примечание</h4>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-birthday"
+            label="День рождения: "
+            maxLength="20"
+            v-model="editedWorker.birthday"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="note"
-                        type="text"
-                        maxlength="100"
-                        v-model.trim="note"
-                        @change="changeData(note, 'Примечание')"
-                      >
-                      <label class="active" for="note">Текст нового примечания</label>
-                    </div>
+          <AppSelect
+            selectID="select-bank"
+            label="Пол: "
+            v-model="editedWorker.sex"
+          >
+            <option class="editor-option" value="Мужской">Мужской</option>
+            <option class="editor-option" value="Женский">Женский</option>
+          </AppSelect>
 
-                    <div class="input-field editor-input flex-column-center">
-                      <button id="upload_widget" @click.prevent="uploadNote" class="cloudinary-button">Загрузить фото примечания</button>
+          <AppLineText
+            inputID="input-nationality"
+            label="Национальность: "
+            maxLength="20"
+            v-model="editedWorker.nationality"
+          />
 
-                      <div class="photo-container flex-center" v-if="editedWorker.uploadImageNote != null">
-                        <img :src="editedWorker.uploadImageNote" width="200rem">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <AppLineText
+            inputID="input-medical-book"
+            label="Мед.книжка: "
+            maxLength="20"
+            v-model="editedWorker.medicalBook"
+          />
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">assignment</i> Личные данные</h4>
+          <AppLineText
+            inputID="input-education"
+            label="Образование: "
+            maxLength="20"
+            v-model="editedWorker.education"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="birthday"
-                        type="date"
-                        v-model.trim="editedWorker.birthday"
-                        @change="ageCalc(), changeData(editedWorker.birthday, 'день рождение')"
-                      >
-                      <label class="active" for="birthday">День рождения</label>
-                      <p>Возраст: {{editedWorker.age}} лет</p>
-                    </div>
+          <AppLineText
+            inputID="input-university"
+            label="ВУЗ: "
+            maxLength="20"
+            v-model="editedWorker.university"
+          />
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Банковские данные"/>
 
-                    <div class="input-field radio-field editor-input flex-start-center">
-                      <p class="right-margin-big">Пол: </p>
-                      <p class="right-margin-little">
-                        <label>
-                          <input type="radio" @change="changeData(editedWorker.sex, 'пол')" value="Мужской" v-model.trim="editedWorker.sex"/>
-                          <span>Мужской</span>
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <input type="radio" value="Женский" v-model.trim="editedWorker.sex"/>
-                          <span>Женский</span>
-                        </label>
-                      </p>
-                    </div>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-surname-card"
+            label="Фамилия владельца: "
+            maxLength="20"
+            v-model="editedWorker.surnameCard"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="nationality"
-                        type="text"
-                        v-model.trim="editedWorker.nationality"
-                        @change="changeData(editedWorker.nationality, 'Национальность')"
-                      >
-                      <label class="active" for="nationality">Национальность</label>
-                    </div>
+          <AppLineText
+            inputID="input-name-card"
+            label="Имя владельца: "
+            maxLength="20"
+            v-model="editedWorker.nameCard"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="medicalBook"
-                        type="date"
-                        v-model="editedWorker.medicalBook"
-                        @change="medicalBookCalc(), changeData(editedWorker.medicalBook, 'Медицинская Книга')"
-                      >
-                      <label class="active" for="medicalBook">Медицинская Книга</label>
-                      <p v-if="editedWorker.medicalBookStatus === 'Просрочена'" class="red-text darken-1">{{editedWorker.medicalBookStatus}}</p>
-                      <p v-else>Истекает через: {{editedWorker.medicalBookStatus}}</p>
-                    </div>
+          <AppLineText
+            inputID="input-patronymic-card"
+            label="Отчество владельца: "
+            maxLength="20"
+            v-model="editedWorker.patronymicCard"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="education"
-                        type="text"
-                        v-model.trim="editedWorker.education"
-                        @change="changeData(editedWorker.education, 'Образование')"
-                      >
-                      <label class="active" for="education">Образование</label>
-                    </div>
+          <AppLineText
+            inputID="input-account-card-number"
+            label="Номер счёта: "
+            maxLength="20"
+            v-model="editedWorker.accountNumber"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="university"
-                        type="text"
-                        v-model.trim="editedWorker.university"
-                        @change="changeData(editedWorker.university, 'ВУЗ')"
-                      >
-                      <label class="active" for="university">ВУЗ</label>
-                    </div>
-                  </div>
-                </div>
+          <AppSelect
+            selectID="select-bank"
+            label="Банк: "
+            v-model="editedWorker.bank"
+          >
+            <option class="editor-option" value="СберБанк">СберБанк</option>
+            <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
+            <option class="editor-option" value="Газпромбанк">Газпромбанк</option>
+            <option class="editor-option" value="Национальный Клиринговый Центр">Национальный Клиринговый Центр</option>
+            <option class="editor-option" value="Альфа-Банк">Альфа-Банк</option>
+            <option class="editor-option" value="Россельхозбанк">Россельхозбанк</option>
+            <option class="editor-option" value="Московский Кредитный Банк">Московский Кредитный Банк</option>
+            <option class="editor-option" value="Банк «Открытие»">Банк «Открытие»</option>
+            <option class="editor-option" value="Совкомбанк">Совкомбанк</option>
+            <option class="editor-option" value="Росбанк">Росбанк</option>
+            <option class="editor-option" value="Тинькофф Банк">Тинькофф Банк</option>
+          </AppSelect>
+        </div>
+      </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Контактные данные"/>
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">book</i> Паспортные данные</h4>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-city"
+            label="Город: "
+            maxLength="20"
+            v-model="editedWorker.city"
+          />
 
-                    <div class="input-field editor-input flex-column-center">
-                      <button @click.prevent="uploadPassport" class="cloudinary-button">Загрузить паспорт рабочего</button>
+          <AppLineText
+            inputID="input-home-phone"
+            label="Домашний телефон: "
+            maxLength="20"
+            v-model="editedWorker.homePhone"
+          />
 
-                      <div class="photo-container flex-center" v-show="editedWorker.UploadPassport !== undefined">
-                        <a v-bind:href="editedWorker.UploadPassport" target="_blank">Открыть паспорт</a>
-                      </div>
-                    </div>
+          <AppLineText
+            inputID="input-mobile-phone"
+            label="Основ. моб. телефон: "
+            maxLength="20"
+            v-model="editedWorker.mobilePhone"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportID"
-                        type="text"
-                        v-model.trim="editedWorker.passportID"
-                        @change="changeData(editedWorker.passportID, 'номер паспорта')"
-                      >
-                      <label class="active" for="PassportID">Номер Паспорта</label>
-                    </div>
+          <AppLineText
+            inputID="input-mobile-phone-additional"
+            label="Доб. моб. телефон: "
+            maxLength="20"
+            v-model="editedWorker.mobilePhoneAdditional"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportDate"
-                        type="date"
-                        v-model.trim="editedWorker.passportDate"
-                        @change="changeData(editedWorker.passportDate, 'дата выдачи паспорта')"
-                      >
-                      <label class="active" for="passportDate">Дата Выдачи Паспорта</label>
-                    </div>
+          <AppLineText
+            inputID="input-mobile-phone-standby"
+            label="Запас. моб. телефон: "
+            maxLength="20"
+            v-model="editedWorker.mobilePhoneStandby"
+          />
+        </div>
+      </div>
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="passportIssued"
-                        type="text"
-                        v-model.trim="editedWorker.passportIssued"
-                        @change="changeData(editedWorker.passportIssued, 'Кем выдан')"
-                      >
-                      <label class="active" for="passportIssued">Кем выдан</label>
-                    </div>
+      <div class="edit-block">
+        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Рабочие данные"/>
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="registration"
-                        type="text"
-                        v-model.trim="editedWorker.registration"
-                        @change="changeData(editedWorker.registration, 'Прописка')"
-                      >
-                      <label class="active" for="registration">Прописка</label>
-                    </div>
+        <div class="edit-block-content">
+          <AppLineText
+            inputID="input-account-number"
+            label="Учёт. номер: "
+            maxLength="20"
+            v-model="editedWorker.accountNumber"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="address"
-                        type="text"
-                        v-model.trim="editedWorker.address"
-                        @change="changeData(editedWorker.address, 'Адрес')"
-                      >
-                      <label class="active" for="address">Адрес</label>
-                    </div>
-                  </div>
-                </div>
+          <AppLineText
+            inputID="input-previous-work"
+            label="Прежняя работа: "
+            maxLength="20"
+            v-model="editedWorker.previousWork"
+          />
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">account_balance_wallet</i> Банковские данные</h4>
-                    <div class="input-field editor-input">
-                      <input
-                        id="nameCard"
-                        type="text"
-                        v-model.trim="editedWorker.nameCard"
-                        @change="changeData(editedWorker.nameCard, 'имя держателя карты')"
-                      >
-                      <label class="active" for="nameCard">Имя Держателя Карты</label>
-                    </div>
+          <AppLineText
+            inputID="input-reason-coming"
+            label="Почему пришёл к нам: "
+            maxLength="20"
+            v-model="editedWorker.reasonComing"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="surnameCard"
-                        type="text"
-                        v-model.trim="editedWorker.surnameCard"
-                        @change="changeData(editedWorker.surnameCard, 'фамилия держателя карты')"
-                      >
-                      <label class="active" for="surnameCard">Фамилия Держателя Карты</label>
-                    </div>
+          <AppLineText
+            inputID="input-profession"
+            label="Профессия 1: "
+            maxLength="20"
+            v-model="editedWorker.professions"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="patronymicCard"
-                        type="text"
-                        v-model.trim="editedWorker.patronymicCard"
-                        @change="changeData(editedWorker.patronymicCard, 'отчество держателя карты')"
-                      >
-                      <label class="active" for="surnameCard">Отчество Держателя Карты</label>
-                    </div>
+          <AppLineText
+            inputID="input-profession-second"
+            label="Профессия 2: "
+            maxLength="20"
+            v-model="editedWorker.professionsSecond"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="accountNumberCard"
-                        type="text"
-                        v-model.trim="editedWorker.accountNumberCard"
-                        @change="changeData(editedWorker.accountNumberCard, 'номер счёта')"
-                      >
-                      <label class="active" for="accountNumberCard">Номер Счёта</label>
-                    </div>
+          <AppLineText
+            inputID="input-profession-third"
+            label="Профессия 3: "
+            maxLength="20"
+            v-model="editedWorker.professionsThird"
+          />
 
-                    <div class="input-field editor-input">
-                      <select
-                        class="browser-default editor-select"
-                        id="bank"
-                        v-model.trim="editedWorker.bank"
-                        @change="changeData(editedWorker.bank, 'банк')"
-                      >
-                        <option class="editor-option" value="СберБанк">СберБанк</option>
-                        <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
-                        <option class="editor-option" value="Газпромбанк">Газпромбанк</option>
-                        <option class="editor-option" value="Национальный Клиринговый Центр">Национальный Клиринговый Центр</option>
-                        <option class="editor-option" value="Альфа-Банк">Альфа-Банк</option>
-                        <option class="editor-option" value="Россельхозбанк">Россельхозбанк</option>
-                        <option class="editor-option" value="Московский Кредитный Банк">Московский Кредитный Банк</option>
-                        <option class="editor-option" value="Банк «Открытие»">Банк «Открытие»</option>
-                        <option class="editor-option" value="Совкомбанк">Совкомбанк</option>
-                        <option class="editor-option" value="Росбанк">Росбанк</option>
-                        <option class="editor-option" value="Тинькофф Банк">Тинькофф Банк</option>
-                      </select>
-                      <label class="active">Банк</label>
-                    </div>
-                  </div>
-                </div>
+          <AppLineText
+            inputID="input-night-shift"
+            label="Ночная смена: "
+            maxLength="20"
+            v-model="editedWorker.nightShift"
+          />
 
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">local_phone</i> Контактные данные</h4>
+          <AppLineText
+            inputID="input-check-mvd"
+            label="Проверка МВД: "
+            maxLength="20"
+            v-model="editedWorker.checkMVD"
+          />
 
-                    <div class="input-field editor-input">
-                      <select class="browser-default editor-select"
-                              @change="changeData(editedWorker.city, 'город')"
-                              v-model="editedWorker.city"
-                      >
-                        <option class="editor-option" selected value="">Не отмечено</option>
-                        <option class="editor-option" v-for="city of this.sites" :key="city.value">
-                          {{ city.name }}
-                        </option>
-                      </select>
-                      <label class="active">Город</label>
-                    </div>
+          <AppLineText
+            inputID="input-date-interview"
+            label="Дата собеседования: "
+            maxLength="20"
+            v-model="editedWorker.dateInterview"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="homePhone"
-                        type="text"
-                        v-model.trim="editedWorker.homePhone"
-                        @change="changeData(editedWorker.homePhone, 'домашний телефон')"
-                      >
-                      <label class="active" for="homePhone">Телефон Домашний</label>
-                    </div>
+          <AppLineText
+            inputID="input-date-uniform"
+            label="Униформа: "
+            maxLength="20"
+            v-model="editedWorker.uniform"
+          />
 
-                    <div class="input-field editor-input">
-                      <input
-                        id="mobilePhone"
-                        type="text"
-                        v-model.trim="editedWorker.mobilePhone"
-                        v-mask="'+7 (###) ###-##-##'"
-                        placeholder="+7 ( ) "
-                        @change="changeData(editedWorker.mobilePhone, 'основной мобильный телефон')"
-                      >
-                      <label class="active" for="mobilePhone">Основной мобильный телефон</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="mobilePhoneAdditional"
-                        type="text"
-                        v-model.trim="editedWorker.mobilePhoneAdditional"
-                        v-mask="'+7 (###) ###-##-##'"
-                        placeholder="+7 ( ) "
-                        @change="changeData(editedWorker.mobilePhone, 'дополнительный мобильный телефон')"
-                      >
-                      <label class="active" for="mobilePhoneAdditional">Дополнительный мобильный телефон</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="mobilePhoneStandby"
-                        type="text"
-                        v-model.trim="editedWorker.mobilePhoneStandby"
-                        v-mask="'+7 (###) ###-##-##'"
-                        placeholder="+7 ( ) "
-                        @change="changeData(editedWorker.mobilePhone, 'запасной мобильный телефон')"
-                      >
-                      <label class="active" for="mobilePhoneStandby">Запасной мобильный телефон</label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card editor-card white darken-1 black-text">
-                  <div class="card-content flex-column-center">
-                    <h4 class="card-title"><i class="material-icons">rate_review</i> Рабочие данные</h4>
-                    <div class="input-field editor-input">
-                      <input
-                        id="accountNumber"
-                        type="text"
-                        v-model.trim="editedWorker.accountNumber"
-                        @change="changeData(editedWorker.accountNumber, 'учётный номер')"
-                      >
-                      <label class="active" for="accountNumber">Учётный номер</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="previousWork"
-                        type="text"
-                        v-model.trim="editedWorker.previousWork"
-                        @change="changeData(editedWorker.previousWork, 'прежняя работа')"
-                      >
-                      <label class="active" for="previousWork">Прежняя Работа</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="reasonComing"
-                        type="text"
-                        maxlength="100"
-                        v-model.trim="editedWorker.reasonComing"
-                        @change="changeData(editedWorker.reasonComing, 'почему пришёл к нам')"
-                      >
-                      <label class="active" for="reasonComing">Почему пришел к нам (кратко)</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="professions"
-                        type="text"
-                        v-model.trim="editedWorker.professions"
-                        @change="changeData(editedWorker.professions, 'профессия')"
-                      >
-                      <label class="active" for="professions">Профессия 1</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="professionsSecond"
-                        type="text"
-                        v-model.trim="editedWorker.professionsSecond"
-                        @change="changeData(editedWorker.professionsSecond, 'профессия 2')"
-                      >
-                      <label class="active" for="professionsSecond">Профессия 2</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="professionsThird"
-                        type="text"
-                        v-model.trim="editedWorker.professionsThird"
-                        @change="changeData(editedWorker.professionsThird, 'профессия 3')"
-                      >
-                      <label class="active" for="professionsThird">Профессия 3</label>
-                    </div>
-
-                    <div class="input-field radio-field editor-input flex-start-center">
-                      <p class="right-margin-big">Ночная смена: </p>
-                      <p class="right-margin-little">
-                        <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.nightShift" @change="changeData(editedWorker.nightShift, 'ночная схема')"/>
-                          <span>Да</span>
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <input type="radio" value="Нет" v-model.trim="editedWorker.nightShift"/>
-                          <span>Нет</span>
-                        </label>
-                      </p>
-                    </div>
-
-                    <div class="input-field radio-field editor-input flex-start-center">
-                      <p class="right-margin-big">Проверка МВД: </p>
-                      <p class="right-margin-little">
-                        <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.checkMVD" />
-                          <span>Да</span>
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <input type="radio" value="Нет" v-model.trim="editedWorker.checkMVD" @change="changeData(editedWorker.nightShift, 'проверка МВД')"/>
-                          <span>Нет</span>
-                        </label>
-                      </p>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="dateInterview"
-                        type="date"
-                        v-model.trim="editedWorker.dateInterview"
-                        @change="changeData(editedWorker.nightShift, 'дата собеседования')"
-                      >
-                      <label class="active" for="dateInterview">Дата Собеседования</label>
-                    </div>
-
-                    <div class="input-field editor-input">
-                      <input
-                        id="uniform"
-                        type="text"
-                        v-model.trim="editedWorker.uniform"
-                        @change="changeData(editedWorker.uniform, 'униформа')"
-                      >
-                      <label class="active" for="uniform">Униформа</label>
-                    </div>
-
-                    <div class="input-field radio-field editor-input flex-start-center">
-                      <p class="right-margin-big">Уволен: </p>
-                      <p class="right-margin-little">
-                        <label>
-                          <input type="radio" value="Да" v-model.trim="editedWorker.fired" @change="changeData(editedWorker.fired, 'уволен')"/>
-                          <span>Да</span>
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <input type="radio" value="Нет" v-model.trim="editedWorker.fired"/>
-                          <span>Нет</span>
-                        </label>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+          <AppLineText
+            inputID="input-fired"
+            label="Уволен ли: "
+            maxLength="20"
+            v-model="editedWorker.fired"
+          />
         </div>
       </div>
     </section>
@@ -510,20 +303,19 @@
 
 <script>
 import M from 'materialize-css'
-import NavWorker from '@/components/workers/WorkerNav'
-import { mask } from 'vue-the-mask'
-import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
+
+import AppTopPanel from '@/components/AppTopPanel'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import AppLineText from '@/components/AppLineText'
+import AppHeaderIcon from '@/components/AppHeaderIcon'
+import AppSelect from '@/components/AppSelect'
 
 export default {
   name: 'EditorWorkers',
 
-  components: { NavWorker },
-
-  mixins: [popupMixin],
-
-  directives: { mask },
+  components: { AppTopPanel, AppButtonIcon, AppLineText, AppHeaderIcon, AppSelect },
 
   data () {
     return {
@@ -663,9 +455,18 @@ export default {
 </script>
 
 <style scoped>
-  .photo-container {
-    border-radius: var(--border-radius);
-    margin-top: 2rem;
-    width: 100%;
+  #app-edit .edit-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: min-content;
+    grid-row-gap: 2rem;
+  }
+
+  #app-edit .edit-top-panel h3{
+    margin: 0;
+  }
+
+  #app-edit .edit-block-content {
+    margin-top: 1rem;
   }
 </style>
