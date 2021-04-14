@@ -1,26 +1,35 @@
 <template>
   <div>
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3 class="right-margin-big">Список клиентов</h3>
+    <AppTopPanel header="Список клиентов">
+      <template #nav-buttons>
+        <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateCustomers"/>
+        <AppButtonIcon icon="add" title="Добавить клиентов" @button-click="addCustomer"/>
+      </template>
+    </AppTopPanel>
 
-        <div class="flex-center">
-          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
-                  title="Обновить страницу"
-                  @click="updateCustomers"
-          ><i class="material-icons middle-material-icons">autorenew</i>
-          </button>
-        </div>
-      </div>
+    <template>
+<!--      <div class="page-title flex-between-center">-->
+<!--        <div class="flex-center">-->
+<!--          <h3 class="right-margin-big">Список клиентов</h3>-->
 
-      <InputAdd
-        @add-element="addCustomer"
-        placeholder="Добавить нового клиента"
-      />
-    </div>
+<!--          <div class="flex-center">-->
+<!--            <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"-->
+<!--                    title="Обновить страницу"-->
+<!--                    @click="updateCustomers"-->
+<!--            ><i class="material-icons middle-material-icons">autorenew</i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <InputAdd-->
+<!--          @add-element="addCustomer"-->
+<!--          placeholder="Добавить нового клиента"-->
+<!--        />-->
+<!--      </div>-->
+    </template>
 
     <section>
-      <TableWorkers
+      <CustomersTable
         @remove-customer="removeCustomer"
         :customers="customers"
       />
@@ -29,15 +38,21 @@
 </template>
 
 <script>
-import InputAdd from '@/components/InputAdd'
-import TableWorkers from '@/components/customers/CustomersTable'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
+
+import AppTopPanel from '@/components/AppTopPanel'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import CustomersTable from '@/components/customers/CustomersTable'
 
 export default {
   name: 'Customers',
 
-  components: { InputAdd, TableWorkers },
+  components: {
+    AppTopPanel,
+    AppButtonIcon,
+    CustomersTable
+  },
 
   computed: {
     ...mapGetters([

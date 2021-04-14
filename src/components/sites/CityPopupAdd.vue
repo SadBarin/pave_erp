@@ -34,7 +34,12 @@ import AppLineText from '@/components/AppLineText'
 export default {
   name: 'CityPopupAdd',
 
-  components: { AppPopupWrapper, AppTopPanel, AppButtonIcon, AppLineText },
+  components: {
+    AppPopupWrapper,
+    AppTopPanel,
+    AppButtonIcon,
+    AppLineText
+  },
 
   props: { popupHidden: Boolean },
 

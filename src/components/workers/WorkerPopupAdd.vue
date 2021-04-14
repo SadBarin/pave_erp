@@ -1,15 +1,15 @@
 <template>
   <AppPopupWrapper :hidden="popupHidden">
-    <AppTopPanel header="Добавление сотрудников">
+    <AppTopPanel header="Добавление рабочих">
       <template #nav-buttons>
         <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('popupToggle')"/>
       </template>
     </AppTopPanel>
 
     <div class="add-city-container">
-      <EmployeesAdd
+      <WorkerAdd
         @add-employee="$emit('addEmployee')"
-        :employees="employees"
+        :workers="workers"
       />
     </div>
   </AppPopupWrapper>
@@ -19,28 +19,22 @@
 import AppPopupWrapper from '@/components/AppPopupWrapper'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import EmployeesAdd from '@/components/employees/EmployeesAdd'
+import WorkerAdd from '@/components/workers/WorkerAdd'
 
 export default {
-  name: 'EmployeePopupAdd',
+  name: 'WorkerPopupAdd',
 
   components: {
     AppPopupWrapper,
     AppTopPanel,
     AppButtonIcon,
-    EmployeesAdd
+    WorkerAdd
   },
 
   props: {
     popupHidden: Boolean,
-    employees: Object
-  },
-
-  data () {
-    return {
-      addedCity: {},
-      firstNote: 'Город был создан'
-    }
+    workers: Object
   }
 }
 </script>
+

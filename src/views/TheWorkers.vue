@@ -1,27 +1,12 @@
 <template>
   <div>
-    <div class="page-title flex-between-center">
-      <div class="flex-center">
-        <h3 class="right-margin-big">Список рабочих</h3>
-
-        <div class="flex-center">
-          <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"
-                  title="Обновить страницу"
-                  @click="updateWorkers"
-          ><i class="material-icons middle-material-icons">autorenew</i>
-          </button>
-
-          <router-link class="btn-transparent transparent btn-page-title blue-text text-darken-1" title="Начать поиск" to="/workers/search">
-            <i class="material-icons middle-material-icons">search</i>
-          </router-link>
-        </div>
-      </div>
-
-      <AddCardWorkers
-        @add-worker="addWorker"
-        :workers="workers"
-      />
-    </div>
+    <AppTopPanel header="Список рабочих">
+      <template #nav-buttons>
+        <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateWorkers()"/>
+        <AppButtonIcon icon="search" title="Поиск" @button-click="$router.push('/workers/search')"/>
+        <AppButtonIcon icon="add" title="Добавить рабочего" @button-click="addWorker"/>
+      </template>
+    </AppTopPanel>
 
     <section>
       <TableWorkers
@@ -34,15 +19,21 @@
 </template>
 
 <script>
-import TableWorkers from '@/components/workers/WorkersTable'
-import AddCardWorkers from '@/components/workers/WorkerAdd'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
+
+import AppTopPanel from '@/components/AppTopPanel'
+import AppButtonIcon from '@/components/AppButtonIcon'
+import TableWorkers from '@/components/workers/WorkersTable'
 
 export default {
   name: 'Workers',
 
-  components: { TableWorkers, AddCardWorkers },
+  components: {
+    AppTopPanel,
+    AppButtonIcon,
+    TableWorkers
+  },
 
   computed: {
     ...mapGetters([

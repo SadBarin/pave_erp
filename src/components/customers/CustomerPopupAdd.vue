@@ -22,7 +22,7 @@ import AppButtonIcon from '@/components/AppButtonIcon'
 import EmployeesAdd from '@/components/employees/EmployeesAdd'
 
 export default {
-  name: 'EmployeePopupAdd',
+  name: 'CustomerPopupAdd',
 
   components: {
     AppPopupWrapper,
@@ -34,13 +34,10 @@ export default {
   props: {
     popupHidden: Boolean,
     employees: Object
-  },
-
-  data () {
-    return {
-      addedCity: {},
-      firstNote: 'Город был создан'
-    }
   }
 }
 </script>
+
+<style scoped>
+
+</style>
