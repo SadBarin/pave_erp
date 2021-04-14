@@ -1,104 +1,104 @@
 <template class="editor">
   <div id="app-edit">
-    <AppTopPanel :header="'Редактор сотрудника: ' + editedEmployee.surname + ' ' + editedEmployee.name">
+    <AppEditWrapper :header="'Редактор сотрудника: ' + editedEmployee.surname + ' ' + editedEmployee.name">
       <template #nav-buttons>
         <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedEmployee(editedEmployee)"/>
         <AppButtonIcon icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
       </template>
-    </AppTopPanel>
 
-    <section class="edit-section">
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="assignment_ind" header-text="Авторизация"/>
+      <template #edit-section>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="assignment_ind" header-text="Авторизация"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-email"
-            label="Почта: "
-            maxLength="20"
-            v-model="editedEmployee.email"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-email"
+              label="Почта: "
+              maxLength="20"
+              v-model="editedEmployee.email"
+            />
 
-          <AppLineText
-            inputID="input-password"
-            label="Пароль: "
-            maxLength="20"
-            v-model="editedEmployee.password"
-          />
+            <AppLineText
+              inputID="input-password"
+              label="Пароль: "
+              maxLength="20"
+              v-model="editedEmployee.password"
+            />
 
-          <AppSelect
-            selectID="select"
-            label="Доступ: "
-            v-model="editedEmployee.access"
-          >
-            <option value="employee">Сотрудник</option>
-            <option value="admin">Админ</option>
-            <option value="staffManager">Менеджер по персоналу</option>
-            <option value="customerManager">Менеджер по работе с заказчиками</option>
-            <option value="leader">Руководитель обособленного подразделения</option>
-          </AppSelect>
+            <AppSelect
+              selectID="select"
+              label="Доступ: "
+              v-model="editedEmployee.access"
+            >
+              <option value="employee">Сотрудник</option>
+              <option value="admin">Админ</option>
+              <option value="staffManager">Менеджер по персоналу</option>
+              <option value="customerManager">Менеджер по работе с заказчиками</option>
+              <option value="leader">Руководитель обособленного подразделения</option>
+            </AppSelect>
 
-          <AppLineText
-            inputID="input-duty"
-            label="Должность: "
-            maxLength="20"
-            v-model="editedEmployee.duty"
-          />
+            <AppLineText
+              inputID="input-duty"
+              label="Должность: "
+              maxLength="20"
+              v-model="editedEmployee.duty"
+            />
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="ФИО"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="ФИО"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-surname"
-            label="Фамилия: "
-            maxLength="20"
-            v-model="editedEmployee.surname"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-surname"
+              label="Фамилия: "
+              maxLength="20"
+              v-model="editedEmployee.surname"
+            />
 
-          <AppLineText
-            inputID="input-name"
-            label="Имя: "
-            maxLength="20"
-            v-model="editedEmployee.name"
-          />
+            <AppLineText
+              inputID="input-name"
+              label="Имя: "
+              maxLength="20"
+              v-model="editedEmployee.name"
+            />
 
-          <AppLineText
-            inputID="input-patronymic"
-            label="Отчество: "
-            maxLength="20"
-            v-model="editedEmployee.patronymic"
-          />
+            <AppLineText
+              inputID="input-patronymic"
+              label="Отчество: "
+              maxLength="20"
+              v-model="editedEmployee.patronymic"
+            />
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="local_phone" header-text="Контактные данные"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="local_phone" header-text="Контактные данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-city"
-            label="Город: "
-            maxLength="20"
-            v-model="editedEmployee.city"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-city"
+              label="Город: "
+              maxLength="20"
+              v-model="editedEmployee.city"
+            />
 
-          <AppLineText
-            inputID="input-home-phone"
-            label="Телефон домашний: "
-            maxLength="20"
-            v-model="editedEmployee.homePhone"
-          />
+            <AppLineText
+              inputID="input-home-phone"
+              label="Телефон домашний: "
+              maxLength="20"
+              v-model="editedEmployee.homePhone"
+            />
 
-          <AppLineText
-            inputID="input-mobile-phone"
-            label="Телефон мобильный: "
-            maxLength="20"
-            v-model="editedEmployee.mobilePhone"
-          />
+            <AppLineText
+              inputID="input-mobile-phone"
+              label="Телефон мобильный: "
+              maxLength="20"
+              v-model="editedEmployee.mobilePhone"
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </template>
+    </AppEditWrapper>
   </div>
 </template>
 
@@ -106,8 +106,8 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
+import AppEditWrapper from '@/components/AppEditWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
-import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import AppLineText from '@/components/AppLineText'
 import AppSelect from '@/components/AppSelect'
@@ -116,8 +116,8 @@ export default {
   name: 'addEmployees.vue',
 
   components: {
+    AppEditWrapper,
     AppHeaderIcon,
-    AppTopPanel,
     AppButtonIcon,
     AppLineText,
     AppSelect
@@ -188,20 +188,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  #app-edit .edit-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: min-content;
-    grid-row-gap: 2rem
-  }
-
-  #app-edit .edit-top-panel h3{
-    margin: 0;
-  }
-
-  #app-edit .edit-block-content {
-    margin-top: 1rem;
-  }
-</style>

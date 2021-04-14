@@ -11,53 +11,53 @@
       </template>
     </PopupRemove>
 
-    <AppTopPanel :header="'Редактор города: ' + editedCity.name">
+    <AppEditWrapper :header="'Редактор города: ' + editedCity.name">
       <template #nav-buttons>
         <AppButtonIcon icon="delete" title="Удалить город" @button-click="popupRemoveToggle"/>
         <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
         <AppButtonIcon icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
       </template>
-    </AppTopPanel>
 
-    <section class="edit-section">
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
+      <template #edit-section>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="import_contacts" header-text="Основные данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-city"
-            label="Название города: "
-            maxLength="20"
-            v-model="editedCity.name"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-city"
+              label="Название города: "
+              maxLength="20"
+              v-model="editedCity.name"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
 
-        <div class="edit-block-content">
-          <AppNumbers
-            inputID="input-note-count"
-            label="Заметок в списке:  "
-            minValue="0"
-            maxValue="35"
-            maxLength="3"
-            v-model="editedCity.notesCount"
-          />
+          <div class="edit-block-content">
+            <AppNumbers
+              inputID="input-note-count"
+              label="Заметок в списке:  "
+              minValue="0"
+              maxValue="35"
+              maxLength="3"
+              v-model="editedCity.notesCount"
+            />
 
-          <AppLineText
-            placeholder="Введите новую заметку"
-            inputID="input-note"
-            label="Новая Заметка: "
-            maxLength="35"
-            v-model="note"
-          />
+            <AppLineText
+              placeholder="Введите новую заметку"
+              inputID="input-note"
+              label="Новая Заметка: "
+              maxLength="35"
+              v-model="note"
+            />
 
-          <AppNotesList :notes-list="editedCity.notes" :notes-count="editedCity.notesCount"/>
+            <AppNotesList :notes-list="editedCity.notes" :notes-count="editedCity.notesCount"/>
+          </div>
         </div>
-      </div>
-    </section>
+      </template>
+    </AppEditWrapper>
   </div>
 </template>
 
@@ -65,7 +65,7 @@
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
-import AppTopPanel from '@/components/AppTopPanel'
+import AppEditWrapper from '@/components/AppEditWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppNotesList from '@/components/edit/AppNotesList'
 import AppLineText from '@/components/AppLineText'
@@ -76,7 +76,15 @@ import PopupRemove from '@/components/PopupRemove'
 export default {
   name: 'Sites',
 
-  components: { AppTopPanel, AppHeaderIcon, AppButtonIcon, AppLineText, AppNumbers, AppNotesList, PopupRemove },
+  components: {
+    AppEditWrapper,
+    AppHeaderIcon,
+    AppButtonIcon,
+    AppLineText,
+    AppNumbers,
+    AppNotesList,
+    PopupRemove
+  },
 
   data () {
     return {
@@ -90,6 +98,11 @@ export default {
     ...mapGetters([
       'sites'
     ])
+  },
+
+  created () {
+    this.SET_SITES_FROM_LOCAL_STORAGE()
+    this.editedCity = this.sites[this.$route.params.id]
   },
 
   methods: {
@@ -135,28 +148,6 @@ export default {
           M.toast({ html: 'Данные сохранены!' })
         })
     }
-  },
-
-  mounted () {
-    this.SET_SITES_FROM_LOCAL_STORAGE()
-    this.editedCity = this.sites[this.$route.params.id]
   }
 }
 </script>
-
-<style scoped>
-  #app-edit .edit-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: min-content;
-    grid-row-gap: 2rem
-  }
-
-  #app-edit .edit-top-panel h3{
-    margin: 0;
-  }
-
-  #app-edit .edit-block-content {
-    margin-top: 1rem;
-  }
-</style>

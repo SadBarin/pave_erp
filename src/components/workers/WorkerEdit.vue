@@ -1,303 +1,302 @@
 <template>
   <div id="app-edit">
-    <AppTopPanel :header="'Редактор рабочего: ' + editedWorker.surname + ' ' + editedWorker.name">
+    <AppEditWrapper :header="'Редактор рабочего: ' + editedWorker.surname + ' ' + editedWorker.name">
       <template #nav-buttons>
         <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedWorker(editedWorker)"/>
         <AppButtonIcon icon="location_city" title="Вернуться к рабочим" @button-click="editorExit"/>
       </template>
-    </AppTopPanel>
 
-    <section class="edit-section">
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="ФИО"/>
+      <template #edit-section>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="ФИО"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-surname"
-            label="Фамилия: "
-            maxLength="20"
-            v-model="editedWorker.surname"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-surname"
+              label="Фамилия: "
+              maxLength="20"
+              v-model="editedWorker.surname"
+            />
 
-          <AppLineText
-            inputID="input-name"
-            label="Имя: "
-            maxLength="20"
-            v-model="editedWorker.name"
-          />
+            <AppLineText
+              inputID="input-name"
+              label="Имя: "
+              maxLength="20"
+              v-model="editedWorker.name"
+            />
 
-          <AppLineText
-            inputID="input-patronymic"
-            label="Отчество: "
-            maxLength="20"
-            v-model="editedWorker.patronymic"
-          />
+            <AppLineText
+              inputID="input-patronymic"
+              label="Отчество: "
+              maxLength="20"
+              v-model="editedWorker.patronymic"
+            />
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Паспортные данные"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Паспортные данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-passport-id"
-            label="Номер паспорта: "
-            maxLength="20"
-            v-model="editedWorker.passportID"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-passport-id"
+              label="Номер паспорта: "
+              maxLength="20"
+              v-model="editedWorker.passportID"
+            />
 
-          <AppLineText
-            inputID="input-passport-date"
-            label="Дата выдачи: "
-            maxLength="20"
-            v-model="editedWorker.passportDate"
-          />
+            <AppLineText
+              inputID="input-passport-date"
+              label="Дата выдачи: "
+              maxLength="20"
+              v-model="editedWorker.passportDate"
+            />
 
-          <AppLineText
-            inputID="input-passport-issued"
-            label="Кем выдан: "
-            maxLength="20"
-            v-model="editedWorker.passportIssued"
-          />
+            <AppLineText
+              inputID="input-passport-issued"
+              label="Кем выдан: "
+              maxLength="20"
+              v-model="editedWorker.passportIssued"
+            />
 
-          <!--          <AppLineText-->
-          <!--            inputID="input-registration"-->
-          <!--            label="Прописка: "-->
-          <!--            maxLength="20"-->
-          <!--            v-model="editedWorker.registration"-->
-          <!--          />-->
+            <!--          <AppLineText-->
+            <!--            inputID="input-registration"-->
+            <!--            label="Прописка: "-->
+            <!--            maxLength="20"-->
+            <!--            v-model="editedWorker.registration"-->
+            <!--          />-->
 
-          <AppLineText
-            inputID="input-passport-address"
-            label="Адрес: "
-            maxLength="20"
-            v-model="editedWorker.address"
-          />
+            <AppLineText
+              inputID="input-passport-address"
+              label="Адрес: "
+              maxLength="20"
+              v-model="editedWorker.address"
+            />
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Личные данные"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Личные данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-birthday"
-            label="День рождения: "
-            maxLength="20"
-            v-model="editedWorker.birthday"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-birthday"
+              label="День рождения: "
+              maxLength="20"
+              v-model="editedWorker.birthday"
+            />
 
-          <AppSelect
-            selectID="select-bank"
-            label="Пол: "
-            v-model="editedWorker.sex"
-          >
-            <option class="editor-option" value="Мужской">Мужской</option>
-            <option class="editor-option" value="Женский">Женский</option>
-          </AppSelect>
+            <AppSelect
+              selectID="select-bank"
+              label="Пол: "
+              v-model="editedWorker.sex"
+            >
+              <option class="editor-option" value="Мужской">Мужской</option>
+              <option class="editor-option" value="Женский">Женский</option>
+            </AppSelect>
 
-          <AppLineText
-            inputID="input-nationality"
-            label="Национальность: "
-            maxLength="20"
-            v-model="editedWorker.nationality"
-          />
+            <AppLineText
+              inputID="input-nationality"
+              label="Национальность: "
+              maxLength="20"
+              v-model="editedWorker.nationality"
+            />
 
-          <AppLineText
-            inputID="input-medical-book"
-            label="Мед.книжка: "
-            maxLength="20"
-            v-model="editedWorker.medicalBook"
-          />
+            <AppLineText
+              inputID="input-medical-book"
+              label="Мед.книжка: "
+              maxLength="20"
+              v-model="editedWorker.medicalBook"
+            />
 
-          <AppLineText
-            inputID="input-education"
-            label="Образование: "
-            maxLength="20"
-            v-model="editedWorker.education"
-          />
+            <AppLineText
+              inputID="input-education"
+              label="Образование: "
+              maxLength="20"
+              v-model="editedWorker.education"
+            />
 
-          <AppLineText
-            inputID="input-university"
-            label="ВУЗ: "
-            maxLength="20"
-            v-model="editedWorker.university"
-          />
+            <AppLineText
+              inputID="input-university"
+              label="ВУЗ: "
+              maxLength="20"
+              v-model="editedWorker.university"
+            />
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Банковские данные"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Банковские данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-surname-card"
-            label="Фамилия владельца: "
-            maxLength="20"
-            v-model="editedWorker.surnameCard"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-surname-card"
+              label="Фамилия владельца: "
+              maxLength="20"
+              v-model="editedWorker.surnameCard"
+            />
 
-          <AppLineText
-            inputID="input-name-card"
-            label="Имя владельца: "
-            maxLength="20"
-            v-model="editedWorker.nameCard"
-          />
+            <AppLineText
+              inputID="input-name-card"
+              label="Имя владельца: "
+              maxLength="20"
+              v-model="editedWorker.nameCard"
+            />
 
-          <AppLineText
-            inputID="input-patronymic-card"
-            label="Отчество владельца: "
-            maxLength="20"
-            v-model="editedWorker.patronymicCard"
-          />
+            <AppLineText
+              inputID="input-patronymic-card"
+              label="Отчество владельца: "
+              maxLength="20"
+              v-model="editedWorker.patronymicCard"
+            />
 
-          <AppLineText
-            inputID="input-account-card-number"
-            label="Номер счёта: "
-            maxLength="20"
-            v-model="editedWorker.accountNumber"
-          />
+            <AppLineText
+              inputID="input-account-card-number"
+              label="Номер счёта: "
+              maxLength="20"
+              v-model="editedWorker.accountNumber"
+            />
 
-          <AppSelect
-            selectID="select-bank"
-            label="Банк: "
-            v-model="editedWorker.bank"
-          >
-            <option class="editor-option" value="СберБанк">СберБанк</option>
-            <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
-            <option class="editor-option" value="Газпромбанк">Газпромбанк</option>
-            <option class="editor-option" value="Национальный Клиринговый Центр">Национальный Клиринговый Центр</option>
-            <option class="editor-option" value="Альфа-Банк">Альфа-Банк</option>
-            <option class="editor-option" value="Россельхозбанк">Россельхозбанк</option>
-            <option class="editor-option" value="Московский Кредитный Банк">Московский Кредитный Банк</option>
-            <option class="editor-option" value="Банк «Открытие»">Банк «Открытие»</option>
-            <option class="editor-option" value="Совкомбанк">Совкомбанк</option>
-            <option class="editor-option" value="Росбанк">Росбанк</option>
-            <option class="editor-option" value="Тинькофф Банк">Тинькофф Банк</option>
-          </AppSelect>
+            <AppSelect
+              selectID="select-bank"
+              label="Банк: "
+              v-model="editedWorker.bank"
+            >
+              <option class="editor-option" value="СберБанк">СберБанк</option>
+              <option class="editor-option" value="Банк ВТБ">Банк ВТБ</option>
+              <option class="editor-option" value="Газпромбанк">Газпромбанк</option>
+              <option class="editor-option" value="Национальный Клиринговый Центр">Национальный Клиринговый Центр</option>
+              <option class="editor-option" value="Альфа-Банк">Альфа-Банк</option>
+              <option class="editor-option" value="Россельхозбанк">Россельхозбанк</option>
+              <option class="editor-option" value="Московский Кредитный Банк">Московский Кредитный Банк</option>
+              <option class="editor-option" value="Банк «Открытие»">Банк «Открытие»</option>
+              <option class="editor-option" value="Совкомбанк">Совкомбанк</option>
+              <option class="editor-option" value="Росбанк">Росбанк</option>
+              <option class="editor-option" value="Тинькофф Банк">Тинькофф Банк</option>
+            </AppSelect>
+          </div>
         </div>
-      </div>
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Контактные данные"/>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Контактные данные"/>
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-city"
-            label="Город: "
-            maxLength="20"
-            v-model="editedWorker.city"
-          />
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-city"
+              label="Город: "
+              maxLength="20"
+              v-model="editedWorker.city"
+            />
 
-          <AppLineText
-            inputID="input-home-phone"
-            label="Домашний телефон: "
-            maxLength="20"
-            v-model="editedWorker.homePhone"
-          />
+            <AppLineText
+              inputID="input-home-phone"
+              label="Домашний телефон: "
+              maxLength="20"
+              v-model="editedWorker.homePhone"
+            />
 
-          <AppLineText
-            inputID="input-mobile-phone"
-            label="Основ. моб. телефон: "
-            maxLength="20"
-            v-model="editedWorker.mobilePhone"
-          />
+            <AppLineText
+              inputID="input-mobile-phone"
+              label="Основ. моб. телефон: "
+              maxLength="20"
+              v-model="editedWorker.mobilePhone"
+            />
 
-          <AppLineText
-            inputID="input-mobile-phone-additional"
-            label="Доб. моб. телефон: "
-            maxLength="20"
-            v-model="editedWorker.mobilePhoneAdditional"
-          />
+            <AppLineText
+              inputID="input-mobile-phone-additional"
+              label="Доб. моб. телефон: "
+              maxLength="20"
+              v-model="editedWorker.mobilePhoneAdditional"
+            />
 
-          <AppLineText
-            inputID="input-mobile-phone-standby"
-            label="Запас. моб. телефон: "
-            maxLength="20"
-            v-model="editedWorker.mobilePhoneStandby"
-          />
+            <AppLineText
+              inputID="input-mobile-phone-standby"
+              label="Запас. моб. телефон: "
+              maxLength="20"
+              v-model="editedWorker.mobilePhoneStandby"
+            />
+          </div>
         </div>
-      </div>
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Рабочие данные"/>
 
-      <div class="edit-block">
-        <AppHeaderIcon header-level="4" material-icon="account_box" header-text="Рабочие данные"/>
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-account-number"
+              label="Учёт. номер: "
+              maxLength="20"
+              v-model="editedWorker.accountNumber"
+            />
 
-        <div class="edit-block-content">
-          <AppLineText
-            inputID="input-account-number"
-            label="Учёт. номер: "
-            maxLength="20"
-            v-model="editedWorker.accountNumber"
-          />
+            <AppLineText
+              inputID="input-previous-work"
+              label="Прежняя работа: "
+              maxLength="20"
+              v-model="editedWorker.previousWork"
+            />
 
-          <AppLineText
-            inputID="input-previous-work"
-            label="Прежняя работа: "
-            maxLength="20"
-            v-model="editedWorker.previousWork"
-          />
+            <AppLineText
+              inputID="input-reason-coming"
+              label="Почему пришёл к нам: "
+              maxLength="20"
+              v-model="editedWorker.reasonComing"
+            />
 
-          <AppLineText
-            inputID="input-reason-coming"
-            label="Почему пришёл к нам: "
-            maxLength="20"
-            v-model="editedWorker.reasonComing"
-          />
+            <AppLineText
+              inputID="input-profession"
+              label="Профессия 1: "
+              maxLength="20"
+              v-model="editedWorker.professions"
+            />
 
-          <AppLineText
-            inputID="input-profession"
-            label="Профессия 1: "
-            maxLength="20"
-            v-model="editedWorker.professions"
-          />
+            <AppLineText
+              inputID="input-profession-second"
+              label="Профессия 2: "
+              maxLength="20"
+              v-model="editedWorker.professionsSecond"
+            />
 
-          <AppLineText
-            inputID="input-profession-second"
-            label="Профессия 2: "
-            maxLength="20"
-            v-model="editedWorker.professionsSecond"
-          />
+            <AppLineText
+              inputID="input-profession-third"
+              label="Профессия 3: "
+              maxLength="20"
+              v-model="editedWorker.professionsThird"
+            />
 
-          <AppLineText
-            inputID="input-profession-third"
-            label="Профессия 3: "
-            maxLength="20"
-            v-model="editedWorker.professionsThird"
-          />
+            <AppLineText
+              inputID="input-night-shift"
+              label="Ночная смена: "
+              maxLength="20"
+              v-model="editedWorker.nightShift"
+            />
 
-          <AppLineText
-            inputID="input-night-shift"
-            label="Ночная смена: "
-            maxLength="20"
-            v-model="editedWorker.nightShift"
-          />
+            <AppLineText
+              inputID="input-check-mvd"
+              label="Проверка МВД: "
+              maxLength="20"
+              v-model="editedWorker.checkMVD"
+            />
 
-          <AppLineText
-            inputID="input-check-mvd"
-            label="Проверка МВД: "
-            maxLength="20"
-            v-model="editedWorker.checkMVD"
-          />
+            <AppLineText
+              inputID="input-date-interview"
+              label="Дата собеседования: "
+              maxLength="20"
+              v-model="editedWorker.dateInterview"
+            />
 
-          <AppLineText
-            inputID="input-date-interview"
-            label="Дата собеседования: "
-            maxLength="20"
-            v-model="editedWorker.dateInterview"
-          />
+            <AppLineText
+              inputID="input-date-uniform"
+              label="Униформа: "
+              maxLength="20"
+              v-model="editedWorker.uniform"
+            />
 
-          <AppLineText
-            inputID="input-date-uniform"
-            label="Униформа: "
-            maxLength="20"
-            v-model="editedWorker.uniform"
-          />
-
-          <AppLineText
-            inputID="input-fired"
-            label="Уволен ли: "
-            maxLength="20"
-            v-model="editedWorker.fired"
-          />
+            <AppLineText
+              inputID="input-fired"
+              label="Уволен ли: "
+              maxLength="20"
+              v-model="editedWorker.fired"
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </template>
+    </AppEditWrapper>
   </div>
 </template>
 
@@ -306,7 +305,7 @@ import M from 'materialize-css'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import AppTopPanel from '@/components/AppTopPanel'
+import AppEditWrapper from '@/components/AppEditWrapper'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import AppLineText from '@/components/AppLineText'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
@@ -315,7 +314,13 @@ import AppSelect from '@/components/AppSelect'
 export default {
   name: 'EditorWorkers',
 
-  components: { AppTopPanel, AppButtonIcon, AppLineText, AppHeaderIcon, AppSelect },
+  components: {
+    AppEditWrapper,
+    AppButtonIcon,
+    AppLineText,
+    AppHeaderIcon,
+    AppSelect
+  },
 
   data () {
     return {
@@ -453,20 +458,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  #app-edit .edit-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: min-content;
-    grid-row-gap: 2rem;
-  }
-
-  #app-edit .edit-top-panel h3{
-    margin: 0;
-  }
-
-  #app-edit .edit-block-content {
-    margin-top: 1rem;
-  }
-</style>
