@@ -1,10 +1,16 @@
 <template>
   <div>
+    <WorkerPopupAdd
+      :popupHidden="popupAddHidden"
+      @add-worker="addWorker"
+      @popup-toggle="popupAddToggle"
+    />
+
     <AppTopPanel header="Список рабочих">
       <template #nav-buttons>
         <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateWorkers()"/>
         <AppButtonIcon icon="search" title="Поиск" @button-click="$router.push('/workers/search')"/>
-        <AppButtonIcon icon="add" title="Добавить рабочего" @button-click="addWorker"/>
+        <AppButtonIcon icon="add" title="Добавить рабочего" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 
@@ -25,6 +31,7 @@ import firebase from 'firebase/app'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import TableWorkers from '@/components/workers/WorkersTable'
+import WorkerPopupAdd from '@/components/workers/WorkerPopupAdd'
 
 export default {
   name: 'Workers',
@@ -32,7 +39,14 @@ export default {
   components: {
     AppTopPanel,
     AppButtonIcon,
-    TableWorkers
+    TableWorkers,
+    WorkerPopupAdd
+  },
+
+  data () {
+    return {
+      popupAddHidden: true
+    }
   },
 
   computed: {
@@ -50,6 +64,10 @@ export default {
       'SET_WORKERS_FROM_SERVER',
       'SET_WORKERS_FROM_LOCAL_STORAGE'
     ]),
+
+    popupAddToggle () {
+      this.popupAddHidden = !this.popupAddHidden
+    },
 
     removeWorker (id) {
       firebase.database().ref('/workers/' + id).remove()
