@@ -1,32 +1,17 @@
 <template>
   <div>
+    <CustomerPopupAdd
+      :popupHidden="popupAddHidden"
+      @add-customer="addCustomer"
+      @popup-toggle="popupAddToggle"
+    />
+
     <AppTopPanel header="Список клиентов">
       <template #nav-buttons>
         <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateCustomers"/>
-        <AppButtonIcon icon="add" title="Добавить клиентов" @button-click="addCustomer"/>
+        <AppButtonIcon icon="add" title="Добавить клиентов" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
-
-    <template>
-<!--      <div class="page-title flex-between-center">-->
-<!--        <div class="flex-center">-->
-<!--          <h3 class="right-margin-big">Список клиентов</h3>-->
-
-<!--          <div class="flex-center">-->
-<!--            <button class="btn-transparent transparent btn-page-title blue-text text-darken-1"-->
-<!--                    title="Обновить страницу"-->
-<!--                    @click="updateCustomers"-->
-<!--            ><i class="material-icons middle-material-icons">autorenew</i>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <InputAdd-->
-<!--          @add-element="addCustomer"-->
-<!--          placeholder="Добавить нового клиента"-->
-<!--        />-->
-<!--      </div>-->
-    </template>
 
     <section>
       <CustomersTable
@@ -41,6 +26,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
+import CustomerPopupAdd from '../components/customers/CustomerPopupAdd'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import CustomersTable from '@/components/customers/CustomersTable'
@@ -49,9 +35,16 @@ export default {
   name: 'Customers',
 
   components: {
+    CustomerPopupAdd,
     AppTopPanel,
     AppButtonIcon,
     CustomersTable
+  },
+
+  data () {
+    return {
+      popupAddHidden: true
+    }
   },
 
   computed: {
@@ -73,6 +66,10 @@ export default {
       'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
     ]),
 
+    popupAddToggle () {
+      this.popupAddHidden = !this.popupAddHidden
+    },
+
     removeCustomer (id) {
       firebase.database().ref('/customers/' + id).remove()
         .then(() => {
@@ -82,6 +79,10 @@ export default {
     },
 
     addCustomer (name) {
+      console.log(name)
+
+      this.popupAddToggle()
+
       const newCustomer = {
         id: Date.now(),
         name,

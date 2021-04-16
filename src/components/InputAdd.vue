@@ -30,6 +30,7 @@ export default {
 
   methods: {
     submitElement () {
+      console.log(this.name)
       this.$emit('add-element', this.name)
       this.name = ''
     }
