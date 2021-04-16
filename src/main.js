@@ -8,8 +8,6 @@ import Popup from '@/components/AppPopup'
 import * as Sentry from '@sentry/browser'
 import { Integrations } from '@sentry/tracing'
 
-import Cloudinary from 'cloudinary-vue'
-
 import 'materialize-css/dist/js/materialize.min.js'
 import 'materialize-css/dist/css/materialize.min.css'
 import Vuelidate from 'vuelidate'
@@ -22,9 +20,7 @@ import 'firebase/database'
 Vue.component('Popup', Popup)
 
 Vue.config.productionTip = false
-Vue.use(Vuelidate, VueTheMask, Cloudinary, {
-  configuration: { cloudName: 'db6qzfvbw' }
-})
+Vue.use(Vuelidate, VueTheMask)
 
 Sentry.init({
   Vue,
