@@ -1,19 +1,15 @@
 <template>
 <div>
-  <Popup
-    v-if="popupShow"
-    @yes="removeEmployee(employee.id)"
-    @no="popupHidden"
-    :popup-toast="`Сотрудник ${employee.surname} ${employee.name} был удалён!`"
+  <PopupDeleteWrapper
+    :hidePopupStatus="popupRemoveHidden"
+    @close-popup="popupRemoveToggle"
+    @delete-element="removeEmployee(employee.id)"
+    :header="`Удаление сотрудника`"
   >
-    <template #title-popup>
-      Удалить?
+    <template #popup-delete-content>
+      После нажатия кнопки "да" будет удалён сотрудник!
     </template>
-
-    <template #text-info-popup>
-      После нажатия кнопки "да" будет удалён сотрудник <b>{{employee.surname}} {{employee.name}}</b>!
-    </template>
-  </Popup>
+  </PopupDeleteWrapper>
 
   <table>
     <tr>
@@ -69,7 +65,7 @@
 
           <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
                   title="Удалить"
-                  @click="popupVisibility(employee); setEmployee(employee)"
+                  @click="popupRemoveToggle(); setEmployee(employee)"
           >
             <i class="material-icons">delete</i>
           </button>
@@ -81,24 +77,33 @@
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
+import PopupDeleteWrapper from '@/components/popups/PopupDeleteWrapper'
 
 export default {
   name: 'TableEmployees',
-  mixins: [popupMixin],
+
+  components: { PopupDeleteWrapper },
+
   props: { employees: Object },
+
   data () {
     return {
-      employee: ''
+      employee: '',
+      popupRemoveHidden: true
     }
   },
+
   methods: {
+    popupRemoveToggle () {
+      this.popupRemoveHidden = !this.popupRemoveHidden
+    },
+
     setEmployee (employee) {
       this.employee = employee
     },
 
     removeEmployee (id) {
-      this.popupHidden()
+      this.popupRemoveToggle()
       this.$emit('remove-employee', id)
     }
   }

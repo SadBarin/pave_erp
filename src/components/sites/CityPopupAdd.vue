@@ -1,7 +1,7 @@
 <template>
   <PopupAddWrapper
     :hidden="hidden"
-    header="Добавить город"
+    header="Добавление города"
     @popup-close="$emit('popup-toggle')"
     @popup-add="addCity(addedCity)"
   >
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import PopupAddWrapper from '../PopupAddWrapper'
+import PopupAddWrapper from '../popups/PopupAddWrapper'
 import AppLineText from '../AppLineText'
 
 export default {

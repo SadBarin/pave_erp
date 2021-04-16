@@ -1,15 +1,15 @@
 <template>
   <div id="app-edit">
-    <PopupRemove
-      :popupHidden="popupRemoveHidden"
-      @close="popupRemoveToggle"
-      @delete="removeCity(editedCity)"
+    <PopupDeleteWrapper
+      :hidePopupStatus="popupRemoveHidden"
+      @close-popup="popupRemoveToggle"
+      @delete-element="removeCity(editedCity)"
       :header="`Удаление города ${editedCity.name}`"
     >
-      <template #popup-content>
+      <template #popup-delete-content>
         После нажатия на иконку корзины будет удалён город <b>{{editedCity.name}}</b>
       </template>
-    </PopupRemove>
+    </PopupDeleteWrapper>
 
     <AppEditWrapper :header="'Редактор города: ' + editedCity.name">
       <template #nav-buttons>
@@ -65,13 +65,13 @@
 import firebase from 'firebase/app'
 import { mapGetters, mapMutations } from 'vuex'
 
-import AppEditWrapper from '@/components/AppEditWrapper'
+import AppEditWrapper from '@/components/edit/AppEditWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppNotesList from '@/components/edit/AppNotesList'
 import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import PopupRemove from '@/components/PopupRemove'
+import PopupDeleteWrapper from '@/components/popups/PopupDeleteWrapper'
 
 export default {
   name: 'Sites',
@@ -83,7 +83,7 @@ export default {
     AppLineText,
     AppNumbers,
     AppNotesList,
-    PopupRemove
+    PopupDeleteWrapper
   },
 
   data () {

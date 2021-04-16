@@ -1,5 +1,5 @@
 <template>
-  <AppPopupWrapper :hidden="popupHidden">
+  <AppPopupWrapper :hidden="hidePopupStatus">
     <AppTopPanel :header="header">
       <template #nav-buttons>
         <AppButtonIcon icon="delete" title="Удалить" @button-click="$emit('delete-element')"/>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AppPopupWrapper from '@/components/AppPopupWrapper'
+import AppPopupWrapper from '@/components/popups/AppPopupWrapper'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 
@@ -28,7 +28,7 @@ export default {
   },
 
   props: {
-    popupHidden: Boolean,
+    hidePopupStatus: Boolean,
     header: String
   }
 }

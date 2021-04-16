@@ -34,7 +34,12 @@ import CityPopupAdd from '@/components/sites/CityPopupAdd'
 export default {
   name: 'Sites',
 
-  components: { AppTopPanel, AppButtonIcon, ListSites, CityPopupAdd },
+  components: {
+    AppTopPanel,
+    AppButtonIcon,
+    ListSites,
+    CityPopupAdd
+  },
 
   data () {
     return {
@@ -77,6 +82,7 @@ export default {
     },
 
     addCity (city) {
+      console.log('worx')
       city.name = city.name[0].toUpperCase() + city.name.substring(1)
 
       firebase.database().ref('/sites/' + city.id).set(city)

@@ -52,7 +52,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import AppEditWrapper from '@/components/AppEditWrapper'
+import AppEditWrapper from '@/components/edit/AppEditWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import AppNumbers from '@/components/AppNumbers'

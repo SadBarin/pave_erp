@@ -305,7 +305,7 @@ import M from 'materialize-css'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import AppEditWrapper from '@/components/AppEditWrapper'
+import AppEditWrapper from '@/components/edit/AppEditWrapper'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import AppLineText from '@/components/AppLineText'
 import AppHeaderIcon from '@/components/AppHeaderIcon'

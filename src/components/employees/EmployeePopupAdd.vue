@@ -1,34 +1,32 @@
 <template>
-  <AppPopupWrapper :hidden="popupHidden">
-    <AppTopPanel header="Добавление сотрудников">
-      <template #nav-buttons>
-        <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('popupToggle')"/>
-      </template>
-    </AppTopPanel>
-
-    <div class="add-city-container">
-      <EmployeesAdd
-        @add-employee="$emit('addEmployee')"
-        :employees="employees"
+  <PopupAddWrapper
+    :hidden="popupHidden"
+    header="Добавление сотрудника"
+    @popup-close="$emit('popupToggle')"
+    @popup-add="createEmployee()"
+  >
+    <template #popup-add-content>
+      <AppLineText
+        inputID="input-email"
+        label="Почта: "
+        maxLength="20"
+        v-model="email"
       />
-    </div>
-  </AppPopupWrapper>
+    </template>
+  </PopupAddWrapper>
 </template>
 
 <script>
-import AppPopupWrapper from '@/components/AppPopupWrapper'
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
-import EmployeesAdd from '@/components/employees/EmployeesAdd'
+import PopupAddWrapper from '@/components/popups/PopupAddWrapper'
+import AppLineText from '@/components/AppLineText'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'EmployeePopupAdd',
 
   components: {
-    AppPopupWrapper,
-    AppTopPanel,
-    AppButtonIcon,
-    EmployeesAdd
+    PopupAddWrapper,
+    AppLineText
   },
 
   props: {
@@ -38,8 +36,58 @@ export default {
 
   data () {
     return {
-      addedCity: {},
-      firstNote: 'Город был создан'
+      email: ''
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'authEmployee'
+    ])
+  },
+
+  methods: {
+    getPassword () {
+      let password = ''
+      const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!№;%:?*()@_+='
+
+      for (let i = 0; i < 10; i++) {
+        password += symbols.charAt(Math.floor(Math.random() * symbols.length))
+      }
+
+      return password
+    },
+
+    createEmployee () {
+      const newEmployee = {
+        id: Date.now(),
+        email: this.email,
+        password: this.getPassword(),
+        name: 'Сотрудник',
+        surname: 'Новый',
+        patronymic: '',
+        sex: 'Мужской',
+        homePhone: '',
+        mobilePhone: '',
+        city: this.authEmployee.city,
+        duty: 'Сотрудник',
+        access: 'employee',
+        settings: {
+          autoUpdate: 5000
+        },
+        history: [{
+          date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+          info: 'Сотрудник создан сотрудником ',
+          employee: {
+            name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+            id: this.authEmployee.id
+          }
+        }]
+      }
+
+      this.$emit('addEmployee', newEmployee)
+
+      this.email = ''
     }
   }
 }

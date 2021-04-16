@@ -1,9 +1,9 @@
 <template>
   <div>
     <PopupDeleteWrapper
-      :popupHidden="popupRemoveHidden"
-      @close="popupRemoveToggle"
-      @delete="removeCity(city)"
+      :hidePopupStatus="popupRemoveHidden"
+      @close-popup="popupRemoveToggle"
+      @delete-element="removeCity(city)"
       :header="`Удаление города ${city.name}`"
     >
       <template #popup-delete-content>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PopupDeleteWrapper from '../../PopupDeleteWrapper'
+import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 

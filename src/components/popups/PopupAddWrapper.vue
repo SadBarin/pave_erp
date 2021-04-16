@@ -15,8 +15,8 @@
 
 <script>
 import AppPopupWrapper from './AppPopupWrapper'
-import AppTopPanel from './AppTopPanel'
-import AppButtonIcon from './AppButtonIcon'
+import AppTopPanel from '../AppTopPanel'
+import AppButtonIcon from '../AppButtonIcon'
 
 export default {
   name: 'PopupAddWrapper',

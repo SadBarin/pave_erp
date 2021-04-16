@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import AppPopupWrapper from '@/components/AppPopupWrapper'
+import AppPopupWrapper from '@/components/popups/AppPopupWrapper'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import AppLineText from '@/components/AppLineText'
