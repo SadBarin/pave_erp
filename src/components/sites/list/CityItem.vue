@@ -1,15 +1,15 @@
 <template>
   <div>
-    <PopupRemove
+    <PopupDeleteWrapper
       :popupHidden="popupRemoveHidden"
       @close="popupRemoveToggle"
       @delete="removeCity(city)"
       :header="`Удаление города ${city.name}`"
     >
-      <template #popup-content>
+      <template #popup-delete-content>
         После нажатия на иконку корзины будет удалён город <b>{{city.name}}</b>
       </template>
-    </PopupRemove>
+    </PopupDeleteWrapper>
 
       <div class="city-item">
         <AppHeaderIcon header-level="6" material-icon="location_city" :header-text="city.name"/>
@@ -23,14 +23,18 @@
 </template>
 
 <script>
-import PopupRemove from '@/components/PopupRemove'
+import PopupDeleteWrapper from '../../PopupDeleteWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
   name: 'CardSites',
 
-  components: { PopupRemove, AppHeaderIcon, AppButtonIcon },
+  components: {
+    PopupDeleteWrapper,
+    AppHeaderIcon,
+    AppButtonIcon
+  },
 
   props: { city: Object },
 

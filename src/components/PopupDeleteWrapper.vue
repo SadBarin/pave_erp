@@ -2,13 +2,13 @@
   <AppPopupWrapper :hidden="popupHidden">
     <AppTopPanel :header="header">
       <template #nav-buttons>
-        <AppButtonIcon icon="delete" title="Удалить" @button-click="$emit('delete')"/>
-        <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('close')"/>
+        <AppButtonIcon icon="delete" title="Удалить" @button-click="$emit('delete-element')"/>
+        <AppButtonIcon icon="close" title="Закрыть" @button-click="$emit('close-popup')"/>
       </template>
     </AppTopPanel>
 
-    <div class="popup-remove-container">
-      <p><slot name="popup-content"></slot></p>
+    <div class="popup-delete-wrapper">
+      <p><slot name="popup-delete-content"></slot></p>
     </div>
   </AppPopupWrapper>
 </template>
@@ -19,11 +19,18 @@ import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
 
 export default {
-  name: 'PopupRemove',
+  name: 'PopupDeleteWrapper',
 
-  components: { AppPopupWrapper, AppTopPanel, AppButtonIcon },
+  components: {
+    AppPopupWrapper,
+    AppTopPanel,
+    AppButtonIcon
+  },
 
-  props: { popupHidden: Boolean, header: String }
+  props: {
+    popupHidden: Boolean,
+    header: String
+  }
 }
 </script>
 

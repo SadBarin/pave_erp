@@ -1,7 +1,7 @@
 <template>
   <div id="app-sites">
     <CityPopupAdd
-      :popupHidden="popupAddHidden"
+      :hidden="popupAddHidden"
       @add-city="addCity"
       @popup-toggle="popupAddToggle"
     />

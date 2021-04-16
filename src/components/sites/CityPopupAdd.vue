@@ -1,13 +1,11 @@
 <template>
-  <AppPopupWrapper :hidden="popupHidden">
-    <AppTopPanel header="Добавление города">
-      <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить город" @button-click="addCity(addedCity)"/>
-        <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('popup-toggle')"/>
-      </template>
-    </AppTopPanel>
-
-    <div class="add-city-container">
+  <PopupAddWrapper
+    :hidden="hidden"
+    header="Добавить город"
+    @popup-close="$emit('popup-toggle')"
+    @popup-add="addCity(addedCity)"
+  >
+    <template #popup-add-content>
       <AppLineText
         inputID="input-city"
         label="Название: "
@@ -21,27 +19,23 @@
         maxLength="30"
         v-model="firstNote"
       />
-    </div>
-  </AppPopupWrapper>
+    </template>
+  </PopupAddWrapper>
 </template>
 
 <script>
-import AppPopupWrapper from '@/components/AppPopupWrapper'
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
-import AppLineText from '@/components/AppLineText'
+import PopupAddWrapper from '../PopupAddWrapper'
+import AppLineText from '../AppLineText'
 
 export default {
   name: 'CityPopupAdd',
 
   components: {
-    AppPopupWrapper,
-    AppTopPanel,
-    AppButtonIcon,
+    PopupAddWrapper,
     AppLineText
   },
 
-  props: { popupHidden: Boolean },
+  props: { hidden: Boolean },
 
   data () {
     return {
@@ -79,7 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
