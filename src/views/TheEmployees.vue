@@ -15,7 +15,7 @@
     </AppTopPanel>
 
     <div>
-      <TableEmployees
+      <EmployeesTable
         v-if="employees"
         :employees="employees"
         @remove-employee="removeEmployee"
@@ -28,16 +28,16 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import TableEmployees from '@/components/employees/EmployeesTable'
+import EmployeesTable from '../components/section/employees/EmployeesTable'
+import EmployeePopupAdd from '../components/section/employees/EmployeePopupAdd'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import EmployeePopupAdd from '@/components/employees/EmployeePopupAdd'
 
 export default {
   name: 'Employees',
 
   components: {
-    TableEmployees,
+    EmployeesTable,
     AppTopPanel,
     AppButtonIcon,
     EmployeePopupAdd

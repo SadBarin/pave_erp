@@ -15,7 +15,7 @@
     </AppTopPanel>
 
     <section>
-      <TableWorkers
+      <WorkersTable
         v-if="workers"
         @remove-worker="removeWorker"
         :workers="workers"
@@ -30,8 +30,8 @@ import firebase from 'firebase/app'
 
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import TableWorkers from '@/components/workers/WorkersTable'
-import WorkerPopupAdd from '@/components/workers/WorkerPopupAdd'
+import WorkersTable from '../components/section/workers/WorkersTable'
+import WorkerPopupAdd from '../components/section/workers/WorkerPopupAdd'
 
 export default {
   name: 'Workers',
@@ -39,7 +39,7 @@ export default {
   components: {
     AppTopPanel,
     AppButtonIcon,
-    TableWorkers,
+    WorkersTable,
     WorkerPopupAdd
   },
 

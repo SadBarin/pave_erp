@@ -2,7 +2,7 @@
   <div>
     <div class="page-title flex-between-center">
       <h3 class="right-margin-big">История редактирования рабочего<br>"{{worker.surname}} {{worker.name}}"</h3>
-      <NavWorker :worker="worker"/>
+      <WorkerNav :worker="worker"/>
     </div>
 
     <section>
@@ -25,12 +25,12 @@
 </template>
 
 <script>
-import NavWorker from '@/components/workers/WorkerNav'
+import WorkerNav from './WorkerNav'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'HistoryWorkers',
-  components: { NavWorker },
+  components: { WorkerNav },
   data () {
     return {
       worker: ''

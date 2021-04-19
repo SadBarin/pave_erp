@@ -20,7 +20,7 @@
     </div>
 
     <section>
-      <TableSubdivisions
+      <CustomerSubdivisionsTable
         @remove-customer="removeCustomer"
         :customers="customerSubdivisions"
         :customerId="customerId"
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import TableSubdivisions from '@/components/customers/subdivisions/CustomerSubdivisionsTable'
+import CustomerSubdivisionsTable from './CustomerSubdivisionsTable'
 import SubdivisionAdd from '@/components/InputAdd'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
@@ -38,7 +38,10 @@ import firebase from 'firebase/app'
 export default {
   name: 'CustomerSubdivisions',
 
-  components: { TableSubdivisions, SubdivisionAdd },
+  components: {
+    CustomerSubdivisionsTable,
+    SubdivisionAdd
+  },
 
   computed: {
     ...mapGetters([

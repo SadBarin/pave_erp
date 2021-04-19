@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
+import PopupDeleteWrapper from '../../../popups/PopupDeleteWrapper'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppButtonIcon from '@/components/AppButtonIcon'
 

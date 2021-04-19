@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CustomerEmployeesTable from '@/components/customers/subdivisions/employees/CustomerEmployeesTable'
+import CustomerEmployeesTable from './CustomerEmployeesTable'
 import EmployeeAdd from '@/components/InputAdd'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'

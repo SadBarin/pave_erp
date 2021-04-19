@@ -126,7 +126,7 @@
               <div class="col s12 black-text">
                 <h4>Найдено</h4>
 
-                <TableWorkers
+                <WorkersTable
                   @remove-worker="removeWorker"
                   :workers="searchWorkers"
                 />
@@ -141,14 +141,14 @@
 
 <script>
 import M from 'materialize-css'
-import TableWorkers from '@/components/workers/WorkersTable'
+import WorkersTable from './WorkersTable'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 export default {
   name: 'SearchWorkers',
-  components: { TableWorkers },
+  components: { WorkersTable },
   mixins: [popupMixin],
   data () {
     return {

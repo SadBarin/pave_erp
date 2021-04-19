@@ -26,10 +26,10 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import CustomerPopupAdd from '../components/customers/CustomerPopupAdd'
+import CustomerPopupAdd from '../components/section/customers/CustomerPopupAdd'
+import CustomersTable from '../components/section/customers/CustomersTable'
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import CustomersTable from '@/components/customers/CustomersTable'
 
 export default {
   name: 'Customers',

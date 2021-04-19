@@ -23,7 +23,7 @@ const router = new VueRouter({
       path: '/sites/edit/city:id',
       name: 'cityEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/sites/CityEdit')
+      component: () => import('../components/section/sites/CityEdit')
     },
 
     {
@@ -36,13 +36,13 @@ const router = new VueRouter({
       path: '/employees/edit/employee:id',
       name: 'employeeEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/employees/EmployeeEdit')
+      component: () => import('../components/section/employees/EmployeeEdit')
     },
     {
       path: '/employees/history/employee:id',
       name: 'employeeHistory',
       meta: { layout: 'main' },
-      component: () => import('../components/employees/EmployeeHistory')
+      component: () => import('../components/section/employees/EmployeeHistory')
     },
 
     {
@@ -55,31 +55,31 @@ const router = new VueRouter({
       path: '/workers/edit/worker:id',
       name: 'workerEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/WorkerEdit')
+      component: () => import('../components/section/workers/WorkerEdit')
     },
     {
       path: '/workers/search',
       name: 'workersSearch',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/WorkersSearch')
+      component: () => import('../components/section/workers/WorkersSearch')
     },
     {
       path: '/workers/about/worker:id',
       name: 'workerAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/WorkerAbout')
+      component: () => import('../components/section/workers/WorkerAbout')
     },
     {
       path: '/workers/history/worker:id',
       name: 'workerHistory',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/WorkerHistory')
+      component: () => import('../components/section/workers/WorkerHistory')
     },
     {
       path: '/workers/calendar/worker:id',
       name: 'workerCalendar',
       meta: { layout: 'main' },
-      component: () => import('../components/workers/calendar/WorkerCalendar')
+      component: () => import('../components/section/workers/calendar/WorkerCalendar')
     },
 
     {
@@ -99,51 +99,51 @@ const router = new VueRouter({
       path: '/customers/about/customer:id',
       name: 'customerAbout',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/CustomerAbout')
+      component: () => import('../components/section/customers/CustomerAbout')
     },
     {
       path: '/customers/edit/customer:id',
       name: 'customerEdit',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/CustomerEdit')
+      component: () => import('../components/section/customers/CustomerEdit')
     },
 
     {
       path: '/customers/subdivisions/customer:id',
       name: 'customerSubdivisions',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/CustomerSubdivisions')
+      component: () => import('../components/section/customers/subdivisions/CustomerSubdivisions')
     },
     {
       path: '/customers/subdivisions/customer:id/about/subdivision:subId',
       name: 'customerAboutSubdivision',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/CustomerSubdivisionAbout')
+      component: () => import('../components/section/customers/subdivisions/CustomerSubdivisionAbout')
     },
     {
       path: '/customers/subdivisions/customer:id/edit/subdivision:subId',
       name: 'customerEditSubdivision',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/CustomerSubdivisionEdit')
+      component: () => import('../components/section/customers/subdivisions/CustomerSubdivisionEdit')
     },
 
     {
       path: '/customers/subdivisions/customer:id/subdivision:subId/employees',
       name: 'subdivisionEmployees',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/employees/CustomerEmployees')
+      component: () => import('../components/section/customers/subdivisions/employees/CustomerEmployees')
     },
     {
       path: '/customers/subdivisions/customer:id/subdivision:subId/employees/about/employee:empId',
       name: 'subdivisionAboutEmployee',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/employees/CustomerEmployeeAbout')
+      component: () => import('../components/section/customers/subdivisions/employees/CustomerEmployeeAbout')
     },
     {
       path: '/customers/subdivisions/customer:id/subdivision:subId/employees/edit/employee:empId',
       name: 'subdivisionEditEmployee',
       meta: { layout: 'main' },
-      component: () => import('../components/customers/subdivisions/employees/CustomerEmployeeEdit')
+      component: () => import('../components/section/customers/subdivisions/employees/CustomerEmployeeEdit')
     },
 
     {

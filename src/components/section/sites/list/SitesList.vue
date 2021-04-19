@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CityItem from '@/components/sites/list/CityItem'
+import CityItem from './CityItem'
 
 export default {
   name: 'ListSites',

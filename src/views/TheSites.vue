@@ -14,7 +14,7 @@
     </AppTopPanel>
 
     <div class="app-sites-content">
-      <ListSites
+      <SitesList
         :sites="sites"
         @remove-city="removeCity"
       />
@@ -28,8 +28,8 @@ import firebase from 'firebase/app'
 
 import AppTopPanel from '@/components/AppTopPanel'
 import AppButtonIcon from '@/components/AppButtonIcon'
-import ListSites from '@/components/sites/list/SitesList'
-import CityPopupAdd from '@/components/sites/CityPopupAdd'
+import SitesList from '../components/section/sites/list/SitesList'
+import CityPopupAdd from '../components/section/sites/CityPopupAdd'
 
 export default {
   name: 'Sites',
@@ -37,7 +37,7 @@ export default {
   components: {
     AppTopPanel,
     AppButtonIcon,
-    ListSites,
+    SitesList,
     CityPopupAdd
   },
 

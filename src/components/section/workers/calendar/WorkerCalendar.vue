@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddCalendarEvent
+    <WorkerAddEvent
       v-show="addEventShowStatus"
       @hiddenEventVisibility="hiddenEventVisibility"
       @addEventCalendar="addEventCalendar"
@@ -15,11 +15,12 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import ruLocale from '@fullcalendar/core/locales/ru'
 import { mapGetters, mapMutations } from 'vuex'
-import AddCalendarEvent from '@/components/workers/calendar/WorkerAddEvent'
+
+import WorkerAddEvent from './WorkerAddEvent'
 
 export default {
   components: {
-    FullCalendar, AddCalendarEvent
+    FullCalendar, WorkerAddEvent
   },
   data () {
     return {

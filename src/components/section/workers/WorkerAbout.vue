@@ -2,7 +2,7 @@
   <div>
     <div class="page-title flex-between-center">
       <h3 class="title-clip">Информация о рабочем <br> "{{ worker.surname }} {{ worker.name }}"</h3>
-      <NavWorker :worker="worker"/>
+      <WorkerNav :worker="worker"/>
     </div>
 
     <section class="info-content">
@@ -192,13 +192,13 @@
 </template>
 
 <script>
-import NavWorker from '@/components/workers/WorkerNav'
+import WorkerNav from './WorkerNav'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'AboutWorker',
 
-  components: { NavWorker },
+  components: { WorkerNav },
 
   filters: {
     booleanToWord: function (boolean) {

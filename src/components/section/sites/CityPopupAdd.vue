@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import PopupAddWrapper from '../popups/PopupAddWrapper'
-import AppLineText from '../AppLineText'
+import PopupAddWrapper from '../../popups/PopupAddWrapper'
+import AppLineText from '../../AppLineText'
 
 export default {
   name: 'CityPopupAdd',

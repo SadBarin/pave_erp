@@ -11,21 +11,27 @@
         <AppButtonIcon icon="add" title="Добавить сделки" @button-click="popupAddToggle()"/>
       </template>
     </AppTopPanel>
+
+    <div class="app-deal-content">
+      <DealTable/>
+    </div>
   </div>
 </template>
 
 <script>
-import DealPopupAdd from '@/components/deal/DealPopupAdd'
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
+import AppTopPanel from '../components/AppTopPanel'
+import AppButtonIcon from '../components/AppButtonIcon'
+import DealPopupAdd from '../components/section/deal/DealPopupAdd'
+import DealTable from '../components/section/deal/DealTable'
 
 export default {
   name: 'TheDeal',
 
   components: {
-    DealPopupAdd,
     AppTopPanel,
-    AppButtonIcon
+    AppButtonIcon,
+    DealPopupAdd,
+    DealTable
   },
 
   data () {
