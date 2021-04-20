@@ -5,6 +5,7 @@
       class="app-button"
       @click="$emit('button-click')"
       :title="title"
+      :style="'width: ' + size + ' !important;' + 'height: ' + size + ' !important'"
     >
       <i class="material-icons app-button-icon" :style="'font-size: ' + size + ' !important'">{{icon}}</i>
     </button>
@@ -13,6 +14,7 @@
       v-else
       class="app-button pressed"
       :title="title"
+      :style="'width: ' + size + ' !important;' + 'height: ' + size + ' !important'"
     >
       <i class="material-icons app-button-icon" :style="'font-size: ' + size + ' !important'">{{icon}}</i>
     </div>

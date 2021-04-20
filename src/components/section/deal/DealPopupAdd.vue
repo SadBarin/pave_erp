@@ -2,8 +2,8 @@
   <AppPopupWrapper :hidden="popupHidden">
     <AppTopPanel header="Добавление сделки">
       <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить город" @button-click="addDeal(addedDeal)"/>
-        <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('popup-toggle')"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить город" @button-click="addDeal(addedDeal)"/>
+        <AppButtonIcon icon="close" size="1.8rem" title="Закрыть окно" @button-click="$emit('popup-toggle')"/>
       </template>
     </AppTopPanel>
 

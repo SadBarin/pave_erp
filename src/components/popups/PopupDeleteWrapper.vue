@@ -2,8 +2,8 @@
   <AppPopupWrapper :hidden="hidePopupStatus">
     <AppTopPanel :header="header">
       <template #nav-buttons>
-        <AppButtonIcon icon="delete" title="Удалить" @button-click="$emit('delete-element')"/>
-        <AppButtonIcon icon="close" title="Закрыть" @button-click="$emit('close-popup')"/>
+        <AppButtonIcon icon="delete" size="1.8rem" title="Удалить" @button-click="$emit('delete-element')"/>
+        <AppButtonIcon icon="close" size="1.8rem" title="Закрыть" @button-click="$emit('close-popup')"/>
       </template>
     </AppTopPanel>
 

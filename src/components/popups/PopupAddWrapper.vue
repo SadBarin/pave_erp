@@ -2,8 +2,8 @@
   <AppPopupWrapper :hidden="hidden">
     <AppTopPanel :header="header">
       <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить" @button-click="$emit('popup-add')"/>
-        <AppButtonIcon icon="close" title="Закрыть" @button-click="$emit('popup-close')"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить" @button-click="$emit('popup-add')"/>
+        <AppButtonIcon icon="close" size="1.8rem" title="Закрыть" @button-click="$emit('popup-close')"/>
       </template>
     </AppTopPanel>
 
