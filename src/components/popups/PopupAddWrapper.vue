@@ -29,7 +29,37 @@ export default {
 
   props: {
     hidden: Boolean,
-    header: String
+    header: String,
+    objectAdded: Object
+  },
+
+  data () {
+    return {
+      addedCity: {},
+      firstNote: 'Город был создан'
+    }
+  },
+
+  created () {
+    this.renewAddedData()
+  },
+
+  methods: {
+    renewAddedData () {
+      this.addedCity = {
+        id: Date.now(),
+        name: '',
+        notes: ['Город был создан'],
+        notesCount: '5'
+      }
+
+      this.firstNote = 'Город был создан'
+    },
+
+    addCity (city) {
+      this.$emit('add-city', city)
+      this.renewAddedData()
+    }
   }
 }
 </script>

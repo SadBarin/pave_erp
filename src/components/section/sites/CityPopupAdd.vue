@@ -12,13 +12,6 @@
         maxLength="20"
         v-model="addedCity.name"
       />
-
-      <AppLineText
-        inputID="input-first-note"
-        label="Заметка: "
-        maxLength="30"
-        v-model="firstNote"
-      />
     </template>
   </PopupAddWrapper>
 </template>
