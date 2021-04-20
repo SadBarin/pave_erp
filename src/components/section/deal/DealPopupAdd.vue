@@ -1,13 +1,11 @@
 <template>
-  <AppPopupWrapper :hidden="popupHidden">
-    <AppTopPanel header="Добавление сделки">
-      <template #nav-buttons>
-        <AppButtonIcon icon="add" size="1.8rem" title="Добавить город" @button-click="addDeal(addedDeal)"/>
-        <AppButtonIcon icon="close" size="1.8rem" title="Закрыть окно" @button-click="$emit('popup-toggle')"/>
-      </template>
-    </AppTopPanel>
-
-    <div class="add-city-container">
+  <PopupAddWrapper
+    :hidden="popupHidden"
+    header="Добавление сделки"
+    @popup-add="addDeal(addedDeal)"
+    @popup-close="$emit('popup-toggle')"
+  >
+    <template #popup-add-content>
       <AppLineText
         inputID="input-deal-name"
         label="Название: "
@@ -30,17 +28,15 @@
       >
         <option v-for="element in workers" :key="element.id" :value="element.surname">{{element.surname}} {{element.name}}</option>
       </AppSelect>
-    </div>
-  </AppPopupWrapper>
+    </template>
+  </PopupAddWrapper>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 
-import AppPopupWrapper from '@/components/popups/AppPopupWrapper'
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
-import AppLineText from '@/components/AppLineText'
+import PopupAddWrapper from '../../popups/PopupAddWrapper'
+import AppLineText from '../../AppLineText'
 import AppSelect from '../../AppSelect'
 
 export default {
@@ -59,9 +55,7 @@ export default {
   },
 
   components: {
-    AppPopupWrapper,
-    AppTopPanel,
-    AppButtonIcon,
+    PopupAddWrapper,
     AppLineText,
     AppSelect
   },
@@ -99,7 +93,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

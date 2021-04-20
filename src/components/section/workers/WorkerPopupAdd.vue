@@ -1,13 +1,11 @@
 <template>
-  <AppPopupWrapper :hidden="popupHidden">
-    <AppTopPanel header="Добавление рабочего">
-      <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить" @button-click="createWorker()"/>
-        <AppButtonIcon icon="close" title="Закрыть окно" @button-click="$emit('popup-toggle')"/>
-      </template>
-    </AppTopPanel>
-
-    <div class="add-city-container">
+  <PopupAddWrapper
+    :hidden="popupHidden"
+    header="Добавление рабочего"
+    @popup-add="createWorker()"
+    @popup-close="$emit('popup-toggle')"
+  >
+    <template #popup-add-content>
       <AppLineText
         class="input-add"
         type="text"
@@ -15,14 +13,12 @@
         v-model.trim="surname"
         label="Фамилия: "
       />
-    </div>
-  </AppPopupWrapper>
+    </template>
+  </PopupAddWrapper>
 </template>
 
 <script>
-import AppPopupWrapper from '@/components/popups/AppPopupWrapper'
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
+import PopupAddWrapper from '../../popups/PopupAddWrapper'
 import AppLineText from '@/components/AppLineText'
 
 export default {
@@ -35,9 +31,7 @@ export default {
   },
 
   components: {
-    AppPopupWrapper,
-    AppTopPanel,
-    AppButtonIcon,
+    PopupAddWrapper,
     AppLineText
   },
 
