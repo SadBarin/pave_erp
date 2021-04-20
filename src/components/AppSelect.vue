@@ -21,10 +21,6 @@ export default {
     selectID: String,
     label: String,
     value: String
-  },
-
-  created () {
-    console.log(this)
   }
 }
 </script>
@@ -38,6 +34,7 @@ export default {
   }
 
   #container-select .app-select {
+    background: transparent;
     border: none;
     color: #808080;
     font-size: 1.1rem !important;

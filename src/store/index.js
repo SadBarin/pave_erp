@@ -6,6 +6,7 @@ import sites from '@/store/modules/sites'
 import employees from '@/store/modules/employees'
 import workers from '@/store/modules/workers'
 import customers from '@/store/modules/customers'
+import deals from '@/store/modules/deals'
 
 Vue.use(Vuex)
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         commit('SET_CUSTOMERS_FROM_SERVER')
         commit('SET_SITES_FROM_SERVER')
         commit('SET_EMPLOYEES_FROM_SERVER')
+        commit('SET_DEALS_FROM_SERVER')
       } catch (e) {}
     },
 
@@ -29,5 +31,5 @@ export default new Vuex.Store({
       await firebase.auth().signOut()
     }
   },
-  modules: [sites, employees, workers, customers]
+  modules: [sites, employees, workers, customers, deals]
 })

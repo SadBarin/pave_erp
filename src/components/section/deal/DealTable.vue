@@ -3,18 +3,11 @@
     <template #table-content>
       <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
                    :columns-array="columnHeaderArray" :row-header="true"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="empty"/>
+
+      <template v-for="(element) in deals">
+        <AppTableRow :key="element.id" :columns-count="columnsCount" :columns-size="columnsSize"
+                     :columns-array="[element.name, element.customer, element.worker, element.notes[0]]"/>
+      </template>
     </template>
   </AppTableWrapper>
 </template>
@@ -34,12 +27,12 @@ export default {
         'Название', 'Заказчик',
         'Рабочий', 'Заметка',
         'Действия'
-      ],
-      empty: [
-        'Работа для грузчика', 'Майкрасофтен ин корпар',
-        'Олег Петров', 'Прибыть ровно в 5'
       ]
     }
+  },
+
+  props: {
+    deals: Object
   },
 
   components: {

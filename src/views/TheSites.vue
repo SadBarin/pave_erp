@@ -8,7 +8,6 @@
 
     <AppTopPanel header="Список городов">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateCity"/>
         <AppButtonIcon icon="add" title="Добавить города" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
@@ -43,13 +42,7 @@ export default {
 
   data () {
     return {
-      popupAddHidden: true,
-      addedCity: {
-        id: Date.now(),
-        name: '',
-        notes: [],
-        notesCount: 5
-      }
+      popupAddHidden: true
     }
   },
 
@@ -82,7 +75,6 @@ export default {
     },
 
     addCity (city) {
-      console.log('worx')
       city.name = city.name[0].toUpperCase() + city.name.substring(1)
 
       firebase.database().ref('/sites/' + city.id).set(city)
@@ -90,12 +82,6 @@ export default {
           console.log('Город добавлен ➕')
           this.popupAddHidden = true
           this.SET_SITES_FROM_SERVER()
-          this.addedCity = {
-            id: Date.now(),
-            name: '',
-            notes: [],
-            notesCount: 5
-          }
         })
     },
 
