@@ -8,7 +8,7 @@
 
     <AppTopPanel header="Список сделок">
       <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить сделки" @button-click="popupAddToggle()"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить сделки" @button-click="popupAddToggle()"/>
       </template>
     </AppTopPanel>
 

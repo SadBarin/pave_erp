@@ -60,7 +60,7 @@ export default {
 <style scoped>
   .city-item {
     width: 100%;
-    padding: 0 0.6rem;
+    padding: 0.1rem 0.6rem;
 
     transition: 0.1s ease;
   }

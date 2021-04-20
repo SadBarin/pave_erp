@@ -8,9 +8,9 @@
 
     <AppTopPanel header="Список рабочих">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateWorkers()"/>
-        <AppButtonIcon icon="search" title="Поиск" @button-click="$router.push('/workers/search')"/>
-        <AppButtonIcon icon="add" title="Добавить рабочего" @button-click="popupAddToggle"/>
+        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить страницу" @button-click="updateWorkers()"/>
+        <AppButtonIcon icon="search" size="1.8rem" title="Поиск" @button-click="$router.push('/workers/search')"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить рабочего" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 

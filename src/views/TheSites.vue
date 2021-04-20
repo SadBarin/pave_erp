@@ -8,7 +8,7 @@
 
     <AppTopPanel header="Список городов">
       <template #nav-buttons>
-        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupAddToggle"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить города" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 

@@ -8,8 +8,8 @@
 
     <AppTopPanel header="Список клиентов">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" title="Обновить страницу" @button-click="updateCustomers"/>
-        <AppButtonIcon icon="add" title="Добавить клиентов" @button-click="popupAddToggle"/>
+        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить страницу" @button-click="updateCustomers"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить клиентов" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 

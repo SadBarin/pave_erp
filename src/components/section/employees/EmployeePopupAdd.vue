@@ -36,7 +36,8 @@ export default {
 
   data () {
     return {
-      email: ''
+      email: '',
+      firstNote: 'Сотрудник был создан'
     }
   },
 

@@ -9,8 +9,8 @@
 
     <AppTopPanel header="Список сотрудников">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" title="Обновить города" @button-click="updateEmployees"/>
-        <AppButtonIcon icon="add" title="Добавить города" @button-click="popupAddToggle"/>
+        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить города" @button-click="updateEmployees"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить города" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
 
