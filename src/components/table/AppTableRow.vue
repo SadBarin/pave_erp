@@ -5,6 +5,10 @@
     <div v-for="(column, i) in columnsArray" :key="i">
       {{column}}
     </div>
+
+    <div>
+      <slot class="column-action" name="column-action"></slot>
+    </div>
   </div>
 </template>
 
@@ -29,6 +33,9 @@ export default {
 
   .app-table-row > div {
     padding: 0 0.4rem;
+
+    display: flex;
+    align-items: center;
   }
 
   .row-header {

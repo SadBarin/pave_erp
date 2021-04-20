@@ -47,7 +47,7 @@ export default {
     border: none;
 
     width: fit-content;
-    height: 2rem;
+    height: fit-content;
     padding: 0;
     cursor: pointer;
 

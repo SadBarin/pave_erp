@@ -13,7 +13,7 @@
     </AppTopPanel>
 
     <div class="app-deal-content">
-      <DealTable :deals="deals"/>
+      <DealTable :deals="deals" @remove-deal="removeDeal"/>
     </div>
   </div>
 </template>
@@ -61,6 +61,14 @@ export default {
 
     popupAddToggle () {
       this.popupAddDeal = !this.popupAddDeal
+    },
+
+    removeDeal (id) {
+      firebase.database().ref('/deals/' + id).remove()
+        .then(() => {
+          console.log('Сделка удалёна 🗑️')
+          this.SET_DEALS_FROM_SERVER()
+        })
     },
 
     addDeal (deal) {
