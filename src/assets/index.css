@@ -326,14 +326,13 @@ html, body {
 }
 
 #app .app-page {
-  padding-top: var(--padding-height);
   padding-left: var(--sidebar-width);
 
   transition: padding-left .3s;
 }
 
 #app .app-page.full {
-  padding-left: 0;
+  padding-left: 4.5rem;
 }
 
 .container-page{

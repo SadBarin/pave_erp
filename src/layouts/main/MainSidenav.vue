@@ -4,7 +4,7 @@
       <div class="main-sidenav-top">
         <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station" link-path="/workers"/>
         <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>
-        <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deal"/>
+        <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deals"/>
         <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>
       </div>
 
@@ -14,15 +14,15 @@
     </aside>
 
     <aside class="main-sidenav" v-else-if="!open">
-      <div class="main-sidenav-top">
-        <AppButtonIcon material-icon="transfer_within_a_station" @button-click="$router.push('/workers')"/>
-        <AppButtonIcon material-icon="business_center" @button-click="$router.push('/customers')"/>
-        <AppButtonIcon material-icon="attach_money" @button-click="$router.push('/deal')"/>
-        <AppButtonIcon material-icon="settings" @button-click="$router.push('/settings')"/>
+      <div class="main-sidenav-top main-sidenav-button">
+        <AppButtonIcon icon="transfer_within_a_station" size="1.8rem" @button-click="$router.push('/workers')"/>
+        <AppButtonIcon icon="business_center" size="1.8rem" @button-click="$router.push('/customers')"/>
+        <AppButtonIcon icon="attach_money" size="1.8rem" @button-click="$router.push('/deals')"/>
+        <AppButtonIcon icon="settings" size="1.8rem" @button-click="$router.push('/settings')"/>
       </div>
 
       <div class="main-sidenav-bottom">
-        <AppButtonIcon material-icon="exit_to_app" @button-click="$router.push('/')"/>
+        <AppButtonIcon icon="exit_to_app" size="1.8rem" @button-click="$router.push('/')"/>
       </div>
     </aside>
   </div>
@@ -45,7 +45,9 @@ export default {
 
 <style scoped>
   #main-sidenav-container {
+    opacity: 0.8;
     height: 100%;
+    padding: 6.5rem 0.5rem 0.5rem 0.5rem;
 
     position: absolute;
     z-index: 100;
@@ -57,6 +59,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  #main-sidenav-container .main-sidenav-button > *{
+    margin-bottom: 1rem;
   }
 
   #main-sidenav-container .main-sidenav .main-sidenav-top,

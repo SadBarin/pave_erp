@@ -1,51 +1,11 @@
 <template>
   <transition>
     <div class="app-main-layout">
-      <Popup
-        v-if="popupShow"
-        @yes="exit()"
-        @no="popupHidden"
-      >
-        <template #title-popup>
-          Выйти?
-        </template>
-      </Popup>
-
       <div class="sidenav-menu">
-        <div class="navbar-left">
-          <button
-            class="btn transparent blue-text text-darken-1"
-            @click.prevent="isOpen = !isOpen"
-          >
-            <i class="material-icons">menu</i>
-          </button>
-        </div>
+        <AppButtonIcon icon="menu" size="1.8rem" @button-click="isOpen = !isOpen"/>
       </div>
 
-      <div class="sidenav app-sidenav" :class="{open: isOpen}">
-        <div class="sidenav-content sidenav-top">
-          <ul>
-            <li>
-              <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station" link-path="/workers"/>
-            </li>
-            <li>
-              <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>
-            </li>
-            <li>
-              <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deals"/>
-            </li>
-            <li>
-              <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sidenav-content sidenav-bottom">
-          <AppLinkIcon link-content="Выйти" link-icon="exit_to_app" link-path="/"/>
-        </div>
-      </div>
-
-<!--      <MainSidenav :open="false"/>-->
+      <MainSidenav :open="isOpen"/>
 
       <main class="app-content">
         <div
@@ -60,22 +20,23 @@
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
 import firebase from 'firebase/app'
 import { mapGetters } from 'vuex'
 
-import AppLinkIcon from '@/components/AppLinkIcon'
+import MainSidenav from './MainSidenav'
+import AppButtonIcon from '../../components/AppButtonIcon'
 
 export default {
   name: 'MainLayout.vue',
 
-  components: { AppLinkIcon },
-
-  mixins: [popupMixin],
+  components: {
+    MainSidenav,
+    AppButtonIcon
+  },
 
   data () {
     return {
-      isOpen: true
+      isOpen: false
     }
   },
 
@@ -103,17 +64,7 @@ export default {
 </script>
 
 <style scoped>
-  #app .btn.transparent:hover {
-    color: var(--hover-color) !important;
-    background: transparent;
-  }
-
-  #app .btn.transparent:hover .material-icons {
-    color: var(--hover-color) !important;
-  }
-
-  .sidenav-bottom {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .app-main-layout .sidenav-menu {
+    padding: 1.65rem 0.5rem 0.5rem 0.5rem;
   }
 </style>

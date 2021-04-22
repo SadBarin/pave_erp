@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
   #app-top-panel {
-    margin: 1rem 0 2rem 0;
+    padding: 1.5rem 0 3rem 0;
 
     display: flex;
     align-items: flex-end;
