@@ -147,10 +147,16 @@ const router = new VueRouter({
     },
 
     {
-      path: '/deal',
+      path: '/deals',
       name: 'deal',
       meta: { layout: 'main' },
-      component: () => import('../views/TheDeal')
+      component: () => import('../views/TheDeals')
+    },
+    {
+      path: '/deals/edit/deal:id',
+      name: 'dealEdit',
+      meta: { layout: 'main' },
+      component: () => import('../components/section/deals/DealEdit')
     }
   ]
 })

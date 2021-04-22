@@ -6,8 +6,8 @@
       {{column}}
     </div>
 
-    <div>
-      <slot class="column-action" name="column-action"></slot>
+    <div class="column-action">
+      <slot name="column-action"></slot>
     </div>
   </div>
 </template>
@@ -32,10 +32,13 @@ export default {
   }
 
   .app-table-row > div {
-    padding: 0 0.4rem;
+    line-height: 1rem;
+
+    padding: 0 0.4rem 0.3rem 0.4rem;
 
     display: flex;
     align-items: center;
+    overflow: hidden;
   }
 
   .row-header {
@@ -43,7 +46,10 @@ export default {
   }
 
   .row-simple:hover {
-    background: hsla(208, 82%, 72%, 0.2);
-    border-radius: 10px;
+    color: hsla(277, 88%, 36%, 0.6)
+  }
+
+  .app-table-row .column-action {
+    padding-left: 2rem;
   }
 </style>

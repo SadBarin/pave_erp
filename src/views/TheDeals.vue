@@ -13,7 +13,7 @@
     </AppTopPanel>
 
     <div class="app-deal-content">
-      <DealTable :deals="deals" @remove-deal="removeDeal"/>
+      <DealsTable :deals="deals" @remove-deal="removeDeal"/>
     </div>
   </div>
 </template>
@@ -24,17 +24,17 @@ import { mapGetters, mapMutations } from 'vuex'
 
 import AppTopPanel from '../components/AppTopPanel'
 import AppButtonIcon from '../components/AppButtonIcon'
-import DealPopupAdd from '../components/section/deal/DealPopupAdd'
-import DealTable from '../components/section/deal/DealTable'
+import DealPopupAdd from '../components/section/deals/DealPopupAdd'
+import DealsTable from '../components/section/deals/DealsTable'
 
 export default {
-  name: 'TheDeal',
+  name: 'TheDeals',
 
   components: {
     AppTopPanel,
     AppButtonIcon,
     DealPopupAdd,
-    DealTable
+    DealsTable
   },
 
   data () {

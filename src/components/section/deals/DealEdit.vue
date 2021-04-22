@@ -3,19 +3,19 @@
     <PopupDeleteWrapper
       :hidePopupStatus="popupRemoveHidden"
       @close-popup="popupRemoveToggle"
-      @delete-element="removeCity(editedCity)"
-      :header="`Удаление города ${editedCity.name}`"
+      @delete-element="removeDeal(editedDeal)"
+      :header="`Удаление сделки ${editedDeal.name}`"
     >
       <template #popup-delete-content>
-        После нажатия на иконку корзины будет удалён город <b>{{editedCity.name}}</b>
+        После нажатия на иконку корзины будет удалёна сделка <b>{{editedDeal.name}}</b>
       </template>
     </PopupDeleteWrapper>
 
-    <AppEditWrapper :header="'Редактор города: ' + editedCity.name">
+    <AppEditWrapper :header="'Редактор сделок: ' + editedDeal.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="delete" title="Удалить город" @button-click="popupRemoveToggle"/>
-        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCity(editedCity)"/>
-        <AppButtonIcon icon="location_city" title="Вернуться к городам" @button-click="editorExit"/>
+        <AppButtonIcon icon="delete" title="Удалить" @button-click="popupRemoveToggle"/>
+        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedDeal(editedDeal)"/>
+        <AppButtonIcon icon="attach_money" title="Вернуться" @button-click="editorExit"/>
       </template>
 
       <template #edit-section>
@@ -25,9 +25,9 @@
           <div class="edit-block-content">
             <AppLineText
               inputID="input-city"
-              label="Название города: "
+              label="Название сделки: "
               maxLength="20"
-              v-model="editedCity.name"
+              v-model="editedDeal.name"
             />
           </div>
         </div>
@@ -42,7 +42,7 @@
               minValue="0"
               maxValue="35"
               maxLength="3"
-              v-model="editedCity.notesCount"
+              v-model="editedDeal.notesCount"
             />
 
             <AppLineText
@@ -53,7 +53,7 @@
               v-model="note"
             />
 
-            <AppNotesList :notes-list="editedCity.notes" :notes-count="editedCity.notesCount"/>
+            <AppNotesList :notes-list="editedDeal.notes" :notes-count="editedDeal.notesCount"/>
           </div>
         </div>
       </template>
@@ -74,7 +74,7 @@ import AppButtonIcon from '@/components/AppButtonIcon'
 import PopupDeleteWrapper from '@/components/popups/PopupDeleteWrapper'
 
 export default {
-  name: 'CityEdit',
+  name: 'DealEdit',
 
   components: {
     AppEditWrapper,
@@ -89,60 +89,60 @@ export default {
   data () {
     return {
       popupRemoveHidden: true,
-      editedCity: '',
+      editedDeal: '',
       note: ''
     }
   },
 
   computed: {
     ...mapGetters([
-      'sites'
+      'deals'
     ])
   },
 
   created () {
-    this.SET_SITES_FROM_LOCAL_STORAGE()
-    this.editedCity = this.sites[this.$route.params.id]
+    this.SET_DEALS_FROM_LOCAL_STORAGE()
+    this.editedDeal = this.deals[this.$route.params.id]
   },
 
   methods: {
     ...mapMutations([
-      'SET_SITES_FROM_SERVER',
-      'SET_SITES_FROM_LOCAL_STORAGE'
+      'SET_DEALS_FROM_SERVER',
+      'SET_DEALS_FROM_LOCAL_STORAGE'
     ]),
 
     popupRemoveToggle () {
       this.popupRemoveHidden = !this.popupRemoveHidden
     },
 
-    removeCity (city) {
+    removeDeal (deal) {
       this.popupRemoveToggle()
       this.editorExit()
 
-      firebase.database().ref('/sites/' + city.id).remove()
+      firebase.database().ref('/deals/' + deal.id).remove()
         .then(() => {
-          console.log('Город удалён 🗑️')
-          this.SET_SITES_FROM_SERVER()
+          console.log('Сделка удалёна 🗑️')
+          this.SET_DEALS_FROM_SERVER()
         })
     },
 
     editorExit () {
-      this.$router.push('/sites')
+      this.$router.push('/deals')
     },
 
-    saveEditedCity (city) {
+    saveEditedDeal (deal) {
       if (this.note.length) {
         try {
-          this.editedCity.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+          this.editedDeal.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
         } catch (error) {
-          this.editedCity.notes = []
-          this.editedCity.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
+          this.editedDeal.notes = []
+          this.editedDeal.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
         }
       }
 
-      firebase.database().ref('/sites/' + city.id).set(city)
+      firebase.database().ref('/deals/' + deal.id).set(deal)
         .then(() => {
-          this.SET_SITES_FROM_SERVER()
+          this.SET_DEALS_FROM_SERVER()
           this.editorExit()
           // eslint-disable-next-line no-undef
           M.toast({ html: 'Данные сохранены!' })

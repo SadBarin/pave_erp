@@ -32,7 +32,7 @@
               <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>
             </li>
             <li>
-              <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deal"/>
+              <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deals"/>
             </li>
             <li>
               <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>

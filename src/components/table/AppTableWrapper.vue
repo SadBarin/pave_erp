@@ -14,5 +14,7 @@ export default {
   .app-table {
     display: flex;
     flex-direction: column;
+
+    margin-left: -0.4rem;
   }
 </style>
