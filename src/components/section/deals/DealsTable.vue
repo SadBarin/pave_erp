@@ -12,8 +12,12 @@
         </template>
       </PopupDeleteWrapper>
 
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize"
-                   :columns-array="columnHeaderArray" :row-header="true"/>
+      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize" :columns-array="columnHeaderArray" :row-header="true">
+        <template #column-action>
+          <AppButtonIcon size="1.2rem"/>
+          <AppButtonIcon size="1.2rem"/>
+        </template>
+      </AppTableRow>
 
       <template v-for="(element) in deals">
         <AppTableRow :key="element.id" :columns-count="columnsCount" :columns-size="columnsSize"
@@ -42,7 +46,7 @@ export default {
       popupRemoveHidden: true,
       currentDeal: {},
 
-      columnsCount: 5,
+      columnsCount: 4,
       columnsSize: '1fr',
       columnHeaderArray: [
         'Название', 'Заказчик',

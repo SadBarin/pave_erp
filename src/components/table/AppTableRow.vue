@@ -2,12 +2,16 @@
   <div :class="`app-table-row ${(rowHeader)? 'row-header' : 'row-simple'}`"
        :style="{ '--columns-count': columnsCount, '--columns-size': columnsSize }"
   >
-    <div v-for="(column, i) in columnsArray" :key="i">
-      {{column}}
+    <div class="row-info">
+      <div v-for="(column, i) in columnsArray" :key="i">
+        {{column}}
+      </div>
     </div>
 
-    <div class="column-action">
-      <slot name="column-action"></slot>
+    <div class="row-action">
+      <div class="column-action">
+        <slot name="column-action"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -27,11 +31,17 @@ export default {
 
 <style scoped>
   .app-table-row {
+    display: flex;
+  }
+
+  .app-table-row .row-info{
+    width: 100%;
+
     display: grid;
     grid-template-columns: repeat(var(--columns-count), var(--columns-size));
   }
 
-  .app-table-row > div {
+  .app-table-row .row-info > div {
     line-height: 1rem;
 
     padding: 0 0.4rem 0.3rem 0.4rem;
@@ -50,6 +60,11 @@ export default {
   }
 
   .app-table-row .column-action {
+    width: fit-content;
+    display: flex;
+  }
+
+  .app-table-row .row-action {
     padding-left: 2rem;
   }
 </style>
