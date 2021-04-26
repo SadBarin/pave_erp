@@ -1,28 +1,26 @@
 <template>
-  <div id="container-line-text">
+  <div id="container-line-date">
     <input
-      class="line-text"
-      type="text"
+      class="line-date"
+      type="datetime-local"
 
-      :maxlength="maxLength"
-      :id='inputID'
+      :id='dateID'
       :placeholder="placeholder"
       :value="value"
       @input="$emit('input', $event.target.value)"
     >
 
-    <label :for="inputID" class="line-text-label">{{label}}</label>
+    <label :for="dateID" class="line-date-label">{{label}}</label>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppLinetext',
+  name: 'AppLineDate',
 
   props: {
-    inputID: String,
+    dateID: String,
     placeholder: String,
-    maxLength: String,
     label: String,
     value: String
   }
@@ -30,14 +28,14 @@ export default {
 </script>
 
 <style scoped>
-  #container-line-text {
+  #container-line-date {
     width: 100%;
 
     display: flex;
     align-items: center;
   }
 
-  #container-line-text .line-text {
+  #container-line-date .line-date {
     border: none;
     color: #808080;
     font-size: 1.1rem !important;
@@ -50,7 +48,7 @@ export default {
 
     order: 1
   }
-  #container-line-text .line-text::placeholder{
+  #container-line-date .line-date::placeholder{
     border: none;
     color: #c9c9c9;
     font-size: 1.1rem !important;
@@ -58,7 +56,7 @@ export default {
     padding: 0;
   }
 
-  #container-line-text .line-text-label {
+  #container-line-date .line-date-label {
     font-size: 1.2rem;
     color: #3e3e3e;
 
@@ -69,7 +67,7 @@ export default {
     user-select: none;
   }
 
-  #container-line-text .app-input:focus + .line-text-label {
+  #container-line-date .app-input:focus + .line-date-label {
     color: hsla(277, 88%, 36%, 0.6);
   }
 </style>

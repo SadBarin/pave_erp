@@ -16,13 +16,17 @@
         <template #column-action>
           <AppButtonIcon size="1.2rem"/>
           <AppButtonIcon size="1.2rem"/>
+          <AppButtonIcon size="1.2rem"/>
         </template>
       </AppTableRow>
 
       <template v-for="(element) in deals">
         <AppTableRow :key="element.id" :columns-count="columnsCount" :columns-size="columnsSize"
-                     :columns-array="[element.name, element.customer, element.worker, element.notes[element.notes.length - 1]]">
+                     :columns-array="[element.name, element.customer, element.worker, element.date, element.time, element.notes[element.notes.length - 1]]"
+                     @dbclickEvent="$router.push({name : 'dealEdit', params: {id: element.id}})"
+        >
           <template #column-action>
+            <AppButtonIcon icon="description" title="История сделки" size="1.2rem"/>
             <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
             <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
           </template>
@@ -46,12 +50,12 @@ export default {
       popupRemoveHidden: true,
       currentDeal: {},
 
-      columnsCount: 4,
+      columnsCount: 6,
       columnsSize: '1fr',
       columnHeaderArray: [
         'Название', 'Заказчик',
-        'Рабочий', 'Заметка',
-        ''
+        'Рабочий', 'Дата', 'Время',
+        'Заметка'
       ]
     }
   },

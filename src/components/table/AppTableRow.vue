@@ -3,7 +3,7 @@
        :style="{ '--columns-count': columnsCount, '--columns-size': columnsSize }"
   >
     <div class="row-info">
-      <div v-for="(column, i) in columnsArray" :key="i">
+      <div v-for="(column, i) in columnsArray" :key="i" @dblclick="$emit('dbclickEvent')">
         {{column}}
       </div>
     </div>

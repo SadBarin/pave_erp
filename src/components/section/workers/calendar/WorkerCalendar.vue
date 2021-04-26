@@ -95,6 +95,7 @@ export default {
   mounted () {
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.calendarOptions.events = this.workers[this.$route.params.id].events
+    console.log(this.workers[this.$route.params.id])
   }
 }
 </script>

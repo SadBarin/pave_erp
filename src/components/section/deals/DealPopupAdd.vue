@@ -13,6 +13,12 @@
         v-model="addedDeal.name"
       />
 
+      <AppLineDate
+        dateID="input-deal-date"
+        label="Дата: "
+        v-model="addedDeal.date"
+      />
+
       <AppSelect
         selectID="select"
         label="Заказчик: "
@@ -24,9 +30,9 @@
       <AppSelect
         selectID="select"
         label="Рабочий: "
-        v-model="addedDeal.worker"
+        v-model="addedDeal.workerID"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.surname">{{element.surname}} {{element.name}}</option>
+        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
     </template>
   </PopupAddWrapper>
@@ -37,6 +43,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 import PopupAddWrapper from '../../popups/PopupAddWrapper'
 import AppLineText from '../../AppLineText'
+import AppLineDate from '../../AppLineDate'
 import AppSelect from '../../AppSelect'
 
 export default {
@@ -57,6 +64,7 @@ export default {
   components: {
     PopupAddWrapper,
     AppLineText,
+    AppLineDate,
     AppSelect
   },
 
@@ -80,7 +88,8 @@ export default {
         id: Date.now(),
         name: '',
         customer: '',
-        worker: '',
+        date: '',
+        workerID: '',
         notes: ['Сделка была создана'],
         notesCount: '5'
       }

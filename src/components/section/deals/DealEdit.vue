@@ -13,9 +13,9 @@
 
     <AppEditWrapper :header="'Редактор сделок: ' + editedDeal.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="delete" title="Удалить" @button-click="popupRemoveToggle"/>
-        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedDeal(editedDeal)"/>
-        <AppButtonIcon icon="attach_money" title="Вернуться" @button-click="editorExit"/>
+        <AppButtonIcon icon="delete" size="1.8" title="Удалить" @button-click="popupRemoveToggle"/>
+        <AppButtonIcon icon="save" size="1.8" title="Сохранить и выйти" @button-click="saveEditedDeal(editedDeal)"/>
+        <AppButtonIcon icon="attach_money" size="1.8" title="Вернуться" @button-click="editorExit"/>
       </template>
 
       <template #edit-section>

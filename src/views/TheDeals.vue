@@ -45,7 +45,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'deals'
+      'deals',
+      'workers'
     ])
   },
 
@@ -56,7 +57,8 @@ export default {
   methods: {
     ...mapMutations([
       'SET_DEALS_FROM_LOCAL_STORAGE',
-      'SET_DEALS_FROM_SERVER'
+      'SET_DEALS_FROM_SERVER',
+      'SET_WORKERS_FROM_SERVER'
     ]),
 
     popupAddToggle () {
@@ -74,6 +76,20 @@ export default {
     addDeal (deal) {
       this.popupAddToggle()
       deal.name = deal.name[0].toUpperCase() + deal.name.substring(1)
+      const worker = this.workers[deal.workerID]
+      deal.worker = worker.surname + ' ' + worker.name
+
+      const date = deal.date
+      deal.worker = worker.surname + ' ' + worker.name
+      deal.date = date.slice(0, 10)
+      deal.time = date.slice(11, 16)
+
+      worker.events.push({ id: Date.now(), title: deal.name, date })
+
+      firebase.database().ref('/workers/' + worker.id).set(worker)
+        .then(() => {
+          this.SET_WORKERS_FROM_SERVER()
+        })
 
       firebase.database().ref('/deals/' + deal.id).set(deal)
         .then(() => {
