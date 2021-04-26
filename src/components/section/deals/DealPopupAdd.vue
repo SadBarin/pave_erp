@@ -91,7 +91,15 @@ export default {
         date: '',
         workerID: '',
         notes: ['Сделка была создана'],
-        notesCount: '5'
+        notesCount: '5',
+        history: [{
+          date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+          info: 'Сделка создана ',
+          employee: {
+            name: '',
+            id: ''
+          }
+        }]
       }
     },
 

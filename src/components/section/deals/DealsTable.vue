@@ -26,7 +26,7 @@
                      @dbclickEvent="$router.push({name : 'dealEdit', params: {id: element.id}})"
         >
           <template #column-action>
-            <AppButtonIcon icon="description" title="История сделки" size="1.2rem"/>
+            <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
             <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
             <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
           </template>
