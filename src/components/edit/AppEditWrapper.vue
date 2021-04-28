@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import AppTopPanel from '@/components/AppTopPanel'
+import AppTopPanel from '../AppTopPanel'
 
 export default {
   name: 'AppEditWrapper',

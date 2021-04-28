@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="page-title flex-between-center" style="margin-top: 2rem">
-      <h3 class="right-margin-big">История сделки<br>"{{deal.name}}"</h3>
+      <h3 class="right-margin-big">История изменения сделки<br>"{{deal.name}}"</h3>
     </div>
 
-    <section>
+    <section v-if="this.deal.history">
       <div v-for="(moment, i) of deal.history" :key="i">
         <div class="history-line">
           <p class="history-index">{{i}}:</p>
@@ -20,6 +20,8 @@
         </div>
       </div>
     </section>
+
+    <section v-else>Истории пока нет</section>
   </div>
 </template>
 
@@ -46,6 +48,7 @@ export default {
   mounted () {
     this.SET_DEALS_FROM_LOCAL_STORAGE()
     this.deal = this.deals[this.$route.params.id]
+    console.log()
   }
 }
 </script>

@@ -25,7 +25,7 @@
           <div class="edit-block-content">
             <AppLineText
               inputID="input-city"
-              label="Название сделки: "
+              label="Название: "
               maxLength="20"
               v-model="editedDeal.name"
             />
@@ -90,25 +90,43 @@ export default {
     return {
       popupRemoveHidden: true,
       editedDeal: '',
-      note: ''
+      note: '',
+
+      historyElement: {
+        date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
+        info: 'Сделка просматривалась ',
+        employee: {
+          name: 'Неизвестный пользователь',
+          id: 0
+        }
+      }
     }
   },
 
   computed: {
     ...mapGetters([
-      'deals'
+      'deals',
+      'employees',
+      'authEmployee'
     ])
   },
 
   created () {
+    this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
     this.SET_DEALS_FROM_LOCAL_STORAGE()
+
     this.editedDeal = this.deals[this.$route.params.id]
+    this.historyElement.employee = {
+      name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+      id: this.authEmployee.id
+    }
   },
 
   methods: {
     ...mapMutations([
       'SET_DEALS_FROM_SERVER',
-      'SET_DEALS_FROM_LOCAL_STORAGE'
+      'SET_DEALS_FROM_LOCAL_STORAGE',
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
     ]),
 
     popupRemoveToggle () {
@@ -130,7 +148,7 @@ export default {
       this.$router.push('/deals')
     },
 
-    saveEditedDeal (deal) {
+    saveNewNote () {
       if (this.note.length) {
         try {
           this.editedDeal.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
@@ -139,6 +157,19 @@ export default {
           this.editedDeal.notes.push(`${new Date().toLocaleDateString()}: ${this.note}`)
         }
       }
+    },
+
+    getNewHistoryElement (info) {
+      const localHistoryElement = this.historyElement
+      localHistoryElement.info = info
+
+      return localHistoryElement
+    },
+
+    saveEditedDeal (deal) {
+      this.saveNewNote()
+
+      deal.history.push(this.getNewHistoryElement('Сделка была изменена'))
 
       firebase.database().ref('/deals/' + deal.id).set(deal)
         .then(() => {
