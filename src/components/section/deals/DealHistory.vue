@@ -1,54 +1,47 @@
 <template>
-  <div>
-    <div class="page-title flex-between-center" style="margin-top: 2rem">
-      <h3 class="right-margin-big">История изменения сделки<br>"{{deal.name}}"</h3>
-    </div>
-
-    <section v-if="this.deal.history">
-      <div v-for="(moment, i) of deal.history" :key="i">
-        <div class="history-line">
-          <p class="history-index">{{i}}:</p>
-          <div class="history-moment">
-            <span class="history-moment-date">{{moment.date}}</span>
-            <p class="history-moment-text">{{moment.info}}</p>
-            <router-link title="Перейти к сотруднику"
-                         :to="{name : 'employeeEdit', params: {id: moment.employee.id}}"
-            >
-              {{moment.employee.name}}
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section v-else>Истории пока нет</section>
-  </div>
+  <AppHistoryWrapper :header='`История изменения сделки "${deal.name}"`' :element="deal">
+    <template #nav-buttons>
+      <AppButtonIcon icon="create" size="1.8rem" title="Редактировать сделку" @button-click="$router.push({name : 'dealEdit', params: {id: deal.id}})"/>
+      <AppButtonIcon icon="attach_money" size="1.8rem" title="Вернуться" @button-click="$router.push('/deals')"/>
+    </template>
+  </AppHistoryWrapper>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 
+import AppHistoryWrapper from '../../AppHistoryWrapper'
+import AppButtonIcon from '../../AppButtonIcon'
+
 export default {
   name: 'DealHistory',
+
+  components: {
+    AppHistoryWrapper,
+    AppButtonIcon
+  },
+
   data () {
     return {
       deal: ''
     }
   },
+
   computed: {
     ...mapGetters([
       'deals'
     ])
   },
+
+  created () {
+    this.SET_DEALS_FROM_LOCAL_STORAGE()
+    this.deal = this.deals[this.$route.params.id]
+  },
+
   methods: {
     ...mapMutations([
       'SET_DEALS_FROM_LOCAL_STORAGE'
     ])
-  },
-  mounted () {
-    this.SET_DEALS_FROM_LOCAL_STORAGE()
-    this.deal = this.deals[this.$route.params.id]
-    console.log()
   }
 }
 </script>
