@@ -28,59 +28,6 @@
     <AppButtonIcon icon="transfer_within_a_station" size="1.8rem"
                    title="Вернуться к рабочим"
                    @button-click="$router.push('/workers')"/>
-
-    <template>
-      <!--  <div class="btns-collection flex-between-center">-->
-      <!--    <button-->
-      <!--      class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--      title="Сохранить и выйти"-->
-      <!--      @click="$emit('save-worker')"-->
-      <!--      v-show="$route.name === 'workerEdit'"-->
-      <!--    >-->
-      <!--      <i class="material-icons">save</i>-->
-      <!--    </button>-->
-
-      <!--    <router-link class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--                 title="Просмотреть"-->
-      <!--                 :to="{name : 'workerAbout', params: {id: worker.id}}"-->
-      <!--                 v-show="$route.name !== 'workerAbout'"-->
-      <!--    >-->
-      <!--      <i class="material-icons">remove_red_eye</i>-->
-      <!--    </router-link>-->
-
-      <!--    <router-link class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--                 title="Календарь"-->
-      <!--                 :to="{name : 'workerCalendar', params: {id: worker.id}}"-->
-      <!--                 v-show="$route.name !== 'workerCalendar'"-->
-      <!--    >-->
-      <!--      <i class="material-icons">date_range</i>-->
-      <!--    </router-link>-->
-
-      <!--    <router-link class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--                 title="История редактирования"-->
-      <!--                 :to="{name : 'workerHistory', params: {id: worker.id}}"-->
-      <!--                 v-show="$route.name !== 'workerHistory'"-->
-      <!--    >-->
-      <!--      <i class="material-icons">description</i>-->
-      <!--    </router-link>-->
-
-      <!--    <router-link class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--                 title="Редактировать"-->
-      <!--                 :to="{name : 'workerEdit', params: {id: worker.id}}"-->
-      <!--                 v-show="$route.name !== 'workerEdit'"-->
-      <!--    >-->
-      <!--      <i class="material-icons">create</i>-->
-      <!--    </router-link>-->
-
-      <!--    <button class="btn-transparent transparent blue-text text-darken-1"-->
-      <!--            title="Удалить"-->
-      <!--            v-if="!worker.edited"-->
-      <!--            @click="popupVisibility(worker)"-->
-      <!--    >-->
-      <!--      <i class="material-icons">delete</i>-->
-      <!--    </button>-->
-      <!--  </div>-->
-    </template>
   </div>
 </template>
 

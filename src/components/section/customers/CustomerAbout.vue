@@ -1,22 +1,28 @@
 <template>
   <div>
-    <div class="page-title flex-between-center">
-      <h3 class="title-clip">Информация о клиенте <br> "{{customer.name}}"</h3>
+<!--    <div class="page-title flex-between-center">-->
+<!--      <h3 class="title-clip">Информация о клиенте <br> "{{customer.name}}"</h3>-->
 
-      <div class="editor-btns">
-        <router-link class="btn btn-hover pointer blue darken-1"
-                     :to="{name : 'customerEdit', params: {id: customer.id}}"
-        >
-          <i class="material-icons">create</i> В редактор
-        </router-link>
+<!--      <div class="editor-btns">-->
+<!--        <router-link class="btn btn-hover pointer blue darken-1"-->
+<!--                     :to="{name : 'customerEdit', params: {id: customer.id}}"-->
+<!--        >-->
+<!--          <i class="material-icons">create</i> В редактор-->
+<!--        </router-link>-->
 
-        <router-link class="btn btn-hover pointer blue darken-1"
-                     to="/customers"
-        >
-          <i class="material-icons">business_center</i> К Клиентам
-        </router-link>
-      </div>
-    </div>
+<!--        <router-link class="btn btn-hover pointer blue darken-1"-->
+<!--                     to="/customers"-->
+<!--        >-->
+<!--          <i class="material-icons">business_center</i> К Клиентам-->
+<!--        </router-link>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <AppTopPanel :header='`Информация о клиенте "${customer.name}`'>
+      <template #nav-buttons>
+        <CustomerNavigation :customer="customer"/>
+      </template>
+    </AppTopPanel>
 
     <section class="info-content">
 <!--      <div class="margin-fix w20rem">-->
@@ -61,8 +67,16 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 
+import AppTopPanel from '../../AppTopPanel'
+import CustomerNavigation from './CustomerNavigation'
+
 export default {
   name: 'AboutCustomer',
+
+  components: {
+    AppTopPanel,
+    CustomerNavigation
+  },
 
   filters: {
     booleanToWord: function (boolean) {

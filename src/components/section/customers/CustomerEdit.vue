@@ -2,8 +2,9 @@
   <div id="app-edit">
     <AppEditWrapper :header="'Редактор клиента: ' + editedCustomer.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCustomer(editedCustomer)"/>
-        <AppButtonIcon icon="business_center" title="Вернуться к клиентам" @button-click="editorExit"/>
+<!--        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCustomer(editedCustomer)"/>-->
+<!--        <AppButtonIcon icon="business_center" title="Вернуться к клиентам" @button-click="editorExit"/>-->
+        <CustomerNavigation :customer="editedCustomer" @save-customer="saveEditedCustomer(editedCustomer)"/>
       </template>
 
       <template #edit-section>
@@ -53,8 +54,7 @@ import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 import AppEditWrapper from '@/components/edit/AppEditWrapper'
-import AppHeaderIcon from '@/components/AppHeaderIcon'
-import AppButtonIcon from '@/components/AppButtonIcon'
+import CustomerNavigation from './CustomerNavigation'
 import AppNumbers from '@/components/AppNumbers'
 import AppLineText from '@/components/AppLineText'
 import AppNotesList from '@/components/edit/AppNotesList'
@@ -64,8 +64,7 @@ export default {
 
   components: {
     AppEditWrapper,
-    AppHeaderIcon,
-    AppButtonIcon,
+    CustomerNavigation,
     AppNumbers,
     AppLineText,
     AppNotesList
