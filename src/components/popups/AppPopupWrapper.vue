@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
   #app-popup-wrapper .popup-wrapper-overlay {
-    background: var(--hover-bg);
+    background: hsla(208, 82%, 72%, 0.4);
     backdrop-filter: blur(3px);
 
     width: 100vw;
@@ -38,7 +38,7 @@ export default {
   }
 
   #app-popup-wrapper .popup-wrapper-content {
-    background: hsla(0, 0%, 100%, 0.7);
+    background: hsla(0, 0%, 100%, 0.9);
     border-radius: 10px;
 
     width: fit-content;
