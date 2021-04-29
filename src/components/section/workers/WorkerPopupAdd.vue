@@ -7,11 +7,27 @@
   >
     <template #popup-add-content>
       <AppLineText
-        class="input-add"
+        class="input-surname"
         type="text"
         maxLength="25"
         v-model.trim="surname"
         label="Фамилия: "
+      />
+
+      <AppLineText
+        class="input-name"
+        type="text"
+        maxLength="25"
+        v-model.trim="name"
+        label="Имя "
+      />
+
+      <AppLineText
+        class="input-phone"
+        type="text"
+        maxLength="25"
+        v-model.trim="mobilePhone"
+        label="Телефон "
       />
     </template>
   </PopupAddWrapper>
@@ -26,7 +42,9 @@ export default {
 
   data () {
     return {
-      surname: 'Рабочий'
+      surname: 'Новый',
+      name: 'Рабочий',
+      mobilePhone: '+7'
     }
   },
 
@@ -44,7 +62,7 @@ export default {
     createWorker () {
       const newWorker = {
         id: Date.now(),
-        name: 'Новый',
+        name: this.name,
         surname: this.surname,
         patronymic: '',
         accountNumber: Date.now(),
@@ -63,7 +81,7 @@ export default {
         registration: '',
         address: '',
         homePhone: '',
-        mobilePhone: '',
+        mobilePhone: this.mobilePhone,
         medicalBook: '',
         education: '',
         university: '',

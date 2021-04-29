@@ -1,23 +1,5 @@
 <template>
   <div>
-<!--    <div class="page-title flex-between-center">-->
-<!--      <h3 class="title-clip">Информация о клиенте <br> "{{customer.name}}"</h3>-->
-
-<!--      <div class="editor-btns">-->
-<!--        <router-link class="btn btn-hover pointer blue darken-1"-->
-<!--                     :to="{name : 'customerEdit', params: {id: customer.id}}"-->
-<!--        >-->
-<!--          <i class="material-icons">create</i> В редактор-->
-<!--        </router-link>-->
-
-<!--        <router-link class="btn btn-hover pointer blue darken-1"-->
-<!--                     to="/customers"-->
-<!--        >-->
-<!--          <i class="material-icons">business_center</i> К Клиентам-->
-<!--        </router-link>-->
-<!--      </div>-->
-<!--    </div>-->
-
     <AppTopPanel :header='`Информация о клиенте "${customer.name}`'>
       <template #nav-buttons>
         <CustomerNavigation :customer="customer"/>
