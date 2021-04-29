@@ -2,8 +2,10 @@
   <div id="app-edit">
     <AppEditWrapper :header="'Редактор рабочего: ' + editedWorker.surname + ' ' + editedWorker.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedWorker(editedWorker)"/>
-        <AppButtonIcon icon="location_city" title="Вернуться к рабочим" @button-click="editorExit"/>
+        <AppButtonIcon icon="save" title="Сохранить и выйти" size="1.8rem" @button-click="saveEditedWorker(editedWorker)"/>
+        <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: editedWorker.id}})"/>
+        <AppButtonIcon icon="description" title="История" size="1.8rem" @button-click="$router.push({name : 'workerHistory', params: {id: editedWorker.id}})"/>
+        <AppButtonIcon icon="transfer_within_a_station" title="Вернуться к рабочим" size="1.8rem" @button-click="editorExit"/>
       </template>
 
       <template #edit-section>

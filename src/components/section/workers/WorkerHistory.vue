@@ -1,54 +1,48 @@
 <template>
-  <div>
-    <div class="page-title flex-between-center">
-      <h3 class="right-margin-big">История редактирования рабочего<br>"{{worker.surname}} {{worker.name}}"</h3>
-      <WorkerNav :worker="worker"/>
-    </div>
-
-    <section>
-      <div v-for="(moment, i) of worker.history" :key="i">
-        <div class="history-line">
-          <p class="history-index">{{i}}:</p>
-          <div class="history-moment">
-            <span class="history-moment-date">{{moment.date}}</span>
-            <p class="history-moment-text">{{moment.info}}</p>
-            <router-link title="Перейти к сотруднику"
-                         :to="{name : 'employeeEdit', params: {id: moment.employee.id}}"
-            >
-              {{moment.employee.name}}
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+  <AppHistoryWrapper :header='`История изменения рабочего "${worker.surname} ${worker.name}"`' :element="worker">
+    <template #nav-buttons>
+      <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: worker.id}})"/>
+      <AppButtonIcon icon="create" size="1.8rem" title="Редактировать" @button-click="$router.push({name : 'workerEdit', params: {id: worker.id}})"/>
+      <AppButtonIcon icon="transfer_within_a_station" size="1.8rem" title="Вернуться" @button-click="$router.push('/workers')"/>
+    </template>
+  </AppHistoryWrapper>
 </template>
 
 <script>
-import WorkerNav from './WorkerNav'
 import { mapGetters, mapMutations } from 'vuex'
+
+import AppHistoryWrapper from '../../AppHistoryWrapper'
+import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
   name: 'HistoryWorkers',
-  components: { WorkerNav },
+
+  components: {
+    AppHistoryWrapper,
+    AppButtonIcon
+  },
+
   data () {
     return {
       worker: ''
     }
   },
+
   computed: {
     ...mapGetters([
       'workers'
     ])
   },
+
+  created () {
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.worker = this.workers[this.$route.params.id]
+  },
+
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_LOCAL_STORAGE'
     ])
-  },
-  mounted () {
-    this.SET_WORKERS_FROM_LOCAL_STORAGE()
-    this.worker = this.workers[this.$route.params.id]
   }
 }
 </script>
