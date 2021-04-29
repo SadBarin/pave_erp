@@ -25,6 +25,12 @@
                      :columns-array="[element.name, element.customer, element.worker, element.date, element.time, element.notes[element.notes.length - 1]]"
                      @dbclickEvent="$router.push({name : 'dealEdit', params: {id: element.id}})"
         >
+          <template #row-content>
+            <td>
+              <p>ОЛЕГ</p>
+            </td>
+          </template>
+
           <template #column-action>
             <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
             <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>

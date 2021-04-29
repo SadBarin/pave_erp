@@ -1,19 +1,15 @@
 <template>
-  <div :class="`app-table-row ${(rowHeader)? 'row-header' : 'row-simple'}`"
-       :style="{ '--columns-count': columnsCount, '--columns-size': columnsSize }"
-  >
-    <div class="row-info">
-      <div v-for="(column, i) in columnsArray" :key="i" @dblclick="$emit('dbclickEvent')">
-        {{column}}
-      </div>
-    </div>
+  <tr :class="`app-table-row ${(rowHeader)? 'row-header' : 'row-simple'}`" @dblclick="$emit('dbclickEvent')">
+    <td v-for="(column, i) in columnsArray" :key="i" class="row-element">
+      {{column}}
+    </td>
 
-    <div class="row-action">
-      <div class="column-action">
-        <slot name="column-action"></slot>
-      </div>
-    </div>
-  </div>
+    <slot name="row-content"/>
+
+    <td class="row-action">
+      <slot name="column-action"/>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -21,8 +17,6 @@ export default {
   name: 'AppTableRow',
 
   props: {
-    columnsCount: Number,
-    columnsSize: String,
     columnsArray: Array,
     rowHeader: Boolean
   }
@@ -30,41 +24,36 @@ export default {
 </script>
 
 <style scoped>
-  .app-table-row {
-    display: flex;
-  }
-
-  .app-table-row .row-info{
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(var(--columns-count), var(--columns-size));
-  }
-
-  .app-table-row .row-info > div {
-    line-height: 1rem;
-
-    padding: 0 0.4rem 0.3rem 0.4rem;
-
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
   .row-header {
     font-weight: bold;
   }
 
+  .row-header:hover {
+    background: transparent !important;
+  }
+
   .row-simple:hover {
+    background: transparent !important;
     color: hsla(277, 88%, 36%, 0.6)
   }
 
-  .app-table-row .column-action {
+  .row-element {
+    text-align: start !important;
+
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .row-element:not(:last-child) {
+    padding-right: 3rem !important;
+  }
+
+  .row-action {
     width: fit-content;
     display: flex;
   }
 
-  .app-table-row .row-action {
-    padding-left: 2rem;
+  .row-action > *:not(:last-child) {
+    padding-right: 0.3rem;
   }
 </style>

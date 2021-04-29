@@ -1,7 +1,13 @@
 <template>
   <section class="app-table">
-    <slot name="table-content"></slot>
+    <table>
+      <slot name="table-content"></slot>
+    </table>
   </section>
+
+<!--  <section class="app-table">-->
+<!--    <slot name="table-content"></slot>-->
+<!--  </section>-->
 </template>
 
 <script>
@@ -12,9 +18,10 @@ export default {
 
 <style scoped>
   .app-table {
-    display: flex;
-    flex-direction: column;
+    width: fit-content;
+    /*display: flex;*/
+    /*flex-direction: column;*/
 
-    margin-left: -0.4rem;
+    /*margin-left: -0.4rem;*/
   }
 </style>
