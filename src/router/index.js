@@ -148,7 +148,7 @@ const router = new VueRouter({
 
     {
       path: '/deals',
-      name: 'deal',
+      name: 'deals',
       meta: { layout: 'main' },
       component: () => import('../views/TheDeals')
     },

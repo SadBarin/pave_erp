@@ -2,10 +2,25 @@
   <div id="main-sidenav-container">
     <aside class="main-sidenav" v-if="open">
       <div class="main-sidenav-top">
-        <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station" link-path="/workers"/>
-        <AppLinkIcon link-content="Клиенты" link-icon="business_center" link-path="/customers"/>
-        <AppLinkIcon link-content="Сделки" link-icon="attach_money" link-path="/deals"/>
-        <AppLinkIcon link-content="Настройки" link-icon="settings" link-path="/settings"/>
+        <AppLinkIcon link-content="Рабочие" link-icon="transfer_within_a_station"
+                     link-path="/workers"
+                     :pressed="$route.name === 'workers'"
+        />
+
+        <AppLinkIcon link-content="Клиенты" link-icon="business_center"
+                     link-path="/customers"
+                     :pressed="$route.name === 'customers'"
+        />
+
+        <AppLinkIcon link-content="Сделки" link-icon="attach_money"
+                     link-path="/deals"
+                     :pressed="$route.name === 'deals'"
+        />
+
+        <AppLinkIcon link-content="Настройки" link-icon="settings"
+                     link-path="/settings"
+                     :pressed="$route.name === 'settings'"
+        />
       </div>
 
       <div class="main-sidenav-bottom">
@@ -15,10 +30,25 @@
 
     <aside class="main-sidenav" v-else-if="!open">
       <div class="main-sidenav-top main-sidenav-button">
-        <AppButtonIcon icon="transfer_within_a_station" size="1.8rem" @button-click="$router.push('/workers')"/>
-        <AppButtonIcon icon="business_center" size="1.8rem" @button-click="$router.push('/customers')"/>
-        <AppButtonIcon icon="attach_money" size="1.8rem" @button-click="$router.push('/deals')"/>
-        <AppButtonIcon icon="settings" size="1.8rem" @button-click="$router.push('/settings')"/>
+        <AppButtonIcon icon="transfer_within_a_station" size="1.8rem"
+                       @button-click="$router.push('/workers')"
+                       :pressed="$route.name === 'workers'"
+        />
+
+        <AppButtonIcon icon="business_center" size="1.8rem"
+                       @button-click="$router.push('/customers')"
+                       :pressed="$route.name === 'customers'"
+        />
+
+        <AppButtonIcon icon="attach_money" size="1.8rem"
+                       @button-click="$router.push('/deals')"
+                       :pressed="$route.name === 'deals'"
+        />
+
+        <AppButtonIcon icon="settings" size="1.8rem"
+                       @button-click="$router.push('/settings')"
+                       :pressed="$route.name === 'settings'"
+        />
       </div>
 
       <div class="main-sidenav-bottom">
@@ -39,7 +69,11 @@ export default {
     open: Boolean
   },
 
-  components: { AppLinkIcon, AppButtonIcon }
+  components: { AppLinkIcon, AppButtonIcon },
+
+  created () {
+    console.log(this.$route.name)
+  }
 }
 </script>
 
