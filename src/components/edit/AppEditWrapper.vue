@@ -33,7 +33,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, min-content);
     grid-auto-rows: min-content;
-    grid-row-gap: 2rem;
+    grid-gap: 2rem;
   }
 
   #app-edit-wrapper .edit-wrapper-section .edit-block-header {
