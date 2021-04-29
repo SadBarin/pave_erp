@@ -31,12 +31,30 @@ export default {
 
   #app-edit-wrapper .edit-wrapper-section {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, min-content);
     grid-auto-rows: min-content;
     grid-row-gap: 2rem;
   }
 
   #app-edit-wrapper .edit-wrapper-section .edit-block-header {
     margin-bottom: 1rem;
+  }
+
+  @media (max-width: 2400px) {
+    #app-edit-wrapper .edit-wrapper-section {
+      grid-template-columns: repeat(3, min-content);
+    }
+  }
+
+  @media (max-width: 1400px) {
+    #app-edit-wrapper .edit-wrapper-section {
+      grid-template-columns: repeat(2, min-content);
+    }
+  }
+
+  @media (max-width: 800px) {
+    #app-edit-wrapper .edit-wrapper-section {
+      grid-template-columns: repeat(1, min-content);
+    }
   }
 </style>

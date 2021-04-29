@@ -84,9 +84,11 @@ export default {
 #container-app-numbers .app-numbers-label {
   font-size: 1.2rem !important;
   color: #3e3e3e;
+  line-height: 1.1rem;
+  white-space: nowrap;
 
   margin-top: -0.1rem;
-  max-width: 35%;
+  max-width: 40%;
   order: 0;
 
   user-select: none;

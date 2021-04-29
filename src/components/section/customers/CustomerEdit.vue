@@ -58,6 +58,7 @@ import CustomerNavigation from './CustomerNavigation'
 import AppNumbers from '@/components/AppNumbers'
 import AppLineText from '@/components/AppLineText'
 import AppNotesList from '@/components/edit/AppNotesList'
+import AppHeaderIcon from '../../AppHeaderIcon'
 
 export default {
   name: 'EditorWorkers',
@@ -67,7 +68,8 @@ export default {
     CustomerNavigation,
     AppNumbers,
     AppLineText,
-    AppNotesList
+    AppNotesList,
+    AppHeaderIcon
   },
 
   data () {

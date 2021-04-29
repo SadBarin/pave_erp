@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
   #container-line-text {
-    width: 100%;
+    width: fit-content;
 
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@ export default {
     color: #808080;
     font-size: 1.1rem !important;
 
-    max-width: 65%;
+    max-width: 60%;
     width: fit-content;
     height: fit-content;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
@@ -61,8 +61,10 @@ export default {
   #container-line-text .line-text-label {
     font-size: 1.2rem;
     color: #3e3e3e;
+    line-height: 1.1rem;
+    white-space: nowrap;
 
-    max-width: 35%;
+    max-width: 40%;
     margin-bottom: 0.15rem !important;
     order: 0;
 
