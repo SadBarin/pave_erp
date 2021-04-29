@@ -1,9 +1,11 @@
 <template>
   <AppHistoryWrapper :header='`История изменения рабочего "${worker.surname} ${worker.name}"`' :element="worker">
     <template #nav-buttons>
-      <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: worker.id}})"/>
-      <AppButtonIcon icon="create" size="1.8rem" title="Редактировать" @button-click="$router.push({name : 'workerEdit', params: {id: worker.id}})"/>
-      <AppButtonIcon icon="transfer_within_a_station" size="1.8rem" title="Вернуться" @button-click="$router.push('/workers')"/>
+<!--      <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: worker.id}})"/>-->
+<!--      <AppButtonIcon icon="create" size="1.8rem" title="Редактировать" @button-click="$router.push({name : 'workerEdit', params: {id: worker.id}})"/>-->
+<!--      <AppButtonIcon icon="transfer_within_a_station" size="1.8rem" title="Вернуться" @button-click="$router.push('/workers')"/>-->
+
+      <WorkerNavigation :worker="worker"/>
     </template>
   </AppHistoryWrapper>
 </template>
@@ -12,14 +14,14 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import AppHistoryWrapper from '../../AppHistoryWrapper'
-import AppButtonIcon from '../../AppButtonIcon'
+import WorkerNavigation from './WorkerNavigation'
 
 export default {
   name: 'HistoryWorkers',
 
   components: {
     AppHistoryWrapper,
-    AppButtonIcon
+    WorkerNavigation
   },
 
   data () {

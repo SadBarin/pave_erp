@@ -2,10 +2,12 @@
   <div id="app-edit">
     <AppEditWrapper :header="'Редактор рабочего: ' + editedWorker.surname + ' ' + editedWorker.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="save" title="Сохранить и выйти" size="1.8rem" @button-click="saveEditedWorker(editedWorker)"/>
-        <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: editedWorker.id}})"/>
-        <AppButtonIcon icon="description" title="История" size="1.8rem" @button-click="$router.push({name : 'workerHistory', params: {id: editedWorker.id}})"/>
-        <AppButtonIcon icon="transfer_within_a_station" title="Вернуться к рабочим" size="1.8rem" @button-click="editorExit"/>
+<!--        <AppButtonIcon icon="save" title="Сохранить и выйти" size="1.8rem" @button-click="saveEditedWorker(editedWorker)"/>-->
+<!--        <AppButtonIcon icon="date_range" size="1.8rem" title="Календарь" @button-click="$router.push({name : 'workerCalendar', params: {id: editedWorker.id}})"/>-->
+<!--        <AppButtonIcon icon="description" title="История" size="1.8rem" @button-click="$router.push({name : 'workerHistory', params: {id: editedWorker.id}})"/>-->
+<!--        <AppButtonIcon icon="transfer_within_a_station" title="Вернуться к рабочим" size="1.8rem" @button-click="editorExit"/>-->
+
+        <WorkerNavigation :worker="editedWorker" @save-worker="saveEditedWorker(editedWorker)"/>
       </template>
 
       <template #edit-section>
@@ -308,7 +310,7 @@ import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
 import AppEditWrapper from '@/components/edit/AppEditWrapper'
-import AppButtonIcon from '@/components/AppButtonIcon'
+import WorkerNavigation from './WorkerNavigation'
 import AppLineText from '@/components/AppLineText'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppSelect from '@/components/AppSelect'
@@ -318,7 +320,7 @@ export default {
 
   components: {
     AppEditWrapper,
-    AppButtonIcon,
+    WorkerNavigation,
     AppLineText,
     AppHeaderIcon,
     AppSelect

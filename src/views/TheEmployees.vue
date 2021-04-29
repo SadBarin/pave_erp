@@ -9,7 +9,6 @@
 
     <AppTopPanel header="Список сотрудников">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить города" @button-click="updateEmployees"/>
         <AppButtonIcon icon="add" size="1.8rem" title="Добавить города" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
@@ -96,12 +95,6 @@ export default {
           this.SET_EMPLOYEES_FROM_SERVER()
           console.log('Сотрудник добавлен ➕')
         })
-    },
-
-    updateEmployees () {
-      this.SET_EMPLOYEES_FROM_SERVER()
-      // eslint-disable-next-line no-undef
-      M.toast({ html: 'Сотрудники обновлены' })
     }
   }
 }

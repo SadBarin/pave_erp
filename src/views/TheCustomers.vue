@@ -8,7 +8,6 @@
 
     <AppTopPanel header="Список клиентов">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить страницу" @button-click="updateCustomers"/>
         <AppButtonIcon icon="add" size="1.8rem" title="Добавить клиентов" @button-click="popupAddToggle"/>
       </template>
     </AppTopPanel>
@@ -111,12 +110,6 @@ export default {
           this.SET_CUSTOMERS_FROM_SERVER()
           console.log('Клиент добавлен ➕')
         })
-    },
-
-    updateCustomers () {
-      this.SET_CUSTOMERS_FROM_SERVER()
-      // eslint-disable-next-line no-undef
-      M.toast({ html: 'Наши клиенты обновлены' })
     }
   }
 }

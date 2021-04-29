@@ -13,11 +13,11 @@
           <div class="history-moment">
             <span class="history-moment-date">{{moment.date}}</span>
             <p class="history-moment-text">{{moment.info}}</p>
-            <p title="Перейти к сотруднику"
+            <router-link title="Перейти к сотруднику"
                          :to="{name : 'employeeEdit', params: {id: moment.employee.id}}"
             >
               {{moment.employee.name}}
-            </p>
+            </router-link>
           </div>
         </div>
       </div>

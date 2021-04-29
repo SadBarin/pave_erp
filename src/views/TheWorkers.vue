@@ -8,7 +8,6 @@
 
     <AppTopPanel header="Список рабочих">
       <template #nav-buttons>
-        <AppButtonIcon icon="autorenew" size="1.8rem" title="Обновить страницу" @button-click="updateWorkers()"/>
         <AppButtonIcon icon="search" size="1.8rem" title="Поиск" @button-click="$router.push('/workers/search')"/>
         <AppButtonIcon icon="add" size="1.8rem" title="Добавить рабочего" @button-click="popupAddToggle"/>
       </template>
@@ -83,12 +82,6 @@ export default {
           this.SET_WORKERS_FROM_SERVER()
           console.log('Рабочий добавлен ➕')
         })
-    },
-
-    updateWorkers () {
-      this.SET_WORKERS_FROM_SERVER()
-      // eslint-disable-next-line no-undef
-      M.toast({ html: 'Сотрудники обновлены' })
     }
   }
 }

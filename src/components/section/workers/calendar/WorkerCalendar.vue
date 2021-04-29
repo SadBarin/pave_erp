@@ -1,11 +1,20 @@
 <template>
   <div>
+    <AppTopPanel :header='`Календарь рабочего "${worker.surname} ${worker.name}"`'>
+      <template #nav-buttons>
+        <WorkerNavigation :worker="worker"/>
+      </template>
+    </AppTopPanel>
+
     <WorkerAddEvent
       v-show="addEventShowStatus"
       @hiddenEventVisibility="hiddenEventVisibility"
       @addEventCalendar="addEventCalendar"
     />
-    <FullCalendar :options="calendarOptions" class="full-calendar"/>
+
+    <section>
+      <FullCalendar :options="calendarOptions" class="full-calendar"/>
+    </section>
   </div>
 </template>
 
@@ -16,14 +25,21 @@ import interactionPlugin from '@fullcalendar/interaction'
 import ruLocale from '@fullcalendar/core/locales/ru'
 import { mapGetters, mapMutations } from 'vuex'
 
+import AppTopPanel from '../../../AppTopPanel'
+import WorkerNavigation from '../WorkerNavigation'
 import WorkerAddEvent from './WorkerAddEvent'
 
 export default {
   components: {
-    FullCalendar, WorkerAddEvent
+    AppTopPanel,
+    WorkerNavigation,
+    WorkerAddEvent,
+    FullCalendar
   },
+
   data () {
     return {
+      worker: {},
       addEventShowStatus: false,
       cell: 'var',
       eventID: '',
@@ -57,11 +73,19 @@ export default {
       }
     }
   },
+
   computed: {
     ...mapGetters([
       'workers'
     ])
   },
+
+  created () {
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.worker = this.workers[this.$route.params.id]
+    this.calendarOptions.events = this.worker.events
+  },
+
   methods: {
     ...mapMutations([
       'SET_WORKERS_FROM_LOCAL_STORAGE'
@@ -91,11 +115,6 @@ export default {
     handleDateClick (arg) {
       this.cell = arg
     }
-  },
-  mounted () {
-    this.SET_WORKERS_FROM_LOCAL_STORAGE()
-    this.calendarOptions.events = this.workers[this.$route.params.id].events
-    console.log(this.workers[this.$route.params.id])
   }
 }
 </script>

@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="page-title flex-between-center">
-      <h3 class="title-clip">Информация о рабочем <br> "{{ worker.surname }} {{ worker.name }}"</h3>
-      <WorkerNav :worker="worker"/>
-    </div>
+    <AppTopPanel :header='`Информация о рабочем "${worker.surname} ${worker.name}`'>
+        <template #nav-buttons>
+          <WorkerNavigation :worker="worker"/>
+        </template>
+    </AppTopPanel>
 
     <section class="info-content">
       <div class="margin-fix w20rem">
@@ -192,13 +193,15 @@
 </template>
 
 <script>
-import WorkerNav from './WorkerNav'
 import { mapGetters, mapMutations } from 'vuex'
+
+import AppTopPanel from '../../AppTopPanel'
+import WorkerNavigation from './WorkerNavigation'
 
 export default {
   name: 'AboutWorker',
 
-  components: { WorkerNav },
+  components: { AppTopPanel, WorkerNavigation },
 
   filters: {
     booleanToWord: function (boolean) {
