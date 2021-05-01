@@ -1,7 +1,7 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/pave-erp-demo/'
-    : '/',
+  // publicPath: process.env.NODE_ENV === 'production'
+  //   ? '/pave-erp-demo/'
+  //   : '/',
 
   pwa: {
     name: 'PaveERP',
