@@ -24,6 +24,10 @@ export default {
 </script>
 
 <style scoped>
+  .settings-section {
+    position: relative;
+  }
+
   #app-settings .settings-header {
     margin: 1.6rem 0 2rem -1rem;
   }

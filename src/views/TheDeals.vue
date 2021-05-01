@@ -8,12 +8,12 @@
 
     <AppTopPanel header="Список сделок">
       <template #nav-buttons>
-        <AppButtonIcon icon="add" size="1.8rem" title="Добавить сделки" @button-click="popupAddToggle()"/>
+        <AppButtonIcon icon="add" size="1.8rem" title="Добавить" @button-click="popupAddToggle()"/>
       </template>
     </AppTopPanel>
 
     <div class="app-deal-content">
-      <DealsTable :deals="deals" @remove-deal="removeDeal"/>
+      <DealsTable :deals="deals" @remove-deal="removeDeal" @set-current-deal="setCurrentDeal"/>
     </div>
   </div>
 </template>
@@ -39,7 +39,8 @@ export default {
 
   data () {
     return {
-      popupAddDeal: true
+      popupAddDeal: true,
+      currentDeal: null
     }
   },
 
@@ -63,6 +64,10 @@ export default {
 
     popupAddToggle () {
       this.popupAddDeal = !this.popupAddDeal
+    },
+
+    setCurrentDeal (deal) {
+      this.currentDeal = deal
     },
 
     removeDeal (id) {

@@ -12,31 +12,45 @@
         </template>
       </PopupDeleteWrapper>
 
-      <AppTableRow :columns-count="columnsCount" :columns-size="columnsSize" :columns-array="columnHeaderArray" :row-header="true">
-        <template #column-action>
-          <AppButtonIcon size="1.2rem"/>
-          <AppButtonIcon size="1.2rem"/>
-          <AppButtonIcon size="1.2rem"/>
+      <AppTableWrapperRow>
+        <template #row-content>
+          <th></th>
+          <th>Название</th>
+          <th>Заказчик</th>
+          <th>Рабочий</th>
+          <th>Дата</th>
+          <th>Время</th>
+          <th>Заметка</th>
+          <th></th>
         </template>
-      </AppTableRow>
+      </AppTableWrapperRow>
 
       <template v-for="(element) in deals">
-        <AppTableRow :key="element.id" :columns-count="columnsCount" :columns-size="columnsSize"
-                     :columns-array="[element.name, element.customer, element.worker, element.date, element.time, element.notes[element.notes.length - 1]]"
-                     @dbclickEvent="$router.push({name : 'dealEdit', params: {id: element.id}})"
-        >
+        <AppTableWrapperRow :key="element.id"
+                            @db-click="$router.push({name : 'dealEdit', params: {id: element.id}})"
+                            @on-click="$emit('set-current-deal', element)">
           <template #row-content>
-            <td>
-              <p>ОЛЕГ</p>
+            <td class="table-row-checkbox">
+              <label>
+                <input type="checkbox" />
+                <span></span>
+              </label>
+            </td>
+
+            <td :title="element.name">{{element.name}}</td>
+            <td :title="element.customer">{{element.customer}}</td>
+            <td :title="element.worker">{{element.worker}}</td>
+            <td :title="element.date">{{element.date}}</td>
+            <td :title="element.time">{{element.time}}</td>
+            <td :title="element.notes[element.notes.length - 1]">{{element.notes[element.notes.length - 1]}}</td>
+
+            <td class="row-action">
+              <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
+              <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
             </td>
           </template>
-
-          <template #column-action>
-            <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
-            <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
-            <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
-          </template>
-        </AppTableRow>
+        </AppTableWrapperRow>
       </template>
     </template>
   </AppTableWrapper>
@@ -45,7 +59,7 @@
 <script>
 import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
 import AppTableWrapper from '../../table/AppTableWrapper'
-import AppTableRow from '../../table/AppTableRow'
+import AppTableWrapperRow from '../../table/AppTableWrapperRow'
 import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
@@ -54,15 +68,7 @@ export default {
   data () {
     return {
       popupRemoveHidden: true,
-      currentDeal: {},
-
-      columnsCount: 6,
-      columnsSize: '1fr',
-      columnHeaderArray: [
-        'Название', 'Заказчик',
-        'Рабочий', 'Дата', 'Время',
-        'Заметка'
-      ]
+      currentDeal: {}
     }
   },
 
@@ -74,7 +80,7 @@ export default {
     PopupDeleteWrapper,
     AppButtonIcon,
     AppTableWrapper,
-    AppTableRow
+    AppTableWrapperRow
   },
 
   methods: {
