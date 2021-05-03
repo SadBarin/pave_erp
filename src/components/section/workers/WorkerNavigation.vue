@@ -1,5 +1,15 @@
 <template>
   <div class="worker-navigation">
+    <AppButtonIcon icon="timeline" size="1.8rem"
+                   title="Статистика"
+                   v-show="$route.name !== 'workerStatistics'"
+                   @button-click="$router.push({name : 'workerStatistics', params: {id: worker.id}})"/>
+
+    <AppButtonIcon icon="remove_red_eye" size="1.8rem"
+                   title="Просмотреть"
+                   v-show="$route.name !== 'workerAbout'"
+                   @button-click="$router.push({name : 'workerAbout', params: {id: worker.id}})"/>
+
     <AppButtonIcon icon="date_range" size="1.8rem"
                    title="Календарь"
                    v-show="$route.name !== 'workerCalendar'"
@@ -9,11 +19,6 @@
                    title="История"
                    v-show="$route.name !== 'workerHistory'"
                    @button-click="$router.push({name : 'workerHistory', params: {id: worker.id}})"/>
-
-    <AppButtonIcon icon="remove_red_eye" size="1.8rem"
-                   title="Просмотреть"
-                   v-show="$route.name !== 'workerAbout'"
-                   @button-click="$router.push({name : 'workerAbout', params: {id: worker.id}})"/>
 
     <AppButtonIcon icon="create" size="1.8rem"
                    title="Редактировать"

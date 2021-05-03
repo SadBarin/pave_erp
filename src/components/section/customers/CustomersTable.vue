@@ -35,7 +35,7 @@
 
             <td class="row-action">
               <AppButtonIcon icon="domain" title="Подразделения" size="1.2rem" @button-click="$router.push({name : 'customerSubdivisions', params: {id: element.id}})"/>
-              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'customerSubdivisions', params: {id: element.id}})"/>
+              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'customerStatistics', params: {id: element.id}})"/>
               <AppButtonIcon icon="remove_red_eye" title="Просмотреть" size="1.2rem" @button-click="$router.push({name : 'customerAbout', params: {id: element.id}})"/>
               <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'customerEdit', params: {id: element.id}})"/>
               <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); customer = element"/>

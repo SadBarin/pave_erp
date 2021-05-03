@@ -64,6 +64,12 @@ const router = new VueRouter({
       component: () => import('../components/section/workers/WorkersSearch')
     },
     {
+      path: '/workers/statistics/customer:id',
+      name: 'workerStatistics',
+      meta: { layout: 'main' },
+      component: () => import('../components/section/workers/WorkerStatisticsTable')
+    },
+    {
       path: '/workers/about/worker:id',
       name: 'workerAbout',
       meta: { layout: 'main' },
@@ -106,6 +112,12 @@ const router = new VueRouter({
       name: 'customerEdit',
       meta: { layout: 'main' },
       component: () => import('../components/section/customers/CustomerEdit')
+    },
+    {
+      path: '/customers/statistics/customer:id',
+      name: 'customerStatistics',
+      meta: { layout: 'main' },
+      component: () => import('../components/section/customers/CustomerStatisticsTable')
     },
 
     {

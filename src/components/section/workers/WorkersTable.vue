@@ -38,7 +38,7 @@
             <td :title="element.professions">{{element.professions}}</td>
 
             <td class="row-action">
-              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'workerSubdivisions', params: {id: element.id}})"/>
+              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'workerStatistics', params: {id: element.id}})"/>
               <AppButtonIcon icon="remove_red_eye" title="Просмотреть" size="1.2rem" @button-click="$router.push({name : 'workerAbout', params: {id: element.id}})"/>
               <AppButtonIcon icon="date_range" title="Календарь" size="1.2rem" @button-click="$router.push({name : 'workerCalendar', params: {id: element.id}})"/>
               <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'workerHistory', params: {id: element.id}})"/>

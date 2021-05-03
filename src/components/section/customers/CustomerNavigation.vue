@@ -1,5 +1,14 @@
 <template>
   <div class="customer-navigation">
+    <AppButtonIcon icon="domain" size="1.8rem"
+                   title="Подразделения"
+                   @button-click="$router.push({name : 'customerSubdivisions', params: {id: customer.id}})"/>
+
+    <AppButtonIcon icon="timeline" size="1.8rem"
+                   title="Статистика"
+                   v-show="$route.name !== 'customerStatistics'"
+                   @button-click="$router.push({name : 'customerStatistics', params: {id: customer.id}})"/>
+
     <AppButtonIcon icon="remove_red_eye" size="1.8rem"
                    title="Просмотреть"
                    v-show="$route.name !== 'customerAbout'"
@@ -14,10 +23,6 @@
                    title="Сохранить и выйти"
                    v-show="$route.name === 'customerEdit'"
                    @button-click="$emit('save-customer')"/>
-
-    <AppButtonIcon icon="domain" size="1.8rem"
-                   title="Подразделения"
-                   @button-click="$router.push({name : 'customerSubdivisions', params: {id: customer.id}})"/>
 
     <AppButtonIcon icon="business_center" size="1.8rem"
                    title="Вернуться к клиентам"
