@@ -45,6 +45,7 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="ФИО"/>
 
@@ -71,6 +72,7 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="local_phone" header-text="Контактные данные"/>
 

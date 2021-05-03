@@ -14,7 +14,6 @@
 
       <AppTableWrapperRow>
         <template #row-content>
-          <th></th>
           <th>Название</th>
           <th>Заказчик</th>
           <th>Рабочий</th>
@@ -30,13 +29,6 @@
                             @db-click="$router.push({name : 'dealEdit', params: {id: element.id}})"
                             @on-click="$emit('set-current-deal', element)">
           <template #row-content>
-            <td class="table-row-checkbox">
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-
             <td :title="element.name">{{element.name}}</td>
             <td :title="element.customer">{{element.customer}}</td>
             <td :title="element.worker">{{element.worker}}</td>
@@ -65,6 +57,13 @@ import AppButtonIcon from '../../AppButtonIcon'
 export default {
   name: 'DealsTable',
 
+  components: {
+    PopupDeleteWrapper,
+    AppButtonIcon,
+    AppTableWrapper,
+    AppTableWrapperRow
+  },
+
   data () {
     return {
       popupRemoveHidden: true,
@@ -74,13 +73,6 @@ export default {
 
   props: {
     deals: Object
-  },
-
-  components: {
-    PopupDeleteWrapper,
-    AppButtonIcon,
-    AppTableWrapper,
-    AppTableWrapperRow
   },
 
   methods: {

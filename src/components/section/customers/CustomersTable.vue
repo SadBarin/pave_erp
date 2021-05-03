@@ -1,111 +1,85 @@
 <template>
-<div>
-  <Popup
-    v-if="popupShow"
-    @yes="removeCustomer(customer)"
-    @no="popupHidden()"
-    :popup-toast="`Клиент был удалён!`"
-  >
-    <template #title-popup>
-      Удалить?
+  <AppTableWrapper>
+    <template #table-content>
+      <PopupDeleteWrapper
+        :hidePopupStatus="popupRemoveHidden"
+        @close-popup="popupRemoveToggle({})"
+        @delete-element="$emit('remove-customer', customer.id); popupRemoveToggle({})"
+        :header="`Удаление клиента ${customer.name}`"
+      >
+        <template #popup-delete-content>
+          После нажатия на иконку корзины будет удалён клиент <b>{{customer.name}}</b>
+        </template>
+      </PopupDeleteWrapper>
+
+      <AppTableWrapperRow>
+        <template #row-content>
+          <th>Наименование</th>
+          <th>Телефон</th>
+          <th>Сайт</th>
+          <th>Почта</th>
+          <th>Адрес</th>
+          <th></th>
+        </template>
+      </AppTableWrapperRow>
+
+      <template v-for="(element) in customers">
+        <AppTableWrapperRow :key="element.id"
+                            @db-click="$router.push({name : 'customerEdit', params: {id: element.id}})">
+          <template #row-content>
+            <td :title="element.name">{{element.name}}</td>
+            <td>{{element.subdivisions['0'].number}}</td>
+            <td>{{element.subdivisions['0'].site}}</td>
+            <td>{{element.subdivisions['0'].email}}</td>
+            <td>{{element.subdivisions['0'].address}}</td>
+
+            <td class="row-action">
+              <AppButtonIcon icon="domain" title="Подразделения" size="1.2rem" @button-click="$router.push({name : 'customerSubdivisions', params: {id: element.id}})"/>
+              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'customerSubdivisions', params: {id: element.id}})"/>
+              <AppButtonIcon icon="remove_red_eye" title="Просмотреть" size="1.2rem" @button-click="$router.push({name : 'customerAbout', params: {id: element.id}})"/>
+              <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'customerEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); customer = element"/>
+            </td>
+          </template>
+        </AppTableWrapperRow>
+      </template>
     </template>
-
-    <template #text-info-popup>
-      Клиент <b>{{customer.name}}</b> будет удалён
-    </template>
-  </Popup>
-
-  <table>
-    <tr>
-      <th>Наименование</th>
-      <th>Телефон</th>
-      <th>Сайт</th>
-      <th>Почта</th>
-      <th>Адрес</th>
-    </tr>
-    <tr v-for="customer in customers" :key="customer.value">
-        <td>
-          <div class="parent-clip-text">
-            <p class="clip-text" :title="customer.name">{{customer.name}}</p>
-          </div>
-        </td>
-        <td><a :href="'tel:' + customer.number" title="Позвонить">{{customer.subdivisions['0'].number}}</a></td>
-        <td>
-          <div class="parent-clip-text">
-            <a class="clip-text" :title="customer.site" target="_blank" :href="customer.site">{{customer.subdivisions['0'].site}}</a>
-          </div>
-        </td>
-        <td>
-          <div class="parent-clip-text">
-            <a class="clip-text" :href="'mailto:' + customer.email" :title="'Написать на почту: ' + customer.email">{{customer.subdivisions['0'].email}}</a>
-          </div>
-        </td>
-        <td>
-          <div class="parent-clip-text">
-            <p class="clip-text" :title="customer.address">{{customer.subdivisions['0'].address}}</p>
-          </div>
-        </td>
-        <td>
-          <div class="flex-center btns-collection">
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                         title="Подразделения"
-                         :to="{name : 'customerSubdivisions', params: {id: customer.id}}"
-            >
-              <i class="material-icons">domain</i>
-            </router-link>
-
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                         title="Просмотреть"
-                         :to="{name : 'customerAbout', params: {id: customer.id}}"
-            >
-              <i class="material-icons">remove_red_eye</i>
-            </router-link>
-
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                         title="Редактировать"
-                         :to="{name : 'customerEdit', params: {id: customer.id}}"
-            >
-              <i class="material-icons">create</i>
-            </router-link>
-
-            <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                    title="Удалить"
-                    v-if="!customer.edited"
-                    @click="popupVisibility(customer); setCustomer(customer)"
-            >
-              <i class="material-icons">delete</i>
-            </button>
-          </div>
-        </td>
-      </tr>
-  </table>
-</div>
+  </AppTableWrapper>
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
+import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
+import AppTableWrapper from '../../table/AppTableWrapper'
+import AppTableWrapperRow from '../../table/AppTableWrapperRow'
+import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
   name: 'TableCustomers',
 
-  mixins: [popupMixin],
+  components: {
+    PopupDeleteWrapper,
+    AppButtonIcon,
+    AppTableWrapper,
+    AppTableWrapperRow
+  },
 
   props: { customers: Object },
 
   data () {
     return {
-      customer: ''
+      customer: '',
+
+      popupRemoveHidden: true
     }
   },
 
   methods: {
-    setCustomer (customer) {
-      this.customer = customer
+    popupRemoveToggle () {
+      this.popupRemoveHidden = !this.popupRemoveHidden
     },
 
     removeCustomer (customer) {
       this.$emit('remove-customer', customer.id)
-      this.popupHidden()
     }
   }
 }

@@ -12,7 +12,7 @@
 
     <AppButtonIcon icon="save" size="1.8rem"
                    title="Сохранить и выйти"
-                   v-show="$route.name === 'workerEdit'"
+                   v-show="$route.name === 'customerEdit'"
                    @button-click="$emit('save-customer')"/>
 
     <AppButtonIcon icon="domain" size="1.8rem"

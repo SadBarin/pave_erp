@@ -2,8 +2,6 @@
   <div id="app-edit">
     <AppEditWrapper :header="'Редактор клиента: ' + editedCustomer.name">
       <template #nav-buttons>
-<!--        <AppButtonIcon icon="save" title="Сохранить и выйти" @button-click="saveEditedCustomer(editedCustomer)"/>-->
-<!--        <AppButtonIcon icon="business_center" title="Вернуться к клиентам" @button-click="editorExit"/>-->
         <CustomerNavigation :customer="editedCustomer" @save-customer="saveEditedCustomer(editedCustomer)"/>
       </template>
 
@@ -20,6 +18,7 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
 

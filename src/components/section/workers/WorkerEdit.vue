@@ -32,8 +32,9 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Паспортные данные"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="book" header-text="Паспортные данные"/>
 
           <div class="edit-block-content">
             <AppLineText
@@ -72,8 +73,9 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Личные данные"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="assignment" header-text="Личные данные"/>
 
           <div class="edit-block-content">
             <AppLineText
@@ -121,8 +123,9 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Банковские данные"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_balance_wallet" header-text="Банковские данные"/>
 
           <div class="edit-block-content">
             <AppLineText
@@ -172,8 +175,9 @@
             </AppSelect>
           </div>
         </div>
+
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Контактные данные"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="local_phone" header-text="Контактные данные"/>
 
           <div class="edit-block-content">
             <AppLineText
@@ -212,29 +216,16 @@
             />
           </div>
         </div>
+
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="Рабочие данные"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="pan_tool" header-text="Профессиональные данные"/>
 
           <div class="edit-block-content">
-            <AppLineText
-              inputID="input-account-number"
-              label="Учёт. номер: "
-              maxLength="20"
-              v-model="editedWorker.accountNumber"
-            />
-
             <AppLineText
               inputID="input-previous-work"
               label="Прежняя работа: "
               maxLength="20"
               v-model="editedWorker.previousWork"
-            />
-
-            <AppLineText
-              inputID="input-reason-coming"
-              label="Почему пришёл к нам: "
-              maxLength="20"
-              v-model="editedWorker.reasonComing"
             />
 
             <AppLineText
@@ -256,6 +247,51 @@
               label="Профессия 3: "
               maxLength="20"
               v-model="editedWorker.professionsThird"
+            />
+          </div>
+        </div>
+
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="chrome_reader_mode" header-text="Заметки"/>
+
+          <div class="edit-block-content">
+            <AppNumbers
+              inputID="input-note-count"
+              label="Заметок в списке:  "
+              minValue="0"
+              maxValue="35"
+              maxLength="3"
+              v-model="editedWorker.notesCount"
+            />
+
+            <AppLineText
+              placeholder="Введите новую заметку"
+              inputID="input-note"
+              label="Новая Заметка: "
+              maxLength="35"
+              v-model="note"
+            />
+
+            <AppNotesList :notes-list="editedWorker.notes" :notes-count="editedWorker.notesCount"/>
+          </div>
+        </div>
+
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="rate_review" header-text="Рабочие данные"/>
+
+          <div class="edit-block-content">
+            <AppLineText
+              inputID="input-account-number"
+              label="Учёт. номер: "
+              maxLength="20"
+              v-model="editedWorker.accountNumber"
+            />
+
+            <AppLineText
+              inputID="input-reason-coming"
+              label="Почему пришёл к нам: "
+              maxLength="20"
+              v-model="editedWorker.reasonComing"
             />
 
             <AppLineText
@@ -309,6 +345,8 @@ import WorkerNavigation from './WorkerNavigation'
 import AppLineText from '@/components/AppLineText'
 import AppHeaderIcon from '@/components/AppHeaderIcon'
 import AppSelect from '@/components/AppSelect'
+import AppNumbers from '../../AppNumbers'
+import AppNotesList from '../../edit/AppNotesList'
 
 export default {
   name: 'EditorWorkers',
@@ -318,7 +356,9 @@ export default {
     WorkerNavigation,
     AppLineText,
     AppHeaderIcon,
-    AppSelect
+    AppSelect,
+    AppNumbers,
+    AppNotesList
   },
 
   data () {

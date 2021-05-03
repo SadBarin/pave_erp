@@ -15,6 +15,10 @@ export default {
     border-radius: 0 !important;
   }
 
+  .app-table-row a{
+    font-size: 1rem;
+  }
+
   .app-table-row:hover{
     background: transparent !important;
   }
@@ -49,7 +53,7 @@ export default {
 
   .app-table-row th:not(:last-child),
   .app-table-row td:not(:last-child){
-    padding-right: 3rem !important;
+    padding-right: 2.8rem !important;
   }
 
   .app-table-row .row-action {

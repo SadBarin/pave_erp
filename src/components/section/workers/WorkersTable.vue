@@ -1,104 +1,86 @@
 <template>
-<div>
-  <Popup
-    v-if="popupShow"
-    @yes="removeWorker(worker)"
-    @no="popupHidden()"
-    :popup-toast="`Рабочий ${worker.surname} ${worker.name} был удалён!'`"
-  >
-    <template #title-popup>
-      Удалить?
+  <AppTableWrapper>
+    <template #table-content>
+      <PopupDeleteWrapper
+        :hidePopupStatus="popupRemoveHidden"
+        @close-popup="popupRemoveToggle({})"
+        @delete-element="$emit('remove-worker', worker.id); popupRemoveToggle({})"
+        :header="`Удаление рабочего ${worker.surname} ${worker.name}`"
+      >
+        <template #popup-delete-content>
+          После нажатия на иконку корзины будет удалён рабочий <b>{{worker.name}}</b>
+        </template>
+      </PopupDeleteWrapper>
+
+      <AppTableWrapperRow>
+        <template #row-content>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Мед.книжка</th>
+          <th>Город</th>
+          <th>Телефон</th>
+          <th>Профессия</th>
+          <th></th>
+        </template>
+      </AppTableWrapperRow>
+
+      <template v-for="(element) in workers">
+        <AppTableWrapperRow :key="element.id"
+                            @db-click="$router.push({name : 'workerEdit', params: {id: element.id}})">
+          <template #row-content>
+            <td :title="element.surname">{{element.surname}}</td>
+            <td :title="element.name">{{element.name}}</td>
+            <td :title="element.patronymic">{{element.patronymic}}</td>
+            <td :title="element.medicalBookStatus">Около {{(element.medicalBookStatus)? element.medicalBookStatus : '0 лет'}}</td>
+            <td :title="element.city">{{element.city}}</td>
+            <td :title="element.mobilePhone">{{element.mobilePhone}}</td>
+            <td :title="element.professions">{{element.professions}}</td>
+
+            <td class="row-action">
+              <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'workerSubdivisions', params: {id: element.id}})"/>
+              <AppButtonIcon icon="remove_red_eye" title="Просмотреть" size="1.2rem" @button-click="$router.push({name : 'workerAbout', params: {id: element.id}})"/>
+              <AppButtonIcon icon="date_range" title="Календарь" size="1.2rem" @button-click="$router.push({name : 'workerCalendar', params: {id: element.id}})"/>
+              <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'workerHistory', params: {id: element.id}})"/>
+              <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'workerEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); worker = element"/>
+            </td>
+          </template>
+        </AppTableWrapperRow>
+      </template>
     </template>
-
-    <template #text-info-popup>
-      После нажатия кнопки "да" будет удалён <b>{{worker.surname}} {{worker.name}}</b>!
-    </template>
-  </Popup>
-
-  <table>
-    <tr>
-      <th>Фамилия</th>
-      <th>Имя</th>
-      <th>Отчество</th>
-      <th>Возраст</th>
-      <th>Мед.книжка</th>
-      <th>Город</th>
-      <th>Телефон</th>
-      <th>Профессия</th>
-      <th></th>
-    </tr>
-    <tr v-for="worker in workers" :key="worker.value" :class="worker.fired === 'Нет' ? '' : 'opacity-5'">
-        <td>{{worker.surname}}</td>
-        <td>{{worker.name}}</td>
-        <td>{{worker.patronymic}}</td>
-        <td>{{worker.age}}</td>
-        <td>
-          <div v-if="worker.medicalBookStatus === 'Просрочена'" class="red-text darken-1">{{worker.medicalBookStatus}}</div>
-          <div v-else>{{worker.medicalBookStatus}}</div>
-        </td>
-        <td>{{worker.city}}</td>
-        <td><a :href="'tel:' + worker.mobilePhone" title="Позвонить">{{worker.mobilePhone}}</a></td>
-        <td>{{worker.professions}}</td>
-        <td>
-          <div class="flex-center btns-collection" v-if="worker">
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                    title="Просмотреть"
-                     v-if="worker"
-                    :to="{name: 'workerAbout', params: {id: worker.id}}"
-            >
-              <i class="material-icons">remove_red_eye</i>
-            </router-link>
-
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                         title="Календарь"
-                         :to="{name : 'workerCalendar', params: {id: worker.id}}"
-            >
-              <i class="material-icons">date_range</i>
-            </router-link>
-
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                         title="История редактирования"
-                         :to="{name : 'workerHistory', params: {id: worker.id}}"
-            >
-              <i class="material-icons">description</i>
-            </router-link>
-
-            <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                    title="Редактировать"
-                    :to="{name : 'workerEdit', params: {id: worker.id}}"
-            >
-              <i class="material-icons">create</i>
-            </router-link>
-
-            <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                    title="Удалить"
-                    v-if="!worker.edited"
-                    @click="popupVisibility(worker); setWorker(worker)"
-            >
-              <i class="material-icons">delete</i>
-            </button>
-          </div>
-        </td>
-      </tr>
-  </table>
-</div>
+  </AppTableWrapper>
 </template>
 
 <script>
-import popupMixin from '@/mixins/popupMixin'
+import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
+import AppTableWrapper from '../../table/AppTableWrapper'
+import AppTableWrapperRow from '../../table/AppTableWrapperRow'
+import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
   name: 'TableWorkers',
-  mixins: [popupMixin],
+
+  components: {
+    PopupDeleteWrapper,
+    AppButtonIcon,
+    AppTableWrapper,
+    AppTableWrapperRow
+  },
+
   props: { workers: Object },
+
   data () {
     return {
-      worker: ''
+      worker: '',
+
+      popupRemoveHidden: true
     }
   },
+
   methods: {
-    setWorker (worker) {
-      this.worker = worker
+    popupRemoveToggle () {
+      this.popupRemoveHidden = !this.popupRemoveHidden
     },
 
     removeWorker (worker) {
