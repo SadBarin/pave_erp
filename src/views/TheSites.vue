@@ -13,7 +13,7 @@
     </AppTopPanel>
 
     <div class="app-sites-content">
-      <SitesList
+      <SitesTable
         :sites="sites"
         @remove-city="removeCity"
       />
@@ -25,9 +25,9 @@
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
-import AppTopPanel from '@/components/AppTopPanel'
-import AppButtonIcon from '@/components/AppButtonIcon'
-import SitesList from '../components/section/sites/list/SitesList'
+import AppTopPanel from '../components/AppTopPanel'
+import AppButtonIcon from '../components/AppButtonIcon'
+import SitesTable from '../components/section/sites/SitesTable'
 import CityPopupAdd from '../components/section/sites/CityPopupAdd'
 
 export default {
@@ -36,7 +36,7 @@ export default {
   components: {
     AppTopPanel,
     AppButtonIcon,
-    SitesList,
+    SitesTable,
     CityPopupAdd
   },
 

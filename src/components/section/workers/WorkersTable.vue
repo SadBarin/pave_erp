@@ -21,6 +21,7 @@
           <th>Город</th>
           <th>Телефон</th>
           <th>Профессия</th>
+          <th>Заметка</th>
           <th></th>
         </template>
       </AppTableWrapperRow>
@@ -34,8 +35,22 @@
             <td :title="element.patronymic">{{element.patronymic}}</td>
             <td :title="element.medicalBookStatus">Около {{(element.medicalBookStatus)? element.medicalBookStatus : '0 лет'}}</td>
             <td :title="element.city">{{element.city}}</td>
-            <td :title="element.mobilePhone">{{element.mobilePhone}}</td>
+
+            <td>
+              <a :href="'tel:' + element.mobilePhone"
+                 title="Позвонить">
+                {{element.mobilePhone}}
+              </a>
+            </td>
+
             <td :title="element.professions">{{element.professions}}</td>
+
+            <td v-if="element.notes"
+                :title="element.notes[element.notes.length - 1]"
+            >
+              {{element.notes[element.notes.length - 1]}}
+            </td>
+            <td v-else>Заметок нет</td>
 
             <td class="row-action">
               <AppButtonIcon icon="timeline" title="Статистика" size="1.2rem" @button-click="$router.push({name : 'workerStatistics', params: {id: element.id}})"/>

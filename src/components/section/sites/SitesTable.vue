@@ -4,36 +4,27 @@
       <PopupDeleteWrapper
         :hidePopupStatus="popupRemoveHidden"
         @close-popup="popupRemoveToggle({})"
-        @delete-element="$emit('remove-deal', currentDeal.id); popupRemoveToggle({})"
-        :header="`Удаление сделки ${currentDeal.name}`"
+        @delete-element="$emit('remove-city', city.id); popupRemoveToggle({})"
+        :header="`Удаление города ${city.name}`"
       >
         <template #popup-delete-content>
-          После нажатия на иконку корзины будет удалёна сделка <b>{{currentDeal.name}}</b>
+          После нажатия на иконку корзины будет удалён город <b>{{city.name}}</b>
         </template>
       </PopupDeleteWrapper>
 
       <AppTableWrapperRow>
         <template #row-content>
           <th>Название</th>
-          <th>Заказчик</th>
-          <th>Рабочий</th>
-          <th>Дата</th>
-          <th>Время</th>
           <th>Заметка</th>
           <th></th>
         </template>
       </AppTableWrapperRow>
 
-      <template v-for="(element) in deals">
+      <template v-for="(element) in sites">
         <AppTableWrapperRow :key="element.id"
-                            @db-click="$router.push({name : 'dealEdit', params: {id: element.id}})"
-                            @on-click="$emit('set-current-deal', element)">
+                            @db-click="$router.push({name : 'cityEdit', params: {id: element.id}})">
           <template #row-content>
             <td :title="element.name">{{element.name}}</td>
-            <td :title="element.customer">{{element.customer}}</td>
-            <td :title="element.worker">{{element.worker}}</td>
-            <td :title="element.date">{{element.date}}</td>
-            <td :title="element.time">{{element.time}}</td>
 
             <td v-if="element.notes"
                 :title="element.notes[element.notes.length - 1]"
@@ -43,9 +34,8 @@
             <td v-else>Заметок нет</td>
 
             <td class="row-action">
-              <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
-              <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
-              <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
+              <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'cityEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); city = element"/>
             </td>
           </template>
         </AppTableWrapperRow>
@@ -61,7 +51,7 @@ import AppTableWrapperRow from '../../table/AppTableWrapperRow'
 import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
-  name: 'DealsTable',
+  name: 'SitesTable',
 
   components: {
     PopupDeleteWrapper,
@@ -73,18 +63,17 @@ export default {
   data () {
     return {
       popupRemoveHidden: true,
-      currentDeal: {}
+      city: {}
     }
   },
 
   props: {
-    deals: Object
+    sites: Object
   },
 
   methods: {
-    popupRemoveToggle (deal) {
+    popupRemoveToggle () {
       this.popupRemoveHidden = !this.popupRemoveHidden
-      this.currentDeal = deal
     }
   }
 }

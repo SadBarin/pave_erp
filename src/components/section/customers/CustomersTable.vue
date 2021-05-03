@@ -15,10 +15,11 @@
       <AppTableWrapperRow>
         <template #row-content>
           <th>Наименование</th>
+          <th>Почта</th>
           <th>Телефон</th>
           <th>Сайт</th>
-          <th>Почта</th>
           <th>Адрес</th>
+          <th>Заметка</th>
           <th></th>
         </template>
       </AppTableWrapperRow>
@@ -28,10 +29,37 @@
                             @db-click="$router.push({name : 'customerEdit', params: {id: element.id}})">
           <template #row-content>
             <td :title="element.name">{{element.name}}</td>
-            <td>{{element.subdivisions['0'].number}}</td>
-            <td>{{element.subdivisions['0'].site}}</td>
-            <td>{{element.subdivisions['0'].email}}</td>
-            <td>{{element.subdivisions['0'].address}}</td>
+
+            <td>
+              <a :href="'mailto:' + element.subdivisions['0'].email"
+                 :title="'Написать на почту: ' + element.subdivisions['0'].email">
+                {{element.subdivisions['0'].email}}
+              </a>
+            </td>
+
+            <td>
+              <a :href="'tel:' + element.subdivisions['0'].number"
+                 title="Позвонить">
+                {{element.subdivisions['0'].number}}
+              </a>
+            </td>
+
+            <td>
+              <a :href="element.subdivisions['0'].site"
+                 target="_blank"
+                 :title="'Посетить: ' + element.subdivisions['0'].site">
+                {{element.subdivisions['0'].site}}
+              </a>
+            </td>
+
+            <td :title="element.subdivisions['0'].address">{{element.subdivisions['0'].address}}</td>
+
+            <td v-if="element.notes"
+                :title="element.notes[element.notes.length - 1]"
+            >
+              {{element.notes[element.notes.length - 1]}}
+            </td>
+            <td v-else>Заметок нет</td>
 
             <td class="row-action">
               <AppButtonIcon icon="domain" title="Подразделения" size="1.2rem" @button-click="$router.push({name : 'customerSubdivisions', params: {id: element.id}})"/>

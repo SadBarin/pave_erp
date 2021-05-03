@@ -1,88 +1,82 @@
 <template>
 <div>
-  <PopupDeleteWrapper
-    :hidePopupStatus="popupRemoveHidden"
-    @close-popup="popupRemoveToggle"
-    @delete-element="removeEmployee(employee.id)"
-    :header="`Удаление сотрудника`"
-  >
-    <template #popup-delete-content>
-      После нажатия кнопки "да" будет удалён сотрудник!
+  <AppTableWrapper>
+    <template #table-content>
+      <PopupDeleteWrapper
+        :hidePopupStatus="popupRemoveHidden"
+        @close-popup="popupRemoveToggle"
+        @delete-element="removeEmployee(employee.id)"
+        :header="`Удаление сотрудника ${employee.surname} ${employee.name}`"
+      >
+        <template #popup-delete-content>
+          После нажатия кнопки "да" будет удалён сотрудник {{employee.surname}} {{employee.name}}!
+        </template>
+      </PopupDeleteWrapper>
+
+      <AppTableWrapperRow>
+        <template #row-content>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Почта</th>
+          <th>Номер</th>
+          <th>Город</th>
+          <th>Должность</th>
+          <th></th>
+        </template>
+      </AppTableWrapperRow>
+
+      <template v-for="(element) in employees">
+        <AppTableWrapperRow :key="element.id"
+                            @db-click="$router.push({name : 'employeeEdit', params: {id: element.id}})">
+          <template #row-content>
+            <td :title="element.surname">{{element.surname}}</td>
+            <td :title="element.name">{{element.name}}</td>
+
+            <td>
+              <a :href="'mailto:' + element.email"
+                 :title="'Написать на почту: ' + element.email">
+                {{element.email}}
+              </a>
+            </td>
+
+            <td>
+              <a :href="'tel:' + element.number"
+                 title="Позвонить">
+                {{element.mobilePhone}}
+              </a>
+            </td>
+
+            <td :title="element.city">{{element.city}}</td>
+            <td :title="element.duty">{{element.duty}}</td>
+
+            <td class="row-action">
+              <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'employeeHistory', params: {id: element.id}})"/>
+              <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'employeeEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); employee = element"/>
+            </td>
+          </template>
+        </AppTableWrapperRow>
+      </template>
     </template>
-  </PopupDeleteWrapper>
-
-  <table>
-    <tr>
-      <th>Фамилия</th>
-      <th>Имя</th>
-      <th>Почта</th>
-      <th>Номер</th>
-      <th>Город</th>
-      <th>Должность</th>
-    </tr>
-    <tr v-for="employee in employees" :key="employee.value">
-      <td>
-        <div class="parent-clip-text">
-          <p class="clip-text" :title="employee.surname">{{employee.surname}}</p>
-        </div>
-      </td>
-      <td>
-        <div class="parent-clip-text">
-          <p class="clip-text" :title="employee.name">{{employee.name}}</p>
-        </div>
-      </td>
-      <td>
-        <div class="parent-clip-text">
-          <a class="clip-text" :href="'mailto:' + employee.email" :title="'Написать на почту: ' + employee.email">{{employee.email}}</a>
-        </div>
-      </td>
-      <td><a :href="'tel:' + employee.number" title="Позвонить">{{employee.mobilePhone}}</a></td>
-      <td>
-        <div class="parent-clip-text">
-          <p class="clip-text" :title="employee.city">{{employee.city}}</p>
-        </div>
-      </td>
-      <td>
-        <div class="parent-clip-text">
-          <p class="clip-text" :title="employee.duty">{{employee.duty}}</p>
-        </div>
-      </td>
-      <td>
-        <div class="flex-center btns-collection">
-          <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                       title="История редактирования"
-                       :to="{name : 'employeeHistory', params: {id: employee.id}}"
-          >
-            <i class="material-icons">description</i>
-          </router-link>
-
-          <router-link class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                       title="Редактировать"
-                       :to="{name : 'employeeEdit', params: {id: employee.id}}"
-          >
-            <i class="material-icons">create</i>
-          </router-link>
-
-          <button class="btn-transparent transparent waves-effect waves-light auth-submit blue-text text-darken-1"
-                  title="Удалить"
-                  @click="popupRemoveToggle(); setEmployee(employee)"
-          >
-            <i class="material-icons">delete</i>
-          </button>
-        </div>
-      </td>
-    </tr>
-  </table>
+  </AppTableWrapper>
 </div>
 </template>
 
 <script>
-import PopupDeleteWrapper from '@/components/popups/PopupDeleteWrapper'
+import PopupDeleteWrapper from '../../popups/PopupDeleteWrapper'
+import AppTableWrapper from '../../table/AppTableWrapper'
+import AppTableWrapperRow from '../../table/AppTableWrapperRow'
+import AppButtonIcon from '../../AppButtonIcon'
 
 export default {
   name: 'TableEmployees',
 
-  components: { PopupDeleteWrapper },
+  components: {
+    PopupDeleteWrapper,
+    AppButtonIcon,
+    AppTableWrapper,
+    AppTableWrapperRow
+  },
 
   props: { employees: Object },
 
@@ -96,10 +90,6 @@ export default {
   methods: {
     popupRemoveToggle () {
       this.popupRemoveHidden = !this.popupRemoveHidden
-    },
-
-    setEmployee (employee) {
-      this.employee = employee
     },
 
     removeEmployee (id) {

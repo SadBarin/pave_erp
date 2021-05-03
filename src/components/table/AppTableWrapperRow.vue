@@ -33,7 +33,7 @@ export default {
   }
 
   .app-table-row td {
-    padding: 0 0 1rem 0.1rem !important;
+    padding: 0 0 0.8rem 0.1rem !important;
   }
 
   .app-table-row th,
@@ -44,7 +44,7 @@ export default {
     font-size: 1rem;
     line-height: 1rem;
 
-    max-width: 14rem;
+    max-width: 16rem;
     width: fit-content;
     height: fit-content;
 
@@ -53,7 +53,7 @@ export default {
 
   .app-table-row th:not(:last-child),
   .app-table-row td:not(:last-child){
-    padding-right: 2.8rem !important;
+    padding-right: 2.2rem !important;
   }
 
   .app-table-row .row-action {

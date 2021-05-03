@@ -1,15 +1,10 @@
 <template>
   <div id="search">
-    <div class="page-title flex-between-center">
-      <h3>Поиск рабочих</h3>
-
-      <button
-        class="btn btn-hover blue darken-1"
-        @click="searchAll"
-      >
-        <i class="material-icons">search</i> Поиск
-      </button>
-    </div>
+    <AppTopPanel header="Поиск рабочих">
+      <template #nav-buttons>
+        <AppButtonIcon icon="search" size="1.8rem" @button-click="searchAll"/>
+      </template>
+    </AppTopPanel>
 
     <section>
       <div class="row">
@@ -141,15 +136,25 @@
 
 <script>
 import M from 'materialize-css'
-import WorkersTable from './WorkersTable'
 import popupMixin from '@/mixins/popupMixin'
 import { mapGetters, mapMutations } from 'vuex'
 import firebase from 'firebase/app'
 
+import WorkersTable from './WorkersTable'
+import AppTopPanel from '../../AppTopPanel'
+import AppButtonIcon from '../../AppButtonIcon'
+
 export default {
   name: 'SearchWorkers',
-  components: { WorkersTable },
+
+  components: {
+    WorkersTable,
+    AppTopPanel,
+    AppButtonIcon
+  },
+
   mixins: [popupMixin],
+
   data () {
     return {
       updateTimeout: 60000,
