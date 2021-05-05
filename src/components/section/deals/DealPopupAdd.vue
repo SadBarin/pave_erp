@@ -14,9 +14,15 @@
       />
 
       <AppLineDate
-        dateID="input-deal-date"
-        label="Дата: "
-        v-model="addedDeal.date"
+        dateID="input-deal-date-start"
+        label="Начало: "
+        v-model="addedDeal.dateStart"
+      />
+
+      <AppLineDate
+        dateID="input-deal-date-end"
+        label="Конец: "
+        v-model="addedDeal.dateEnd"
       />
 
       <AppSelect
@@ -24,13 +30,13 @@
         label="Заказчик: "
         v-model="addedDeal.customer"
       >
-        <option v-for="element in customers" :key="element.id" :value="element.name">{{element.name}}</option>
+        <option v-for="element in customers" :key="element.id" :value="element.id">{{element.name}}</option>
       </AppSelect>
 
       <AppSelect
         selectID="select"
         label="Рабочий: "
-        v-model="addedDeal.workerID"
+        v-model="addedDeal.worker"
       >
         <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
@@ -86,15 +92,20 @@ export default {
     renewAddedData () {
       this.addedDeal = {
         id: Date.now(),
-        name: '',
+        name: 'Новая сделка',
+
         customer: '',
-        date: '',
-        workerID: '',
-        notes: ['Сделка была создана'],
+        worker: '',
+
+        dateStart: '',
+        dateEnd: '',
+
+        notes: [`${new Date().toLocaleDateString()} Сделка была создана`],
         notesCount: '5',
+
         history: [{
           date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
-          info: 'Сделка создана ',
+          info: 'Сделка создана',
           employee: {
             name: '',
             id: ''

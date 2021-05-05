@@ -48,8 +48,7 @@ export default {
 
 <style scoped>
   #app .popup-overlay {
-    background: var(--hover-bg);
-    backdrop-filter: blur(3px);
+    background: hsl(204, 88%, 94%);
     width: 100vw;
     height: 100vh;
 

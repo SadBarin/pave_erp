@@ -15,10 +15,10 @@
       <AppTableWrapperRow>
         <template #row-content>
           <th>Название</th>
-          <th>Заказчик</th>
+          <th>Клиент</th>
           <th>Рабочий</th>
-          <th>Дата</th>
-          <th>Время</th>
+          <th>Начало</th>
+          <th>Конец</th>
           <th>Заметка</th>
           <th></th>
         </template>
@@ -30,10 +30,25 @@
                             @on-click="$emit('set-current-deal', element)">
           <template #row-content>
             <td :title="element.name">{{element.name}}</td>
-            <td :title="element.customer">{{element.customer}}</td>
-            <td :title="element.worker">{{element.worker}}</td>
-            <td :title="element.date">{{element.date}}</td>
-            <td :title="element.time">{{element.time}}</td>
+
+            <td>
+              <router-link title="Перейти к клиенту"
+                           :to="{name : 'customerAbout', params: {id: element.customer.id}}"
+              >
+                {{element.customer.name}}
+              </router-link>
+            </td>
+
+            <td>
+              <router-link title="Перейти в календарь рабочего"
+                           :to="{name : 'workerCalendar', params: {id: element.worker.id}}"
+              >
+                {{element.worker.surname}} {{element.worker.name}}
+              </router-link>
+            </td>
+
+            <td :title="element.dateStart">{{element.dateStart}}</td>
+            <td :title="element.dateEnd">{{element.dateEnd}}</td>
 
             <td v-if="element.notes"
                 :title="element.notes[element.notes.length - 1]"

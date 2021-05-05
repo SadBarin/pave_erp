@@ -55,7 +55,7 @@ export default {
         dateClick: this.handleDateClick,
         eventClick: this.addEventID,
         events: [
-          { id: 0, title: 'событие 1', date: '2021-02-01' }
+          { id: 0, title: 'событие 1', date: '2021-05-01' }
         ],
         customButtons: {
           addEventButton: {

@@ -47,19 +47,26 @@ export default {
   computed: {
     ...mapGetters([
       'deals',
-      'workers'
+      'workers',
+      'customers'
     ])
   },
 
   created () {
     this.SET_DEALS_FROM_LOCAL_STORAGE()
+
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
   },
 
   methods: {
     ...mapMutations([
       'SET_DEALS_FROM_LOCAL_STORAGE',
       'SET_DEALS_FROM_SERVER',
-      'SET_WORKERS_FROM_SERVER'
+
+      'SET_WORKERS_FROM_SERVER',
+      'SET_WORKERS_FROM_LOCAL_STORAGE',
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
     popupAddToggle () {
@@ -79,21 +86,27 @@ export default {
     },
 
     addDeal (deal) {
+      console.log(deal)
+
       this.popupAddToggle()
       deal.name = deal.name[0].toUpperCase() + deal.name.substring(1)
-      const worker = this.workers[deal.workerID]
-      deal.worker = worker.surname + ' ' + worker.name
+      const worker = deal.worker = this.workers[deal.worker]
+      deal.customer = this.customers[deal.customer]
 
-      const date = deal.date
-      deal.worker = worker.surname + ' ' + worker.name
-      deal.date = date.slice(0, 10)
-      deal.time = date.slice(11, 16)
+      // deal.worker = worker.surname + ' ' + worker.name
 
-      worker.events.push({ id: Date.now(), title: deal.name, date })
+      // const date = deal.date
+      // deal.worker = worker.surname + ' ' + worker.name
+
+      deal.dateStart = deal.dateStart.slice(0, 10) + ', ' + deal.dateStart.slice(11)
+      deal.dateEnd = deal.dateEnd.slice(0, 10) + ', ' + deal.dateEnd.slice(11)
+
+      worker.events.push({ id: Date.now(), title: deal.name, start: deal.dateStart, end: deal.dateEnd })
 
       firebase.database().ref('/workers/' + worker.id).set(worker)
         .then(() => {
           this.SET_WORKERS_FROM_SERVER()
+          console.log('DATE:', typeof deal.date)
         })
 
       firebase.database().ref('/deals/' + deal.id).set(deal)
