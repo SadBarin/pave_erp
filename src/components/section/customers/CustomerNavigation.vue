@@ -1,5 +1,17 @@
 <template>
   <div class="customer-navigation">
+    <AppButtonIcon icon="av_timer" size="1.8rem"
+                   title="Настроить период"
+                   v-show="$route.name === 'customerStatistics'"
+                   @button-click="$emit('show-period-popup')"/>
+
+    <AppButtonIcon icon="save" size="1.8rem"
+                   title="Сохранить и выйти"
+                   v-show="$route.name === 'customerEdit'"
+                   @button-click="$emit('save-customer')"/>
+
+    <AppButtonIcon size="0.5rem"/>
+
     <AppButtonIcon icon="domain" size="1.8rem"
                    title="Подразделения"
                    @button-click="$router.push({name : 'customerSubdivisions', params: {id: customer.id}})"/>
@@ -18,16 +30,6 @@
                    title="Редактировать"
                    v-show="$route.name !== 'customerEdit'"
                    @button-click="$router.push({name : 'customerEdit', params: {id: customer.id}})"/>
-
-    <AppButtonIcon icon="av_timer" size="1.8rem"
-                   title="Настроить период"
-                   v-show="$route.name === 'customerStatistics'"
-                   @button-click="$emit('show-period-popup')"/>
-
-    <AppButtonIcon icon="save" size="1.8rem"
-                   title="Сохранить и выйти"
-                   v-show="$route.name === 'customerEdit'"
-                   @button-click="$emit('save-customer')"/>
 
     <AppButtonIcon icon="business_center" size="1.8rem"
                    title="Вернуться к клиентам"

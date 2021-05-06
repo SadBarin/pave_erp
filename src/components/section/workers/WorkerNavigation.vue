@@ -1,5 +1,17 @@
 <template>
   <div class="worker-navigation">
+    <AppButtonIcon icon="av_timer" size="1.8rem"
+                   title="Настроить период"
+                   v-show="$route.name === 'workerStatistics'"
+                   @button-click="$emit('show-period-popup')"/>
+
+    <AppButtonIcon icon="save" size="1.8rem"
+                   title="Сохранить и выйти"
+                   v-show="$route.name === 'workerEdit'"
+                   @button-click="$emit('save-worker')"/>
+
+    <AppButtonIcon size="0.5rem"/>
+
     <AppButtonIcon icon="timeline" size="1.8rem"
                    title="Статистика"
                    v-show="$route.name !== 'workerStatistics'"
@@ -24,16 +36,6 @@
                    title="Редактировать"
                    v-show="$route.name !== 'workerEdit'"
                    @button-click="$router.push({name : 'workerEdit', params: {id: worker.id}})"/>
-
-    <AppButtonIcon icon="av_timer" size="1.8rem"
-                   title="Настроить период"
-                   v-show="$route.name === 'workerStatistics'"
-                   @button-click="$emit('show-period-popup')"/>
-
-    <AppButtonIcon icon="save" size="1.8rem"
-                   title="Сохранить и выйти"
-                   v-show="$route.name === 'workerEdit'"
-                   @button-click="$emit('save-worker')"/>
 
     <AppButtonIcon icon="transfer_within_a_station" size="1.8rem"
                    title="Вернуться к рабочим"
