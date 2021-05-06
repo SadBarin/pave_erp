@@ -13,6 +13,9 @@ export default {
 <style scoped>
   .app-table-row {
     border-radius: 0 !important;
+
+    transition: ease-in 1ms !important;
+    cursor: pointer;
   }
 
   .app-table-row a{
@@ -25,10 +28,11 @@ export default {
 
   .app-table-row:hover > td {
     background: transparent !important;
-    color: hsla(277, 88%, 36%, 0.6)
+    color: hsla(277, 88%, 36%, 0.6);
   }
 
   .app-table-row th {
+    transition: ease-in 1ms !important;
     padding-bottom: 1.4rem !important;
   }
 

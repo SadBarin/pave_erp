@@ -66,6 +66,8 @@ export default {
 
       'SET_WORKERS_FROM_SERVER',
       'SET_WORKERS_FROM_LOCAL_STORAGE',
+
+      'SET_CUSTOMERS_FROM_SERVER',
       'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
@@ -86,27 +88,64 @@ export default {
     },
 
     addDeal (deal) {
-      console.log(deal)
-
       this.popupAddToggle()
       deal.name = deal.name[0].toUpperCase() + deal.name.substring(1)
       const worker = deal.worker = this.workers[deal.worker]
-      deal.customer = this.customers[deal.customer]
+      const customer = deal.customer = this.customers[deal.customer]
 
       // deal.worker = worker.surname + ' ' + worker.name
 
       // const date = deal.date
       // deal.worker = worker.surname + ' ' + worker.name
 
+      try {
+        customer.dealStatistics.push({
+          name: deal.name,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd
+        })
+      } catch (e) {
+        customer.dealStatistics = [{
+          name: deal.name,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd
+        }]
+      }
+
+      worker.events.push({
+        id: Date.now(),
+        title: deal.name,
+        start: deal.dateStart,
+        end: deal.dateEnd
+      })
+
+      try {
+        worker.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd
+        })
+      } catch (e) {
+        worker.dealStatistics = [{
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd
+        }]
+      }
+
       deal.dateStart = deal.dateStart.slice(0, 10) + ', ' + deal.dateStart.slice(11)
       deal.dateEnd = deal.dateEnd.slice(0, 10) + ', ' + deal.dateEnd.slice(11)
-
-      worker.events.push({ id: Date.now(), title: deal.name, start: deal.dateStart, end: deal.dateEnd })
 
       firebase.database().ref('/workers/' + worker.id).set(worker)
         .then(() => {
           this.SET_WORKERS_FROM_SERVER()
-          console.log('DATE:', typeof deal.date)
+        })
+
+      firebase.database().ref('/customers/' + customer.id).set(customer)
+        .then(() => {
+          this.SET_CUSTOMERS_FROM_SERVER()
         })
 
       firebase.database().ref('/deals/' + deal.id).set(deal)

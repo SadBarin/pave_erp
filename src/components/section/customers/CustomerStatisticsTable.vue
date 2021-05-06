@@ -12,14 +12,17 @@
           <AppTableWrapperRow>
             <template #row-content>
               <th>Сделка</th>
-              <th>Дата</th>
-              <th>Время</th>
+              <th>Начало</th>
+              <th>Конец</th>
             </template>
           </AppTableWrapperRow>
 
-          <template v-for="(element) in customer">
-            <AppTableWrapperRow :key="element.id">
+          <template v-for="(element, i) in customer.dealStatistics">
+            <AppTableWrapperRow :key="i">
               <template #row-content>
+                <td>{{element.name}}</td>
+                <td>{{element.dateStart.slice(0, 10) + ', ' + element.dateStart.slice(11)}}</td>
+                <td>{{element.dateEnd.slice(0, 10) + ', ' + element.dateStart.slice(11)}}</td>
               </template>
             </AppTableWrapperRow>
           </template>

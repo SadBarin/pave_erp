@@ -86,6 +86,12 @@ export default {
         id: Date.now(),
         name,
         notes: [`${new Date().toLocaleDateString()}: Клиент создан`],
+        dealStatistics: [{
+          name: 'Сделка-заглушка',
+          dateStart: '2021-05-07, 18:11',
+          dateEnd: '2021-05-07, 18:11'
+        }],
+
         subdivisions: {
           0: {
             id: '0',

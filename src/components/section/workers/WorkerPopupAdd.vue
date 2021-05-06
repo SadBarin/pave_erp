@@ -95,6 +95,12 @@ export default {
         fired: 'Нет',
         edited: false,
         editedCount: 0,
+        dealStatistics: [{
+          name: 'Сделка-заглушка',
+          customer: { name: 'Клиентинк' },
+          dateStart: '2021-05-07, 18:11',
+          dateEnd: '2021-05-07, 18:11'
+        }],
         history: [{
           date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
           info: 'Работник создан сотрудником ',
