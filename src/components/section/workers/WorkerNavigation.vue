@@ -25,6 +25,11 @@
                    v-show="$route.name !== 'workerEdit'"
                    @button-click="$router.push({name : 'workerEdit', params: {id: worker.id}})"/>
 
+    <AppButtonIcon icon="av_timer" size="1.8rem"
+                   title="Настроить период"
+                   v-show="$route.name === 'workerStatistics'"
+                   @button-click="$emit('show-period-popup')"/>
+
     <AppButtonIcon icon="save" size="1.8rem"
                    title="Сохранить и выйти"
                    v-show="$route.name === 'workerEdit'"

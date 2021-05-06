@@ -93,11 +93,6 @@ export default {
       const worker = deal.worker = this.workers[deal.worker]
       const customer = deal.customer = this.customers[deal.customer]
 
-      // deal.worker = worker.surname + ' ' + worker.name
-
-      // const date = deal.date
-      // deal.worker = worker.surname + ' ' + worker.name
-
       try {
         customer.dealStatistics.push({
           name: deal.name,
