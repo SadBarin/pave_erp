@@ -1,8 +1,29 @@
 <template>
   <div>
+    <PopupAddWrapper
+      :hidden="popupHidden"
+      header="Фильтрация"
+      @popup-add="filterDate(start, end)"
+      @popup-close="popupToggle"
+    >
+      <template #popup-add-content>
+        <AppLineDate
+          dateID="input-deal-date-start"
+          label="Начало: "
+          v-model="start"
+        />
+
+        <AppLineDate
+          dateID="input-deal-date-end"
+          label="Конец: "
+          v-model="end"
+        />
+      </template>
+    </PopupAddWrapper>
+
     <AppTopPanel :header="`Статистика сделок рабочего ${worker.surname} ${worker.name}`">
       <template #nav-buttons>
-        <WorkerNavigation :worker="worker"/>
+        <WorkerNavigation :worker="worker" @show-period-popup="popupToggle"/>
       </template>
     </AppTopPanel>
 
@@ -46,6 +67,8 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 import AppTopPanel from '../../AppTopPanel'
+import PopupAddWrapper from '../../popups/PopupAddWrapper'
+import AppLineDate from '../../AppLineDate'
 import WorkerNavigation from './WorkerNavigation'
 import AppTableWrapper from '../../table/AppTableWrapper'
 import AppTableWrapperRow from '../../table/AppTableWrapperRow'
@@ -54,17 +77,21 @@ export default {
   name: 'WorkerStatisticsTable',
 
   components: {
+    PopupAddWrapper,
     AppTopPanel,
     WorkerNavigation,
     AppTableWrapper,
-    AppTableWrapperRow
+    AppTableWrapperRow,
+    AppLineDate
   },
 
   data () {
     return {
       worker: '',
+      start: '',
+      end: '',
 
-      popupRemoveHidden: true
+      popupHidden: true
     }
   },
 
@@ -84,8 +111,22 @@ export default {
       'SET_WORKERS_FROM_LOCAL_STORAGE'
     ]),
 
-    popupRemoveToggle () {
-      this.popupRemoveHidden = !this.popupRemoveHidden
+    popupToggle () {
+      this.popupHidden = !this.popupHidden
+    },
+
+    filterDate (start, end) {
+      this.popupToggle()
+
+      this.SET_WORKERS_FROM_LOCAL_STORAGE()
+      const dateCollection = this.workers[this.$route.params.id].dealStatistics
+      const buffer = []
+
+      for (const element of dateCollection) {
+        if (element.dateStart > start && element.dateStart < end) buffer.push(element)
+      }
+
+      this.worker.dealStatistics = buffer
     }
   }
 }
