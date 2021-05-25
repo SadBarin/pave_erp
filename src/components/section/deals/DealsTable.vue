@@ -16,7 +16,7 @@
         <template #row-content>
           <th>Название</th>
           <th>Клиент</th>
-          <th>Рабочий</th>
+<!--          <th>Рабочий</th>-->
           <th>Начало</th>
           <th>Конец</th>
           <th>Заметка</th>
@@ -39,13 +39,13 @@
               </router-link>
             </td>
 
-            <td>
-              <router-link title="Перейти в календарь рабочего"
-                           :to="{name : 'workerCalendar', params: {id: element.worker.id}}"
-              >
-                {{element.worker.surname}} {{element.worker.name}}
-              </router-link>
-            </td>
+<!--            <td>-->
+<!--              <router-link title="Перейти в календарь рабочего"-->
+<!--                           :to="{name : 'workerCalendar', params: {id: element.worker.id}}"-->
+<!--              >-->
+<!--                {{element.worker.surname}} {{element.worker.name}}-->
+<!--              </router-link>-->
+<!--            </td>-->
 
             <td :title="element.dateStart">{{element.dateStart}}</td>
             <td :title="element.dateEnd">{{element.dateEnd}}</td>

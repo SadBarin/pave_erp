@@ -90,65 +90,212 @@ export default {
     addDeal (deal) {
       this.popupAddToggle()
       deal.name = deal.name[0].toUpperCase() + deal.name.substring(1)
-      const worker = deal.worker = this.workers[deal.worker]
-      const customer = deal.customer = this.customers[deal.customer]
+      const worker = deal.worker = this.workers[deal.worker] ?? null
+      const worker2 = deal.worker2 = this.workers[deal.worker2] ?? null
+      const worker3 = deal.worker3 = this.workers[deal.worker3] ?? null
+      const worker4 = deal.worker4 = this.workers[deal.worker4] ?? null
+      const worker5 = deal.worker5 = this.workers[deal.worker5] ?? null
+      const customer = deal.customer = this.customers[deal.customer] ?? null
 
-      try {
-        customer.dealStatistics.push({
-          name: deal.name,
-          dateStart: deal.dateStart,
-          dateEnd: deal.dateEnd
-        })
-      } catch (e) {
-        customer.dealStatistics = [{
-          name: deal.name,
-          dateStart: deal.dateStart,
-          dateEnd: deal.dateEnd
-        }]
+      if (customer !== undefined && customer !== null) {
+        try {
+          customer.dealStatistics.push({
+            name: deal.name,
+            dateStart: deal.dateStart,
+            dateEnd: deal.dateEnd
+          })
+        } catch (e) {
+          customer.dealStatistics = [{
+            name: deal.name,
+            dateStart: deal.dateStart,
+            dateEnd: deal.dateEnd
+          }]
+        }
+
+        firebase.database().ref('/customers/' + customer.id).set(customer)
+          .then(() => {
+            this.SET_CUSTOMERS_FROM_SERVER()
+          })
+
+        if (worker !== undefined && worker !== null) {
+          worker.events.push({
+            id: Date.now(),
+            title: deal.name,
+            start: deal.dateStart,
+            end: deal.dateEnd
+          })
+
+          try {
+            worker.dealStatistics.push({
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            })
+          } catch (e) {
+            worker.dealStatistics = [{
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            }]
+          }
+
+          firebase.database().ref('/workers/' + worker.id).set(worker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        }
+
+        if (worker2 !== undefined && worker2 !== null) {
+          worker2.events.push({
+            id: Date.now(),
+            title: deal.name,
+            start: deal.dateStart,
+            end: deal.dateEnd
+          })
+
+          try {
+            worker2.dealStatistics.push({
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            })
+          } catch (e) {
+            worker2.dealStatistics = [{
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            }]
+          }
+
+          firebase.database().ref('/workers/' + worker2.id).set(worker2)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        }
+
+        if (worker3 !== undefined && worker3 !== null) {
+          worker3.events.push({
+            id: Date.now(),
+            title: deal.name,
+            start: deal.dateStart,
+            end: deal.dateEnd
+          })
+
+          try {
+            worker3.dealStatistics.push({
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            })
+          } catch (e) {
+            worker3.dealStatistics = [{
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            }]
+          }
+
+          firebase.database().ref('/workers/' + worker3.id).set(worker3)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        }
+
+        if (worker4 !== undefined && worker4 !== null) {
+          worker4.events.push({
+            id: Date.now(),
+            title: deal.name,
+            start: deal.dateStart,
+            end: deal.dateEnd
+          })
+
+          try {
+            worker4.dealStatistics.push({
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            })
+          } catch (e) {
+            worker4.dealStatistics = [{
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            }]
+          }
+
+          firebase.database().ref('/workers/' + worker4.id).set(worker4)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        }
+
+        if (worker5 !== undefined && worker5 !== null) {
+          worker5.events.push({
+            id: Date.now(),
+            title: deal.name,
+            start: deal.dateStart,
+            end: deal.dateEnd
+          })
+
+          try {
+            worker5.dealStatistics.push({
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            })
+          } catch (e) {
+            worker5.dealStatistics = [{
+              name: deal.name,
+              customer: deal.customer,
+              dateStart: deal.dateStart,
+              dateEnd: deal.dateEnd
+            }]
+          }
+
+          firebase.database().ref('/workers/' + worker5.id).set(worker5)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        }
+
+        if (deal.dateStart === '') {
+          // eslint-disable-next-line no-undef
+          M.toast({ html: 'Начало сделки не задано!' })
+
+          // eslint-disable-next-line no-throw-literal
+          throw 'Начало сделки не задано'
+        }
+
+        if (deal.dateEnd === '') {
+          // eslint-disable-next-line no-undef
+          M.toast({ html: 'Конец сделки не задан!' })
+
+          // eslint-disable-next-line no-throw-literal
+          throw 'Конец сделки не задан!'
+        }
+
+        deal.dateStart = deal.dateStart.slice(0, 10) + ', ' + deal.dateStart.slice(11)
+        deal.dateEnd = deal.dateEnd.slice(0, 10) + ', ' + deal.dateEnd.slice(11)
+
+        firebase.database().ref('/deals/' + deal.id).set(deal)
+          .then(() => {
+            console.log('Сделка добавлена ➕')
+            this.popupAddHidden = true
+            this.SET_DEALS_FROM_SERVER()
+          })
+      } else {
+        // eslint-disable-next-line no-undef
+        M.toast({ html: 'Клиент не задан!' })
       }
-
-      worker.events.push({
-        id: Date.now(),
-        title: deal.name,
-        start: deal.dateStart,
-        end: deal.dateEnd
-      })
-
-      try {
-        worker.dealStatistics.push({
-          name: deal.name,
-          customer: deal.customer,
-          dateStart: deal.dateStart,
-          dateEnd: deal.dateEnd
-        })
-      } catch (e) {
-        worker.dealStatistics = [{
-          name: deal.name,
-          customer: deal.customer,
-          dateStart: deal.dateStart,
-          dateEnd: deal.dateEnd
-        }]
-      }
-
-      deal.dateStart = deal.dateStart.slice(0, 10) + ', ' + deal.dateStart.slice(11)
-      deal.dateEnd = deal.dateEnd.slice(0, 10) + ', ' + deal.dateEnd.slice(11)
-
-      firebase.database().ref('/workers/' + worker.id).set(worker)
-        .then(() => {
-          this.SET_WORKERS_FROM_SERVER()
-        })
-
-      firebase.database().ref('/customers/' + customer.id).set(customer)
-        .then(() => {
-          this.SET_CUSTOMERS_FROM_SERVER()
-        })
-
-      firebase.database().ref('/deals/' + deal.id).set(deal)
-        .then(() => {
-          console.log('Сделка добавлена ➕')
-          this.popupAddHidden = true
-          this.SET_DEALS_FROM_SERVER()
-        })
     }
   }
 }

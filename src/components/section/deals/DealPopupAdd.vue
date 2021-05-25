@@ -35,8 +35,40 @@
 
       <AppSelect
         selectID="select"
-        label="Рабочий: "
+        label="Рабочий 1: "
         v-model="addedDeal.worker"
+      >
+        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+      </AppSelect>
+
+      <AppSelect
+        selectID="select"
+        label="Рабочий 2: "
+        v-model="addedDeal.worker2"
+      >
+        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+      </AppSelect>
+
+      <AppSelect
+        selectID="select"
+        label="Рабочий 3: "
+        v-model="addedDeal.worker3"
+      >
+        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+      </AppSelect>
+
+      <AppSelect
+        selectID="select"
+        label="Рабочий 4: "
+        v-model="addedDeal.worker4"
+      >
+        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+      </AppSelect>
+
+      <AppSelect
+        selectID="select"
+        label="Рабочий 5: "
+        v-model="addedDeal.worker5"
       >
         <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
