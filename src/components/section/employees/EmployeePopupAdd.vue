@@ -70,7 +70,7 @@ export default {
         sex: 'Мужской',
         homePhone: '',
         mobilePhone: '',
-        city: this.authEmployee.city,
+        city: '',
         duty: 'Сотрудник',
         access: 'employee',
         settings: {
@@ -78,11 +78,7 @@ export default {
         },
         history: [{
           date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
-          info: 'Сотрудник создан сотрудником ',
-          employee: {
-            name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
-            id: this.authEmployee.id
-          }
+          info: 'Сотрудник создан '
         }]
       }
 
