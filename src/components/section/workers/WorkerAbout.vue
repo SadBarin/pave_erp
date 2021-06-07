@@ -47,9 +47,9 @@
 
       <div class="margin-fix w20rem">
         <h5 class="flex-start-center"><i class="material-icons">book</i> Паспортные данные</h5>
-        <h6 v-show="worker.UploadPassport !== undefined || ''">Скан:
+        <h6 v-show="worker.passportImage != null || ''">Скан:
           <wbr>
-          <span><a v-bind:href="worker.UploadPassport" target="_blank">Открыть паспорт</a></span></h6>
+          <span><a v-bind:href="worker.passportImage" target="_blank">Открыть паспорт</a></span></h6>
         <h6 v-if="worker.passportID !== '' || null ">Номер паспорта:
           <wbr>
           <span>{{ worker.passportID }}</span></h6>
@@ -172,8 +172,12 @@
 
       <div class="margin-fix w20rem">
         <h5 class="flex-start-center big-margin-bottom"><i class="material-icons">photo</i> Фото рабочего</h5>
-        <p v-show="worker.UploadImage === undefined">Загрузите фото рабочего в редакторе</p>
-        <img v-bind:src="worker.UploadImage" width="200rem">
+        <h6 v-show="worker.profileImage != null || ''">
+          <img v-bind:src="worker.profileImage" width="200rem">
+          <h6><span><a v-bind:href="worker.profileImage" target="_blank">Открыть в отдельной вкладке</a></span></h6>
+        </h6>
+
+        <p v-show="worker.profileImage === undefined || null || ''">Загрузите фото рабочего в редакторе</p>
       </div>
 
       <div class="margin-fix w20rem">
@@ -183,10 +187,6 @@
             {{ note }}
           </p>
         </h6>
-
-        <h6 v-show="worker.uploadImageNote !== undefined || ''">Изображение:
-          <wbr>
-          <span><a v-bind:href="worker.uploadImageNote" target="_blank">Открыть</a></span></h6>
       </div>
     </section>
   </div>

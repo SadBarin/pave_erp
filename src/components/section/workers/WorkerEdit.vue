@@ -10,6 +10,22 @@
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="account_box" header-text="ФИО"/>
 
           <div class="edit-block-content">
+            <div>
+              <div >
+                <p>Фото профиля:</p>
+                <input class="profile-load" type="file" @change="previewImage" accept="image/*">
+              </div>
+              <div>
+                <p>Прогресс: {{uploadValue.toFixed()+"%"}}
+                  <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
+              </div>
+              <div>
+                <img class="preview-profile" :src="editedWorker.profileImage" width="200" v-show="editedWorker.profileImage != null || '' || undefined">
+                <h6><span><a v-bind:href="editedWorker.profileImage" target="_blank" v-show="editedWorker.profileImage != null || '' || undefined">Открыть в отдельной вкладке</a></span></h6>
+                <button @click="onUpload">Загрузить</button>
+              </div>
+            </div>
+
             <AppLineText
               inputID="input-surname"
               label="Фамилия: "
@@ -37,6 +53,22 @@
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="book" header-text="Паспортные данные"/>
 
           <div class="edit-block-content">
+            <div>
+              <div >
+                <p>Фото паспорта:</p>
+                <input class="profile-load" type="file" @change="previewImage" accept="image/*">
+              </div>
+              <div>
+                <p>Прогресс: {{uploadPassportValue.toFixed()+"%"}}
+                  <progress id="progress-passport" :value="uploadPassportValue" max="100" ></progress>  </p>
+              </div>
+              <div>
+                <img class="preview-profile" :src="editedWorker.passportImage" width="200" v-show="editedWorker.passportImage != null || '' || undefined">
+                <h6><span><a v-bind:href="editedWorker.passportImage" target="_blank" v-show="editedWorker.passportImage != null || '' || undefined">Открыть в отдельной вкладке</a></span></h6>
+                <button @click="onPassportUpload">Загрузить</button>
+              </div>
+            </div>
+
             <AppLineText
               inputID="input-passport-id"
               label="Номер паспорта: "
@@ -338,7 +370,7 @@
 <script>
 import M from 'materialize-css'
 import { mapGetters, mapMutations } from 'vuex'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 
 import AppEditWrapper from '@/components/edit/AppEditWrapper'
 import WorkerNavigation from './WorkerNavigation'
@@ -365,7 +397,13 @@ export default {
     return {
       editedWorker: '',
       history: [],
-      note: ''
+      note: '',
+
+      imageData: null,
+      uploadValue: 0,
+
+      imagePassportData: null,
+      uploadPassportValue: 0
     }
   },
 
@@ -449,51 +487,59 @@ export default {
       this.editedWorker.medicalBookStatus = (year > 0) ? year + ' лет' : 'Просрочена'
     },
 
-    upload () {
-      // eslint-disable-next-line no-undef
-      const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'db6qzfvbw',
-        uploadPreset: 'ml_default',
-        language: 'ru'
-      }, (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.editedWorker.UploadImage = result.info.secure_url
-        }
-      })
+    addNewImageProfile (event) {
+      const file = event.target.files[0]
+      const reader = new FileReader(file)
 
-      myWidget.open()
+      reader.onload = () => {
+        const saveData = JSON.parse(reader.result)
+        console.log(saveData)
+      }
     },
 
-    uploadPassport () {
-      // eslint-disable-next-line no-undef
-      const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'db6qzfvbw',
-        uploadPreset: 'ml_default',
-        language: 'ru'
-      }, (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.editedWorker.UploadPassport = result.info.secure_url
-        }
+    previewImage (event) {
+      this.uploadValue = 0
+      this.imageData = event.target.files[0]
+
+      this.uploadPassportValue = 0
+      this.imagePassportData = event.target.files[0]
+    },
+
+    // Fixs it!!!
+
+    onUpload () {
+      const storageRef = firebase.storage().ref(`${this.imageData.name}`).put(this.imageData)
+      storageRef.on('state_changed', snapshot => {
+        this.uploadValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      }, error => { console.log(error.message) },
+      () => {
+        this.uploadValue = 100
+        storageRef.snapshot.ref.getDownloadURL().then((url) => {
+          this.editedWorker.profileImage = url
+        })
       }
       )
-
-      myWidget.open()
     },
 
-    uploadNote () {
-      // eslint-disable-next-line no-undef
-      const myWidget = cloudinary.createUploadWidget({
-        cloudName: 'db6qzfvbw',
-        uploadPreset: 'ml_default',
-        language: 'ru'
-      }, (error, result) => {
-        if (!error && result && result.event === 'success') {
-          this.editedWorker.uploadImageNote = result.info.secure_url
-        }
-      })
-
-      myWidget.open()
+    onPassportUpload () {
+      const storageRef = firebase.storage().ref(`${this.imagePassportData.name}`).put(this.imagePassportData)
+      storageRef.on('state_changed', snapshot => {
+        this.uploadPassportValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      }, error => { console.log(error.message) },
+      () => {
+        this.uploadPassportValue = 100
+        storageRef.snapshot.ref.getDownloadURL().then((url) => {
+          this.editedWorker.passportImage = url
+        })
+      }
+      )
     }
   }
 }
 </script>
+
+<style scoped>
+  .profile-load {
+    padding: 0 !important;
+  }
+</style>
