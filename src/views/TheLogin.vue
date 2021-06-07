@@ -74,8 +74,8 @@ export default {
 
   data () {
     return {
-      email: 'root@root.com',
-      password: 'bb%LWz%*W3',
+      email: 'admin@test.com',
+      password: 'simpleTest',
       loading: false,
 
       version: packageApp.version

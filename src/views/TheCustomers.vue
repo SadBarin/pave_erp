@@ -103,8 +103,8 @@ export default {
             site: '',
             email: '',
             note: 'Главное подразделение клиента',
-            address: this.authEmployee.city,
-            manager: this.authEmployee.surname + ' ' + this.authEmployee.name,
+            address: 'Неизвестно',
+            manager: '',
             status: 'Действующий',
             notes: [`${new Date().toLocaleDateString()}: Главное подразделение`]
           }
