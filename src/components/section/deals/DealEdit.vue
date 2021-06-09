@@ -30,6 +30,79 @@
               maxLength="20"
               v-model="editedDeal.name"
             />
+
+            <AppSelect
+              selectID="select"
+              label="Заказчик: "
+              v-model="editedDeal.customer"
+            >
+              <option v-for="element in customers" :key="element.id" :value="element.id">{{element.name}}</option>
+            </AppSelect>
+          </div>
+        </div>
+
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="date_range" header-text="Даты сделки"/>
+
+          <div class="edit-block-content">
+            <AppLineDate
+              dateID="input-deal-date-start"
+              label="Начало: "
+              v-model="editedDeal.dateStart"
+            />
+
+            <AppLineDate
+              dateID="input-deal-date-end"
+              label="Конец: "
+              v-model="editedDeal.dateEnd"
+            />
+          </div>
+        </div>
+
+        <div class="edit-block">
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="transfer_within_a_station" header-text="Рабочие"/>
+
+          <div class="edit-block-content">
+
+            <AppSelect
+              selectID="select"
+              label="Рабочий 1: "
+              v-model="editedDeal.worker"
+            >
+              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+            </AppSelect>
+
+            <AppSelect
+              selectID="select"
+              label="Рабочий 2: "
+              v-model="editedDeal.worker2"
+            >
+              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+            </AppSelect>
+
+            <AppSelect
+              selectID="select"
+              label="Рабочий 3: "
+              v-model="editedDeal.worker3"
+            >
+              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+            </AppSelect>
+
+            <AppSelect
+              selectID="select"
+              label="Рабочий 4: "
+              v-model="editedDeal.worker4"
+            >
+              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+            </AppSelect>
+
+            <AppSelect
+              selectID="select"
+              label="Рабочий 5: "
+              v-model="editedDeal.worker5"
+            >
+              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+            </AppSelect>
           </div>
         </div>
 
@@ -73,6 +146,8 @@ import AppLineText from '@/components/AppLineText'
 import AppNumbers from '@/components/AppNumbers'
 import AppButtonIcon from '@/components/AppButtonIcon'
 import PopupDeleteWrapper from '@/components/popups/PopupDeleteWrapper'
+import AppSelect from '../../AppSelect'
+import AppLineDate from '../../AppLineDate'
 
 export default {
   name: 'DealEdit',
@@ -83,6 +158,8 @@ export default {
     AppButtonIcon,
     AppLineText,
     AppNumbers,
+    AppSelect,
+    AppLineDate,
     AppNotesList,
     PopupDeleteWrapper
   },
@@ -108,7 +185,9 @@ export default {
     ...mapGetters([
       'deals',
       'employees',
-      'authEmployee'
+      'authEmployee',
+      'workers',
+      'customers'
     ])
   },
 
@@ -117,6 +196,7 @@ export default {
     this.SET_DEALS_FROM_LOCAL_STORAGE()
 
     this.editedDeal = this.deals[this.$route.params.id]
+
     this.historyElement.employee = {
       name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
       id: this.authEmployee.id

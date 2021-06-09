@@ -95,7 +95,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'workers', 'customers'
+      'workers',
+      'customers'
     ])
   },
 
