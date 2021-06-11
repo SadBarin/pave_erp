@@ -20,7 +20,8 @@ export default {
   props: {
     selectID: String,
     label: String,
-    value: String
+    // eslint-disable-next-line vue/require-prop-type-constructor
+    value: String | Number
   }
 }
 </script>

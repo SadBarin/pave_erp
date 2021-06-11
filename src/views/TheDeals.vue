@@ -102,13 +102,15 @@ export default {
           customer.dealStatistics.push({
             name: deal.name,
             dateStart: deal.dateStart,
-            dateEnd: deal.dateEnd
+            dateEnd: deal.dateEnd,
+            dealID: deal.id
           })
         } catch (e) {
           customer.dealStatistics = [{
             name: deal.name,
             dateStart: deal.dateStart,
-            dateEnd: deal.dateEnd
+            dateEnd: deal.dateEnd,
+            dealID: deal.id
           }]
         }
 
@@ -122,7 +124,8 @@ export default {
             id: Date.now(),
             title: deal.name,
             start: deal.dateStart,
-            end: deal.dateEnd
+            end: deal.dateEnd,
+            dealID: deal.id
           })
 
           try {
@@ -130,14 +133,16 @@ export default {
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             })
           } catch (e) {
             worker.dealStatistics = [{
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             }]
           }
 
@@ -152,7 +157,8 @@ export default {
             id: Date.now(),
             title: deal.name,
             start: deal.dateStart,
-            end: deal.dateEnd
+            end: deal.dateEnd,
+            dealID: deal.id
           })
 
           try {
@@ -160,14 +166,16 @@ export default {
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             })
           } catch (e) {
             worker2.dealStatistics = [{
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             }]
           }
 
@@ -182,7 +190,8 @@ export default {
             id: Date.now(),
             title: deal.name,
             start: deal.dateStart,
-            end: deal.dateEnd
+            end: deal.dateEnd,
+            dealID: deal.id
           })
 
           try {
@@ -190,14 +199,16 @@ export default {
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             })
           } catch (e) {
             worker3.dealStatistics = [{
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             }]
           }
 
@@ -212,7 +223,8 @@ export default {
             id: Date.now(),
             title: deal.name,
             start: deal.dateStart,
-            end: deal.dateEnd
+            end: deal.dateEnd,
+            dealID: deal.id
           })
 
           try {
@@ -220,14 +232,16 @@ export default {
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             })
           } catch (e) {
             worker4.dealStatistics = [{
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             }]
           }
 
@@ -242,7 +256,8 @@ export default {
             id: Date.now(),
             title: deal.name,
             start: deal.dateStart,
-            end: deal.dateEnd
+            end: deal.dateEnd,
+            dealID: deal.id
           })
 
           try {
@@ -250,14 +265,16 @@ export default {
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             })
           } catch (e) {
             worker5.dealStatistics = [{
               name: deal.name,
               customer: deal.customer,
               dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd
+              dateEnd: deal.dateEnd,
+              dealID: deal.id
             }]
           }
 
@@ -282,9 +299,6 @@ export default {
           // eslint-disable-next-line no-throw-literal
           throw 'Конец сделки не задан!'
         }
-
-        deal.dateStart = deal.dateStart.slice(0, 10) + ', ' + deal.dateStart.slice(11)
-        deal.dateEnd = deal.dateEnd.slice(0, 10) + ', ' + deal.dateEnd.slice(11)
 
         firebase.database().ref('/deals/' + deal.id).set(deal)
           .then(() => {

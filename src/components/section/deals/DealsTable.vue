@@ -47,8 +47,8 @@
 <!--              </router-link>-->
 <!--            </td>-->
 
-            <td :title="element.dateStart">{{element.dateStart}}</td>
-            <td :title="element.dateEnd">{{element.dateEnd}}</td>
+            <td :title="element.dateStart">{{element.dateStart.slice(0, 10) + ', ' + element.dateStart.slice(11)}}</td>
+            <td :title="element.dateEnd">{{element.dateEnd.slice(0, 10) + ', ' + element.dateEnd.slice(11)}}</td>
 
             <td v-if="element.notes"
                 :title="element.notes[element.notes.length - 1]"

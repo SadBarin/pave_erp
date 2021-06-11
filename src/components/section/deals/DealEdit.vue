@@ -13,8 +13,9 @@
 
     <AppEditWrapper :header="'Редактор сделок: ' + editedDeal.name">
       <template #nav-buttons>
-        <AppButtonIcon icon="delete" size="1.8rem" title="Удалить" @button-click="popupRemoveToggle"/>
         <AppButtonIcon icon="save" size="1.8rem" title="Сохранить и выйти" @button-click="saveEditedDeal(editedDeal)"/>
+        <AppButtonIcon icon="" size="1.8rem"/>
+        <AppButtonIcon icon="delete" size="1.8rem" title="Удалить" @button-click="popupRemoveToggle"/>
         <AppButtonIcon icon="description" title="История" size="1.8rem" @button-click="$router.push({name : 'dealHistory', params: {id: editedDeal.id}})"/>
         <AppButtonIcon icon="attach_money" size="1.8rem" title="Вернуться" @button-click="editorExit"/>
       </template>
@@ -34,7 +35,7 @@
             <AppSelect
               selectID="select"
               label="Заказчик: "
-              v-model="editedDeal.customer"
+              v-model="customerID"
             >
               <option v-for="element in customers" :key="element.id" :value="element.id">{{element.name}}</option>
             </AppSelect>
@@ -67,7 +68,7 @@
             <AppSelect
               selectID="select"
               label="Рабочий 1: "
-              v-model="editedDeal.worker"
+              v-model="worker1ID"
             >
               <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
@@ -75,7 +76,7 @@
             <AppSelect
               selectID="select"
               label="Рабочий 2: "
-              v-model="editedDeal.worker2"
+              v-model="worker2ID"
             >
               <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
@@ -83,7 +84,7 @@
             <AppSelect
               selectID="select"
               label="Рабочий 3: "
-              v-model="editedDeal.worker3"
+              v-model="worker3ID"
             >
               <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
@@ -91,7 +92,7 @@
             <AppSelect
               selectID="select"
               label="Рабочий 4: "
-              v-model="editedDeal.worker4"
+              v-model="worker4ID"
             >
               <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
@@ -99,7 +100,7 @@
             <AppSelect
               selectID="select"
               label="Рабочий 5: "
-              v-model="editedDeal.worker5"
+              v-model=worker5ID
             >
               <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
@@ -170,6 +171,14 @@ export default {
       editedDeal: '',
       note: '',
 
+      customerID: '',
+
+      worker1ID: '',
+      worker2ID: '',
+      worker3ID: '',
+      worker4ID: '',
+      worker5ID: '',
+
       historyElement: {
         date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
         info: 'Сделка просматривалась ',
@@ -194,20 +203,46 @@ export default {
   created () {
     this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
     this.SET_DEALS_FROM_LOCAL_STORAGE()
+    this.SET_WORKERS_FROM_LOCAL_STORAGE()
+    this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
 
     this.editedDeal = this.deals[this.$route.params.id]
+    this.customerID = this.editedDeal.customer.id
 
-    this.historyElement.employee = {
-      name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
-      id: this.authEmployee.id
-    }
+    try {
+      this.worker1ID = this.editedDeal.worker.id
+    } catch (e) {}
+
+    try {
+      this.worker2ID = this.editedDeal.worker2.id
+    } catch (e) {}
+
+    try {
+      this.worker3ID = this.editedDeal.worker3.id
+    } catch (e) {}
+    try {
+      this.worker4ID = this.editedDeal.worker4.id
+    } catch (e) {}
+
+    try {
+      this.worker5ID = this.editedDeal.worker5.id
+    } catch (e) {}
+
+    // this.historyElement.employee = {
+    //   name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
+    //   id: this.authEmployee.id
+    // }
   },
 
   methods: {
     ...mapMutations([
       'SET_DEALS_FROM_SERVER',
       'SET_DEALS_FROM_LOCAL_STORAGE',
-      'SET_EMPLOYEES_FROM_LOCAL_STORAGE'
+      'SET_EMPLOYEES_FROM_LOCAL_STORAGE',
+      'SET_WORKERS_FROM_LOCAL_STORAGE',
+      'SET_CUSTOMERS_FROM_LOCAL_STORAGE',
+      'SET_CUSTOMERS_FROM_SERVER',
+      'SET_WORKERS_FROM_SERVER'
     ]),
 
     popupRemoveToggle () {
@@ -249,6 +284,210 @@ export default {
 
     saveEditedDeal (deal) {
       this.saveNewNote()
+
+      if (this.customerID !== '') {
+        const localCustomers = this.customers
+        localCustomers[this.editedDeal.customer.id].dealStatistics =
+          localCustomers[this.editedDeal.customer.id]
+            .dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+
+        localCustomers[this.customerID].dealStatistics.push({
+          name: this.editedDeal.name,
+          dateStart: this.editedDeal.dateStart,
+          dateEnd: this.editedDeal.dateEnd,
+          dealID: this.editedDeal.id
+        })
+
+        firebase.database().ref('/customers/').set(localCustomers)
+          .then(() => {
+            this.SET_CUSTOMERS_FROM_SERVER()
+          })
+
+        this.editedDeal.customer = this.customers[this.customerID]
+      }
+
+      if (this.worker1ID !== '') {
+        try {
+          const localWorkerID = this.deals[[this.editedDeal.id]].worker.id
+          const localWorker = this.workers[localWorkerID]
+          localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+          localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
+
+          console.log(localWorker)
+
+          firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        } catch (e) {}
+
+        const localWorker2 = this.workers[this.worker1ID]
+        localWorker2.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd,
+          dealID: deal.id
+        })
+        localWorker2.events.push({
+          id: Date.now(),
+          title: deal.name,
+          start: deal.dateStart,
+          end: deal.dateEnd,
+          dealID: deal.id
+        })
+
+        firebase.database().ref('/workers/' + localWorker2.id).set(localWorker2)
+          .then(() => {
+            this.SET_WORKERS_FROM_SERVER()
+          })
+
+        this.editedDeal.worker = this.workers[this.worker1ID]
+      }
+      if (this.worker2ID !== '') {
+        try {
+          const localWorkerID = this.deals[[this.editedDeal.id]].worker2.id
+          const localWorker = this.workers[localWorkerID]
+          localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+          localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
+
+          firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        } catch (e) {}
+
+        const localWorker2 = this.workers[this.worker2ID]
+        localWorker2.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd,
+          dealID: deal.id
+        })
+        localWorker2.events.push({
+          id: Date.now(),
+          title: deal.name,
+          start: deal.dateStart,
+          end: deal.dateEnd,
+          dealID: deal.id
+        })
+
+        firebase.database().ref('/workers/' + localWorker2.id).set(localWorker2)
+          .then(() => {
+            this.SET_WORKERS_FROM_SERVER()
+          })
+
+        this.editedDeal.worker2 = this.workers[this.worker2ID]
+      }
+      if (this.worker3ID !== '') {
+        try {
+          const localWorkerID = this.deals[[this.editedDeal.id]].worker3.id
+          const localWorker = this.workers[localWorkerID]
+          localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+          localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
+
+          firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        } catch (e) {}
+
+        const localWorker2 = this.workers[this.worker3ID]
+        localWorker2.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd,
+          dealID: deal.id
+        })
+        localWorker2.events.push({
+          id: Date.now(),
+          title: deal.name,
+          start: deal.dateStart,
+          end: deal.dateEnd,
+          dealID: deal.id
+        })
+
+        firebase.database().ref('/workers/' + localWorker2.id).set(localWorker2)
+          .then(() => {
+            this.SET_WORKERS_FROM_SERVER()
+          })
+
+        this.editedDeal.worker3 = this.workers[this.worker3ID]
+      }
+      if (this.worker4ID !== '') {
+        try {
+          const localWorkerID = this.deals[[this.editedDeal.id]].worker4.id
+          const localWorker = this.workers[localWorkerID]
+          localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+          localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
+
+          firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        } catch (e) {}
+
+        const localWorker2 = this.workers[this.worker4ID]
+        localWorker2.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd,
+          dealID: deal.id
+        })
+        localWorker2.events.push({
+          id: Date.now(),
+          title: deal.name,
+          start: deal.dateStart,
+          end: deal.dateEnd,
+          dealID: deal.id
+        })
+
+        firebase.database().ref('/workers/' + localWorker2.id).set(localWorker2)
+          .then(() => {
+            this.SET_WORKERS_FROM_SERVER()
+          })
+
+        this.editedDeal.worker4 = this.workers[this.worker4ID]
+      }
+      if (this.worker5ID !== '') {
+        try {
+          const localWorkerID = this.deals[[this.editedDeal.id]].worker5.id
+          const localWorker = this.workers[localWorkerID]
+          localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
+          localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
+
+          firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
+            .then(() => {
+              this.SET_WORKERS_FROM_SERVER()
+            })
+        } catch (e) {}
+
+        const localWorker2 = this.workers[this.worker5ID]
+        localWorker2.dealStatistics.push({
+          name: deal.name,
+          customer: deal.customer,
+          dateStart: deal.dateStart,
+          dateEnd: deal.dateEnd,
+          dealID: deal.id
+        })
+        localWorker2.events.push({
+          id: Date.now(),
+          title: deal.name,
+          start: deal.dateStart,
+          end: deal.dateEnd,
+          dealID: deal.id
+        })
+
+        firebase.database().ref('/workers/' + localWorker2.id).set(localWorker2)
+          .then(() => {
+            this.SET_WORKERS_FROM_SERVER()
+          })
+
+        this.editedDeal.worker5 = this.workers[this.worker5ID]
+      }
 
       deal.history.push(this.getNewHistoryElement('Сделка была изменена'))
 
