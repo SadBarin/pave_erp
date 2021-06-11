@@ -16,13 +16,13 @@
       <AppLineDate
         dateID="input-deal-date-start"
         label="Начало: "
-        v-model="addedDeal.dateStart"
+        v-model="dateStart"
       />
 
       <AppLineDate
         dateID="input-deal-date-end"
         label="Конец: "
-        v-model="addedDeal.dateEnd"
+        v-model="dateEnd"
       />
 
       <AppSelect
@@ -38,7 +38,8 @@
         label="Рабочий 1: "
         v-model="addedDeal.worker"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        <option value="">Никого</option>
+        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
 
       <AppSelect
@@ -46,7 +47,8 @@
         label="Рабочий 2: "
         v-model="addedDeal.worker2"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        <option value="">Никого</option>
+        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
 
       <AppSelect
@@ -54,7 +56,8 @@
         label="Рабочий 3: "
         v-model="addedDeal.worker3"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        <option value="">Никого</option>
+        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
 
       <AppSelect
@@ -62,7 +65,8 @@
         label="Рабочий 4: "
         v-model="addedDeal.worker4"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        <option value="">Никого</option>
+        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
 
       <AppSelect
@@ -70,7 +74,8 @@
         label="Рабочий 5: "
         v-model="addedDeal.worker5"
       >
-        <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        <option value="">Никого</option>
+        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
       </AppSelect>
     </template>
   </PopupAddWrapper>
@@ -89,7 +94,10 @@ export default {
 
   data () {
     return {
-      addedDeal: {}
+      addedDeal: {},
+      localWorkers: '',
+      dateStart: '',
+      dateEnd: ''
     }
   },
 
@@ -109,11 +117,25 @@ export default {
 
   props: { popupHidden: Boolean },
 
+  watch: {
+    dateStart: function () {
+      this.addedDeal.dateStart = this.dateStart
+      this.checkWorkers()
+    },
+
+    dateEnd: function () {
+      this.addedDeal.dateEnd = this.dateEnd
+      this.checkWorkers()
+    }
+  },
+
   created () {
     this.renewAddedData()
 
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
+
+    this.checkWorkers()
   },
 
   methods: {
@@ -121,6 +143,42 @@ export default {
       'SET_WORKERS_FROM_LOCAL_STORAGE',
       'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
+
+    checkWorkers () {
+      this.localWorkers = { ...this.workers }
+      console.log('local', this.localWorkers)
+      console.log('worker', this.workers)
+
+      for (const element in this.localWorkers) {
+        if (this.localWorkers[element].fired === 'Да') {
+          delete this.localWorkers[element]
+        }
+      }
+
+      if (this.dateStart !== '') {
+        try {
+          for (const element in this.localWorkers) {
+            for (const event of this.localWorkers[element].events) {
+              if (this.localWorkers[element] !== undefined && event.start < this.dateStart) {
+                delete this.localWorkers[element]
+              }
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (this.dateEnd !== '') {
+        try {
+          for (const element in this.localWorkers) {
+            for (const event of this.localWorkers[element].events) {
+              if (this.localWorkers[element] !== undefined && event.end < this.dateEnd) {
+                delete this.localWorkers[element]
+              }
+            }
+          }
+        } catch (e) {}
+      }
+    },
 
     renewAddedData () {
       this.addedDeal = {

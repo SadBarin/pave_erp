@@ -354,12 +354,14 @@
               v-model="editedWorker.uniform"
             />
 
-            <AppLineText
+            <AppSelect
               inputID="input-fired"
               label="Уволен ли: "
-              maxLength="20"
               v-model="editedWorker.fired"
-            />
+            >
+              <option class="editor-option" value="Да">Да</option>
+              <option class="editor-option" value="Нет">Нет</option>
+            </AppSelect>
           </div>
         </div>
       </template>

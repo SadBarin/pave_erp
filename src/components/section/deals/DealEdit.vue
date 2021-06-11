@@ -49,13 +49,13 @@
             <AppLineDate
               dateID="input-deal-date-start"
               label="Начало: "
-              v-model="editedDeal.dateStart"
+              v-model="dateStart"
             />
 
             <AppLineDate
               dateID="input-deal-date-end"
               label="Конец: "
-              v-model="editedDeal.dateEnd"
+              v-model="dateEnd"
             />
           </div>
         </div>
@@ -70,7 +70,8 @@
               label="Рабочий 1: "
               v-model="worker1ID"
             >
-              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              <option value="">Никого</option>
+              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
 
             <AppSelect
@@ -78,7 +79,8 @@
               label="Рабочий 2: "
               v-model="worker2ID"
             >
-              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              <option value="">Никого</option>
+              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
 
             <AppSelect
@@ -86,7 +88,8 @@
               label="Рабочий 3: "
               v-model="worker3ID"
             >
-              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              <option value="">Никого</option>
+              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
 
             <AppSelect
@@ -94,7 +97,8 @@
               label="Рабочий 4: "
               v-model="worker4ID"
             >
-              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              <option value="">Никого</option>
+              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
 
             <AppSelect
@@ -102,7 +106,8 @@
               label="Рабочий 5: "
               v-model=worker5ID
             >
-              <option v-for="element in workers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              <option value="">Никого</option>
+              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
             </AppSelect>
           </div>
         </div>
@@ -179,6 +184,10 @@ export default {
       worker4ID: '',
       worker5ID: '',
 
+      dateStart: '',
+      dateEnd: '',
+      localWorkers: '',
+
       historyElement: {
         date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
         info: 'Сделка просматривалась ',
@@ -200,6 +209,18 @@ export default {
     ])
   },
 
+  watch: {
+    dateStart: function () {
+      this.editedDeal.dateStart = this.dateStart
+      this.checkWorkers()
+    },
+
+    dateEnd: function () {
+      this.editedDeal.dateEnd = this.dateEnd
+      this.checkWorkers()
+    }
+  },
+
   created () {
     this.SET_EMPLOYEES_FROM_LOCAL_STORAGE()
     this.SET_DEALS_FROM_LOCAL_STORAGE()
@@ -208,6 +229,8 @@ export default {
 
     this.editedDeal = this.deals[this.$route.params.id]
     this.customerID = this.editedDeal.customer.id
+    this.dateStart = this.editedDeal.dateStart
+    this.dateEnd = this.editedDeal.dateEnd
 
     try {
       this.worker1ID = this.editedDeal.worker.id
@@ -228,6 +251,8 @@ export default {
       this.worker5ID = this.editedDeal.worker5.id
     } catch (e) {}
 
+    this.checkWorkers()
+
     // this.historyElement.employee = {
     //   name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
     //   id: this.authEmployee.id
@@ -244,6 +269,44 @@ export default {
       'SET_CUSTOMERS_FROM_SERVER',
       'SET_WORKERS_FROM_SERVER'
     ]),
+
+    checkWorkers () {
+      this.localWorkers = { ...this.workers }
+
+      for (const element in this.localWorkers) {
+        if (this.localWorkers[element].fired === 'Да') {
+          delete this.localWorkers[element]
+        }
+      }
+
+      if (this.dateStart !== '') {
+        try {
+          for (const element in this.localWorkers) {
+            for (const event of this.localWorkers[element].events) {
+              if (this.localWorkers[element] !== undefined && event.start < this.dateStart) {
+                if (event.dealID !== this.editedDeal.id) {
+                  delete this.localWorkers[element]
+                }
+              }
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (this.dateEnd !== '') {
+        try {
+          for (const element in this.localWorkers) {
+            for (const event of this.localWorkers[element].events) {
+              if (this.localWorkers[element] !== undefined && event.end < this.dateEnd) {
+                if (event.dealID !== this.editedDeal.id) {
+                  delete this.localWorkers[element]
+                }
+              }
+            }
+          }
+        } catch (e) {}
+      }
+    },
 
     popupRemoveToggle () {
       this.popupRemoveHidden = !this.popupRemoveHidden
