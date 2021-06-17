@@ -1,7 +1,7 @@
 <template>
   <PopupAddWrapper
     :hidden="popupHidden"
-    header="Добавление сделки"
+    header="Добавление заявки"
     @popup-add="addDeal(addedDeal)"
     @popup-close="$emit('popup-toggle')"
   >
@@ -183,7 +183,7 @@ export default {
     renewAddedData () {
       this.addedDeal = {
         id: Date.now(),
-        name: 'Новая сделка',
+        name: 'Новая заявка',
 
         customer: '',
         worker: '',
@@ -191,12 +191,12 @@ export default {
         dateStart: '',
         dateEnd: '',
 
-        notes: [`${new Date().toLocaleDateString()} Сделка была создана`],
+        notes: [`${new Date().toLocaleDateString()} Заявка была создана`],
         notesCount: '5',
 
         history: [{
           date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
-          info: 'Сделка создана',
+          info: 'Заявка создана',
           employee: {
             name: '',
             id: ''

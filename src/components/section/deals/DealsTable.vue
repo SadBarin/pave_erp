@@ -5,10 +5,10 @@
         :hidePopupStatus="popupRemoveHidden"
         @close-popup="popupRemoveToggle({})"
         @delete-element="$emit('remove-deal', currentDeal.id); popupRemoveToggle({})"
-        :header="`Удаление сделки ${currentDeal.name}`"
+        :header="`Удаление заявки ${currentDeal.name}`"
       >
         <template #popup-delete-content>
-          После нажатия на иконку корзины будет удалёна сделка <b>{{currentDeal.name}}</b>
+          После нажатия на иконку корзины будет удалёна заявка <b>{{currentDeal.name}}</b>
         </template>
       </PopupDeleteWrapper>
 
@@ -58,9 +58,9 @@
             <td v-else>Заметок нет</td>
 
             <td class="row-action">
-              <AppButtonIcon icon="description" title="История сделки" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>
-              <AppButtonIcon icon="create" title="Редактировать сделку" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
-              <AppButtonIcon icon="delete" title="Удалить сделки" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
+<!--              <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'dealHistory', params: {id: element.id}})"/>-->
+              <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'dealEdit', params: {id: element.id}})"/>
+              <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element)"/>
             </td>
           </template>
         </AppTableWrapperRow>

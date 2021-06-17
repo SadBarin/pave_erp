@@ -1,5 +1,5 @@
 <template>
-  <AppHistoryWrapper :header='`История изменения сделки "${deal.name}"`' :element="deal">
+  <AppHistoryWrapper :header='`История изменения заявка "${deal.name}"`' :element="deal">
     <template #nav-buttons>
       <AppButtonIcon icon="create" size="1.8rem" title="Редактировать" @button-click="$router.push({name : 'dealEdit', params: {id: deal.id}})"/>
       <AppButtonIcon icon="attach_money" size="1.8rem" title="Вернуться" @button-click="$router.push('/deals')"/>

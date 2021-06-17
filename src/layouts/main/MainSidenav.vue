@@ -12,7 +12,7 @@
                      :pressed="$route.name === 'customers'"
         />
 
-        <AppLinkIcon link-content="Сделки" link-icon="attach_money"
+        <AppLinkIcon link-content="Заявки" link-icon="attach_money"
                      link-path="/deals"
                      :pressed="$route.name === 'deals'"
         />

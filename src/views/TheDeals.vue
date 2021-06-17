@@ -6,7 +6,7 @@
       @add-deal="addDeal"
     />
 
-    <AppTopPanel header="Список сделок">
+    <AppTopPanel header="Список заявок">
       <template #nav-buttons>
         <AppButtonIcon icon="add" size="1.8rem" title="Добавить" @button-click="popupAddToggle()"/>
       </template>
@@ -82,7 +82,7 @@ export default {
     removeDeal (id) {
       firebase.database().ref('/deals/' + id).remove()
         .then(() => {
-          console.log('Сделка удалёна 🗑️')
+          console.log('Заявка удалёна 🗑️')
           this.SET_DEALS_FROM_SERVER()
         })
     },
@@ -286,23 +286,23 @@ export default {
 
         if (deal.dateStart === '') {
           // eslint-disable-next-line no-undef
-          M.toast({ html: 'Начало сделки не задано!' })
+          M.toast({ html: 'Начало заявки не задано!' })
 
           // eslint-disable-next-line no-throw-literal
-          throw 'Начало сделки не задано'
+          throw 'Начало заявки не задано'
         }
 
         if (deal.dateEnd === '') {
           // eslint-disable-next-line no-undef
-          M.toast({ html: 'Конец сделки не задан!' })
+          M.toast({ html: 'Конец заявки не задан!' })
 
           // eslint-disable-next-line no-throw-literal
-          throw 'Конец сделки не задан!'
+          throw 'Конец заявки не задан!'
         }
 
         firebase.database().ref('/deals/' + deal.id).set(deal)
           .then(() => {
-            console.log('Сделка добавлена ➕')
+            console.log('Заявки добавлена ➕')
             this.popupAddHidden = true
             this.SET_DEALS_FROM_SERVER()
           })

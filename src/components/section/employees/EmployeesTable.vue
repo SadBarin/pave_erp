@@ -50,7 +50,7 @@
             <td :title="element.duty">{{element.duty}}</td>
 
             <td class="row-action">
-              <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'employeeHistory', params: {id: element.id}})"/>
+<!--              <AppButtonIcon icon="description" title="История" size="1.2rem" @button-click="$router.push({name : 'employeeHistory', params: {id: element.id}})"/>-->
               <AppButtonIcon icon="create" title="Редактировать" size="1.2rem" @button-click="$router.push({name : 'employeeEdit', params: {id: element.id}})"/>
               <AppButtonIcon icon="delete" title="Удалить" size="1.2rem" @button-click="popupRemoveToggle(element); employee = element"/>
             </td>

@@ -4,14 +4,14 @@
       :hidePopupStatus="popupRemoveHidden"
       @close-popup="popupRemoveToggle"
       @delete-element="removeDeal(editedDeal)"
-      :header="`Удаление сделки ${editedDeal.name}`"
+      :header="`Удаление заявки ${editedDeal.name}`"
     >
       <template #popup-delete-content>
-        После нажатия на иконку корзины будет удалёна сделка <b>{{editedDeal.name}}</b>
+        После нажатия на иконку корзины будет удалёна заявка <b>{{editedDeal.name}}</b>
       </template>
     </PopupDeleteWrapper>
 
-    <AppEditWrapper :header="'Редактор сделок: ' + editedDeal.name">
+    <AppEditWrapper :header="'Редактор заявки: ' + editedDeal.name">
       <template #nav-buttons>
         <AppButtonIcon icon="save" size="1.8rem" title="Сохранить и выйти" @button-click="saveEditedDeal(editedDeal)"/>
         <AppButtonIcon icon="" size="1.8rem"/>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="edit-block">
-          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="date_range" header-text="Даты сделки"/>
+          <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="date_range" header-text="Даты"/>
 
           <div class="edit-block-content">
             <AppLineDate
@@ -190,7 +190,7 @@ export default {
 
       historyElement: {
         date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
-        info: 'Сделка просматривалась ',
+        info: 'Заявка просматривалась ',
         employee: {
           name: 'Неизвестный пользователь',
           id: 0
@@ -318,7 +318,7 @@ export default {
 
       firebase.database().ref('/deals/' + deal.id).remove()
         .then(() => {
-          console.log('Сделка удалёна 🗑️')
+          console.log('Заявка удалёна 🗑️')
           this.SET_DEALS_FROM_SERVER()
         })
     },
@@ -552,7 +552,7 @@ export default {
         this.editedDeal.worker5 = this.workers[this.worker5ID]
       }
 
-      deal.history.push(this.getNewHistoryElement('Сделка была изменена'))
+      deal.history.push(this.getNewHistoryElement('Заявка была изменена'))
 
       firebase.database().ref('/deals/' + deal.id).set(deal)
         .then(() => {
