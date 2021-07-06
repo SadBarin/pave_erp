@@ -41,8 +41,11 @@ export default {
     background: hsla(0, 0%, 100%, 0.9);
     border-radius: 10px;
 
+    max-height: 80%;
     width: fit-content;
     padding: 2rem;
+
+    overflow: auto;
   }
 
   #app-popup-wrapper.hidden {

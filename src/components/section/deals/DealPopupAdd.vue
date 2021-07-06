@@ -33,50 +33,19 @@
         <option v-for="element in customers" :key="element.id" :value="element.id">{{element.name}}</option>
       </AppSelect>
 
-      <AppSelect
-        selectID="select"
-        label="Рабочий 1: "
-        v-model="addedDeal.worker"
-      >
-        <option value="">Никого</option>
-        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-      </AppSelect>
+      <div v-for="count in workersCount" :key="count">
+        <AppSelect
+          selectID="select"
+          :label="'Рабочий ' + (count) + ': ' "
+          @select-change="pushMoreWorkers"
+          :value="elementCountNumber(count)"
+        >
+          <option value="">Никого</option>
+          <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+        </AppSelect>
+      </div>
 
-      <AppSelect
-        selectID="select"
-        label="Рабочий 2: "
-        v-model="addedDeal.worker2"
-      >
-        <option value="">Никого</option>
-        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-      </AppSelect>
-
-      <AppSelect
-        selectID="select"
-        label="Рабочий 3: "
-        v-model="addedDeal.worker3"
-      >
-        <option value="">Никого</option>
-        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-      </AppSelect>
-
-      <AppSelect
-        selectID="select"
-        label="Рабочий 4: "
-        v-model="addedDeal.worker4"
-      >
-        <option value="">Никого</option>
-        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-      </AppSelect>
-
-      <AppSelect
-        selectID="select"
-        label="Рабочий 5: "
-        v-model="addedDeal.worker5"
-      >
-        <option value="">Никого</option>
-        <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-      </AppSelect>
+      <p class="button-add" @click="addMoreWorkers()">Добавить ещё одного рабочего</p>
     </template>
   </PopupAddWrapper>
 </template>
@@ -96,6 +65,8 @@ export default {
     return {
       addedDeal: {},
       localWorkers: '',
+      workersCount: 1,
+      addedWorkers: new Set(),
       dateStart: '',
       dateEnd: ''
     }
@@ -131,10 +102,8 @@ export default {
 
   created () {
     this.renewAddedData()
-
     this.SET_WORKERS_FROM_LOCAL_STORAGE()
     this.SET_CUSTOMERS_FROM_LOCAL_STORAGE()
-
     this.checkWorkers()
   },
 
@@ -144,10 +113,28 @@ export default {
       'SET_CUSTOMERS_FROM_LOCAL_STORAGE'
     ]),
 
+    elementCountNumber (count) {
+      let i = 0
+      for (const element of this.addedWorkers) {
+        i++
+        if (i === count) {
+          console.log(element)
+          return element
+        }
+      }
+    },
+
+    addMoreWorkers () {
+      this.workersCount++
+      this.checkWorkers()
+    },
+
+    pushMoreWorkers (workerID) {
+      this.addedWorkers.add(workerID)
+    },
+
     checkWorkers () {
       this.localWorkers = { ...this.workers }
-      console.log('local', this.localWorkers)
-      console.log('worker', this.workers)
 
       for (const element in this.localWorkers) {
         if (this.localWorkers[element].fired === 'Да') {
@@ -212,3 +199,16 @@ export default {
   }
 }
 </script>
+
+<style>
+  .button-add {
+    color: #039be5;
+    background: transparent;
+    border: none;
+
+    margin-top: 1rem !important;
+    padding: 0;
+
+    cursor: pointer;
+  }
+</style>

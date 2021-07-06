@@ -5,6 +5,7 @@
       :id="selectID"
       :value="value"
       @input="$emit('input', $event.target.value)"
+      @change="$emit('select-change', $event.target.value)"
     >
       <slot></slot>
     </select>
