@@ -64,52 +64,21 @@
           <AppHeaderIcon class="edit-block-header" header-level="4" material-icon="transfer_within_a_station" header-text="Рабочие"/>
 
           <div class="edit-block-content">
-
-            <AppSelect
-              selectID="select"
-              label="Рабочий 1: "
-              v-model="worker1ID"
-            >
-              <option value="">Никого</option>
-              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-            </AppSelect>
-
-            <AppSelect
-              selectID="select"
-              label="Рабочий 2: "
-              v-model="worker2ID"
-            >
-              <option value="">Никого</option>
-              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-            </AppSelect>
-
-            <AppSelect
-              selectID="select"
-              label="Рабочий 3: "
-              v-model="worker3ID"
-            >
-              <option value="">Никого</option>
-              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-            </AppSelect>
-
-            <AppSelect
-              selectID="select"
-              label="Рабочий 4: "
-              v-model="worker4ID"
-            >
-              <option value="">Никого</option>
-              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-            </AppSelect>
-
-            <AppSelect
-              selectID="select"
-              label="Рабочий 5: "
-              v-model=worker5ID
-            >
-              <option value="">Никого</option>
-              <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
-            </AppSelect>
+            <div v-for="count in workersCount" :key="count">
+              <AppSelect
+                selectID="select"
+                :label="'Рабочий ' + (count) + ': ' "
+                @select-change="pushMoreWorkers"
+                :value="elementCountNumber(count)"
+                :count="count"
+              >
+                <option value="">Никого</option>
+                <option v-for="element in localWorkers" :key="element.id" :value="element.id">{{element.surname}} {{element.name}}</option>
+              </AppSelect>
+            </div>
           </div>
+
+          <p class="button-add" @click="addMoreWorkers()">Добавить ещё одного рабочего</p>
         </div>
 
         <div class="edit-block">
@@ -188,6 +157,9 @@ export default {
       dateEnd: '',
       localWorkers: '',
 
+      workersCount: 0,
+      addedWorkers: [],
+
       historyElement: {
         date: `[Дата: ${new Date().toLocaleDateString()} Время: ${new Date().toLocaleTimeString()}]`,
         info: 'Заявка просматривалась ',
@@ -231,6 +203,8 @@ export default {
     this.customerID = this.editedDeal.customer.id
     this.dateStart = this.editedDeal.dateStart
     this.dateEnd = this.editedDeal.dateEnd
+    this.addedWorkers = this.editedDeal.workers
+    this.workersCount = this.addedWorkers.length
 
     try {
       this.worker1ID = this.editedDeal.worker.id
@@ -252,6 +226,7 @@ export default {
     } catch (e) {}
 
     this.checkWorkers()
+    console.log(0, this.addedWorkers)
 
     // this.historyElement.employee = {
     //   name: `${this.authEmployee.surname} ${this.authEmployee.name}`,
@@ -269,6 +244,28 @@ export default {
       'SET_CUSTOMERS_FROM_SERVER',
       'SET_WORKERS_FROM_SERVER'
     ]),
+
+    elementCountNumber (count) {
+      let i = 0
+      for (const element of this.addedWorkers) {
+        i++
+        if (i === count) {
+          return element
+        }
+      }
+    },
+
+    addMoreWorkers () {
+      this.workersCount++
+      this.checkWorkers()
+    },
+
+    pushMoreWorkers (workerID, count) {
+      console.log(1, this.addedWorkers)
+      console.log(count)
+      this.addedWorkers[count - 1] = workerID
+      // console.log(2, this.addedWorkers)
+    },
 
     checkWorkers () {
       this.localWorkers = { ...this.workers }
@@ -375,8 +372,6 @@ export default {
           const localWorker = this.workers[localWorkerID]
           localWorker.dealStatistics = localWorker.dealStatistics.filter((element) => element.dealID !== this.editedDeal.id)
           localWorker.events = localWorker.events.filter((element) => element.dealID !== this.editedDeal.id)
-
-          console.log(localWorker)
 
           firebase.database().ref('/workers/' + localWorker.id).set(localWorker)
             .then(() => {
@@ -565,3 +560,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.button-add {
+  color: #039be5;
+  background: transparent;
+  border: none;
+
+  margin-top: 1rem !important;
+  padding: 0;
+
+  cursor: pointer;
+}
+</style>

@@ -90,35 +90,11 @@ export default {
     addDeal (deal) {
       this.popupAddToggle()
       deal.name = deal.name[0].toUpperCase() + deal.name.substring(1)
-      const worker = deal.worker = this.workers[deal.worker] ?? null
-      const worker2 = deal.worker2 = this.workers[deal.worker2] ?? null
-      const worker3 = deal.worker3 = this.workers[deal.worker3] ?? null
-      const worker4 = deal.worker4 = this.workers[deal.worker4] ?? null
-      const worker5 = deal.worker5 = this.workers[deal.worker5] ?? null
+      const workersDeal = deal.workers
       const customer = deal.customer = this.customers[deal.customer] ?? null
 
-      if (customer !== undefined && customer !== null) {
-        try {
-          customer.dealStatistics.push({
-            name: deal.name,
-            dateStart: deal.dateStart,
-            dateEnd: deal.dateEnd,
-            dealID: deal.id
-          })
-        } catch (e) {
-          customer.dealStatistics = [{
-            name: deal.name,
-            dateStart: deal.dateStart,
-            dateEnd: deal.dateEnd,
-            dealID: deal.id
-          }]
-        }
-
-        firebase.database().ref('/customers/' + customer.id).set(customer)
-          .then(() => {
-            this.SET_CUSTOMERS_FROM_SERVER()
-          })
-
+      for (const workerID of workersDeal) {
+        const worker = this.workers[workerID] ?? null
         if (worker !== undefined && worker !== null) {
           worker.events.push({
             id: Date.now(),
@@ -151,138 +127,29 @@ export default {
               this.SET_WORKERS_FROM_SERVER()
             })
         }
+      }
 
-        if (worker2 !== undefined && worker2 !== null) {
-          worker2.events.push({
-            id: Date.now(),
-            title: deal.name,
-            start: deal.dateStart,
-            end: deal.dateEnd,
+      if (customer !== undefined && customer !== null) {
+        try {
+          customer.dealStatistics.push({
+            name: deal.name,
+            dateStart: deal.dateStart,
+            dateEnd: deal.dateEnd,
             dealID: deal.id
           })
-
-          try {
-            worker2.dealStatistics.push({
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            })
-          } catch (e) {
-            worker2.dealStatistics = [{
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            }]
-          }
-
-          firebase.database().ref('/workers/' + worker2.id).set(worker2)
-            .then(() => {
-              this.SET_WORKERS_FROM_SERVER()
-            })
-        }
-
-        if (worker3 !== undefined && worker3 !== null) {
-          worker3.events.push({
-            id: Date.now(),
-            title: deal.name,
-            start: deal.dateStart,
-            end: deal.dateEnd,
+        } catch (e) {
+          customer.dealStatistics = [{
+            name: deal.name,
+            dateStart: deal.dateStart,
+            dateEnd: deal.dateEnd,
             dealID: deal.id
-          })
-
-          try {
-            worker3.dealStatistics.push({
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            })
-          } catch (e) {
-            worker3.dealStatistics = [{
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            }]
-          }
-
-          firebase.database().ref('/workers/' + worker3.id).set(worker3)
-            .then(() => {
-              this.SET_WORKERS_FROM_SERVER()
-            })
+          }]
         }
 
-        if (worker4 !== undefined && worker4 !== null) {
-          worker4.events.push({
-            id: Date.now(),
-            title: deal.name,
-            start: deal.dateStart,
-            end: deal.dateEnd,
-            dealID: deal.id
+        firebase.database().ref('/customers/' + customer.id).set(customer)
+          .then(() => {
+            this.SET_CUSTOMERS_FROM_SERVER()
           })
-
-          try {
-            worker4.dealStatistics.push({
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            })
-          } catch (e) {
-            worker4.dealStatistics = [{
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            }]
-          }
-
-          firebase.database().ref('/workers/' + worker4.id).set(worker4)
-            .then(() => {
-              this.SET_WORKERS_FROM_SERVER()
-            })
-        }
-
-        if (worker5 !== undefined && worker5 !== null) {
-          worker5.events.push({
-            id: Date.now(),
-            title: deal.name,
-            start: deal.dateStart,
-            end: deal.dateEnd,
-            dealID: deal.id
-          })
-
-          try {
-            worker5.dealStatistics.push({
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            })
-          } catch (e) {
-            worker5.dealStatistics = [{
-              name: deal.name,
-              customer: deal.customer,
-              dateStart: deal.dateStart,
-              dateEnd: deal.dateEnd,
-              dealID: deal.id
-            }]
-          }
-
-          firebase.database().ref('/workers/' + worker5.id).set(worker5)
-            .then(() => {
-              this.SET_WORKERS_FROM_SERVER()
-            })
-        }
 
         if (deal.dateStart === '') {
           // eslint-disable-next-line no-undef

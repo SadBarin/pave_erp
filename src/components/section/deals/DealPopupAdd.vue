@@ -118,7 +118,6 @@ export default {
       for (const element of this.addedWorkers) {
         i++
         if (i === count) {
-          console.log(element)
           return element
         }
       }
@@ -173,7 +172,7 @@ export default {
         name: 'Новая заявка',
 
         customer: '',
-        worker: '',
+        workers: '',
 
         dateStart: '',
         dateEnd: '',
@@ -193,6 +192,7 @@ export default {
     },
 
     addDeal (deal) {
+      deal.workers = [...this.addedWorkers]
       this.$emit('add-deal', deal)
       this.renewAddedData()
     }

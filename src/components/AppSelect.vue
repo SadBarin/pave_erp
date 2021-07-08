@@ -5,7 +5,7 @@
       :id="selectID"
       :value="value"
       @input="$emit('input', $event.target.value)"
-      @change="$emit('select-change', $event.target.value)"
+      @change="$emit('select-change', $event.target.value, count)"
     >
       <slot></slot>
     </select>
@@ -22,7 +22,8 @@ export default {
     selectID: String,
     label: String,
     // eslint-disable-next-line vue/require-prop-type-constructor
-    value: String | Number
+    value: String | Number,
+    count: Number
   }
 }
 </script>
