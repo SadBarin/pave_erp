@@ -91,12 +91,10 @@ export default {
   watch: {
     dateStart: function () {
       this.addedDeal.dateStart = this.dateStart
-      this.checkWorkers()
     },
 
     dateEnd: function () {
       this.addedDeal.dateEnd = this.dateEnd
-      this.checkWorkers()
     }
   },
 
